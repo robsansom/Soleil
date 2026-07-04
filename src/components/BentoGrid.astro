@@ -1,0 +1,116 @@
+---
+/**
+ * Feature bento grid — six product moments, each a quiet glass tile
+ * with a glyph chip, eyebrow, title and body. The Real Sun tile takes
+ * the brand-accent surface (the one loud moment in the grid).
+ */
+import { useTranslations } from '../i18n/utils';
+
+const t = useTranslations(Astro.currentLocale);
+
+const tiles = [
+  { key: 'uvNow' as const, span: 'md:col-span-3', glyph: 'sun' },
+  { key: 'sunscreen' as const, span: 'md:col-span-3', glyph: 'drop' },
+  { key: 'realSun' as const, span: 'md:col-span-3', glyph: 'watch', accent: true },
+  { key: 'family' as const, span: 'md:col-span-3', glyph: 'people' },
+  { key: 'glow' as const, span: 'md:col-span-2', glyph: 'sparkle' },
+  { key: 'history' as const, span: 'md:col-span-4', glyph: 'chart' },
+];
+---
+
+<span id="features/" aria-hidden="true"></span>
+<section id="features" class="relative bg-sun-ink text-sun-text overflow-hidden">
+  <div class="mx-auto max-w-6xl px-6 sm:px-8 lg:px-10 pt-24 sm:pt-32 pb-24 sm:pb-32">
+    <p class="reveal-eyebrow text-[12px] uppercase tracking-[0.24em] text-sun-textMuted">
+      {t.bento.eyebrow}
+    </p>
+
+    <h2 class="mt-6 sm:mt-7 display-section text-[clamp(2.25rem,6vw,5rem)] text-balance max-w-[22ch]">
+      {t.bento.headline}&nbsp;<span class="text-dim">{t.bento.headlineAccent}</span>
+    </h2>
+
+    <p class="reveal reveal-delay-2 mt-6 max-w-xl text-[16px] sm:text-[17px] 2xl:text-[19px] leading-[1.55] text-sun-textSoft">
+      {t.bento.body}
+    </p>
+
+    <div class="mt-12 sm:mt-14 grid grid-cols-1 md:grid-cols-6 gap-3.5 sm:gap-4">
+      {tiles.map((tile, i) => {
+        const translation = t.bento[tile.key];
+        return (
+          <article
+            class={[
+              'reveal',
+              `reveal-delay-${(i % 4) + 1}`,
+              'bento-card relative rounded-[24px] p-6 sm:p-7 overflow-hidden min-h-[240px] flex flex-col',
+              tile.accent ? 'bg-sun-red text-[#231505]' : 'bento-tile',
+              tile.span,
+            ].join(' ')}
+          >
+            <span class={tile.accent ? 'system-glyph system-glyph--inverse' : 'system-glyph'} aria-hidden="true">
+              {tile.glyph === 'sun' && (
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <circle cx="12" cy="12" r="4.5" />
+                  <path d="M12 2.5v2.5M12 19v2.5M2.5 12h2.5M19 12h2.5M5 5l1.8 1.8M17.2 17.2 19 19M19 5l-1.8 1.8M6.8 17.2 5 19" />
+                </svg>
+              )}
+              {tile.glyph === 'drop' && (
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 3.5c3.5 4.5 6 7.6 6 10.7a6 6 0 1 1-12 0c0-3.1 2.5-6.2 6-10.7Z" />
+                </svg>
+              )}
+              {tile.glyph === 'people' && (
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="9" cy="8" r="3.2" />
+                  <path d="M3.5 19.5c0-3 2.5-5 5.5-5s5.5 2 5.5 5" />
+                  <circle cx="16.8" cy="9.2" r="2.4" />
+                  <path d="M16 14.7c2.6.2 4.5 2 4.5 4.3" />
+                </svg>
+              )}
+              {tile.glyph === 'watch' && (
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="6.5" y="6.5" width="11" height="11" rx="3.2" />
+                  <path d="M9 6.5 9.5 2.8h5L15 6.5M9 17.5l.5 3.7h5l.5-3.7" />
+                </svg>
+              )}
+              {tile.glyph === 'sparkle' && (
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 3.5 13.8 9l5.7 1.8-5.7 1.8L12 18.2l-1.8-5.6L4.5 10.8 10.2 9 12 3.5Z" />
+                  <path d="M19 16.5 19.6 18.4 21.5 19l-1.9.6L19 21.5l-.6-1.9-1.9-.6 1.9-.6.6-1.9Z" />
+                </svg>
+              )}
+              {tile.glyph === 'chart' && (
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <path d="M4 20V10M9.5 20V4M15 20v-8M20.5 20V7" />
+                </svg>
+              )}
+            </span>
+            <p
+              class={[
+                'mt-5 text-[12px] uppercase tracking-[0.18em]',
+                tile.accent ? 'text-[#231505]/75' : 'text-sun-textMuted',
+              ].join(' ')}
+            >
+              {translation.eyebrow}
+            </p>
+            <h3
+              class={[
+                'mt-3 font-semibold tracking-tight leading-[1.18] text-[clamp(1.25rem,2.2vw,1.55rem)]',
+                tile.accent ? 'text-[#231505]' : 'text-sun-text',
+              ].join(' ')}
+            >
+              {translation.title}
+            </h3>
+            <p
+              class={[
+                'mt-3 leading-[1.55] text-[14.5px] max-w-[44ch]',
+                tile.accent ? 'text-[#231505]/85' : 'text-sun-textSoft',
+              ].join(' ')}
+            >
+              {translation.body}
+            </p>
+          </article>
+        );
+      })}
+    </div>
+  </div>
+</section>

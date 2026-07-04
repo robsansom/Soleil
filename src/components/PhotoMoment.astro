@@ -1,0 +1,87 @@
+---
+/**
+ * PhotoMoment — centred, hero-scale editorial photograph.
+ *
+ * Carries `#theme-sentinel`: the page-wide dark→light theme flip
+ * (see IndexPage's inline script) triggers when the photo's vertical
+ * midpoint crosses the viewport centre, so the sunrise moment and the
+ * theme change land in the same beat.
+ */
+
+const base = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+
+export interface Props {
+  eyebrow: string;
+  headline: string;
+  headlineAccent?: string;
+  body?: string;
+  image: string;
+  alt: string;
+}
+
+const { eyebrow, headline, headlineAccent, body, image, alt } = Astro.props;
+---
+
+<section class="relative overflow-hidden bg-sun-ink text-sun-text">
+  <div class="relative mx-auto max-w-8xl px-6 sm:px-8 lg:px-10 pt-24 sm:pt-32 pb-24 sm:pb-32">
+    {/* Second "hero-sized" beat on the page, matched in scale to the
+        privacy converge headline so the two flagship sections sit at
+        the same typographic weight. */}
+    <div class="text-center max-w-4xl mx-auto">
+      <p class="reveal-eyebrow text-[12px] uppercase tracking-[0.24em] text-sun-textMuted">
+        {eyebrow}
+      </p>
+
+      <h2 class="mt-7 sm:mt-9 display text-[clamp(2.75rem,9vw,7rem)] text-balance">
+        <span class="block">{headline}</span>
+        {headlineAccent && (
+          <span class="block text-dim">{headlineAccent}</span>
+        )}
+      </h2>
+
+      {body && (
+        <p class="reveal reveal-delay-2 mt-6 sm:mt-8 mx-auto max-w-md 2xl:max-w-lg text-[16px] sm:text-[17px] 2xl:text-[19px] leading-[1.55] text-sun-textSoft">
+          {body}
+        </p>
+      )}
+    </div>
+
+    <div class="photo-moment reveal-image relative mt-16 sm:mt-20 mx-auto">
+      <img
+        src={`${base}images/${image}`}
+        alt={alt}
+        loading="lazy"
+        decoding="async"
+        class="w-full h-auto block"
+        width="1024"
+        height="683"
+      />
+
+      {/* Page theme flips when this line hits the viewport centre. */}
+      <div
+        id="theme-sentinel"
+        aria-hidden="true"
+        class="absolute left-0 right-0 top-1/2 h-px -translate-y-1/2 pointer-events-none"
+      ></div>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .photo-moment {
+    width: min(100%, 58rem);
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.08),
+      0 50px 100px -30px rgba(0, 0, 0, 0.65);
+    transition: box-shadow 600ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  :root.is-light .photo-moment {
+    box-shadow:
+      0 0 0 1px rgba(0, 0, 0, 0.05),
+      0 50px 100px -35px rgba(60, 42, 20, 0.35);
+  }
+</style>

@@ -1,0 +1,80 @@
+---
+/**
+ * PartOfIphone — system-integration section (widgets, Apple Watch,
+ * alerts). The website never leads the app: everything here has
+ * shipped in the current build.
+ */
+import { useTranslations } from '../i18n/utils';
+
+const t = useTranslations(Astro.currentLocale);
+---
+
+<section class="relative bg-sun-ink text-sun-text overflow-hidden">
+  <div class="mx-auto max-w-6xl px-6 sm:px-8 lg:px-10 pt-24 sm:pt-32 pb-24 sm:pb-32">
+    <p class="reveal-eyebrow text-[12px] uppercase tracking-[0.24em] text-sun-textMuted">
+      {t.integration.eyebrow}
+    </p>
+
+    <h2 class="mt-6 sm:mt-7 display-section text-[clamp(2.25rem,6vw,5rem)] text-balance max-w-[22ch]">
+      {t.integration.headline}&nbsp;<span class="text-dim">{t.integration.headlineAccent}</span>
+    </h2>
+
+    <p class="reveal reveal-delay-2 mt-6 max-w-2xl text-[16px] sm:text-[17px] 2xl:text-[19px] leading-[1.55] text-sun-textSoft">
+      {t.integration.body}
+    </p>
+
+    <div class="mt-12 sm:mt-14 grid grid-cols-1 md:grid-cols-3 gap-3.5 sm:gap-4">
+      <article class="reveal reveal-delay-1 bento-card bento-tile rounded-[24px] p-6 sm:p-7 flex flex-col">
+        <span class="system-glyph" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
+            <rect x="3.5" y="3.5" width="7.5" height="7.5" rx="2" />
+            <rect x="13" y="3.5" width="7.5" height="7.5" rx="2" />
+            <rect x="3.5" y="13" width="7.5" height="7.5" rx="2" />
+            <rect x="13" y="13" width="7.5" height="7.5" rx="2" />
+          </svg>
+        </span>
+        <p class="mt-5 text-[12px] uppercase tracking-[0.18em] text-sun-textMuted">{t.integration.widgets.eyebrow}</p>
+        <h3 class="mt-3 font-semibold tracking-tight leading-[1.18] text-[clamp(1.25rem,2.2vw,1.55rem)] text-sun-text">
+          {t.integration.widgets.title}
+        </h3>
+        <p class="mt-3 leading-[1.55] text-[14.5px] max-w-[40ch] text-sun-textSoft">
+          {t.integration.widgets.body}
+        </p>
+      </article>
+
+      <article class="reveal reveal-delay-2 bento-card bento-tile rounded-[24px] p-6 sm:p-7 flex flex-col">
+        <span class="system-glyph" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="6.5" y="6.5" width="11" height="11" rx="3.2" />
+            <path d="M9 6.5 9.5 2.8h5L15 6.5M9 17.5l.5 3.7h5l.5-3.7" />
+          </svg>
+        </span>
+        <p class="mt-5 text-[12px] uppercase tracking-[0.18em] text-sun-textMuted">{t.integration.watch.eyebrow}</p>
+        <h3 class="mt-3 font-semibold tracking-tight leading-[1.18] text-[clamp(1.25rem,2.2vw,1.55rem)] text-sun-text">
+          {t.integration.watch.title}
+        </h3>
+        <div class="mt-4 flex flex-wrap gap-1.5">
+          {t.integration.watch.capabilities.map((capability) => (
+            <span class="system-action-pill">{capability}</span>
+          ))}
+        </div>
+      </article>
+
+      <article class="reveal reveal-delay-3 bento-card bento-tile rounded-[24px] p-6 sm:p-7 flex flex-col">
+        <span class="system-glyph" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3.5c-3.2 0-5.5 2.4-5.5 5.5 0 5-2 6-2 6h15s-2-1-2-6c0-3.1-2.3-5.5-5.5-5.5Z" />
+            <path d="M10 18.5a2.2 2.2 0 0 0 4 0" />
+          </svg>
+        </span>
+        <p class="mt-5 text-[12px] uppercase tracking-[0.18em] text-sun-textMuted">{t.integration.alerts.eyebrow}</p>
+        <h3 class="mt-3 font-semibold tracking-tight leading-[1.18] text-[clamp(1.25rem,2.2vw,1.55rem)] text-sun-text">
+          {t.integration.alerts.title}
+        </h3>
+        <p class="mt-3 leading-[1.55] text-[14.5px] max-w-[40ch] text-sun-textSoft">
+          {t.integration.alerts.body}
+        </p>
+      </article>
+    </div>
+  </div>
+</section>

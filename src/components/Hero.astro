@@ -1,0 +1,77 @@
+---
+import AppStoreBadge from './AppStoreBadge.astro';
+import { useTranslations } from '../i18n/utils';
+
+const t = useTranslations(Astro.currentLocale);
+
+const base = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+---
+
+<section class="relative isolate overflow-hidden bg-sun-ink text-sun-text">
+  {/* Photographic backdrop — golden-hour portrait, warm and human. A
+      left-weighted scrim keeps the headline at AA contrast over the
+      brightest part of the image, and a bottom fade dissolves the photo
+      into the page surface so the next section reads as one canvas
+      (the same treatment as the app's paywall hero). */}
+  <div class="absolute inset-0 -z-10" aria-hidden="true">
+    <img
+      src={`${base}images/hero-goldenhour.jpg`}
+      alt=""
+      class="hero-photo h-full w-full object-cover"
+      fetchpriority="high"
+      decoding="async"
+    />
+    <div class="absolute inset-0 hero-scrim"></div>
+  </div>
+
+  <div class="hero-inner relative mx-auto max-w-8xl px-6 sm:px-8 lg:px-10 pt-20 sm:pt-32 lg:pt-36 pb-24 sm:pb-40">
+
+    <p class="text-[12px] uppercase tracking-[0.24em] text-sun-peach/90">
+      {t.hero.eyebrow}
+    </p>
+
+    {/* Brand line. Largest type on the site — every other section
+        headline steps down from here. Intentionally static (no entrance
+        animation) so the brand line lands instantly on first paint. */}
+    <h1 class="hero-headline mt-7 sm:mt-9 display text-[clamp(2.75rem,9vw,7rem)]">
+      <span class="block">{t.hero.title}</span>
+      <span class="block text-dim">{t.hero.titleAccent}</span>
+    </h1>
+
+    <p class="mt-8 max-w-xl text-[18px] sm:text-[20px] leading-[1.4] text-sun-text/95">
+      {t.hero.body}
+    </p>
+
+    <div class="hero-actions mt-10 sm:mt-12 flex flex-wrap items-center gap-5">
+      <AppStoreBadge height={56} />
+      <span class="text-[13.5px] text-sun-text/75">
+        {t.hero.badgeLabel}
+      </span>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  /* Keep faces in frame: the source photo's subject sits right of
+     centre, so bias the crop there as the viewport narrows. */
+  .hero-photo {
+    object-position: 72% 30%;
+  }
+
+  /* Readability scrim: strong at the text corner, opening up towards
+     the photo's subject, plus a fade into the page ink at the bottom. */
+  .hero-scrim {
+    background:
+      linear-gradient(to bottom, rgba(11, 8, 5, 0.30) 0%, rgba(11, 8, 5, 0.05) 30%, rgba(11, 8, 5, 0.55) 78%, #0B0805 100%),
+      linear-gradient(100deg, rgba(11, 8, 5, 0.82) 0%, rgba(11, 8, 5, 0.55) 38%, rgba(11, 8, 5, 0.12) 70%);
+  }
+
+  @media (max-width: 767px) {
+    .hero-scrim {
+      background:
+        linear-gradient(to bottom, rgba(11, 8, 5, 0.45) 0%, rgba(11, 8, 5, 0.35) 40%, rgba(11, 8, 5, 0.72) 80%, #0B0805 100%);
+    }
+  }
+</style>

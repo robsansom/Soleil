@@ -1,0 +1,559 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    background: #0B0805;
+  }
+  body {
+    @apply font-sans bg-sun-ink text-sun-text;
+    font-feature-settings: 'ss01', 'ss02', 'cv11';
+  }
+  ::selection {
+    background: #F08A1D;
+    color: #ffffff;
+  }
+
+  /* Display headlines (Dropset-calibrated weights and metrics) */
+  .display {
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 0.95;
+  }
+  .display-section {
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 0.9;
+  }
+  .display-tighter {
+    font-weight: 700;
+    letter-spacing: -0.032em;
+    line-height: 0.92;
+  }
+  /* On phones the display sizes wrap to several lines; the desktop
+     leading is too tight there, so open it up slightly. */
+  @media (max-width: 639px) {
+    .display {
+      line-height: 1.1;
+    }
+    .display-section {
+      line-height: 1.05;
+    }
+    .display-tighter {
+      line-height: 1.08;
+    }
+  }
+  .text-dim {
+    color: #F08A1D;
+  }
+  /* The brand orange reads at ~8:1 on the dark canvas but only ~2.4:1
+     on the light cream, so display-accent text deepens when the page
+     flips light (same move as the app's dark-mode accent, inverted). */
+  :root.is-light .text-dim {
+    color: #C25E00;
+  }
+
+  /* Opened up from the .display default (0.95): the two brand lines
+     were sitting too close together. */
+  .hero-headline {
+    line-height: 1.02;
+  }
+
+  @media (max-width: 639px) {
+    .hero-inner {
+      padding-left: 1rem;
+      padding-right: 1rem;
+      padding-top: 4.5rem;
+      padding-bottom: 4.5rem;
+    }
+    .hero-headline {
+      font-size: clamp(4rem, 18.1vw, 4.7rem) !important;
+      line-height: 0.92;
+      letter-spacing: -0.055em;
+    }
+    .hero-actions {
+      margin-top: 3.5rem;
+    }
+    .showcase-headline {
+      font-size: clamp(3rem, 13.8vw, 3.8rem);
+      line-height: 0.88;
+    }
+    .showcase-section-inner {
+      padding-top: 5.5rem;
+      padding-bottom: 5.5rem;
+    }
+  }
+
+  /* Backwards-compat alias: `.theme-light` is no longer needed on sections
+     (the whole page handles its own theme), but if any component still
+     carries the class it should be a no-op rather than create a forced
+     light island. */
+  .theme-light { background-color: inherit; color: inherit; }
+}
+
+/* ============================================================
+   Global theme inversion (unlayered so it wins over Tailwind utilities)
+
+   The whole page has one theme state at a time, stored on <html>:
+     <html>                  → dark (default)
+     <html class="is-light"> → light
+
+   A scroll-tracked sentinel (#theme-sentinel) toggles `is-light` when it
+   crosses the viewport's vertical centre, and every themed surface and
+   text colour cross-fades together (~280ms). This is the
+   "scroll-triggered global theme inversion" pattern used by Linear,
+   Apple's experience pages and most premium product launch sites.
+
+   These rules live OUTSIDE @layer so they take cascade priority over
+   Tailwind's utility-layer colour classes regardless of specificity.
+   ============================================================ */
+
+html, body {
+  transition:
+    background-color 280ms cubic-bezier(0.4, 0.0, 0.2, 1),
+    color 280ms cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+.bg-sun-ink,
+.bg-sun-text,
+.text-sun-text,
+.text-sun-textSoft,
+.text-sun-textMuted,
+.text-sun-textDim,
+.text-sun-ink {
+  transition:
+    background-color 280ms cubic-bezier(0.4, 0.0, 0.2, 1),
+    color 280ms cubic-bezier(0.4, 0.0, 0.2, 1),
+    border-color 280ms cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+:root.is-light body {
+  background-color: #FAF6EF;
+  color: #1A1816;
+}
+/* Page surfaces */
+:root.is-light .bg-sun-ink { background-color: #FAF6EF; }
+/* Text */
+:root.is-light .text-sun-text { color: #1A1816; }
+:root.is-light .text-sun-textSoft { color: #4A4742; }
+:root.is-light .text-sun-textMuted { color: #6E6862; }
+:root.is-light .text-sun-textDim { color: #8C857E; }
+/* Buttons that invert (Hero "Download" pill) */
+:root.is-light .bg-sun-text { background-color: #1A1816; }
+:root.is-light .text-sun-ink { color: #FAF6EF; }
+/* Accent hover links + glyph chips also deepen on the light surface. */
+:root.is-light .hover\:text-sun-red:hover,
+:root.is-light .group:hover .group-hover\:text-sun-red { color: #C25E00; }
+:root.is-light .system-glyph:not(.system-glyph--inverse) { color: #C25E00; }
+/* text-dim (coral) reads on both palettes; no override needed. */
+
+/* Suppress only theme-related transitions during the first paint, so
+   users who land deep in the page (e.g. a hash link) don't see a flash
+   from dark→light. Reveal animations on other elements still run. */
+html.boot,
+html.boot body,
+html.boot .bg-sun-ink,
+html.boot .bg-sun-text,
+html.boot .text-sun-text,
+html.boot .text-sun-textSoft,
+html.boot .text-sun-textMuted,
+html.boot .text-sun-textDim,
+html.boot .text-sun-ink,
+html.boot .device-theme-mask,
+html.boot .border-theme-soft,
+html.boot .bento-tile,
+html.boot .site-header-chrome {
+  transition-property: none !important;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .grid-noise {
+    background-image:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(240, 138, 29, 0.10), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 80% 30%, rgba(251, 235, 210, 0.06), transparent 70%);
+  }
+
+  .ring-soft {
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+      0 1px 0 rgba(255, 255, 255, 0.03);
+  }
+
+  .glass-card {
+    background: rgba(20, 20, 23, 0.7);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+      0 30px 80px -30px rgba(0, 0, 0, 0.6);
+  }
+
+  /* Scroll-triggered reveals.
+     Initial hidden state only applies once JS has confirmed it can drive the animation
+     (the inline boot script adds .js-ready to <html> immediately on document parse).
+     This guarantees content is visible if JS fails to load. */
+  .js-ready .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity 900ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;
+  }
+  .js-ready .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 80ms; }
+  .reveal-delay-2 { transition-delay: 160ms; }
+  .reveal-delay-3 { transition-delay: 240ms; }
+  .reveal-delay-4 { transition-delay: 320ms; }
+  .reveal-delay-5 { transition-delay: 400ms; }
+
+  .reveal-lines .reveal-line {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 0.18em;
+    margin-bottom: -0.14em;
+  }
+  .js-ready .reveal-lines .reveal-line > span {
+    display: inline-block;
+    transform: translateY(110%);
+    transition: transform 1100ms cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+  }
+  .js-ready .reveal-lines.is-visible .reveal-line > span {
+    transform: translateY(0);
+  }
+  .reveal-lines .reveal-line:nth-child(1) > span { transition-delay: 60ms; }
+  .reveal-lines .reveal-line:nth-child(2) > span { transition-delay: 160ms; }
+  .reveal-lines .reveal-line:nth-child(3) > span { transition-delay: 260ms; }
+  .reveal-lines .reveal-line:nth-child(4) > span { transition-delay: 360ms; }
+
+  .js-ready .reveal-eyebrow {
+    opacity: 0;
+    transform: translateY(6px);
+    transition:
+      opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .js-ready .reveal-eyebrow.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .js-ready .reveal-image {
+    overflow: visible;
+    opacity: 0;
+    transform: scale(0.97);
+    filter: blur(8px);
+    transition:
+      opacity 1100ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 1100ms cubic-bezier(0.16, 1, 0.3, 1),
+      filter 1100ms cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: 220ms;
+  }
+  .js-ready .reveal-image.is-visible {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+
+  /* Device mockups with baked-in halftone — clip so dots don't bleed into copy.
+     Assets may be exported @3x (3072px); HTML width/height stay at the 1x
+     layout size (1024×906) while these CSS widths control what actually
+     renders. Sizes are ~10% larger than the original 47.8125rem / 68rem
+     baselines (now 52.625rem / 74.8rem) so devices feel hero-scale on
+     desktop without pushing into copy. Parent slot is overflow-hidden so
+     any clip happens on the outer edge. */
+  .js-ready .reveal-image.showcase-device {
+    overflow: hidden;
+  }
+  .showcase-device {
+    width: min(100%, 52.625rem);
+  }
+  .showcase-device img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+  }
+  @media (min-width: 768px) {
+    .showcase-device[data-side] {
+      width: 52.625rem;
+      max-width: none;
+    }
+  }
+
+  .js-ready .reveal-line-draw {
+    transform: scaleX(0);
+    transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .js-ready .reveal-line-draw.is-visible {
+    transform: scaleX(1);
+  }
+
+  /* ---- Device theme mask -----------------------------------------------
+     Wraps a device screenshot so it cross-fades when the global theme
+     flips. The dark Bookmarks shot is marked `.show-on-dark` (visible
+     when <html> is dark, invisible when light), the light Collections
+     shot is marked `.show-on-light` (the inverse). Combined with the
+     `.reveal-image` outer wrapper, the image's entrance animation is
+     gated on the theme so the wrong-mode shot is never visible. */
+  .device-theme-mask {
+    transition: opacity 280ms cubic-bezier(0.4, 0.0, 0.2, 1);
+    will-change: opacity;
+  }
+  .device-theme-mask.show-on-dark { opacity: 1; }
+  :root.is-light .device-theme-mask.show-on-dark { opacity: 0; }
+  .device-theme-mask.show-on-light { opacity: 0; }
+  :root.is-light .device-theme-mask.show-on-light { opacity: 1; }
+
+  /* Soft border that cross-fades with theme (used on footer dividers) */
+  .border-theme-soft {
+    border-color: rgba(255, 255, 255, 0.06);
+    transition: border-color 280ms cubic-bezier(0.4, 0.0, 0.2, 1);
+  }
+  :root.is-light .border-theme-soft {
+    border-color: rgba(0, 0, 0, 0.08);
+  }
+
+  /* Dual-mode bento tile surface. Default (dark) reads as a quiet glass
+     tile on the dark canvas; in light mode it lifts to a soft white card. */
+  .bento-tile {
+    background-color: rgba(255, 255, 255, 0.04);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition:
+      background-color 280ms cubic-bezier(0.4, 0.0, 0.2, 1),
+      box-shadow 280ms cubic-bezier(0.4, 0.0, 0.2, 1),
+      transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  :root.is-light .bento-tile {
+    background-color: rgba(255, 255, 255, 0.7);
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+  }
+
+  /* "Part of your iPhone" tiles — coral glyph chip + shortcut-action
+     pills, both theme-aware like the bento surface they sit on. */
+  .system-glyph {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    color: #F08A1D;
+    background-color: rgba(240, 138, 29, 0.14);
+    box-shadow: inset 0 0 0 1px rgba(240, 138, 29, 0.22);
+    transition: background-color 280ms cubic-bezier(0.4, 0.0, 0.2, 1);
+  }
+  /* Inverse variant for glyphs sitting on the solid accent tile.
+     Dark ink (not white) — white on the brand orange is only ~2:1. */
+  .system-glyph--inverse {
+    color: #231505;
+    background-color: rgba(255, 255, 255, 0.26);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.30);
+  }
+  :root.is-light .system-glyph {
+    background-color: rgba(240, 138, 29, 0.12);
+  }
+  .system-action-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px 7px;
+    border-radius: 999px;
+    font-size: 12.5px;
+    font-weight: 500;
+    line-height: 1;
+    color: #B6B6BA;
+    background-color: rgba(255, 255, 255, 0.06);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+    transition:
+      color 280ms cubic-bezier(0.4, 0.0, 0.2, 1),
+      background-color 280ms cubic-bezier(0.4, 0.0, 0.2, 1),
+      box-shadow 280ms cubic-bezier(0.4, 0.0, 0.2, 1);
+  }
+  :root.is-light .system-action-pill {
+    color: #4A4742;
+    background-color: rgba(0, 0, 0, 0.045);
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.07);
+  }
+
+  /* Bento card hover lift (applies to both default and accent tiles) */
+  .bento-card {
+    transition:
+      transform 600ms cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 600ms cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 400ms ease-out;
+  }
+  .bento-card:hover {
+    transform: translateY(-4px);
+  }
+
+  /* Tiny internal cascade inside each bento tile so the visual feels
+     a beat behind the copy when the card enters view. Builds on the
+     parent .reveal entrance state and only runs after the tile is
+     visible. */
+  .js-ready .bento-card .bento-visual {
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+      opacity 700ms cubic-bezier(0.16, 1, 0.3, 1) 220ms,
+      transform 700ms cubic-bezier(0.16, 1, 0.3, 1) 220ms;
+    will-change: transform, opacity;
+  }
+  .js-ready .bento-card.is-visible .bento-visual {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .js-ready .bento-card .bento-visual {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal,
+    .reveal-eyebrow,
+    .reveal-image,
+    .reveal-line-draw,
+    .device-theme-mask {
+      opacity: 1 !important;
+      transform: none !important;
+      filter: none !important;
+      transition: none !important;
+    }
+    .reveal-lines .reveal-line > span {
+      transform: none !important;
+      transition: none !important;
+    }
+    .bento-card { transition: none !important; }
+    .bento-card:hover { transform: none !important; }
+  }
+
+  /* Used by Hero stacked-card icon */
+  .icon-card {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+  }
+
+  .scroll-mask-fade {
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
+  }
+
+  /* ---- Converge headline ---------------------------------------------
+     The single dramatic, hero-sized headline animation on the page.
+     Used by `SplitHeadline.astro` for the Privacy moment.
+
+     Two words slide in from opposite edges of the viewport and meet
+     at their natural inline positions in a single centred line. Once
+     they’ve landed, the supporting paragraph fades in beneath.
+
+     Implementation gotchas:
+       1. .converge-word MUST be `display: inline-block` — CSS
+          transforms are silently ignored on inline elements.
+       2. The outer .converge-statement section MUST clip horizontal
+          overflow, otherwise the -100vw / +100vw starting transforms
+          create a horizontal page scroll on first paint.
+       3. The headline allows wrapping below the `md` breakpoint, so
+          on phones each line slides in from its own side rather than
+          forcing a single very-wide nowrap row.
+       4. Timing budget (after the section reaches `is-visible`):
+            t=0       words start sliding in
+            t=0–800   words fade in to full opacity
+            t=0–1300  transform completes (the "click" together)
+            t=1100    body paragraph begins fading in (small overlap
+                      with the tail of the word slide, so it feels
+                      like it materialises *as* the words settle)
+            t=~1900   body fully resolved.
+  --------------------------------------------------------------------- */
+  .converge-headline {
+    /* Centred, wraps below md, single line on md+. */
+    line-height: 0.95;
+  }
+  @media (min-width: 768px) {
+    .converge-headline {
+      white-space: nowrap;
+    }
+  }
+  .converge-word {
+    /* REQUIRED: inline-block so translateX actually applies. */
+    display: inline-block;
+    will-change: transform, opacity;
+  }
+  .js-ready .converge-word--left {
+    opacity: 0;
+    transform: translateX(-100vw);
+    transition:
+      opacity 900ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 1300ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .js-ready .converge-word--right {
+    opacity: 0;
+    transform: translateX(100vw);
+    transition:
+      opacity 900ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 1300ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .converge-statement.is-visible .converge-word--left,
+  .converge-statement.is-visible .converge-word--right {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* Body materialises just as the words settle. Long delay so it
+     reads as a beat *after* the headline lands, not concurrent. */
+  .js-ready .converge-body {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity 800ms cubic-bezier(0.22, 1, 0.36, 1) 1100ms,
+      transform 800ms cubic-bezier(0.22, 1, 0.36, 1) 1100ms;
+  }
+  .converge-statement.is-visible .converge-body {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Smaller slide distance on phones — at <768px the words wrap to
+     two lines, so we don't need the full 100vw runway. Shorter
+     distance also keeps the animation snappy at small sizes. */
+  @media (max-width: 767px) {
+    .js-ready .converge-word--left {
+      transform: translateX(-60vw);
+    }
+    .js-ready .converge-word--right {
+      transform: translateX(60vw);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .js-ready .converge-word--left,
+    .js-ready .converge-word--right,
+    .js-ready .converge-body {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+
+}

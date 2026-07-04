@@ -1,0 +1,24 @@
+{
+  "name": "sun-website",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "assets:ipad": "python3 scripts/frame_ipad_assets.py --repo .",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.9",
+    "@astrojs/tailwind": "^5.1.0",
+    "astro": "^5.0.0",
+    "tailwindcss": "^3.4.0",
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0"
+  }
+}

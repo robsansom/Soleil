@@ -2,394 +2,394 @@ import type { TranslationSchema } from '../types';
 
 export const de: TranslationSchema = {
   meta: {
-    title: 'Soleil - Love the sun. Not the burn.',
-    description: 'A calm, personal sun companion. Live UV, your own burn window, sunscreen timing and family alerts - on iPhone and Apple Watch.'
+    title: 'Soleil - Liebe die Sonne. Nicht den Sonnenbrand.',
+    description: 'Ein ruhiger, persönlicher Sonnenbegleiter. UV live, deine persönliche Schutzzeit, Sonnencreme-Timing und Familien-Erinnerungen - auf iPhone und Apple Watch.'
   },
   a11y: {
-    selectLanguage: 'Select language',
-    homeLink: 'Soleil home',
-    appStoreLinkLabel: 'Download Soleil on the App Store',
-    appStoreBadgeAlt: 'Download on the App Store'
+    selectLanguage: 'Sprache auswählen',
+    homeLink: 'Soleil Startseite',
+    appStoreLinkLabel: 'Soleil im App Store laden',
+    appStoreBadgeAlt: 'Laden im App Store'
   },
   cta: {
-    comingSoon: 'Coming soon to the App Store',
-    comingSoonShort: 'Coming soon'
+    comingSoon: 'Bald im App Store',
+    comingSoonShort: 'Bald verfügbar'
   },
   header: {
     features: 'Features',
     support: 'Support',
-    download: 'Download'
+    download: 'Laden'
   },
   footer: {
-    taglineEyebrow: 'A kinder way to be in the sun',
-    taglineHeadline: 'Step outside.',
-    taglineHeadlineDim: 'We\u2019ve got you.',
-    copyright: 'Made with care in the UK.',
-    appleAffiliation: 'Soleil is an independent app, not affiliated with Apple Inc.',
-    appleTrademarks: 'Apple, the Apple logo, iPhone and Apple Watch are trademarks of Apple Inc., registered in the U.S. and other countries and regions. App Store is a service mark of Apple Inc.',
-    medicalDisclaimer: 'Soleil is wellness guidance, not medical advice. For sensitive skin or diagnosed conditions, please follow a dermatologist\u2019s plan.',
-    product: 'Product',
-    company: 'Company',
-    legal: 'Legal',
+    taglineEyebrow: 'Ein sanfterer Weg, die Sonne zu genießen',
+    taglineHeadline: 'Geh raus.',
+    taglineHeadlineDim: 'Wir passen auf.',
+    copyright: 'Mit Sorgfalt gemacht in Großbritannien.',
+    appleAffiliation: 'Soleil ist eine unabhängige App und steht in keiner Verbindung zu Apple Inc.',
+    appleTrademarks: 'Apple, das Apple Logo, iPhone und Apple Watch sind Marken von Apple Inc., eingetragen in den USA und anderen Ländern und Regionen. App Store ist eine Dienstleistungsmarke von Apple Inc.',
+    medicalDisclaimer: 'Soleil bietet Wellness-Orientierung, keine medizinische Beratung. Bei empfindlicher Haut oder diagnostizierten Erkrankungen folge bitte dem Plan deiner Hautärztin oder deines Hautarztes.',
+    product: 'Produkt',
+    company: 'Unternehmen',
+    legal: 'Rechtliches',
     features: 'Features',
-    download: 'Download',
+    download: 'Laden',
     support: 'Support',
-    contact: 'Contact',
-    privacy: 'Privacy',
-    terms: 'Terms'
+    contact: 'Kontakt',
+    privacy: 'Datenschutz',
+    terms: 'Nutzungsbedingungen'
   },
   hero: {
     eyebrow: 'Soleil',
-    title: 'Love the sun.',
-    titleAccent: 'Not the burn.',
-    body: 'A calm, personal sun companion. Live UV, a burn window built around your skin, sunscreen timing and family alerts - on iPhone and Apple Watch.',
-    badgeLabel: 'For iPhone & Apple Watch',
-    imageAlt: 'A woman with her eyes closed, smiling into warm golden-hour sunlight on a coastal path'
+    title: 'Liebe die Sonne.',
+    titleAccent: 'Nicht den Sonnenbrand.',
+    body: 'Ein ruhiger, persönlicher Sonnenbegleiter. UV live, eine Schutzzeit passend zu deiner Haut, Sonnencreme-Timing und Familien-Erinnerungen - auf iPhone und Apple Watch.',
+    badgeLabel: 'Für iPhone & Apple Watch',
+    imageAlt: 'Eine Frau mit geschlossenen Augen lächelt im warmen Abendlicht auf einem Küstenweg'
   },
   showcaseNow: {
-    eyebrow: 'Right now',
-    headline: 'One number.',
-    headlineAccent: 'Your number.',
-    body: 'Soleil pulls the live UV where you\u2019re standing and turns it into the number that matters: how long your skin has, today, with what you\u2019re wearing. Not a generic index - a burn window built from your skin type and your SPF.',
-    imageAlt: 'The Soleil iPhone app showing today\u2019s live UV, the personal burn window and sun timing guidance.'
+    eyebrow: 'Jetzt gerade',
+    headline: 'Eine Zahl.',
+    headlineAccent: 'Deine Zahl.',
+    body: 'Soleil holt den Live-UV-Wert genau dort, wo du stehst, und macht daraus die Zahl, die zählt: wie lange deine Haut heute hat - mit dem, was du trägst. Kein generischer Index, sondern eine Schutzzeit aus deinem Hauttyp und deinem LSF.',
+    imageAlt: 'Die Soleil iPhone-App mit dem aktuellen UV-Wert, der persönlichen Schutzzeit und Sonnen-Timing.'
   },
   showcaseRealSun: {
     eyebrow: 'Real Sun',
-    headline: 'The sun day',
-    headlineAccent: 'you actually had.',
-    body: 'Most UV apps forecast what might happen. Soleil also remembers what did. Your Apple Watch quietly notices your time in daylight, and Soleil matches it against the day\u2019s UV - so you can see when your sun landed, and how strong it was.',
-    imageAlt: 'A man in a linen shirt glancing at his watch in the dappled shade of a beach parasol'
+    headline: 'Der Sonnentag,',
+    headlineAccent: 'den du wirklich hattest.',
+    body: 'Die meisten UV-Apps sagen voraus, was passieren könnte. Soleil merkt sich auch, was passiert ist. Deine Apple Watch registriert still deine Zeit im Tageslicht, und Soleil gleicht sie mit dem UV-Verlauf des Tages ab - so siehst du, wann deine Sonne kam und wie stark sie war.',
+    imageAlt: 'Ein Mann im Leinenhemd wirft im Schatten eines Sonnenschirms am Strand einen Blick auf seine Uhr'
   },
   photoMoment: {
-    eyebrow: 'Family',
-    headline: 'Protect',
-    headlineAccent: 'your people.',
-    body: 'Add the people you look after, run a quick check-in, and Soleil keeps track of everyone\u2019s sunscreen - with reapply reminders for each of them. Free, built in, no subscription.',
-    imageAlt: 'A grandmother and two teenagers laughing together under a cream parasol on a bright beach'
+    eyebrow: 'Familie',
+    headline: 'Schütze',
+    headlineAccent: 'deine Liebsten.',
+    body: 'Füge die Menschen hinzu, um die du dich kümmerst, mach einen kurzen Check-in, und Soleil behält die Sonnencreme aller im Blick - mit Nachcreme-Erinnerungen für jede Person. Kostenlos, integriert, ohne Abo.',
+    imageAlt: 'Eine Großmutter und zwei Teenager lachen zusammen unter einem cremefarbenen Sonnenschirm am hellen Strand'
   },
   showcaseRoutine: {
     eyebrow: 'Sessions',
-    headline: 'Real timing,',
-    headlineAccent: 'not guesswork.',
-    body: 'Start a session, pick what you\u2019re wearing and your SPF, and a live ring counts down to your limit. Reapplying renews your protection - but it never resets the sun you\u2019ve already had. Soleil keeps both honest.',
-    imageAlt: 'The Soleil iPhone app running a live sun session with a countdown ring and sunscreen timing.'
+    headline: 'Echtes Timing,',
+    headlineAccent: 'kein Raten.',
+    body: 'Starte eine Session, wähle Kleidung und LSF, und ein Live-Ring zählt bis zu deinem Limit herunter. Nachcremen erneuert deinen Schutz - aber es setzt die Sonne, die du schon hattest, nie zurück. Soleil hält beides ehrlich fest.',
+    imageAlt: 'Die Soleil iPhone-App mit einer laufenden Sonnensession, Countdown-Ring und Sonnencreme-Timing.'
   },
   splitHeadlinePrivacy: {
-    eyebrow: 'Privacy',
-    first: 'Private,',
-    second: 'by default.',
-    body: 'No account. No tracking. No third-party SDKs. Your skin profile, sessions and history live on your iPhone - not on someone\u2019s server.'
+    eyebrow: 'Privatsphäre',
+    first: 'Privat,',
+    second: 'von Haus aus.',
+    body: 'Kein Account. Kein Tracking. Keine Dritt-SDKs. Dein Hautprofil, deine Sessions und dein Verlauf bleiben auf deinem iPhone - nicht auf irgendeinem Server.'
   },
   bento: {
     eyebrow: 'Features',
-    headline: 'Calm,',
-    headlineAccent: 'not clinical.',
-    body: 'Soleil never shouts. It watches the UV, your skin and your sunscreen, and tells you what to do before you ever feel it - like a friend who happens to know the science.',
+    headline: 'Ruhig,',
+    headlineAccent: 'nicht klinisch.',
+    body: 'Soleil wird nie laut. Es beobachtet UV, Haut und Sonnencreme und sagt dir, was zu tun ist, bevor du etwas spürst - wie ein Freund, der zufällig die Wissenschaft kennt.',
     uvNow: {
-      eyebrow: 'Live UV',
-      title: 'The day at a glance',
-      body: 'Real-time UV index, peak time, cloud cover and your burn-risk window - from Apple WeatherKit, for exactly where you are.'
+      eyebrow: 'UV live',
+      title: 'Der Tag auf einen Blick',
+      body: 'UV-Index in Echtzeit, Spitzenzeit, Bewölkung und deine persönliche Schutzzeit - über Apple WeatherKit, genau für deinen Standort.'
     },
     sunscreen: {
-      eyebrow: 'Sunscreen',
-      title: 'SPF that keeps time',
-      body: 'Log your sunscreen once and Soleil tracks it - fresh, fading or expired - and nudges you before it stops working.'
+      eyebrow: 'Sonnencreme',
+      title: 'LSF mit Zeitgefühl',
+      body: 'Trag deine Sonnencreme einmal ein, und Soleil verfolgt sie - frisch, nachlassend oder abgelaufen - und meldet sich, bevor sie aufhört zu wirken.'
     },
     family: {
-      eyebrow: 'Family',
-      title: 'Everyone covered',
-      body: 'Profiles for the people you look after, a one-tap check-in, and reapply reminders for each of them. Always free.'
+      eyebrow: 'Familie',
+      title: 'Alle geschützt',
+      body: 'Profile für die Menschen, um die du dich kümmerst, ein Check-in mit einem Tipp und Nachcreme-Erinnerungen für jede Person. Für immer kostenlos.'
     },
     realSun: {
       eyebrow: 'Real Sun',
-      title: 'Your daylight story',
-      body: 'Apple Watch daylight matched against the day\u2019s UV shape. See whether your sun landed at the gentle edges or the sharp peak.'
+      title: 'Deine Tageslicht-Story',
+      body: 'Apple Watch Tageslicht, abgeglichen mit dem UV-Verlauf des Tages. Sieh, ob deine Sonne in die sanften Randstunden fiel oder genau in die Spitze.'
     },
     glow: {
       eyebrow: 'Daily Glow',
-      title: 'Routines you\u2019ll keep',
-      body: 'Save the products you trust and the steps you follow. Guided sessions walk through them in order, every time.'
+      title: 'Routinen, die du behältst',
+      body: 'Speichere die Produkte, denen du vertraust, und die Schritte, die du gehst. Geführte Sessions führen dich jedes Mal der Reihe nach hindurch.'
     },
     history: {
-      eyebrow: 'History',
-      title: 'Patterns, not points',
-      body: 'Per-day and per-week exposure history with Vitamin D estimates - and monthly trends and a calendar heatmap with Pro.'
+      eyebrow: 'Verlauf',
+      title: 'Muster statt Punkte',
+      body: 'Sonnenverlauf pro Tag und Woche mit Vitamin-D-Schätzungen - plus Monatstrends und Kalender-Heatmap mit Pro.'
     }
   },
   integration: {
-    eyebrow: 'Woven into iOS',
-    headline: 'On your phone.',
-    headlineAccent: 'On your wrist.',
-    body: 'Soleil lives where you\u2019ll actually see it: a home screen widget with today\u2019s UV, a Live Activity counting down in the Dynamic Island, and a free Apple Watch app that works without taking your phone to the beach.',
+    eyebrow: 'Verwoben mit iOS',
+    headline: 'Auf deinem iPhone.',
+    headlineAccent: 'An deinem Handgelenk.',
+    body: 'Soleil ist da, wo du wirklich hinschaust: ein Homescreen-Widget mit dem UV-Wert von heute, eine Live-Aktivität, die in der Dynamic Island herunterzählt, und eine kostenlose Apple Watch App, die auch ohne iPhone am Strand funktioniert.',
     widgets: {
-      eyebrow: 'Widgets & Live Activity',
-      title: 'Today\u2019s sun, on your home screen',
-      body: 'A widget with the live UV and your burn window, plus a Live Activity that keeps your session countdown in the Dynamic Island.'
+      eyebrow: 'Widgets & Live-Aktivität',
+      title: 'Die Sonne von heute, auf deinem Homescreen',
+      body: 'Ein Widget mit Live-UV und deiner Schutzzeit, plus eine Live-Aktivität, die deinen Session-Countdown in der Dynamic Island behält.'
     },
     watch: {
       eyebrow: 'Apple Watch',
-      title: 'The whole app, on your wrist',
+      title: 'Die ganze App an deinem Handgelenk',
       capabilities: [
-        'UV complication',
-        'Smart Stack card',
-        'Sun sessions',
-        'Sunscreen state',
-        'Haptic reapply nudges',
-        'Time in daylight'
+        'UV-Komplikation',
+        'Smart-Stack-Karte',
+        'Sonnensessions',
+        'Sonnencreme-Status',
+        'Haptische Nachcreme-Hinweise',
+        'Zeit im Tageslicht'
       ]
     },
     alerts: {
-      eyebrow: 'Alerts',
-      title: 'A tap before it matters',
-      body: 'Burn-risk warnings and reapply reminders that arrive before the damage, not after. Gentle, timed to you, and easy to silence.'
+      eyebrow: 'Mitteilungen',
+      title: 'Ein Tipp, bevor es zählt',
+      body: 'Warnungen vor Sonnenbrand-Risiko und Nachcreme-Erinnerungen, die vor dem Schaden ankommen, nicht danach. Sanft, auf dich getaktet und leicht stummzuschalten.'
     }
   },
   privacyPage: {
-    metaTitle: 'Privacy Policy - Soleil',
-    metaDescription: 'How Soleil handles your data. No account. No tracking. Your skin profile, sessions and history live on your device.',
-    eyebrow: 'Legal',
-    headline: 'Privacy.',
-    headlineDim: 'By default.',
-    lastUpdated: '4 July 2026',
-    intro: 'This policy explains, in plain language, what Soleil does with your information. The headline is short: it doesn\u2019t do much, on purpose.',
-    promisesTitle: 'Our promises',
+    metaTitle: 'Datenschutzerklärung - Soleil',
+    metaDescription: 'Wie Soleil mit Ihren Daten umgeht. Kein Account. Kein Tracking. Ihr Hautprofil, Ihre Sessions und Ihr Verlauf bleiben auf Ihrem Gerät.',
+    eyebrow: 'Rechtliches',
+    headline: 'Privatsphäre.',
+    headlineDim: 'Von Haus aus.',
+    lastUpdated: '4. Juli 2026',
+    intro: 'Diese Erklärung beschreibt in einfacher Sprache, was Soleil mit Ihren Informationen macht. Die Kurzfassung: absichtlich sehr wenig.',
+    promisesTitle: 'Unsere Versprechen',
     promises: [
-      'No account. There is nothing for you to sign up to.',
-      'No analytics. We do not measure how you use the app.',
-      'No advertising. We do not show ads, and we never will.',
-      'No tracking. We do not track you across apps or websites.',
-      'No selling data. Your sun history is yours - not a product.',
-      'No third-party analytics or advertising SDKs in the app.'
+      'Kein Account. Es gibt nichts, wofür Sie sich registrieren müssten.',
+      'Keine Analytics. Wir messen nicht, wie Sie die App nutzen.',
+      'Keine Werbung. Wir zeigen keine Anzeigen - und werden es nie tun.',
+      'Kein Tracking. Wir verfolgen Sie nicht über Apps oder Websites hinweg.',
+      'Kein Datenverkauf. Ihr Sonnenverlauf gehört Ihnen - er ist kein Produkt.',
+      'Keine Analyse- oder Werbe-SDKs von Drittanbietern in der App.'
     ],
     sections: [
       {
-        title: 'Who we are',
-        body: 'Soleil (the "App") is published by an independent developer based in the United Kingdom ("we", "us"). We are the controller of personal information you choose to send us, such as a support email. For privacy questions, contact support@getsoleil.com.'
+        title: 'Wer wir sind',
+        body: 'Soleil (die "App") wird von einem unabhängigen Entwickler mit Sitz im Vereinigten Königreich veröffentlicht ("wir", "uns"). Wir sind Verantwortliche für personenbezogene Informationen, die Sie uns freiwillig senden, etwa eine Support-E-Mail. Bei Datenschutzfragen wenden Sie sich an support@getsoleil.com.'
       },
       {
-        title: 'The short version',
-        body: 'The App has no Soleil account or developer-operated content server. Your skin profile, sun sessions, sunscreen log, family profiles and exposure history are stored on your device using Apple\u2019s standard storage frameworks. We do not receive them. The App has no advertising, cross-app tracking or third-party analytics SDK. Information you send to support, technical website logs handled by our hosting provider, and information Apple provides to developers are described below.'
+        title: 'Die Kurzfassung',
+        body: 'Die App hat keinen Soleil-Account und keinen vom Entwickler betriebenen Inhaltsserver. Ihr Hautprofil, Ihre Sonnensessions, Ihr Sonnencreme-Protokoll, Ihre Familienprofile und Ihr Verlauf werden mit Apples Standard-Frameworks auf Ihrem Gerät gespeichert. Wir erhalten sie nicht. Die App enthält keine Werbung, kein App-übergreifendes Tracking und kein Analyse-SDK von Drittanbietern. Informationen, die Sie an den Support senden, technische Website-Logs unseres Hosting-Anbieters und Informationen, die Apple Entwicklern bereitstellt, werden unten beschrieben.'
       },
       {
-        title: 'What data the app handles, and where it lives',
-        body: 'On your device, your Fitzpatrick skin type, SPF and clothing choices, sun sessions, family profiles and history are stored locally using Apple\u2019s SwiftData framework. Soleil does not operate a separate database containing this information or provide us with an interface for reading it. Family profiles are simple local records you create - Soleil does not contact or identify the people they describe.'
+        title: 'Welche Daten die App verarbeitet und wo sie liegen',
+        body: 'Auf Ihrem Gerät werden Ihr Fitzpatrick-Hauttyp, Ihre LSF- und Kleidungsangaben, Sonnensessions, Familienprofile und Ihr Verlauf lokal mit Apples SwiftData-Framework gespeichert. Soleil betreibt keine separate Datenbank mit diesen Informationen und bietet uns keine Möglichkeit, sie einzusehen. Familienprofile sind einfache lokale Einträge, die Sie anlegen - Soleil kontaktiert oder identifiziert die darin beschriebenen Personen nicht.'
       },
       {
-        title: 'Location and weather',
-        body: 'To show the UV index where you are, the App asks iOS for your location and sends coordinates to Apple\u2019s WeatherKit service to retrieve local UV and weather conditions. Apple processes these requests under Apple\u2019s own privacy terms. We do not receive or store your location, and the App does not build a movement history on our systems.'
+        title: 'Standort und Wetter',
+        body: 'Um den UV-Index an Ihrem Standort anzuzeigen, fragt die App iOS nach Ihrem Standort und sendet Koordinaten an Apples WeatherKit-Dienst, um lokale UV- und Wetterdaten abzurufen. Apple verarbeitet diese Anfragen nach Apples eigenen Datenschutzbestimmungen. Wir erhalten oder speichern Ihren Standort nicht, und die App erstellt keinen Bewegungsverlauf auf unseren Systemen.'
       },
       {
-        title: 'Health data',
-        body: 'With your permission, the App reads "Time in Daylight" from Apple HealthKit to power the Real Sun feature, and may reference other sun-related metrics you grant access to. Health data is read on your device, used for on-device calculations and display, and is never transmitted to us or to any third party. You can withdraw HealthKit access at any time in iOS Settings, and the feature degrades gracefully.'
+        title: 'Gesundheitsdaten',
+        body: 'Mit Ihrer Erlaubnis liest die App "Zeit im Tageslicht" aus Apple HealthKit, um die Real Sun Funktion zu ermöglichen, und kann auf weitere sonnenbezogene Werte zugreifen, die Sie freigeben. Gesundheitsdaten werden auf Ihrem Gerät gelesen, für Berechnungen und Anzeige auf dem Gerät verwendet und niemals an uns oder Dritte übertragen. Sie können den HealthKit-Zugriff jederzeit in den iOS-Einstellungen widerrufen; die Funktion bleibt dann in reduzierter Form nutzbar.'
       },
       {
-        title: 'Optional AI skin tone scan',
-        body: 'The optional skin tone scan can run fully on-device. If you choose the AI-assisted option, your photo is sent over an encrypted connection through a secure proxy to a model provider solely to estimate a Fitzpatrick skin type, and the result is returned to your device. Photos are not used to identify you, are not used for training, and are not retained by us. You can always set your skin type manually instead.'
+        title: 'Optionaler KI-Hautton-Scan',
+        body: 'Der optionale Hautton-Scan kann vollständig auf dem Gerät laufen. Wenn Sie die KI-gestützte Option wählen, wird Ihr Foto über eine verschlüsselte Verbindung durch einen sicheren Proxy an einen Modellanbieter gesendet - ausschließlich, um einen Fitzpatrick-Hauttyp zu schätzen - und das Ergebnis an Ihr Gerät zurückgegeben. Fotos werden nicht verwendet, um Sie zu identifizieren, nicht für Training genutzt und nicht von uns aufbewahrt. Sie können Ihren Hauttyp stattdessen jederzeit manuell festlegen.'
       },
       {
-        title: 'Information available through Apple',
-        body: 'Apple may provide developers with aggregated App Store sales, download and usage reports. If you have enabled sharing with app developers in iOS, Apple may also provide diagnostic and crash information. Apple controls the information it collects through the App Store, StoreKit, WeatherKit, HealthKit and device analytics under Apple\u2019s own privacy terms. We do not use this information to build advertising profiles or track you across apps or websites.'
+        title: 'Informationen, die über Apple verfügbar sind',
+        body: 'Apple kann Entwicklern aggregierte Berichte zu App Store Verkäufen, Downloads und Nutzung bereitstellen. Wenn Sie in iOS das Teilen mit App-Entwicklern aktiviert haben, kann Apple auch Diagnose- und Absturzinformationen bereitstellen. Apple kontrolliert die Informationen, die es über den App Store, StoreKit, WeatherKit, HealthKit und Geräteanalysen erhebt, nach Apples eigenen Datenschutzbestimmungen. Wir nutzen diese Informationen nicht, um Werbeprofile zu erstellen oder Sie über Apps oder Websites hinweg zu verfolgen.'
       },
       {
-        title: 'Purchases and subscriptions',
-        body: 'Soleil Pro is sold through Apple\u2019s App Store using StoreKit. Apple processes payments and makes purchase and entitlement information available to the App so it can unlock paid features. We do not receive your full payment-card details. Apple handles billing, refunds and taxes under the Apple Media Services Terms.'
+        title: 'Käufe und Abonnements',
+        body: 'Soleil Pro wird über Apples App Store mit StoreKit verkauft. Apple wickelt Zahlungen ab und stellt der App Kauf- und Berechtigungsinformationen bereit, damit sie bezahlte Funktionen freischalten kann. Wir erhalten nicht Ihre vollständigen Zahlungskartendaten. Apple regelt Abrechnung, Rückerstattungen und Steuern nach den Nutzungsbedingungen für Apple Medienservices.'
       },
       {
-        title: 'Website and support',
-        body: 'This website is hosted by GitHub Pages. GitHub may process IP addresses, request details and security logs when the site is visited. The site loads a font from Google Fonts, so Google may receive ordinary network information when your browser requests that font. The website does not use advertising cookies or analytics. If you email support, our email provider processes your address, message and attachments so we can read and answer it.'
+        title: 'Website und Support',
+        body: 'Diese Website wird von GitHub Pages gehostet. GitHub kann IP-Adressen, Anfragedetails und Sicherheitsprotokolle verarbeiten, wenn die Seite besucht wird. Die Seite lädt eine Schriftart von Google Fonts; Google kann daher übliche Netzwerkinformationen erhalten, wenn Ihr Browser diese Schriftart anfordert. Die Website verwendet keine Werbe-Cookies und keine Analytics. Wenn Sie dem Support eine E-Mail schreiben, verarbeitet unser E-Mail-Anbieter Ihre Adresse, Nachricht und Anhänge, damit wir sie lesen und beantworten können.'
       },
       {
-        title: 'Why we use support information and how long we keep it',
-        body: 'We use support correspondence to answer your request, diagnose problems, prevent abuse and keep an appropriate record of the assistance provided. Our lawful basis under UK GDPR is our legitimate interest in supporting and improving the App and, where relevant, taking steps connected with our contract with you. We keep support messages only for as long as reasonably needed for those purposes, normally no longer than 24 months after the conversation closes unless a longer period is required for a legal, security or accounting reason.'
+        title: 'Warum wir Support-Informationen nutzen und wie lange wir sie aufbewahren',
+        body: 'Wir nutzen Support-Korrespondenz, um Ihre Anfrage zu beantworten, Probleme zu diagnostizieren, Missbrauch zu verhindern und die geleistete Unterstützung angemessen zu dokumentieren. Unsere Rechtsgrundlage nach der UK-DSGVO ist unser berechtigtes Interesse an der Unterstützung und Verbesserung der App sowie, soweit einschlägig, die Durchführung von Schritten im Zusammenhang mit unserem Vertrag mit Ihnen. Wir bewahren Support-Nachrichten nur so lange auf, wie es für diese Zwecke vernünftigerweise nötig ist - in der Regel höchstens 24 Monate nach Abschluss der Konversation, sofern nicht ein längerer Zeitraum aus rechtlichen, Sicherheits- oder Buchhaltungsgründen erforderlich ist.'
       },
       {
-        title: 'Service providers and international transfers',
-        body: 'Apple, GitHub, Google and our email provider process information under their own terms and may process it outside the United Kingdom. Where UK data-protection law applies to a transfer we make, we rely on an applicable adequacy decision or appropriate contractual safeguards. We do not permit these providers to use support correspondence for our advertising.'
+        title: 'Dienstleister und internationale Übermittlungen',
+        body: 'Apple, GitHub, Google und unser E-Mail-Anbieter verarbeiten Informationen nach ihren eigenen Bedingungen und können sie außerhalb des Vereinigten Königreichs verarbeiten. Soweit britisches Datenschutzrecht auf eine von uns veranlasste Übermittlung anwendbar ist, stützen wir uns auf einen einschlägigen Angemessenheitsbeschluss oder geeignete vertragliche Garantien. Wir gestatten diesen Anbietern nicht, Support-Korrespondenz für unsere Werbung zu nutzen.'
       },
       {
-        title: 'Security',
-        body: 'We use platform security features and take reasonable organisational measures appropriate to the limited information we handle. Device security is provided primarily by Apple. No storage or transmission method is completely secure, so we cannot promise absolute security.'
+        title: 'Sicherheit',
+        body: 'Wir nutzen Sicherheitsfunktionen der Plattform und treffen angemessene organisatorische Maßnahmen, die den begrenzten Informationen entsprechen, die wir verarbeiten. Die Gerätesicherheit wird in erster Linie von Apple gewährleistet. Keine Speicher- oder Übertragungsmethode ist vollkommen sicher, daher können wir keine absolute Sicherheit versprechen.'
       },
       {
-        title: 'Children',
-        body: 'Soleil is intended for a general audience and is not directed specifically at children. Family profiles for children are created and controlled by the adult who owns the device, and stay on that device. We do not ask users to create an account or provide an age. If a child emails support, we use the message only to respond and manage the request. A parent or guardian can contact us about that correspondence.'
+        title: 'Kinder',
+        body: 'Soleil richtet sich an ein allgemeines Publikum und nicht gezielt an Kinder. Familienprofile für Kinder werden von der erwachsenen Person angelegt und kontrolliert, der das Gerät gehört, und bleiben auf diesem Gerät. Wir verlangen weder ein Konto noch eine Altersangabe. Wenn ein Kind dem Support schreibt, verwenden wir die Nachricht nur, um zu antworten und die Anfrage zu bearbeiten. Ein Elternteil oder Erziehungsberechtigter kann uns zu dieser Korrespondenz kontaktieren.'
       },
       {
-        title: 'Your rights',
-        body: 'Depending on where you live, you may have rights over personal information we control, including rights to access, correct, erase, restrict or object to its use, and to complain to a regulator. These rights are subject to legal limits. Contact support@getsoleil.com to make a request. UK residents may complain to the Information Commissioner\u2019s Office at ico.org.uk. Content stored only on your device should be managed through the App or your device because we do not hold a copy.'
+        title: 'Ihre Rechte',
+        body: 'Je nach Wohnort haben Sie möglicherweise Rechte an personenbezogenen Informationen in unserer Verantwortung, darunter Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung oder Widerspruch sowie das Recht auf Beschwerde bei einer Aufsichtsbehörde. Diese Rechte unterliegen gesetzlichen Grenzen. Wenden Sie sich für eine Anfrage an support@getsoleil.com. Personen mit Wohnsitz im Vereinigten Königreich können sich beim Information Commissioner\u2019s Office unter ico.org.uk beschweren. Inhalte, die nur auf Ihrem Gerät gespeichert sind, verwalten Sie bitte über die App oder Ihr Gerät, da wir keine Kopie besitzen.'
       },
       {
-        title: 'Changes to this policy',
-        body: 'We may update this policy when the App, website, providers or legal requirements change. We will update the date above and provide additional notice where a change materially affects how we use personal information.'
+        title: 'Änderungen an dieser Erklärung',
+        body: 'Wir können diese Erklärung aktualisieren, wenn sich App, Website, Anbieter oder rechtliche Anforderungen ändern. Wir aktualisieren dann das Datum oben und informieren zusätzlich, wenn eine Änderung die Nutzung personenbezogener Informationen wesentlich beeinflusst.'
       },
       {
-        title: 'Contact',
-        body: 'Questions or requests about privacy can be sent to support@getsoleil.com. A postal address for formal correspondence is available on request.'
+        title: 'Kontakt',
+        body: 'Fragen oder Anliegen zum Datenschutz senden Sie an support@getsoleil.com. Eine Postadresse für formelle Korrespondenz stellen wir auf Anfrage bereit.'
       }
     ]
   },
   supportPage: {
     metaTitle: 'Support - Soleil',
-    metaDescription: 'Help and answers for Soleil. Love the sun. Not the burn.',
+    metaDescription: 'Hilfe und Antworten zu Soleil. Liebe die Sonne. Nicht den Sonnenbrand.',
     eyebrow: 'Support',
-    headline: 'We\u2019re here',
-    headlineDim: 'to help.',
-    intro: 'Most of what you need to know is below. If you can\u2019t find an answer, email us and a real person will get back to you.',
-    contactTitle: 'Contact',
-    contactButton: 'Send a message',
-    faqTitle: 'Frequently asked',
+    headline: 'Wir sind',
+    headlineDim: 'für dich da.',
+    intro: 'Das meiste findest du unten. Wenn eine Antwort fehlt, schreib uns - ein echter Mensch meldet sich zurück.',
+    contactTitle: 'Kontakt',
+    contactButton: 'Nachricht senden',
+    faqTitle: 'Häufige Fragen',
     faqs: [
       {
-        q: 'How does Soleil work out my burn window?',
-        a: 'Soleil combines the live UV index where you are (from Apple WeatherKit) with your Fitzpatrick skin type, your SPF and what you\u2019re wearing. That produces a personal estimate of how long your skin has before burn risk builds. It\u2019s guidance, not a guarantee - shade, water, altitude and reflection all matter too.'
+        q: 'Wie berechnet Soleil meine Schutzzeit?',
+        a: 'Soleil kombiniert den Live-UV-Index an deinem Standort (über Apple WeatherKit) mit deinem Fitzpatrick-Hauttyp, deinem LSF und deiner Kleidung. Daraus entsteht eine persönliche Schätzung, wie lange deine Haut hat, bevor das Sonnenbrand-Risiko steigt. Es ist Orientierung, keine Garantie - Schatten, Wasser, Höhe und Reflexion spielen ebenfalls eine Rolle.'
       },
       {
-        q: 'How do I set my skin type?',
-        a: 'During onboarding you can answer a few questions, use the camera scan, or pick your Fitzpatrick type directly. The optional AI-assisted scan sends one photo through a secure proxy purely to estimate skin tone - or you can keep everything on-device. You can change your skin type any time in the You tab.'
+        q: 'Wie lege ich meinen Hauttyp fest?',
+        a: 'Beim Onboarding kannst du ein paar Fragen beantworten, den Kamera-Scan nutzen oder deinen Fitzpatrick-Typ direkt auswählen. Der optionale KI-gestützte Scan sendet ein einziges Foto durch einen sicheren Proxy, nur um den Hautton zu schätzen - oder du behältst alles auf dem Gerät. Deinen Hauttyp kannst du jederzeit im Tab "Du" ändern.'
       },
       {
-        q: 'How do family profiles and check-ins work?',
-        a: 'Add the people you look after in the You tab. A family check-in asks who\u2019s protected right now, and Soleil schedules reapply reminders for each person based on their SPF. Family features are free and stay on your device - nothing is shared or uploaded.'
+        q: 'Wie funktionieren Familienprofile und Check-ins?',
+        a: 'Füge die Menschen, um die du dich kümmerst, im Tab "Du" hinzu. Ein Familien-Check-in fragt, wer gerade geschützt ist, und Soleil plant Nachcreme-Erinnerungen für jede Person passend zu ihrem LSF. Familienfunktionen sind kostenlos und bleiben auf deinem Gerät - nichts wird geteilt oder hochgeladen.'
       },
       {
-        q: 'What do I need for the Apple Watch features?',
-        a: 'The free Watch app works on watchOS with a paired iPhone, showing UV, sunscreen state and daylight, with haptic reapply nudges and complications. The Real Sun daylight story uses Apple\u2019s Time in Daylight, which needs an Apple Watch SE (2nd gen), Series 6 or later, or any Ultra.'
+        q: 'Was brauche ich für die Apple Watch Funktionen?',
+        a: 'Die kostenlose Watch-App läuft auf watchOS mit einem gekoppelten iPhone und zeigt UV, Sonnencreme-Status und Tageslicht, mit haptischen Nachcreme-Hinweisen und Komplikationen. Die Real Sun Tageslicht-Story nutzt Apples "Zeit im Tageslicht" und braucht eine Apple Watch SE (2. Generation), Series 6 oder neuer oder eine beliebige Ultra.'
       },
       {
-        q: 'Does reapplying sunscreen reset my sun exposure?',
-        a: 'No - and that\u2019s deliberate. Reapplying renews your protection going forward, but the UV your skin has already received today stays counted. Soleil tracks both separately, so your daily total is always honest.'
+        q: 'Setzt Nachcremen meine Sonnenbelastung zurück?',
+        a: 'Nein - und das ist Absicht. Nachcremen erneuert deinen Schutz für die Zeit danach, aber die UV-Dosis, die deine Haut heute schon erhalten hat, bleibt gezählt. Soleil verfolgt beides getrennt, damit deine Tagesbilanz immer ehrlich ist.'
       },
       {
-        q: 'What\u2019s in Soleil Pro, and what does it cost?',
-        a: 'Pro unlocks guided Daily Glow sessions, the Real Sun daylight story, and deeper history - monthly trends and the calendar heatmap. It\u2019s $3.99/month, $19.99/year (with a 3-day free trial), or $69.99 once for lifetime. The Watch app, family protection, widgets, alerts and weekly history all stay free.'
+        q: 'Was steckt in Soleil Pro und was kostet es?',
+        a: 'Pro schaltet geführte Daily Glow Sessions, die Real Sun Tageslicht-Story und einen tieferen Verlauf frei - Monatstrends und die Kalender-Heatmap. Es kostet 3,99 $/Monat, 19,99 $/Jahr (mit 3 Tagen kostenloser Testphase) oder einmalig 69,99 $ für lebenslangen Zugriff. Watch-App, Familienschutz, Widgets, Mitteilungen und der Wochenverlauf bleiben kostenlos.'
       },
       {
-        q: 'How do I cancel a Pro subscription?',
-        a: 'Subscriptions are managed by Apple. Open iOS Settings, tap your name, then Subscriptions, find Soleil and tap Cancel. You\u2019ll keep Pro access until the end of the current billing period.'
+        q: 'Wie kündige ich ein Pro-Abo?',
+        a: 'Abonnements verwaltet Apple. Öffne die iOS-Einstellungen, tippe auf deinen Namen, dann auf "Abonnements", wähle Soleil und tippe auf "Kündigen". Du behältst den Pro-Zugriff bis zum Ende des laufenden Abrechnungszeitraums.'
       },
       {
-        q: 'Can I get a refund?',
-        a: 'Refunds for App Store purchases are handled by Apple. Visit reportaproblem.apple.com, sign in, find the Soleil purchase and request a refund.'
+        q: 'Bekomme ich eine Rückerstattung?',
+        a: 'Rückerstattungen für App Store Käufe übernimmt Apple. Besuche reportaproblem.apple.com, melde dich an, wähle den Soleil-Kauf aus und beantrage eine Rückerstattung.'
       },
       {
-        q: 'Is Soleil medical advice?',
-        a: 'No. Soleil is wellness guidance built on published UV science, and it errs on the side of caution - but it can\u2019t see your skin. If you have sensitive skin, a history of skin cancer, or a diagnosed condition, please follow your dermatologist\u2019s plan first.'
+        q: 'Ist Soleil medizinische Beratung?',
+        a: 'Nein. Soleil ist Wellness-Orientierung auf Basis veröffentlichter UV-Wissenschaft und rechnet lieber vorsichtig - aber es kann deine Haut nicht sehen. Bei empfindlicher Haut, Hautkrebs in der Vorgeschichte oder einer diagnostizierten Erkrankung folge bitte zuerst dem Plan deiner Hautärztin oder deines Hautarztes.'
       },
       {
-        q: 'I\u2019ve found a bug. What do I do?',
-        a: 'Email support@getsoleil.com with a short description of what you were doing, what you expected and what actually happened. A screenshot helps a lot.'
+        q: 'Ich habe einen Fehler gefunden. Was jetzt?',
+        a: 'Schreib an support@getsoleil.com mit einer kurzen Beschreibung: was du gemacht hast, was du erwartet hast und was tatsächlich passiert ist. Ein Screenshot hilft sehr.'
       }
     ]
   },
   termsPage: {
-    metaTitle: 'Terms of Use - Soleil',
-    metaDescription: 'The plain-English terms that apply when you download or use the Soleil iOS app.',
-    eyebrow: 'Legal',
-    headline: 'Terms',
-    headlineDim: 'of Use.',
-    lastUpdated: '4 July 2026',
-    intro: 'These terms apply when you download or use the Soleil iOS app ("Soleil", "we", "us"). By using Soleil you agree to them, together with Apple\u2019s Standard EULA. They are written in plain English on purpose.',
-    tldrTitle: 'In short',
+    metaTitle: 'Nutzungsbedingungen - Soleil',
+    metaDescription: 'Die verständlichen Bedingungen, die gelten, wenn Sie die Soleil iOS-App laden oder nutzen.',
+    eyebrow: 'Rechtliches',
+    headline: 'Nutzungs-',
+    headlineDim: 'bedingungen.',
+    lastUpdated: '4. Juli 2026',
+    intro: 'Diese Bedingungen gelten, wenn Sie die Soleil iOS-App laden oder nutzen ("Soleil", "wir", "uns"). Mit der Nutzung von Soleil stimmen Sie ihnen zu, zusammen mit Apples Standard-EULA. Sie sind bewusst in einfacher Sprache geschrieben.',
+    tldrTitle: 'Kurz gesagt',
     tldr: [
-      'Soleil is licensed to you for personal use on your Apple devices.',
-      'Free and paid features, prices and availability are shown in the App before purchase.',
-      'Apple takes payment, handles refunds and manages your subscription.',
-      'Soleil is wellness guidance, not medical advice - sun decisions remain yours.',
-      'These terms are governed by the laws of England & Wales.'
+      'Soleil wird Ihnen für die persönliche Nutzung auf Ihren Apple Geräten lizenziert.',
+      'Kostenlose und bezahlte Funktionen, Preise und Verfügbarkeit werden vor dem Kauf in der App angezeigt.',
+      'Apple zieht die Zahlung ein, bearbeitet Rückerstattungen und verwaltet Ihr Abonnement.',
+      'Soleil ist Wellness-Orientierung, keine medizinische Beratung - Entscheidungen rund um die Sonne bleiben bei Ihnen.',
+      'Diese Bedingungen unterliegen dem Recht von England und Wales.'
     ],
     sections: [
       {
-        title: '1. About these terms',
-        body: 'These terms apply when you download or use the Soleil iOS and watchOS app ("Soleil", the "App"). The App is published by an independent UK-based developer ("we", "us"). By using Soleil, you agree to these terms together with Apple\u2019s Licensed Application End User Licence Agreement (the "Apple EULA"). They are written in plain English on purpose.'
+        title: '1. Über diese Bedingungen',
+        body: 'Diese Bedingungen gelten, wenn Sie die Soleil-App für iOS und watchOS laden oder nutzen ("Soleil", die "App"). Die App wird von einem unabhängigen Entwickler mit Sitz im Vereinigten Königreich veröffentlicht ("wir", "uns"). Mit der Nutzung von Soleil stimmen Sie diesen Bedingungen zusammen mit Apples Endbenutzer-Lizenzvereinbarung für lizenzierte Anwendungen (der "Apple EULA") zu. Sie sind bewusst in einfacher Sprache geschrieben.'
       },
       {
-        title: '2. The licence',
-        body: 'Soleil is licensed (not sold) to you for personal, non-commercial use on any Apple device you own or control, on the terms of the Apple EULA. Where these terms add to the Apple EULA - for example on our intellectual property, refunds, or the law that governs disputes between us - these terms apply alongside it.',
+        title: '2. Die Lizenz',
+        body: 'Soleil wird Ihnen lizenziert (nicht verkauft) - für die persönliche, nicht-kommerzielle Nutzung auf jedem Apple Gerät, das Sie besitzen oder kontrollieren, zu den Bedingungen der Apple EULA. Soweit diese Bedingungen die Apple EULA ergänzen - etwa zu unserem geistigen Eigentum, zu Rückerstattungen oder zum Recht, das für Streitigkeiten zwischen uns gilt - gelten sie neben ihr.',
         link: {
-          label: 'Read the Apple Standard EULA',
+          label: 'Apple Standard-EULA lesen',
           href: 'https://www.apple.com/legal/internet-services/itunes/dev/stdeula/'
         }
       },
       {
-        title: '3. Not medical advice',
-        body: 'Soleil provides general wellness guidance about sun exposure based on published UV science, weather data and the information you enter. It is not a medical device, does not diagnose, treat or prevent any condition, and cannot account for every individual factor. Estimates such as burn windows, UV load and Vitamin D are approximations. Always use your own judgement, and follow the advice of a qualified clinician - especially if you have sensitive skin, a history of skin cancer, photosensitivity, or take medication that affects sun tolerance. You remain responsible for your own and your family\u2019s sun decisions.'
+        title: '3. Keine medizinische Beratung',
+        body: 'Soleil bietet allgemeine Wellness-Orientierung zur Sonnenexposition auf Basis veröffentlichter UV-Wissenschaft, Wetterdaten und der Angaben, die Sie machen. Es ist kein Medizinprodukt, diagnostiziert, behandelt oder verhindert keine Erkrankung und kann nicht jeden individuellen Faktor berücksichtigen. Schätzungen wie Schutzzeiten, UV-Belastung und Vitamin D sind Näherungswerte. Verlassen Sie sich immer auch auf Ihr eigenes Urteil und folgen Sie dem Rat qualifizierter medizinischer Fachleute - besonders bei empfindlicher Haut, Hautkrebs in der Vorgeschichte, Lichtempfindlichkeit oder Medikamenten, die die Sonnenverträglichkeit beeinflussen. Für die Sonnenentscheidungen für sich und Ihre Familie bleiben Sie selbst verantwortlich.'
       },
       {
-        title: '4. Free and Pro',
-        body: 'Soleil may offer free and paid features. The current limits and features are shown in the App and App Store listing. Paid features may include guided sessions, the Real Sun daylight story and extended history. Features can vary by device, operating-system version and territory; some features require an Apple Watch and/or permissions such as location or HealthKit access.'
+        title: '4. Kostenlos und Pro',
+        body: 'Soleil kann kostenlose und bezahlte Funktionen anbieten. Die jeweils aktuellen Grenzen und Funktionen werden in der App und im App Store angezeigt. Bezahlte Funktionen können geführte Sessions, die Real Sun Tageslicht-Story und einen erweiterten Verlauf umfassen. Funktionen können je nach Gerät, Betriebssystemversion und Region variieren; einige erfordern eine Apple Watch und/oder Berechtigungen wie Standort- oder HealthKit-Zugriff.'
       },
       {
-        title: '5. Subscriptions and one-time purchase',
-        body: 'Pro may be offered as an auto-renewing subscription and/or a one-time purchase. The price, billing period, included features and any trial are displayed by Apple before you confirm a purchase and may vary by country or currency. Subscriptions renew automatically unless cancelled through your Apple account at least 24 hours before the end of the current period. Apple charges your account and manages cancellation. A one-time purchase does not recur and applies to the version and features described at the time of purchase; it is not a promise that the App or every online service will remain available forever.'
+        title: '5. Abonnements und Einmalkauf',
+        body: 'Pro kann als automatisch verlängerndes Abonnement und/oder als Einmalkauf angeboten werden. Preis, Abrechnungszeitraum, enthaltene Funktionen und eine etwaige Testphase zeigt Apple an, bevor Sie einen Kauf bestätigen; sie können je nach Land oder Währung variieren. Abonnements verlängern sich automatisch, sofern sie nicht mindestens 24 Stunden vor Ende des laufenden Zeitraums über Ihren Apple Account gekündigt werden. Apple belastet Ihr Konto und verwaltet die Kündigung. Ein Einmalkauf wiederholt sich nicht und gilt für die zum Kaufzeitpunkt beschriebene Version und die beschriebenen Funktionen; er ist kein Versprechen, dass die App oder jeder Online-Dienst für immer verfügbar bleibt.'
       },
       {
-        title: '6. Refunds',
-        body: 'All purchases of Soleil are processed by Apple under the Apple Media Services Terms. Apple, not us, handles refunds. You can request a refund via reportaproblem.apple.com or your Apple ID purchase history. We have no power to issue refunds directly and we do not store your payment details.',
+        title: '6. Rückerstattungen',
+        body: 'Alle Käufe von Soleil werden von Apple nach den Nutzungsbedingungen für Apple Medienservices abgewickelt. Rückerstattungen bearbeitet Apple, nicht wir. Sie können eine Rückerstattung über reportaproblem.apple.com oder Ihre Apple ID Kaufhistorie beantragen. Wir können Rückerstattungen nicht direkt gewähren und speichern Ihre Zahlungsdaten nicht.',
         link: {
-          label: 'Request an Apple refund',
+          label: 'Rückerstattung bei Apple beantragen',
           href: 'https://reportaproblem.apple.com'
         }
       },
       {
-        title: '7. Price changes',
-        body: 'Prices may change. Apple will provide any notice or consent process required for subscription price changes. A new price does not affect a completed one-time purchase. You may cancel a subscription before a change takes effect, subject to Apple\u2019s applicable terms.',
+        title: '7. Preisänderungen',
+        body: 'Preise können sich ändern. Apple stellt die für Abo-Preisänderungen erforderlichen Hinweise oder Zustimmungsprozesse bereit. Ein neuer Preis wirkt sich nicht auf einen bereits abgeschlossenen Einmalkauf aus. Sie können ein Abonnement kündigen, bevor eine Änderung wirksam wird - vorbehaltlich der jeweils geltenden Bedingungen von Apple.',
         link: {
-          label: 'Apple Media Services Terms',
+          label: 'Nutzungsbedingungen für Apple Medienservices',
           href: 'https://www.apple.com/legal/internet-services/itunes/'
         }
       },
       {
-        title: '8. Your data is yours',
-        body: 'Your skin profile, sun sessions, sunscreen log, family profiles and history belong to you and are stored on your device. We claim no licence over them and we never access them. You are responsible for the accuracy of the information you enter - the App\u2019s guidance is only as good as the skin type, SPF and clothing details you give it.'
+        title: '8. Ihre Daten gehören Ihnen',
+        body: 'Ihr Hautprofil, Ihre Sonnensessions, Ihr Sonnencreme-Protokoll, Ihre Familienprofile und Ihr Verlauf gehören Ihnen und werden auf Ihrem Gerät gespeichert. Wir beanspruchen keine Lizenz daran und greifen niemals darauf zu. Für die Richtigkeit Ihrer Angaben sind Sie verantwortlich - die Hinweise der App sind nur so gut wie die Hauttyp-, LSF- und Kleidungsangaben, die Sie ihr geben.'
       },
       {
-        title: '9. Third-party services',
-        body: 'The App relies on Apple services including WeatherKit (UV and weather data), HealthKit (Time in Daylight, with your permission), StoreKit and notifications. Availability and accuracy of those services depend on Apple, your device, your settings and your network connection. Weather and UV data are estimates provided by third parties and may occasionally be unavailable or inaccurate; the App\u2019s guidance should be treated accordingly.'
+        title: '9. Dienste von Drittanbietern',
+        body: 'Die App stützt sich auf Apple Dienste, darunter WeatherKit (UV- und Wetterdaten), HealthKit ("Zeit im Tageslicht", mit Ihrer Erlaubnis), StoreKit und Mitteilungen. Verfügbarkeit und Genauigkeit dieser Dienste hängen von Apple, Ihrem Gerät, Ihren Einstellungen und Ihrer Netzverbindung ab. Wetter- und UV-Daten sind Schätzungen Dritter und können gelegentlich nicht verfügbar oder ungenau sein; die Hinweise der App sind entsprechend einzuordnen.'
       },
       {
-        title: '10. Acceptable use',
-        body: 'Please don\u2019t (a) reverse engineer, decompile or modify Soleil except where the law or Apple EULA expressly permits it; (b) bypass purchase or entitlement checks; or (c) interfere with the App or another person\u2019s use of it. Where technically and legally possible, we may restrict access to affected features for a serious breach.'
+        title: '10. Zulässige Nutzung',
+        body: 'Bitte unterlassen Sie es, (a) Soleil zurückzuentwickeln, zu dekompilieren oder zu verändern, außer soweit das Gesetz oder die Apple EULA es ausdrücklich erlauben; (b) Kauf- oder Berechtigungsprüfungen zu umgehen; oder (c) die App oder ihre Nutzung durch andere zu stören. Soweit technisch und rechtlich möglich, können wir bei einem schwerwiegenden Verstoß den Zugriff auf betroffene Funktionen einschränken.'
       },
       {
-        title: '11. Our intellectual property',
-        body: 'The Soleil name, design, icons, source code and brand are owned by us or used under licence. The licence in section 2 does not transfer those rights to you. You may mention the App or link to getsoleil.com in reviews, articles or social posts, but must not imply our endorsement or sponsorship without permission.'
+        title: '11. Unser geistiges Eigentum',
+        body: 'Name, Design, Icons, Quellcode und Marke von Soleil gehören uns oder werden unter Lizenz genutzt. Die Lizenz in Abschnitt 2 überträgt Ihnen diese Rechte nicht. Sie dürfen die App in Rezensionen, Artikeln oder Social-Media-Beiträgen erwähnen oder auf getsoleil.com verlinken, dürfen aber ohne Erlaubnis nicht den Eindruck erwecken, wir würden Sie unterstützen oder sponsern.'
       },
       {
-        title: '12. Apple\u2019s role (Apple-Enabled Software)',
-        body: 'Soleil is distributed through Apple\u2019s App Store, which adds the following terms required by Apple:',
+        title: '12. Apples Rolle (Apple-Enabled Software)',
+        body: 'Soleil wird über Apples App Store vertrieben; daraus ergeben sich die folgenden von Apple verlangten Bedingungen:',
         bullets: [
-          'These terms are entered into between you and us, not Apple. Apple is not a party to them and has no responsibility for the App or its content.',
-          'We (not Apple) are solely responsible for the App, its content and any maintenance or support. Apple has no obligation to provide any maintenance or support in relation to the App.',
-          'In the event of any failure of the App to conform to any applicable warranty, you may notify Apple, and Apple will refund the purchase price of the App to you (if any). To the maximum extent permitted by law, Apple has no other warranty obligation whatsoever in relation to the App.',
-          'We (not Apple) are responsible for addressing any claims relating to the App or your possession or use of it, including product-liability claims, claims that the App fails to conform to any applicable legal or regulatory requirement, and claims arising under consumer-protection or privacy law.',
-          'We (not Apple) are responsible for the investigation, defence, settlement and discharge of any third-party intellectual-property infringement claims relating to the App.',
-          'You represent and warrant that (a) you are not located in a country subject to a US Government embargo, or that has been designated by the US Government as a "terrorist supporting" country, and (b) you are not listed on any US Government list of prohibited or restricted parties.',
-          'Apple and Apple\u2019s subsidiaries are third-party beneficiaries of these terms and, upon your acceptance, will have the right (and will be deemed to have accepted the right) to enforce them against you as a third-party beneficiary.'
+          'Diese Bedingungen werden zwischen Ihnen und uns geschlossen, nicht mit Apple. Apple ist keine Partei dieser Bedingungen und trägt keine Verantwortung für die App oder ihre Inhalte.',
+          'Wir (nicht Apple) sind allein verantwortlich für die App, ihre Inhalte sowie jegliche Wartung und jeglichen Support. Apple ist nicht verpflichtet, Wartung oder Support für die App zu leisten.',
+          'Entspricht die App einer anwendbaren Gewährleistung nicht, können Sie Apple benachrichtigen, und Apple erstattet Ihnen den Kaufpreis der App (sofern gezahlt). Soweit gesetzlich zulässig, trifft Apple keinerlei weitere Gewährleistungspflicht in Bezug auf die App.',
+          'Wir (nicht Apple) sind für die Bearbeitung von Ansprüchen im Zusammenhang mit der App oder deren Besitz oder Nutzung verantwortlich, einschließlich Produkthaftungsansprüchen, Ansprüchen wegen Nichteinhaltung rechtlicher oder regulatorischer Anforderungen und Ansprüchen nach Verbraucherschutz- oder Datenschutzrecht.',
+          'Wir (nicht Apple) sind für die Untersuchung, Verteidigung, Beilegung und Erfüllung von Ansprüchen Dritter wegen Verletzung geistigen Eigentums im Zusammenhang mit der App verantwortlich.',
+          'Sie sichern zu und gewährleisten, dass (a) Sie sich nicht in einem Land befinden, das einem Embargo der US-Regierung unterliegt oder von der US-Regierung als "den Terrorismus unterstützendes" Land eingestuft wurde, und (b) Sie auf keiner Liste der US-Regierung mit verbotenen oder beschränkten Parteien stehen.',
+          'Apple und Apples Tochtergesellschaften sind Drittbegünstigte dieser Bedingungen und haben mit Ihrer Annahme das Recht (und gelten als hätten sie dieses Recht angenommen), diese Bedingungen Ihnen gegenüber als Drittbegünstigte durchzusetzen.'
         ]
       },
       {
-        title: '13. Disclaimers',
-        body: 'Soleil is provided "as is" and "as available". To the maximum extent permitted by law, we disclaim all warranties, conditions and representations not expressly stated here, including any warranty that the App will be uninterrupted or error-free, or that UV, weather or daylight estimates will be accurate. Nothing in these terms removes or limits any non-excludable rights you have under the UK Consumer Rights Act 2015 or similar consumer-protection laws.'
+        title: '13. Haftungsausschlüsse',
+        body: 'Soleil wird "wie besehen" und "wie verfügbar" bereitgestellt. Soweit gesetzlich zulässig, schließen wir alle hier nicht ausdrücklich genannten Gewährleistungen, Bedingungen und Zusicherungen aus, einschließlich jeder Gewährleistung, dass die App unterbrechungs- oder fehlerfrei läuft oder dass UV-, Wetter- oder Tageslichtschätzungen genau sind. Nichts in diesen Bedingungen beseitigt oder beschränkt nicht abdingbare Rechte, die Ihnen nach dem UK Consumer Rights Act 2015 oder ähnlichen Verbraucherschutzgesetzen zustehen.'
       },
       {
-        title: '14. Limitation of liability',
-        body: 'We are responsible for loss or damage that is a foreseeable result of our breach of these terms or failure to use reasonable care and skill. We are not responsible for loss that was not foreseeable, for business losses suffered by a consumer, for sunburn or health outcomes resulting from reliance on estimates contrary to section 3, or for failures caused by Apple, a network provider or a third-party service outside our reasonable control. Nothing in these terms excludes or limits liability where doing so would be unlawful, including liability for death or personal injury caused by negligence, fraud, or your statutory consumer rights.'
+        title: '14. Haftungsbeschränkung',
+        body: 'Wir haften für Verluste oder Schäden, die eine vorhersehbare Folge unseres Verstoßes gegen diese Bedingungen oder mangelnder angemessener Sorgfalt sind. Wir haften nicht für nicht vorhersehbare Verluste, für geschäftliche Verluste von Verbrauchern, für Sonnenbrand oder gesundheitliche Folgen aus einem Vertrauen auf Schätzungen entgegen Abschnitt 3 oder für Ausfälle, die von Apple, einem Netzbetreiber oder einem Drittdienst außerhalb unserer zumutbaren Kontrolle verursacht werden. Nichts in diesen Bedingungen schließt eine Haftung aus oder beschränkt sie, wo dies unzulässig wäre - einschließlich der Haftung für Tod oder Personenschäden durch Fahrlässigkeit, für Betrug oder in Bezug auf Ihre gesetzlichen Verbraucherrechte.'
       },
       {
-        title: '15. Termination',
-        body: 'These terms apply while you use the App. You can stop using it at any time by deleting it and managing any subscription through Apple. We may stop providing or updating the App, but this does not remove rights you already have under consumer law.'
+        title: '15. Beendigung',
+        body: 'Diese Bedingungen gelten, solange Sie die App nutzen. Sie können die Nutzung jederzeit beenden, indem Sie die App löschen und ein etwaiges Abonnement über Apple verwalten. Wir können die Bereitstellung oder Aktualisierung der App einstellen; Ihre bereits bestehenden Rechte nach Verbraucherrecht bleiben davon unberührt.'
       },
       {
-        title: '16. Changes',
-        body: 'We may update these terms for legal, security or product reasons. We will update the date above and give reasonable notice of material changes where practicable. Changes will not retrospectively remove rights relating to a purchase already made. If you do not accept a material change, you may stop using the App and cancel any subscription through Apple.'
+        title: '16. Änderungen',
+        body: 'Wir können diese Bedingungen aus rechtlichen, sicherheitsbezogenen oder produktbezogenen Gründen aktualisieren. Wir aktualisieren dann das Datum oben und informieren, soweit praktikabel, angemessen über wesentliche Änderungen. Änderungen entziehen nicht rückwirkend Rechte aus einem bereits getätigten Kauf. Wenn Sie eine wesentliche Änderung nicht akzeptieren, können Sie die Nutzung der App beenden und ein Abonnement über Apple kündigen.'
       },
       {
-        title: '17. Governing law and jurisdiction',
-        body: 'These terms are governed by the laws of England and Wales. If you are a consumer resident elsewhere, you also retain any mandatory protections provided by the law of your home country. You may bring proceedings in the courts available to you under applicable consumer law.'
+        title: '17. Anwendbares Recht und Gerichtsstand',
+        body: 'Diese Bedingungen unterliegen dem Recht von England und Wales. Wenn Sie als Verbraucher anderswo wohnen, behalten Sie zusätzlich alle zwingenden Schutzrechte nach dem Recht Ihres Heimatlandes. Sie können Verfahren vor den Gerichten anstrengen, die Ihnen nach anwendbarem Verbraucherrecht offenstehen.'
       },
       {
-        title: '18. Contact',
-        body: 'Questions about these terms? Email support@getsoleil.com. A UK postal address is available on request for formal correspondence.'
+        title: '18. Kontakt',
+        body: 'Fragen zu diesen Bedingungen? Schreiben Sie an support@getsoleil.com. Eine britische Postadresse für formelle Korrespondenz ist auf Anfrage erhältlich.'
       }
     ]
   }

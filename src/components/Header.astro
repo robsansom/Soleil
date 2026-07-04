@@ -54,13 +54,13 @@ const featuresHref = getLocalizedHashPath(currentLocale, '/', 'features');
           href={site.appStoreUrl}
           target="_blank"
           rel="noopener"
-          class="header-cta ml-1 inline-flex items-center gap-1.5 rounded-full bg-sun-card ring-1 ring-white/10 px-4 py-2 text-[13.5px] font-medium text-white hover:bg-sun-cardHover transition-colors"
+          class="header-cta ml-1 inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-sun-card ring-1 ring-white/10 px-4 py-2 text-[13.5px] font-medium text-white hover:bg-sun-cardHover transition-colors"
         >
           {t.header.download}
         </a>
       ) : (
         <span
-          class="header-cta header-cta--soon ml-1 inline-flex items-center gap-1.5 rounded-full bg-sun-card ring-1 ring-white/10 px-4 py-2 text-[13.5px] font-medium text-sun-textSoft cursor-default select-none"
+          class="header-cta header-cta--soon ml-1 inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-sun-card ring-1 ring-white/10 px-4 py-2 text-[13.5px] font-medium text-sun-textSoft cursor-default select-none"
         >
           <span class="header-cta__dot" aria-hidden="true"></span>
           {t.cta.comingSoonShort}

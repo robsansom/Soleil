@@ -1,9 +1,9 @@
 # Soleil — Marketing Site
 
-Landing page for [Soleil](https://getsoleil.com), the calm, personal sun
-companion for iPhone and Apple Watch. Static site built with
+Landing page for [Soleil](https://getsoleilapp.com), personal sun guidance
+for iPhone and Apple Watch. Static site built with
 [Astro](https://astro.build) + Tailwind, deployed to GitHub Pages behind
-the custom domain `getsoleil.com`.
+the custom domain `getsoleilapp.com`.
 
 ## Stack
 
@@ -33,9 +33,13 @@ npm run preview   # serve the production build
 
 ## Conventions
 
-- The page uses a scroll-triggered global theme inversion: dark (pre-dawn)
-  at the top, flipping to warm cream when `#theme-sentinel` (inside
-  `PhotoMoment`) crosses the viewport midline.
+- The site is light-first: a warm cream canvas (`sun.ink`) with deep warm
+  ink text and a sunrise-orange accent gradient. The footer is the one
+  deliberate dark section (`footer-dark` in `global.css`).
+- Motion lives in `src/scripts/motion.ts` (IntersectionObserver reveals)
+  plus CSS data-viz hooks in `global.css` (`data-draw`, `data-grow`,
+  `data-pop`, `data-ring`) that fire once their `.reveal-image` or
+  `.bento-card` ancestor becomes visible.
 - The App Store badge renders as a "Coming soon" pill until
   `site.appStoreUrl` in `src/config/site.ts` is set to a real
   `https://apps.apple.com/...` URL — then every CTA goes live at once.

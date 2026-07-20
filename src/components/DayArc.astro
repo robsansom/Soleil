@@ -1,0 +1,234 @@
+---
+/**
+ * The sun-arc interlude, ported from the Website-2 exploration but
+ * re-timed: instead of pinning the section and scrubbing with scroll
+ * (which felt like being trapped), the arc simply plays once — a ~9s
+ * ease across the sky — the first time it scrolls into view. A sun dot
+ * rides the quadratic curve from 06:00 to 20:30 while the clock, note
+ * and time-of-day chips follow. Reduced-motion users get the midday
+ * state as a still.
+ */
+import { useTranslations } from '../i18n/utils';
+
+const t = useTranslations(Astro.currentLocale);
+const [noteMorning, noteClimb, notePeak, noteSoften, noteGolden] = t.dayArc.notes;
+---
+
+<section id="day-arc" class="day-arc bg-sun-surface text-sun-text" aria-label={t.dayArc.headline}>
+  <div class="mx-auto max-w-8xl px-6 sm:px-8 lg:px-10 py-20 sm:py-28">
+    <p class="text-[12px] font-semibold uppercase tracking-[0.24em] text-sun-redDeep">
+      {t.dayArc.eyebrow}
+    </p>
+    <h2 class="mt-5 display-section text-[clamp(2rem,5vw,3.6rem)] text-balance">
+      {t.dayArc.headline}
+    </h2>
+
+    <div class="day-stage relative mt-10" aria-hidden="true">
+      <svg class="w-full h-auto" viewBox="0 0 1200 420" preserveAspectRatio="xMidYMax meet">
+        <defs>
+          <linearGradient id="dayArcStroke" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#FFC24B" />
+            <stop offset="0.5" stop-color="#FF7A00" />
+            <stop offset="1" stop-color="#E85D00" />
+          </linearGradient>
+          <linearGradient id="dayArcFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#FF7A00" stop-opacity="0.2" />
+            <stop offset="1" stop-color="#FF7A00" stop-opacity="0" />
+          </linearGradient>
+        </defs>
+        <path d="M 60 380 Q 600 -160 1140 380 L 1140 380 L 60 380 Z" fill="url(#dayArcFill)" />
+        <path
+          d="M 60 380 Q 600 -160 1140 380"
+          fill="none"
+          stroke="url(#dayArcStroke)"
+          stroke-width="3"
+          stroke-linecap="round"
+          stroke-dasharray="1 10"
+        />
+        <line x1="20" y1="380" x2="1180" y2="380" stroke="rgba(36,28,17,0.1)" stroke-width="2" />
+        <g id="day-arc-dot">
+          <circle r="26" fill="rgba(255,165,31,0.35)" />
+          <circle r="13" fill="#FF9F1F" />
+        </g>
+      </svg>
+
+      <div class="day-readout pointer-events-none absolute inset-x-0 top-[12%] grid gap-1 text-center">
+        <p id="day-arc-clock" class="day-clock">06:00</p>
+        <p id="day-arc-note" class="day-note">{noteMorning}</p>
+      </div>
+
+      <div class="mt-3 flex flex-wrap justify-center gap-3">
+        {t.dayArc.chips.map((chip, i) => (
+          <span class="day-chip" data-chip={i}>{chip}</span>
+        ))}
+      </div>
+    </div>
+
+    <p class="mx-auto mt-10 max-w-xl text-center text-[15px] leading-[1.65] text-sun-textSoft">
+      {t.dayArc.footnote}
+    </p>
+  </div>
+</section>
+
+<style>
+  .day-clock {
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    font-variant-numeric: tabular-nums;
+    color: #241c11;
+  }
+  .day-note {
+    font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+    color: #5d5340;
+    min-height: 2.4em;
+  }
+  .day-chip {
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    background: #ffffff;
+    box-shadow: inset 0 0 0 1px rgba(36, 28, 17, 0.08);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #8a7d68;
+    opacity: 0.55;
+    transition:
+      opacity 400ms ease,
+      transform 400ms cubic-bezier(0.16, 1, 0.3, 1),
+      color 400ms ease;
+  }
+  .day-chip.is-lit {
+    opacity: 1;
+    transform: translateY(-3px);
+    color: #e85d00;
+  }
+</style>
+
+<script>
+  // Quadratic bezier from the SVG path: P0(60,380) P1(600,-160) P2(1140,380).
+  const point = (u: number) => ({
+    x: (1 - u) * (1 - u) * 60 + 2 * (1 - u) * u * 600 + u * u * 1140,
+    y: (1 - u) * (1 - u) * 380 + 2 * (1 - u) * u * -160 + u * u * 380,
+  });
+
+  const section = document.getElementById('day-arc');
+  const dot = document.getElementById('day-arc-dot');
+  const clock = document.getElementById('day-arc-clock');
+  const note = document.getElementById('day-arc-note');
+  const chips = Array.from(document.querySelectorAll<HTMLElement>('#day-arc .day-chip'));
+
+  if (section && dot && clock && note) {
+    // Localised notes travel via a JSON script island so punctuation
+    // survives any locale untouched.
+    const noteList: string[] = JSON.parse(
+      document.getElementById('day-arc-notes')?.textContent ?? '[]'
+    );
+    const noteAt: Array<[number, string]> = [
+      [0.0, noteList[0]],
+      [0.3, noteList[1]],
+      [0.45, noteList[2]],
+      [0.66, noteList[3]],
+      [0.86, noteList[4]],
+    ];
+
+    const render = (u: number) => {
+      const { x, y } = point(u);
+      dot.setAttribute('transform', `translate(${x} ${y})`);
+
+      // 06:00 → 20:30 mapped over u.
+      const minutes = 6 * 60 + u * (14.5 * 60);
+      const hh = String(Math.floor(minutes / 60)).padStart(2, '0');
+      const mm = String(Math.floor(minutes % 60)).padStart(2, '0');
+      clock.textContent = `${hh}:${mm}`;
+
+      let text = noteAt[0][1];
+      for (const [at, value] of noteAt) if (u >= at && value) text = value;
+      if (note.textContent !== text) note.textContent = text;
+
+      chips[0]?.classList.toggle('is-lit', u > 0.06 && u < 0.3);
+      chips[1]?.classList.toggle('is-lit', u >= 0.42 && u < 0.62);
+      chips[2]?.classList.toggle('is-lit', u >= 0.78);
+    };
+
+    render(0);
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let played = false;
+
+    const play = () => {
+      if (played) return;
+      played = true;
+      if (reduced) {
+        render(0.5);
+        return;
+      }
+      const DURATION = 9000;
+      const start = performance.now();
+      // Ease-in-out so the sun lingers at the horizons, like a real day.
+      const ease = (p: number) => (p < 0.5 ? 2 * p * p : 1 - (-2 * p + 2) ** 2 / 2);
+      const tick = (now: number) => {
+        const p = Math.min(1, (now - start) / DURATION);
+        render(ease(p));
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    };
+
+    // Primary trigger: IntersectionObserver. Fallback: a passive scroll
+    // check, because some embedded/backgrounded renderers throttle IO
+    // callbacks indefinitely.
+    const inView = () => {
+      const r = section.getBoundingClientRect();
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      const visible = Math.min(r.bottom, vh) - Math.max(r.top, 0);
+      return visible > Math.min(r.height, vh) * 0.45;
+    };
+
+    let io: IntersectionObserver | undefined;
+    const cleanup = () => {
+      io?.disconnect();
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
+    const tryPlay = () => {
+      if (inView()) {
+        cleanup();
+        play();
+      }
+    };
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        tryPlay();
+      });
+    };
+
+    if ('IntersectionObserver' in window) {
+      io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              cleanup();
+              play();
+            }
+          }
+        },
+        { threshold: 0.45 }
+      );
+      io.observe(section);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    tryPlay();
+  }
+</script>
+
+<script
+  is:inline
+  type="application/json"
+  id="day-arc-notes"
+  set:html={JSON.stringify([noteMorning, noteClimb, notePeak, noteSoften, noteGolden])}
+/>

@@ -74,6 +74,15 @@ export interface TranslationSchema {
     body: string;
     imageAlt: string;
   };
+  /** The animated sun-arc interlude (autoplays once when scrolled into
+   *  view). `notes` are shown in order as the sun crosses the sky. */
+  dayArc: {
+    eyebrow: string;
+    headline: string;
+    notes: string[];
+    chips: string[];
+    footnote: string;
+  };
   splitHeadlinePrivacy: {
     eyebrow: string;
     first: string;
@@ -91,6 +100,44 @@ export interface TranslationSchema {
     realSun: { eyebrow: string; title: string; body: string };
     glow: { eyebrow: string; title: string; body: string };
     history: { eyebrow: string; title: string; body: string };
+    /** Alt text for the photographic tile that closes the grid. */
+    photoAlt: string;
+  };
+  /** Strings rendered inside the hand-built UI recreations (the
+   *  "pieces of the app" shown in showcase sections). Numbers and
+   *  units are part of the fiction — keep them plausible, not real. */
+  uiDemo: {
+    sunWindow: {
+      location: string;
+      conditions: string;
+      label: string;
+      minutes: string;
+      caption: string;
+      uvChip: string;
+      sunscreenLabel: string;
+      sunscreenValue: string;
+      peakLabel: string;
+      peakValue: string;
+      notifTime: string;
+      notifTitle: string;
+      notifBody: string;
+    };
+    session: {
+      header: string;
+      remaining: string;
+      caption: string;
+      chipSPF: string;
+      chipClothing: string;
+      reapplyTitle: string;
+      reapplyBody: string;
+    };
+    realSun: {
+      header: string;
+      title: string;
+      daylight: string;
+      caption: string;
+      watchChip: string;
+    };
   };
   integration: {
     eyebrow: string;

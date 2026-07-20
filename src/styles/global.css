@@ -4,20 +4,23 @@
 
 @layer base {
   :root {
-    color-scheme: dark;
+    color-scheme: light;
+    /* Motion vocabulary shared across components. */
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
   }
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    background: #0B0805;
+    background: #FFFBF4;
   }
   body {
     @apply font-sans bg-sun-ink text-sun-text;
     font-feature-settings: 'ss01', 'ss02', 'cv11';
   }
   ::selection {
-    background: #F08A1D;
+    background: #FF7A00;
     color: #ffffff;
   }
 
@@ -50,14 +53,21 @@
       line-height: 1.08;
     }
   }
+
+  /* Accent display text: a juicy sunrise gradient instead of a flat
+     (and on cream, muddy) orange. Falls back to solid where
+     background-clip:text is unsupported. */
   .text-dim {
-    color: #F08A1D;
+    color: #F26B0A;
   }
-  /* The brand orange reads at ~8:1 on the dark canvas but only ~2.4:1
-     on the light cream, so display-accent text deepens when the page
-     flips light (same move as the app's dark-mode accent, inverted). */
-  :root.is-light .text-dim {
-    color: #C25E00;
+  @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+    .text-dim {
+      background-image: linear-gradient(118deg, #FFA51F 0%, #FF7A00 48%, #F0570A 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: #F26B0A;
+    }
   }
 
   /* Opened up from the .display default (0.95): the two brand lines
@@ -90,86 +100,128 @@
       padding-bottom: 5.5rem;
     }
   }
-
-  /* Backwards-compat alias: `.theme-light` is no longer needed on sections
-     (the whole page handles its own theme), but if any component still
-     carries the class it should be a no-op rather than create a forced
-     light island. */
-  .theme-light { background-color: inherit; color: inherit; }
 }
 
 /* ============================================================
-   Global theme inversion (unlayered so it wins over Tailwind utilities)
+   App-UI recreations ("pieces of the app" shown in showcase
+   sections and bento tiles). Hand-built HTML/CSS stand-ins for
+   screenshots: crisp at any size and translatable. Bright iOS-style
+   white cards floating on the warm cream canvas.
 
-   The whole page has one theme state at a time, stored on <html>:
-     <html>                  → dark (default)
-     <html class="is-light"> → light
-
-   A scroll-tracked sentinel (#theme-sentinel) toggles `is-light` when it
-   crosses the viewport's vertical centre, and every themed surface and
-   text colour cross-fades together (~280ms). This is the
-   "scroll-triggered global theme inversion" pattern used by Linear,
-   Apple's experience pages and most premium product launch sites.
-
-   These rules live OUTSIDE @layer so they take cascade priority over
-   Tailwind's utility-layer colour classes regardless of specificity.
+   Unlayered so the variable overrides always win over Tailwind
+   utilities.
    ============================================================ */
-
-html, body {
-  transition:
-    background-color 280ms cubic-bezier(0.4, 0.0, 0.2, 1),
-    color 280ms cubic-bezier(0.4, 0.0, 0.2, 1);
-}
-.bg-sun-ink,
-.bg-sun-text,
-.text-sun-text,
-.text-sun-textSoft,
-.text-sun-textMuted,
-.text-sun-textDim,
-.text-sun-ink {
-  transition:
-    background-color 280ms cubic-bezier(0.4, 0.0, 0.2, 1),
-    color 280ms cubic-bezier(0.4, 0.0, 0.2, 1),
-    border-color 280ms cubic-bezier(0.4, 0.0, 0.2, 1);
+.app-ui {
+  --ui-card: #FFFFFF;
+  --ui-card-2: #F6F1E7;
+  --ui-ink: #241C11;
+  --ui-ink-soft: rgba(36, 28, 17, 0.64);
+  --ui-ink-muted: rgba(36, 28, 17, 0.42);
+  --ui-hairline: rgba(36, 28, 17, 0.08);
+  --ui-accent: #F26B0A;
+  --ui-accent-deep: #E05500;
+  --ui-accent-soft: rgba(255, 122, 0, 0.13);
+  --ui-shadow:
+    0 0 0 1px rgba(84, 56, 18, 0.05),
+    0 18px 44px -18px rgba(148, 94, 26, 0.30),
+    0 42px 90px -40px rgba(148, 94, 26, 0.22);
+  font-feature-settings: 'tnum';
 }
 
-:root.is-light body {
-  background-color: #FAF6EF;
-  color: #1A1816;
+.ui-card {
+  background: var(--ui-card);
+  color: var(--ui-ink);
+  border-radius: 26px;
+  box-shadow: var(--ui-shadow);
 }
-/* Page surfaces */
-:root.is-light .bg-sun-ink { background-color: #FAF6EF; }
-/* Text */
-:root.is-light .text-sun-text { color: #1A1816; }
-:root.is-light .text-sun-textSoft { color: #4A4742; }
-:root.is-light .text-sun-textMuted { color: #6E6862; }
-:root.is-light .text-sun-textDim { color: #8C857E; }
-/* Buttons that invert (Hero "Download" pill) */
-:root.is-light .bg-sun-text { background-color: #1A1816; }
-:root.is-light .text-sun-ink { color: #FAF6EF; }
-/* Accent hover links + glyph chips also deepen on the light surface. */
-:root.is-light .hover\:text-sun-red:hover,
-:root.is-light .group:hover .group-hover\:text-sun-red { color: #C25E00; }
-:root.is-light .system-glyph:not(.system-glyph--inverse) { color: #C25E00; }
-/* text-dim (coral) reads on both palettes; no override needed. */
 
-/* Suppress only theme-related transitions during the first paint, so
-   users who land deep in the page (e.g. a hash link) don't see a flash
-   from dark→light. Reveal animations on other elements still run. */
-html.boot,
-html.boot body,
-html.boot .bg-sun-ink,
-html.boot .bg-sun-text,
-html.boot .text-sun-text,
-html.boot .text-sun-textSoft,
-html.boot .text-sun-textMuted,
-html.boot .text-sun-textDim,
-html.boot .text-sun-ink,
-html.boot .device-theme-mask,
-html.boot .border-theme-soft,
-html.boot .bento-tile,
-html.boot .site-header-chrome {
-  transition-property: none !important;
+/* iOS-style notification banner used by the clusters. */
+.ui-notif {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 13px 16px 14px 13px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: var(--ui-ink);
+  box-shadow: var(--ui-shadow);
+}
+.ui-notif img {
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
+  flex: none;
+}
+.ui-notif .ui-notif-app {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ui-ink-muted);
+}
+.ui-notif .ui-notif-title {
+  margin-top: 2px;
+  font-size: 13.5px;
+  font-weight: 650;
+  line-height: 1.25;
+}
+.ui-notif .ui-notif-body {
+  margin-top: 1px;
+  font-size: 12.5px;
+  line-height: 1.35;
+  color: var(--ui-ink-soft);
+}
+
+/* Small floating stat chip (e.g. Peak UV, From Apple Watch). */
+.ui-float-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 15px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--ui-ink);
+  box-shadow: var(--ui-shadow);
+  font-size: 12.5px;
+  font-weight: 550;
+}
+
+/* Warm ambient sun-glow behind each cluster so the cards float in
+   light. Gently breathes. */
+.ui-cluster-glow {
+  position: absolute;
+  inset: -14% -12%;
+  background:
+    radial-gradient(ellipse 58% 52% at 52% 42%, rgba(255, 168, 32, 0.34), transparent 68%),
+    radial-gradient(ellipse 40% 36% at 62% 56%, rgba(255, 214, 140, 0.45), transparent 70%);
+  pointer-events: none;
+  animation: glowBreathe 7s ease-in-out infinite;
+}
+@keyframes glowBreathe {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.85; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ui-cluster-glow { animation: none; }
+}
+
+/* Floating micro-motion for the overlapping chips + notifications —
+   the "alive" layer. Two speeds so overlapping elements drift out of
+   phase instead of bobbing in lockstep. */
+.float-a { animation: floatDrift 6.5s ease-in-out infinite; }
+.float-b { animation: floatDrift 8s ease-in-out 1.2s infinite; }
+@keyframes floatDrift {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -7px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .float-a, .float-b { animation: none; }
 }
 
 @layer utilities {
@@ -177,25 +229,22 @@ html.boot .site-header-chrome {
     text-wrap: balance;
   }
 
-  .grid-noise {
+  /* Soft warm wash behind sections — sunlight pooling on the page. */
+  .sun-wash {
     background-image:
-      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(240, 138, 29, 0.10), transparent 60%),
-      radial-gradient(ellipse 60% 50% at 80% 30%, rgba(251, 235, 210, 0.06), transparent 70%);
+      radial-gradient(ellipse 70% 55% at 78% 8%, rgba(255, 176, 64, 0.13), transparent 62%),
+      radial-gradient(ellipse 55% 45% at 12% 85%, rgba(255, 214, 140, 0.18), transparent 66%);
+  }
+  .sun-wash--left {
+    background-image:
+      radial-gradient(ellipse 70% 55% at 18% 12%, rgba(255, 176, 64, 0.13), transparent 62%),
+      radial-gradient(ellipse 55% 45% at 88% 80%, rgba(255, 214, 140, 0.16), transparent 66%);
   }
 
   .ring-soft {
     box-shadow:
-      inset 0 0 0 1px rgba(255, 255, 255, 0.06),
-      0 1px 0 rgba(255, 255, 255, 0.03);
-  }
-
-  .glass-card {
-    background: rgba(20, 20, 23, 0.7);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    box-shadow:
-      inset 0 0 0 1px rgba(255, 255, 255, 0.06),
-      0 30px 80px -30px rgba(0, 0, 0, 0.6);
+      inset 0 0 0 1px rgba(36, 28, 17, 0.07),
+      0 1px 0 rgba(255, 255, 255, 0.6);
   }
 
   /* Scroll-triggered reveals.
@@ -206,8 +255,8 @@ html.boot .site-header-chrome {
     opacity: 0;
     transform: translateY(28px);
     transition:
-      opacity 900ms cubic-bezier(0.16, 1, 0.3, 1),
-      transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+      opacity 900ms var(--ease-out-expo),
+      transform 900ms var(--ease-out-expo);
     will-change: transform, opacity;
   }
   .js-ready .reveal.is-visible {
@@ -229,7 +278,7 @@ html.boot .site-header-chrome {
   .js-ready .reveal-lines .reveal-line > span {
     display: inline-block;
     transform: translateY(110%);
-    transition: transform 1100ms cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 1100ms var(--ease-out-expo);
     will-change: transform;
   }
   .js-ready .reveal-lines.is-visible .reveal-line > span {
@@ -244,8 +293,8 @@ html.boot .site-header-chrome {
     opacity: 0;
     transform: translateY(6px);
     transition:
-      opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
-      transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+      opacity 700ms var(--ease-out-expo),
+      transform 700ms var(--ease-out-expo);
   }
   .js-ready .reveal-eyebrow.is-visible {
     opacity: 1;
@@ -258,9 +307,9 @@ html.boot .site-header-chrome {
     transform: scale(0.97);
     filter: blur(8px);
     transition:
-      opacity 1100ms cubic-bezier(0.16, 1, 0.3, 1),
-      transform 1100ms cubic-bezier(0.16, 1, 0.3, 1),
-      filter 1100ms cubic-bezier(0.16, 1, 0.3, 1);
+      opacity 1100ms var(--ease-out-expo),
+      transform 1100ms var(--ease-out-expo),
+      filter 1100ms var(--ease-out-expo);
     transition-delay: 220ms;
   }
   .js-ready .reveal-image.is-visible {
@@ -269,13 +318,7 @@ html.boot .site-header-chrome {
     filter: blur(0);
   }
 
-  /* Device mockups with baked-in halftone — clip so dots don't bleed into copy.
-     Assets may be exported @3x (3072px); HTML width/height stay at the 1x
-     layout size (1024×906) while these CSS widths control what actually
-     renders. Sizes are ~10% larger than the original 47.8125rem / 68rem
-     baselines (now 52.625rem / 74.8rem) so devices feel hero-scale on
-     desktop without pushing into copy. Parent slot is overflow-hidden so
-     any clip happens on the outer edge. */
+  /* Device mockups: clip so any bleed happens on the outer edge. */
   .js-ready .reveal-image.showcase-device {
     overflow: hidden;
   }
@@ -296,56 +339,122 @@ html.boot .site-header-chrome {
 
   .js-ready .reveal-line-draw {
     transform: scaleX(0);
-    transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 900ms var(--ease-out-expo);
   }
   .js-ready .reveal-line-draw.is-visible {
     transform: scaleX(1);
   }
 
-  /* ---- Device theme mask -----------------------------------------------
-     Wraps a device screenshot so it cross-fades when the global theme
-     flips. The dark Bookmarks shot is marked `.show-on-dark` (visible
-     when <html> is dark, invisible when light), the light Collections
-     shot is marked `.show-on-light` (the inverse). Combined with the
-     `.reveal-image` outer wrapper, the image's entrance animation is
-     gated on the theme so the wrong-mode shot is never visible. */
-  .device-theme-mask {
-    transition: opacity 280ms cubic-bezier(0.4, 0.0, 0.2, 1);
-    will-change: opacity;
-  }
-  .device-theme-mask.show-on-dark { opacity: 1; }
-  :root.is-light .device-theme-mask.show-on-dark { opacity: 0; }
-  .device-theme-mask.show-on-light { opacity: 0; }
-  :root.is-light .device-theme-mask.show-on-light { opacity: 1; }
+  /* ---- Data-viz entrance micro-animations --------------------------
+     The clusters and bento tiles carry tiny live charts. These make
+     them draw themselves when the section enters view:
 
-  /* Soft border that cross-fades with theme (used on footer dividers) */
-  .border-theme-soft {
-    border-color: rgba(255, 255, 255, 0.06);
-    transition: border-color 280ms cubic-bezier(0.4, 0.0, 0.2, 1);
+       [data-draw]   SVG path with pathLength="1" — line draws itself
+       [data-grow]   bar/fill that grows up from its baseline
+       [data-pop]    element that pops in with a small overshoot
+
+     All are gated on the closest `.reveal-image.is-visible` or
+     `.bento-card.is-visible` ancestor, so they run one beat after the
+     card itself has landed. Stagger via `--d` inline custom property. */
+  .js-ready .reveal-image [data-draw],
+  .js-ready .bento-card [data-draw] {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 1500ms var(--ease-out-soft);
+    transition-delay: calc(420ms + var(--d, 0ms));
   }
-  :root.is-light .border-theme-soft {
-    border-color: rgba(0, 0, 0, 0.08);
+  .js-ready .reveal-image.is-visible [data-draw],
+  .js-ready .bento-card.is-visible [data-draw] {
+    stroke-dashoffset: 0;
   }
 
-  /* Dual-mode bento tile surface. Default (dark) reads as a quiet glass
-     tile on the dark canvas; in light mode it lifts to a soft white card. */
-  .bento-tile {
-    background-color: rgba(255, 255, 255, 0.04);
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+  .js-ready .reveal-image [data-grow],
+  .js-ready .bento-card [data-grow] {
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transform-box: fill-box;
+    transition: transform 850ms var(--ease-out-soft);
+    transition-delay: calc(430ms + var(--d, 0ms));
+  }
+  .js-ready .reveal-image.is-visible [data-grow],
+  .js-ready .bento-card.is-visible [data-grow] {
+    transform: scaleY(1);
+  }
+
+  .js-ready .reveal-image [data-grow-x],
+  .js-ready .bento-card [data-grow-x] {
+    transform: scaleX(0);
+    transform-origin: left;
+    transform-box: fill-box;
+    transition: transform 900ms var(--ease-out-soft);
+    transition-delay: calc(430ms + var(--d, 0ms));
+  }
+  .js-ready .reveal-image.is-visible [data-grow-x],
+  .js-ready .bento-card.is-visible [data-grow-x] {
+    transform: scaleX(1);
+  }
+
+  .js-ready .reveal-image [data-pop],
+  .js-ready .bento-card [data-pop] {
+    opacity: 0;
+    transform: scale(0.4);
+    transform-box: fill-box;
     transition:
-      background-color 280ms cubic-bezier(0.4, 0.0, 0.2, 1),
-      box-shadow 280ms cubic-bezier(0.4, 0.0, 0.2, 1),
-      transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+      opacity 500ms var(--ease-out-soft),
+      transform 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition-delay: calc(480ms + var(--d, 0ms));
   }
-  :root.is-light .bento-tile {
-    background-color: rgba(255, 255, 255, 0.7);
-    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+  .js-ready .reveal-image.is-visible [data-pop],
+  .js-ready .bento-card.is-visible [data-pop] {
+    opacity: 1;
+    transform: scale(1);
   }
 
-  /* "Part of your iPhone" tiles — coral glyph chip + shortcut-action
-     pills, both theme-aware like the bento surface they sit on. */
+  /* Countdown ring fill: starts empty, sweeps to its resting value.
+     The SVG sets --ring-start (full circumference) and --ring-end
+     (target offset); the attribute value doubles as the no-JS state. */
+  .js-ready .reveal-image [data-ring] {
+    stroke-dashoffset: var(--ring-start);
+    transition: stroke-dashoffset 1700ms var(--ease-out-soft);
+    transition-delay: 500ms;
+  }
+  .js-ready .reveal-image.is-visible [data-ring] {
+    stroke-dashoffset: var(--ring-end);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .js-ready [data-draw],
+    .js-ready [data-grow],
+    .js-ready [data-grow-x],
+    .js-ready [data-pop] {
+      opacity: 1 !important;
+      transform: none !important;
+      stroke-dashoffset: 0 !important;
+      transition: none !important;
+    }
+    .js-ready [data-ring] {
+      stroke-dashoffset: var(--ring-end) !important;
+      transition: none !important;
+    }
+  }
+
+  /* Soft border used on footer dividers. */
+  .border-theme-soft {
+    border-color: rgba(36, 28, 17, 0.09);
+  }
+
+  /* Bento tile surface: a crisp white card lifted off the cream
+     canvas with a warm shadow — the bright "glossy magazine" card. */
+  .bento-tile {
+    background-color: #FFFFFF;
+    box-shadow:
+      inset 0 0 0 1px rgba(84, 56, 18, 0.05),
+      0 14px 34px -18px rgba(148, 94, 26, 0.25),
+      0 30px 70px -42px rgba(148, 94, 26, 0.24);
+  }
+
+  /* "Part of your iPhone" tiles — accent glyph chip + shortcut-action
+     pills on the white card surfaces. */
   .system-glyph {
     display: inline-flex;
     align-items: center;
@@ -353,20 +462,19 @@ html.boot .site-header-chrome {
     width: 44px;
     height: 44px;
     border-radius: 14px;
-    color: #F08A1D;
-    background-color: rgba(240, 138, 29, 0.14);
-    box-shadow: inset 0 0 0 1px rgba(240, 138, 29, 0.22);
-    transition: background-color 280ms cubic-bezier(0.4, 0.0, 0.2, 1);
+    color: #FFFFFF;
+    background-image: linear-gradient(135deg, #FFA51F, #FF7A00 60%, #F0570A);
+    box-shadow:
+      0 6px 16px -6px rgba(240, 87, 10, 0.55),
+      inset 0 1px 0 rgba(255, 255, 255, 0.35);
   }
-  /* Inverse variant for glyphs sitting on the solid accent tile.
-     Dark ink (not white) — white on the brand orange is only ~2:1. */
+  /* Inverse variant for glyphs sitting on the solid accent tile —
+     frosted white, matching the tile's white copy. */
   .system-glyph--inverse {
-    color: #231505;
-    background-color: rgba(255, 255, 255, 0.26);
+    background-image: none;
+    color: #FFFFFF;
+    background-color: rgba(255, 255, 255, 0.22);
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.30);
-  }
-  :root.is-light .system-glyph {
-    background-color: rgba(240, 138, 29, 0.12);
   }
   .system-action-pill {
     display: inline-flex;
@@ -376,41 +484,40 @@ html.boot .site-header-chrome {
     font-size: 12.5px;
     font-weight: 500;
     line-height: 1;
-    color: #B6B6BA;
-    background-color: rgba(255, 255, 255, 0.06);
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
-    transition:
-      color 280ms cubic-bezier(0.4, 0.0, 0.2, 1),
-      background-color 280ms cubic-bezier(0.4, 0.0, 0.2, 1),
-      box-shadow 280ms cubic-bezier(0.4, 0.0, 0.2, 1);
-  }
-  :root.is-light .system-action-pill {
-    color: #4A4742;
-    background-color: rgba(0, 0, 0, 0.045);
-    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.07);
+    color: #5D5340;
+    background-color: #F6F1E7;
+    box-shadow: inset 0 0 0 1px rgba(36, 28, 17, 0.06);
   }
 
-  /* Bento card hover lift (applies to both default and accent tiles) */
+  /* Bento card hover: lift, warm shadow bloom, and the visual inside
+     leans in slightly. */
   .bento-card {
     transition:
-      transform 600ms cubic-bezier(0.16, 1, 0.3, 1),
-      box-shadow 600ms cubic-bezier(0.16, 1, 0.3, 1),
-      background-color 400ms ease-out;
+      transform 550ms var(--ease-out-expo),
+      box-shadow 550ms var(--ease-out-expo);
   }
   .bento-card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-6px);
+    box-shadow:
+      inset 0 0 0 1px rgba(84, 56, 18, 0.05),
+      0 22px 44px -20px rgba(148, 94, 26, 0.32),
+      0 44px 90px -44px rgba(148, 94, 26, 0.30);
+  }
+  .bento-card .bento-visual {
+    transition: transform 550ms var(--ease-out-expo);
+  }
+  .bento-card:hover .bento-visual {
+    transform: translateY(-2px) scale(1.02);
   }
 
   /* Tiny internal cascade inside each bento tile so the visual feels
-     a beat behind the copy when the card enters view. Builds on the
-     parent .reveal entrance state and only runs after the tile is
-     visible. */
+     a beat behind the copy when the card enters view. */
   .js-ready .bento-card .bento-visual {
     opacity: 0;
     transform: translateY(14px);
     transition:
-      opacity 700ms cubic-bezier(0.16, 1, 0.3, 1) 220ms,
-      transform 700ms cubic-bezier(0.16, 1, 0.3, 1) 220ms;
+      opacity 700ms var(--ease-out-expo) 220ms,
+      transform 700ms var(--ease-out-expo) 220ms;
     will-change: transform, opacity;
   }
   .js-ready .bento-card.is-visible .bento-visual {
@@ -429,8 +536,7 @@ html.boot .site-header-chrome {
     .reveal,
     .reveal-eyebrow,
     .reveal-image,
-    .reveal-line-draw,
-    .device-theme-mask {
+    .reveal-line-draw {
       opacity: 1 !important;
       transform: none !important;
       filter: none !important;
@@ -442,17 +548,8 @@ html.boot .site-header-chrome {
     }
     .bento-card { transition: none !important; }
     .bento-card:hover { transform: none !important; }
-  }
-
-  /* Used by Hero stacked-card icon */
-  .icon-card {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: transform;
+    .bento-card .bento-visual { transition: none !important; }
+    .bento-card:hover .bento-visual { transform: none !important; }
   }
 
   .scroll-mask-fade {
@@ -504,15 +601,15 @@ html.boot .site-header-chrome {
     opacity: 0;
     transform: translateX(-100vw);
     transition:
-      opacity 900ms cubic-bezier(0.22, 1, 0.36, 1),
-      transform 1300ms cubic-bezier(0.22, 1, 0.36, 1);
+      opacity 900ms var(--ease-out-soft),
+      transform 1300ms var(--ease-out-soft);
   }
   .js-ready .converge-word--right {
     opacity: 0;
     transform: translateX(100vw);
     transition:
-      opacity 900ms cubic-bezier(0.22, 1, 0.36, 1),
-      transform 1300ms cubic-bezier(0.22, 1, 0.36, 1);
+      opacity 900ms var(--ease-out-soft),
+      transform 1300ms var(--ease-out-soft);
   }
   .converge-statement.is-visible .converge-word--left,
   .converge-statement.is-visible .converge-word--right {
@@ -526,8 +623,8 @@ html.boot .site-header-chrome {
     opacity: 0;
     transform: translateY(20px);
     transition:
-      opacity 800ms cubic-bezier(0.22, 1, 0.36, 1) 1100ms,
-      transform 800ms cubic-bezier(0.22, 1, 0.36, 1) 1100ms;
+      opacity 800ms var(--ease-out-soft) 1100ms,
+      transform 800ms var(--ease-out-soft) 1100ms;
   }
   .converge-statement.is-visible .converge-body {
     opacity: 1;
@@ -555,5 +652,33 @@ html.boot .site-header-chrome {
       transition: none !important;
     }
   }
+}
 
+/* ============================================================
+   Dark footer beat. The one intentionally dark surface on the page —
+   a warm dusk block that closes the bright site with contrast, like
+   a magazine back cover. Unlayered so the scoped text overrides win
+   over Tailwind's utility classes.
+   ============================================================ */
+.footer-dark {
+  background-color: #211809;
+  background-image:
+    radial-gradient(ellipse 75% 60% at 85% 0%, rgba(255, 138, 26, 0.14), transparent 60%),
+    radial-gradient(ellipse 55% 45% at 8% 100%, rgba(255, 178, 92, 0.08), transparent 65%);
+  color: #F7F1E6;
+}
+.footer-dark .text-sun-text { color: #F7F1E6; }
+.footer-dark .text-sun-textSoft { color: #CDC2AC; }
+.footer-dark .text-sun-textMuted { color: #9C9078; }
+.footer-dark .text-sun-textDim { color: #7C725E; }
+.footer-dark .border-theme-soft { border-color: rgba(255, 255, 255, 0.10); }
+.footer-dark .hover\:text-sun-red:hover { color: #FFA51F; }
+/* Gradient accent text stays bright on the dark surface — bump the
+   fallback for browsers without background-clip. */
+.footer-dark .text-dim { color: #FF8A1A; }
+/* "Coming soon" pill needs its dark-surface treatment here. */
+.footer-dark .app-store-soon {
+  background-color: rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+  color: #F2ECDF;
 }

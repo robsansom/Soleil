@@ -1,0 +1,70 @@
+---
+/**
+ * Homepage FAQ (English only). Native <details> accordions in the site's
+ * card language; every sun question carries a "Learn more" link into its
+ * full guide. The matching FAQPage JSON-LD is emitted by IndexPage.
+ */
+import { homeFaqs } from '../data/homeFaq';
+---
+
+<section id="faq" class="bg-sun-ink text-sun-text">
+  <div class="mx-auto max-w-8xl px-6 sm:px-8 lg:px-10 py-20 sm:py-28">
+    <div class="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16 items-start">
+      <div class="lg:sticky lg:top-24">
+        <p class="text-[12px] font-semibold uppercase tracking-[0.24em] text-sun-redDeep">FAQ</p>
+        <h2 class="mt-5 display-section text-[clamp(2rem,5vw,3.6rem)] text-balance">
+          Asked, <span class="text-dim">answered.</span>
+        </h2>
+        <p class="mt-6 max-w-md text-[16px] leading-[1.6] text-sun-textSoft">
+          The short versions. Every sun question links to a full guide with the
+          science and the practical rules.
+        </p>
+        <a
+          href="/guides/"
+          class="mt-7 inline-flex items-center gap-2 rounded-full bg-sun-card ring-soft px-5 py-3 text-[14px] font-semibold text-sun-text transition-transform duration-300 hover:-translate-y-0.5"
+        >
+          Browse all guides →
+        </a>
+      </div>
+
+      <div class="rounded-[24px] bg-sun-card ring-soft overflow-hidden divide-y divide-black/[0.06]">
+        {homeFaqs.map((f) => (
+          <details class="faq-acc group">
+            <summary class="flex cursor-pointer items-baseline justify-between gap-5 p-6 sm:p-7 list-none">
+              <h3 class="text-[15.5px] font-semibold text-sun-text">{f.q}</h3>
+              <span class="faq-acc__plus shrink-0 text-sun-redDeep text-[22px] leading-none" aria-hidden="true">+</span>
+            </summary>
+            <div class="px-6 sm:px-7 pb-6 sm:pb-7 -mt-1">
+              <p class="text-[15px] leading-[1.65] text-sun-textSoft">
+                {f.a}
+                {f.guide && (
+                  <>
+                    {' '}
+                    <a
+                      href={`/guides/${f.guide}`}
+                      class="font-semibold text-sun-redDeep hover:underline whitespace-nowrap"
+                    >
+                      Learn more →
+                    </a>
+                  </>
+                )}
+              </p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-acc summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-acc__plus {
+    transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .faq-acc[open] .faq-acc__plus {
+    transform: rotate(45deg);
+  }
+</style>

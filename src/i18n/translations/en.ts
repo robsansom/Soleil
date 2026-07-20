@@ -2,8 +2,8 @@ import type { TranslationSchema } from '../types';
 
 export const en: TranslationSchema = {
   meta: {
-    title: 'Soleil - Love the sun. Not the burn.',
-    description: 'A calm, personal sun companion. Live UV, your own burn window, sunscreen timing and family alerts - on iPhone and Apple Watch.'
+    title: 'Soleil - UV index and sun protection for iPhone and Apple Watch',
+    description: 'Soleil is a protection-first UV app: live UV where you are, a protection check tuned to your skin and SPF, sunscreen reminders that keep up with the day, and cover-up checks for the people you look after.'
   },
   a11y: {
     selectLanguage: 'Select language',
@@ -21,9 +21,9 @@ export const en: TranslationSchema = {
     download: 'Download'
   },
   footer: {
-    taglineEyebrow: 'A kinder way to be in the sun',
-    taglineHeadline: 'Step outside.',
-    taglineHeadlineDim: 'We\u2019ve got you.',
+    taglineEyebrow: 'Protection-first UV',
+    taglineHeadline: 'Know the UV.',
+    taglineHeadlineDim: 'Enjoy the day.',
     copyright: 'Made with care in the UK.',
     appleAffiliation: 'Soleil is an independent app, not affiliated with Apple Inc.',
     appleTrademarks: 'Apple, the Apple logo, iPhone and Apple Watch are trademarks of Apple Inc., registered in the U.S. and other countries and regions. App Store is a service mark of Apple Inc.',
@@ -40,39 +40,52 @@ export const en: TranslationSchema = {
   },
   hero: {
     eyebrow: 'Soleil',
-    title: 'Love the sun.',
-    titleAccent: 'Not the burn.',
-    body: 'A calm, personal sun companion. Live UV, a burn window built around your skin, sunscreen timing and family alerts - on iPhone and Apple Watch.',
+    title: 'Know the UV.',
+    titleAccent: 'Enjoy the day.',
+    body: 'Live UV where you are, a protection check tuned to your skin, and sunscreen reminders that keep up with the day — on iPhone and Apple Watch.',
     badgeLabel: 'For iPhone & Apple Watch',
-    imageAlt: 'A woman with her eyes closed, smiling into warm golden-hour sunlight on a coastal path'
+    imageAlt: 'A woman applying sunscreen to her face on a bright beach, the sea behind her'
   },
   showcaseNow: {
-    eyebrow: 'Right now',
-    headline: 'One number.',
-    headlineAccent: 'Your number.',
-    body: 'Soleil pulls the live UV where you\u2019re standing and turns it into the number that matters: how long your skin has, today, with what you\u2019re wearing. Not a generic index - a burn window built from your skin type and your SPF.',
-    imageAlt: 'The Soleil iPhone app showing today\u2019s live UV, the personal burn window and sun timing guidance.'
+    eyebrow: 'The Sun Window',
+    headline: 'The UV answer,',
+    headlineAccent: 'in one look.',
+    body: 'Soleil leads with the live UV index where you are — its category, today’s peak, cloud cover and how fresh the reading is. Your skin type and SPF turn that into a timely protection check: what to do now, not how long you may stay.',
+    imageAlt: 'The Soleil Sun Window card: live UV 6, its category, today’s peak and a protection check with SPF.'
   },
   showcaseRealSun: {
     eyebrow: 'Real Sun',
-    headline: 'The sun day',
+    headline: 'See the daylight',
     headlineAccent: 'you actually had.',
-    body: 'Most UV apps forecast what might happen. Soleil also remembers what did. Your Apple Watch quietly notices your time in daylight, and Soleil matches it against the day\u2019s UV - so you can see when your sun landed, and how strong it was.',
-    imageAlt: 'A man in a linen shirt glancing at his watch in the dappled shade of a beach parasol'
+    body: 'Forecasts help before you go out. Real Sun helps afterwards too. Soleil can match Apple Watch Time in Daylight against the day\u2019s UV curve, so you can see whether your exposure came during lower-risk hours or the strongest part of the day.',
+    imageAlt: 'The Soleil Real Sun chart: time in daylight from Apple Watch, drawn against the day\u2019s UV curve.'
   },
   photoMoment: {
     eyebrow: 'Family',
-    headline: 'Protect',
-    headlineAccent: 'your people.',
-    body: 'Add the people you look after, run a quick check-in, and Soleil keeps track of everyone\u2019s sunscreen - with reapply reminders for each of them. Free, built in, no subscription.',
+    headline: 'Keep sunscreen',
+    headlineAccent: 'organised.',
+    body: 'Add the people you look after, check who is covered right now, and set reapply reminders for each person.',
     imageAlt: 'A grandmother and two teenagers laughing together under a cream parasol on a bright beach'
   },
   showcaseRoutine: {
     eyebrow: 'Sessions',
-    headline: 'Real timing,',
-    headlineAccent: 'not guesswork.',
-    body: 'Start a session, pick what you\u2019re wearing and your SPF, and a live ring counts down to your limit. Reapplying renews your protection - but it never resets the sun you\u2019ve already had. Soleil keeps both honest.',
-    imageAlt: 'The Soleil iPhone app running a live sun session with a countdown ring and sunscreen timing.'
+    headline: 'Track today\u2019s',
+    headlineAccent: 'time outside.',
+    body: 'Start a session and Soleil records elapsed time alongside the protection each person has in place. Sunscreen runs on its own clock \u2014 two hours at most, sooner after swimming, sweating or towel-drying \u2014 and reapplying never resets the time you have already spent outside.',
+    imageAlt: 'The Soleil session card: elapsed time, current UV, the people outside and a sunscreen reminder.'
+  },
+  dayArc: {
+    eyebrow: 'Real Sun',
+    headline: 'A day has a shape.',
+    notes: [
+      'Gentle morning light.',
+      'Climbing fast — UV rises towards midday.',
+      'Peak sun. Protection is recommended.',
+      'Softening through the afternoon.',
+      'Golden hour — the sun is low and soft.'
+    ],
+    chips: ['08:00 — UV 2', '13:00 — UV 8 · peak', '18:00 — golden hour'],
+    footnote: 'Soleil can place Apple Watch Time in Daylight against the day’s UV curve — so you can see whether your sun came in the gentle hours or at the peak.'
   },
   splitHeadlinePrivacy: {
     eyebrow: 'Privacy',
@@ -82,66 +95,100 @@ export const en: TranslationSchema = {
   },
   bento: {
     eyebrow: 'Features',
-    headline: 'Calm,',
-    headlineAccent: 'not clinical.',
-    body: 'Soleil never shouts. It watches the UV, your skin and your sunscreen, and tells you what to do before you ever feel it - like a friend who happens to know the science.',
+    headline: 'Practical tools',
+    headlineAccent: 'for sunny days.',
+    body: 'Soleil brings the moving parts together: live UV, protection checks, sunscreen reminders, daylight history, the people you look after, and privacy-first storage on your device.',
     uvNow: {
       eyebrow: 'Live UV',
-      title: 'The day at a glance',
-      body: 'Real-time UV index, peak time, cloud cover and your burn-risk window - from Apple WeatherKit, for exactly where you are.'
+      title: 'UV for where you are',
+      body: 'Real-time UV index and category, today’s peak, cloud cover and humidity from Apple WeatherKit — with the source and freshness shown beside the reading.'
     },
     sunscreen: {
       eyebrow: 'Sunscreen',
-      title: 'SPF that keeps time',
-      body: 'Log your sunscreen once and Soleil tracks it - fresh, fading or expired - and nudges you before it stops working.'
+      title: 'Sunscreen, on schedule',
+      body: 'Log sunscreen and Soleil schedules the next check — two hours at most, and sooner after swimming, sweating or towel-drying. Kept separate from your time outside.'
     },
     family: {
       eyebrow: 'Family',
-      title: 'Everyone covered',
-      body: 'Profiles for the people you look after, a one-tap check-in, and reapply reminders for each of them. Always free.'
+      title: 'Simple family check-ins',
+      body: 'Profiles for the people you look after, a quick cover-up glance, and separate reapply reminders for each person. Pro adds full family history and the Family status widget.'
     },
     realSun: {
       eyebrow: 'Real Sun',
-      title: 'Your daylight story',
-      body: 'Apple Watch daylight matched against the day\u2019s UV shape. See whether your sun landed at the gentle edges or the sharp peak.'
+      title: 'Daylight in context',
+      body: 'Apple Watch daylight matched against the day\u2019s UV curve, so your time outside is easier to understand afterwards.'
     },
     glow: {
       eyebrow: 'Daily Glow',
-      title: 'Routines you\u2019ll keep',
-      body: 'Save the products you trust and the steps you follow. Guided sessions walk through them in order, every time.'
+      title: 'Your routine, recorded',
+      body: 'An optional guided layer on the same live session — your products and steps, in order. For adults, and never a suggestion that tanning is safe.'
     },
     history: {
       eyebrow: 'History',
-      title: 'Patterns, not points',
-      body: 'Per-day and per-week exposure history with Vitamin D estimates - and monthly trends and a calendar heatmap with Pro.'
+      title: 'Patterns over time',
+      body: 'Review recent sessions and protection events. Pro adds full trends, insights and a calendar view.'
+    },
+    photoAlt: 'A woman standing in the dappled shade of a woven beach canopy, sunlight freckling her face and shoulders'
+  },
+  uiDemo: {
+    sunWindow: {
+      location: 'Santa Monica',
+      conditions: 'Sunny \u00b7 H:24\u00b0 L:16\u00b0',
+      label: 'UV now',
+      minutes: '6',
+      caption: 'High \u00b7 live reading',
+      uvChip: 'WeatherKit \u00b7 Live',
+      sunscreenLabel: 'Protection',
+      sunscreenValue: 'Recommended',
+      peakLabel: 'Peak UV',
+      peakValue: '8 at 13:00',
+      notifTime: 'now',
+      notifTitle: 'Peak UV at 13:00',
+      notifBody: 'UV is expected to reach 8 today.'
+    },
+    session: {
+      header: 'Live session',
+      remaining: '18:42',
+      caption: 'elapsed',
+      chipSPF: 'UV 6 · High',
+      chipClothing: '2 people outside',
+      reapplyTitle: 'Reapply your sunscreen',
+      reapplyBody: 'Two hours since application. Sooner after water, sweat or towel-drying.'
+    },
+    realSun: {
+      header: 'Real Sun',
+      title: 'Your daylight against today\u2019s UV',
+      daylight: '1h 24m in daylight',
+      caption: 'Mostly gentle morning sun',
+      watchChip: 'From Apple Watch'
     }
   },
   integration: {
     eyebrow: 'Woven into iOS',
     headline: 'On your phone.',
     headlineAccent: 'On your wrist.',
-    body: 'Soleil lives where you\u2019ll actually see it: a home screen widget with today\u2019s UV, a Live Activity counting down in the Dynamic Island, and a free Apple Watch app that works without taking your phone to the beach.',
+    body: 'Soleil puts the useful bits where you are likely to check them: today\u2019s UV on your home screen, a Live Activity while a session runs, and an Apple Watch app for UV, sunscreen status, haptics and daylight.',
     widgets: {
       eyebrow: 'Widgets & Live Activity',
-      title: 'Today\u2019s sun, on your home screen',
-      body: 'A widget with the live UV and your burn window, plus a Live Activity that keeps your session countdown in the Dynamic Island.'
+      title: 'Today\u2019s UV, on your home screen',
+      body: 'A widget with the live UV index and today\u2019s outlook, plus a Live Activity that keeps a running session visible on the Lock Screen and Dynamic Island.'
     },
     watch: {
       eyebrow: 'Apple Watch',
       title: 'The whole app, on your wrist',
       capabilities: [
-        'UV complication',
+        'Current UV',
+        'UV category',
         'Smart Stack card',
-        'Sun sessions',
-        'Sunscreen state',
+        'Elapsed sun sessions',
         'Haptic reapply nudges',
         'Time in daylight'
       ]
     },
     alerts: {
       eyebrow: 'Alerts',
-      title: 'A tap before it matters',
-      body: 'Burn-risk warnings and reapply reminders that arrive before the damage, not after. Gentle, timed to you, and easy to silence.'
+      title: 'Reminders before you forget',
+      body: 'Burn-risk warnings and reapply reminders based on the session you started, timed to be useful and easy to silence.'
     }
   },
   privacyPage: {
@@ -240,8 +287,8 @@ export const en: TranslationSchema = {
     faqTitle: 'Frequently asked',
     faqs: [
       {
-        q: 'How does Soleil work out my burn window?',
-        a: 'Soleil combines the live UV index where you are (from Apple WeatherKit) with your Fitzpatrick skin type, your SPF and what you\u2019re wearing. That produces a personal estimate of how long your skin has before burn risk builds. It\u2019s guidance, not a guarantee - shade, water, altitude and reflection all matter too.'
+        q: 'What does Soleil tell me about today\u2019s UV?',
+        a: 'Soleil shows the live UV index for your location, its category, today\u2019s peak and the hourly curve using Apple WeatherKit. Your Fitzpatrick skin type and SPF turn that into a timely protection check. It deliberately does not present a countdown as a safe amount of time outside - shade, water, altitude and reflection all matter too.'
       },
       {
         q: 'How do I set my skin type?',
@@ -249,7 +296,7 @@ export const en: TranslationSchema = {
       },
       {
         q: 'How do family profiles and check-ins work?',
-        a: 'Add the people you look after in the You tab. A family check-in asks who\u2019s protected right now, and Soleil schedules reapply reminders for each person based on their SPF. Family features are free and stay on your device - nothing is shared or uploaded.'
+        a: 'Add the people you look after in the You tab, then choose who is outside when you start a session. A check-in asks who\u2019s covered right now, and Soleil schedules reapply reminders for each person. Everything stays on your device - nothing is shared or uploaded. Pro adds full family history and the Family status widget.'
       },
       {
         q: 'What do I need for the Apple Watch features?',
@@ -261,7 +308,7 @@ export const en: TranslationSchema = {
       },
       {
         q: 'What\u2019s in Soleil Pro, and what does it cost?',
-        a: 'Pro unlocks guided Daily Glow sessions, the Real Sun daylight story, and deeper history - monthly trends and the calendar heatmap. It\u2019s $3.99/month, $19.99/year (with a 3-day free trial), or $69.99 once for lifetime. The Watch app, family protection, widgets, alerts and weekly history all stay free.'
+        a: 'Free covers today: live UV, a basic Sun Window, a basic session, your skin profile and recent history. Pro adds Daily Glow setup, full family history and the Family status widget, full trends and insights, the AI skin scan, and the wider widget suite. It\u2019s $3.99/week, $19.99/year, or $69.99 once for lifetime.'
       },
       {
         q: 'How do I cancel a Pro subscription?',
@@ -312,7 +359,7 @@ export const en: TranslationSchema = {
       },
       {
         title: '3. Not medical advice',
-        body: 'Soleil provides general wellness guidance about sun exposure based on published UV science, weather data and the information you enter. It is not a medical device, does not diagnose, treat or prevent any condition, and cannot account for every individual factor. Estimates such as burn windows, UV load and Vitamin D are approximations. Always use your own judgement, and follow the advice of a qualified clinician - especially if you have sensitive skin, a history of skin cancer, photosensitivity, or take medication that affects sun tolerance. You remain responsible for your own and your family\u2019s sun decisions.'
+        body: 'Soleil provides general wellness guidance about sun exposure based on published UV science, weather data and the information you enter. It is not a medical device, does not diagnose, treat or prevent any condition, and cannot account for every individual factor. Estimates such as UV readings, protection checks and time in daylight are approximations. Always use your own judgement, and follow the advice of a qualified clinician - especially if you have sensitive skin, a history of skin cancer, photosensitivity, or take medication that affects sun tolerance. You remain responsible for your own and your family\u2019s sun decisions.'
       },
       {
         title: '4. Free and Pro',
@@ -352,7 +399,7 @@ export const en: TranslationSchema = {
       },
       {
         title: '11. Our intellectual property',
-        body: 'The Soleil name, design, icons, source code and brand are owned by us or used under licence. The licence in section 2 does not transfer those rights to you. You may mention the App or link to getsoleil.com in reviews, articles or social posts, but must not imply our endorsement or sponsorship without permission.'
+        body: 'The Soleil name, design, icons, source code and brand are owned by us or used under licence. The licence in section 2 does not transfer those rights to you. You may mention the App or link to getsoleilapp.com in reviews, articles or social posts, but must not imply our endorsement or sponsorship without permission.'
       },
       {
         title: '12. Apple\u2019s role (Apple-Enabled Software)',

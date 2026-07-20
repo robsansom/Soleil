@@ -2,7 +2,8 @@
 /**
  * Showcase section — editorial headline + body next to either an
  * iPhone screenshot (kind="screenshot", framed in CSS with a rounded
- * bezel) or a full editorial photograph (kind="photo").
+ * bezel), a full editorial photograph (kind="photo"), or a hand-built
+ * app-UI recreation passed via the default slot (kind="custom").
  */
 
 const base = import.meta.env.BASE_URL.endsWith('/')
@@ -13,12 +14,12 @@ export interface Props {
   eyebrow: string;
   headline: string;
   headlineAccent?: string;
-  /** Filename (with extension) inside public/images. */
-  image: string;
-  alt: string;
+  /** Filename (with extension) inside public/images. Unused for kind="custom". */
+  image?: string;
+  alt?: string;
   body?: string;
   device?: 'left' | 'right';
-  kind?: 'screenshot' | 'photo';
+  kind?: 'screenshot' | 'photo' | 'custom';
   imageWidth?: number;
   imageHeight?: number;
 }
@@ -45,7 +46,7 @@ const textAlignClass = device === 'right' ? 'md:text-right' : 'md:text-left';
 const bodyAlignClass = device === 'right' ? 'md:ml-auto' : '';
 ---
 
-<section class="relative overflow-hidden bg-sun-ink text-sun-text">
+<section class={`relative overflow-hidden bg-sun-ink text-sun-text ${device === 'right' ? 'sun-wash' : 'sun-wash--left'}`}>
   <div class="showcase-section-inner relative mx-auto max-w-8xl px-6 sm:px-8 lg:px-10 pt-24 sm:pt-32 pb-24 sm:pb-32">
     <div class="grid grid-cols-1 md:grid-cols-12 gap-10 sm:gap-12 md:gap-16 lg:gap-20 items-center">
       <div class={`md:col-span-5 lg:col-span-5 relative z-10 ${copyOrder} ${textAlignClass}`}>
@@ -68,7 +69,11 @@ const bodyAlignClass = device === 'right' ? 'md:ml-auto' : '';
       </div>
 
       <div class={`md:col-span-7 lg:col-span-7 min-w-0 overflow-visible ${deviceOrder}`}>
-        {kind === 'screenshot' ? (
+        {kind === 'custom' ? (
+          <div class="reveal-image relative">
+            <slot />
+          </div>
+        ) : kind === 'screenshot' ? (
           <div class={`reveal-image showcase-phone relative mx-auto ${deviceAlign}`}>
             <img
               src={`${base}images/${image}`}
@@ -107,14 +112,8 @@ const bodyAlignClass = device === 'right' ? 'md:ml-auto' : '';
     border-radius: clamp(28px, 9%, 54px);
     overflow: hidden;
     box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.10),
-      0 40px 90px -30px rgba(0, 0, 0, 0.65);
-    transition: box-shadow 600ms cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  :root.is-light .showcase-phone {
-    box-shadow:
-      0 0 0 1px rgba(0, 0, 0, 0.06),
-      0 40px 90px -35px rgba(60, 42, 20, 0.35);
+      0 0 0 1px rgba(84, 56, 18, 0.06),
+      0 40px 90px -35px rgba(148, 94, 26, 0.35);
   }
   @media (min-width: 768px) {
     .showcase-phone {
@@ -128,13 +127,7 @@ const bodyAlignClass = device === 'right' ? 'md:ml-auto' : '';
     border-radius: 28px;
     overflow: hidden;
     box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.08),
-      0 40px 90px -35px rgba(0, 0, 0, 0.55);
-    transition: box-shadow 600ms cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  :root.is-light .showcase-photo {
-    box-shadow:
-      0 0 0 1px rgba(0, 0, 0, 0.05),
-      0 40px 90px -40px rgba(60, 42, 20, 0.3);
+      0 0 0 1px rgba(84, 56, 18, 0.05),
+      0 40px 90px -40px rgba(148, 94, 26, 0.32);
   }
 </style>

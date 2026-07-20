@@ -1,0 +1,147 @@
+---
+/**
+ * Real Sun cluster — the daylight-story chart: Apple Watch time in
+ * daylight drawn as bars against the day's UV curve, with a floating
+ * "From Apple Watch" chip. Theme-aware like the other recreations.
+ */
+import { useTranslations } from '../../i18n/utils';
+
+const t = useTranslations(Astro.currentLocale);
+const ui = t.uiDemo.realSun;
+
+// Daylight blocks (x, width, height from baseline y=88). Clustered in
+// the morning + a shorter late-afternoon block: "mostly gentle sun".
+const bars = [
+  { x: 34, w: 13, h: 30 },
+  { x: 50, w: 13, h: 44 },
+  { x: 66, w: 13, h: 52 },
+  { x: 82, w: 13, h: 38 },
+  { x: 210, w: 13, h: 26 },
+  { x: 226, w: 13, h: 34 },
+];
+---
+
+<div class="app-ui rs-cluster relative mx-auto" role="img" aria-label={t.showcaseRealSun.imageAlt}>
+  <div class="ui-cluster-glow" aria-hidden="true"></div>
+
+  <article class="ui-card rs-card" aria-hidden="true">
+    <header class="rs-head">
+      <span class="rs-eyebrow">{ui.header}</span>
+      <p class="rs-title">{ui.title}</p>
+    </header>
+
+    <svg class="rs-chart" viewBox="0 0 320 92" fill="none" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="rsBar" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#FFB340" />
+          <stop offset="100%" stop-color="#FF7A00" />
+        </linearGradient>
+      </defs>
+      {bars.map((bar, i) => (
+        <rect
+          x={bar.x}
+          y={88 - bar.h}
+          width={bar.w}
+          height={bar.h}
+          rx="4"
+          fill="url(#rsBar)"
+          opacity="0.9"
+          data-grow
+          style={`--d: ${i * 90}ms`}
+        />
+      ))}
+      {/* Day's UV curve laid over the daylight bars — sweeps in from
+          the left (data-draw would clobber the dotted dash pattern). */}
+      <path
+        d="M0 86 C 50 82, 90 24, 160 18 C 230 24, 270 82, 320 86"
+        stroke="var(--ui-ink-muted)"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-dasharray="1 6"
+        data-grow-x
+        style="--d: 350ms"
+      />
+      <path d="M0 88 H 320" stroke="var(--ui-hairline)" stroke-width="1" />
+    </svg>
+
+    <footer class="rs-foot">
+      <p class="rs-daylight">{ui.daylight}</p>
+      <p class="rs-caption">{ui.caption}</p>
+    </footer>
+  </article>
+
+  <aside class="ui-float-chip rs-watch float-a" aria-hidden="true">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="6.5" y="6.5" width="11" height="11" rx="3.2" />
+      <path d="M9 6.5 9.5 2.8h5L15 6.5M9 17.5l.5 3.7h5l.5-3.7" />
+    </svg>
+    {ui.watchChip}
+  </aside>
+</div>
+
+<style is:global>
+  .rs-cluster {
+    width: min(100%, 27rem);
+    padding: 1.5rem 0 2.25rem;
+  }
+
+  .rs-card {
+    position: relative;
+    padding: 22px;
+  }
+  .rs-eyebrow {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 999px;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ui-accent);
+    background: var(--ui-accent-soft);
+  }
+  .rs-title {
+    margin-top: 12px;
+    font-size: 16.5px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .rs-chart {
+    display: block;
+    width: 100%;
+    height: 108px;
+    margin-top: 16px;
+  }
+  .rs-foot {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--ui-hairline);
+  }
+  .rs-daylight {
+    font-size: 15px;
+    font-weight: 700;
+  }
+  .rs-caption {
+    font-size: 12.5px;
+    color: var(--ui-ink-soft);
+  }
+
+  .rs-watch {
+    position: absolute;
+    top: 0.15rem;
+    right: -0.5rem;
+    transform: rotate(2deg);
+  }
+  .rs-watch svg {
+    color: var(--ui-accent);
+  }
+
+  @media (max-width: 767px) {
+    .rs-watch { right: 0; }
+  }
+</style>

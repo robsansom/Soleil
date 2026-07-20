@@ -1,0 +1,218 @@
+---
+/**
+ * Sun Window cluster — a hand-built recreation of the app's hero card
+ * (live UV → personal minutes), with a floating Peak UV chip and an
+ * iOS-style shade notification. Replaces the flat home screenshot:
+ * crisp at any size, translated per locale, and theme-aware so the
+ * cards flip dark/light with the page.
+ */
+import { useTranslations } from '../../i18n/utils';
+
+const base = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+
+const t = useTranslations(Astro.currentLocale);
+const ui = t.uiDemo.sunWindow;
+---
+
+<div class="app-ui sw-cluster relative mx-auto" role="img" aria-label={t.showcaseNow.imageAlt}>
+  <div class="ui-cluster-glow" aria-hidden="true"></div>
+
+  <article class="ui-card sw-card" aria-hidden="true">
+    <header class="sw-head">
+      <div>
+        <p class="sw-loc">{ui.location}</p>
+        <p class="sw-meta">{ui.conditions}</p>
+      </div>
+      <span class="sw-uv-chip">{ui.uvChip}</span>
+    </header>
+
+    <p class="sw-label">{ui.label}</p>
+    <p class="sw-minutes">{ui.minutes}</p>
+    <p class="sw-caption">{ui.caption}</p>
+
+    {/* Day's UV curve with a "you are here" marker. The line draws
+        itself and the marker pops in once the cluster is in view. */}
+    <svg class="sw-curve" viewBox="0 0 320 84" fill="none" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="swCurveFill" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#FF7A00" stop-opacity="0.5" />
+          <stop offset="100%" stop-color="#FF7A00" stop-opacity="0.02" />
+        </linearGradient>
+      </defs>
+      <path
+        d="M0 80 C 48 76, 82 26, 160 20 C 238 26, 272 76, 320 80 L 320 84 L 0 84 Z"
+        fill="url(#swCurveFill)"
+        data-grow
+        style="--d: 300ms"
+      />
+      <path
+        d="M0 80 C 48 76, 82 26, 160 20 C 238 26, 272 76, 320 80"
+        stroke="#FF7A00"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        pathLength="1"
+        data-draw
+      />
+      <circle cx="204" cy="31" r="5" fill="#FF7A00" stroke="var(--ui-card)" stroke-width="2.5" data-pop style="--d: 900ms" />
+    </svg>
+
+    <footer class="sw-foot">
+      <span class="sw-foot-label">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 3.5c3.5 4.5 6 7.6 6 10.7a6 6 0 1 1-12 0c0-3.1 2.5-6.2 6-10.7Z" />
+        </svg>
+        {ui.sunscreenLabel}
+      </span>
+      <span class="sw-foot-value">{ui.sunscreenValue}</span>
+    </footer>
+  </article>
+
+  <aside class="ui-float-chip sw-peak float-a" aria-hidden="true">
+    <span class="sw-peak-dot"></span>
+    <span>
+      <span class="sw-peak-label">{ui.peakLabel}</span>
+      <span class="sw-peak-value">{ui.peakValue}</span>
+    </span>
+  </aside>
+
+  <aside class="ui-notif sw-notif float-b" aria-hidden="true">
+    <img src={`${base}images/icon-192.png`} alt="" loading="lazy" decoding="async" />
+    <div class="min-w-0 flex-1">
+      <p class="ui-notif-app"><span>Soleil</span><span>{ui.notifTime}</span></p>
+      <p class="ui-notif-title">{ui.notifTitle}</p>
+      <p class="ui-notif-body">{ui.notifBody}</p>
+    </div>
+  </aside>
+</div>
+
+<style is:global>
+  .sw-cluster {
+    width: min(100%, 26rem);
+    padding: 2.5rem 0 3.5rem;
+  }
+
+  .sw-card {
+    position: relative;
+    padding: 22px 22px 0;
+    overflow: hidden;
+  }
+  .sw-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .sw-loc {
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .sw-meta {
+    margin-top: 2px;
+    font-size: 12px;
+    color: var(--ui-ink-muted);
+  }
+  .sw-uv-chip {
+    flex: none;
+    padding: 6px 11px;
+    border-radius: 999px;
+    font-size: 11.5px;
+    font-weight: 650;
+    color: var(--ui-accent);
+    background: var(--ui-accent-soft);
+  }
+  .sw-label {
+    margin-top: 22px;
+    font-size: 11px;
+    font-weight: 650;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ui-ink-muted);
+  }
+  .sw-minutes {
+    margin-top: 4px;
+    font-size: clamp(2.9rem, 6vw, 3.4rem);
+    font-weight: 750;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+  .sw-caption {
+    margin-top: 6px;
+    font-size: 13px;
+    color: var(--ui-ink-soft);
+  }
+  .sw-curve {
+    display: block;
+    width: calc(100% + 44px);
+    margin: 18px -22px 0;
+    height: 74px;
+  }
+  .sw-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 0 -22px;
+    padding: 13px 22px 15px;
+    border-top: 1px solid var(--ui-hairline);
+    background: var(--ui-card-2);
+  }
+  .sw-foot-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--ui-ink-soft);
+  }
+  .sw-foot-label svg {
+    color: var(--ui-accent);
+  }
+  .sw-foot-value {
+    font-size: 12.5px;
+    font-weight: 650;
+  }
+
+  /* Floating Peak UV chip — overlaps the card's top-right corner. */
+  .sw-peak {
+    position: absolute;
+    top: 0.6rem;
+    right: -0.75rem;
+    transform: rotate(2.5deg);
+  }
+  .sw-peak-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 999px;
+    background: var(--ui-accent);
+    flex: none;
+  }
+  .sw-peak-label {
+    display: block;
+    font-size: 9.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ui-ink-muted);
+  }
+  .sw-peak-value {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  /* Shade notification — overlaps the card's bottom-left corner. */
+  .sw-notif {
+    position: absolute;
+    left: -1.25rem;
+    bottom: 0.4rem;
+    width: min(88%, 21rem);
+    transform: rotate(-1.6deg);
+  }
+
+  @media (max-width: 767px) {
+    .sw-peak { right: 0; }
+    .sw-notif { left: 0; }
+  }
+</style>

@@ -5,25 +5,29 @@ export default {
     extend: {
       colors: {
         sun: {
-          // Warm near-black canvas: the pre-dawn end of the page's
-          // scroll-triggered sunrise. Light-mode values live in
-          // global.css (`:root.is-light` overrides).
-          ink: '#0B0805',
-          surface: '#141008',
-          card: '#1A140B',
-          cardHover: '#221A0F',
-          line: 'rgba(255,255,255,0.06)',
-          lineSolid: '#2A2114',
-          text: '#F5F0E8',
-          textSoft: '#C4BCAE',
-          textMuted: '#8C8375',
-          textDim: '#5C554A',
-          // Brand accent — the app's Soleil orange (SunkindTheme.accent).
-          red: '#F08A1D',
-          redSoft: '#FFB25C',
-          redDeep: '#D96F04',
-          peach: '#F7D9A8',
-          peachSoft: '#FBEBD2',
+          // Light-first, sun-bright palette. `ink` is the page canvas
+          // (warm cream) and `text` is the deep warm ink that sits on
+          // it — the naming survives from the old dark theme, but the
+          // canvas/on-canvas pairing is what every component relies on.
+          ink: '#FFFBF4',
+          surface: '#FFF6E9',
+          card: '#FFFFFF',
+          cardHover: '#FFF8EE',
+          line: 'rgba(36,28,17,0.08)',
+          lineSolid: '#EADFCE',
+          text: '#241C11',
+          textSoft: '#5D5340',
+          textMuted: '#8A7D68',
+          textDim: '#B3A78F',
+          // Brand accent — juicy sunrise orange (brighter than the
+          // app's in-UI accent, tuned for big display type on cream).
+          red: '#FF7A00',
+          redSoft: '#FFB340',
+          redDeep: '#E85D00',
+          peach: '#FFD9A3',
+          peachSoft: '#FFF1DC',
+          sky: '#9AD7EC',
+          skySoft: '#EAF6FB',
         },
       },
       fontFamily: {

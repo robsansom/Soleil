@@ -1,0 +1,46 @@
+---
+/** Homepage guides teaser (English only) — first six guides as cards. */
+import { guides } from '../data/guides';
+
+const featured = guides.slice(0, 6);
+---
+
+<section id="guides" class="bg-sun-surface text-sun-text">
+  <div class="mx-auto max-w-8xl px-6 sm:px-8 lg:px-10 py-20 sm:py-28">
+    <div class="flex flex-wrap items-end justify-between gap-6">
+      <div>
+        <p class="text-[12px] font-semibold uppercase tracking-[0.24em] text-sun-redDeep">
+          Sun guides
+        </p>
+        <h2 class="mt-5 display-section text-[clamp(2rem,5vw,3.6rem)] text-balance">
+          Straight answers to <span class="text-dim">sunny-day questions.</span>
+        </h2>
+      </div>
+      <a
+        href="/guides/"
+        class="inline-flex items-center gap-2 rounded-full bg-sun-card ring-soft px-5 py-3 text-[14px] font-semibold text-sun-text transition-transform duration-300 hover:-translate-y-0.5"
+      >
+        All guides →
+      </a>
+    </div>
+
+    <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {featured.map((g) => (
+        <a
+          href={`/guides/${g.slug}`}
+          class="group flex flex-col rounded-[24px] bg-sun-card ring-soft p-7 transition-transform duration-300 hover:-translate-y-1"
+        >
+          <span class="text-[11px] font-semibold uppercase tracking-[0.16em] text-sun-redDeep">
+            {g.category}
+          </span>
+          <h3 class="mt-3 flex-1 text-[18px] font-semibold leading-snug tracking-tighter2 text-sun-text">
+            {g.title}
+          </h3>
+          <span class="mt-5 text-[13.5px] font-medium text-sun-textMuted group-hover:text-sun-redDeep transition-colors">
+            Read the guide →
+          </span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,78 @@
+---
+/** Guides hub — English only (the guides target English search queries). */
+import Base from '../../layouts/Base.astro';
+import { guides } from '../../data/guides';
+
+const title = 'Sun safety & UV guides — Soleil';
+const description =
+  'Straight answers to sunny-day questions: what the UV index means, how long people burn in, sunscreen reapply rules, tanning honesty, kids, clouds and Apple Watch daylight.';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: title,
+    description,
+    url: new URL('/guides/', Astro.site).toString(),
+    hasPart: guides.map((g) => ({
+      '@type': 'Article',
+      headline: g.title,
+      url: new URL(`/guides/${g.slug}`, Astro.site).toString(),
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: new URL('/', Astro.site).toString() },
+      { '@type': 'ListItem', position: 2, name: 'Guides', item: new URL('/guides/', Astro.site).toString() },
+    ],
+  },
+];
+---
+
+<Base title={title} description={description} pathname="/guides/" jsonLd={jsonLd}>
+  <section class="bg-sun-ink text-sun-text">
+    <div class="mx-auto max-w-8xl px-6 sm:px-8 lg:px-10 pt-16 sm:pt-24 pb-24 sm:pb-32">
+      <nav class="text-[13px] text-sun-textMuted flex gap-2" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-sun-text transition-colors">Home</a>
+        <span aria-hidden="true">/</span>
+        <span>Guides</span>
+      </nav>
+
+      <p class="mt-10 text-[12px] font-semibold uppercase tracking-[0.24em] text-sun-redDeep">
+        Sun guides
+      </p>
+      <h1 class="mt-6 display-section text-[clamp(2.25rem,6vw,5rem)] text-balance">
+        The sun, <span class="text-dim">explained honestly.</span>
+      </h1>
+      <p class="mt-8 max-w-xl text-[17px] leading-[1.55] text-sun-textSoft">
+        Every guide answers a real question with the published science first —
+        then shows how Soleil turns the answer into something your phone just
+        handles for you.
+      </p>
+
+      <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {guides.map((g) => (
+          <a
+            href={`/guides/${g.slug}`}
+            class="group flex flex-col rounded-[24px] bg-sun-card ring-soft p-7 transition-transform duration-300 hover:-translate-y-1"
+          >
+            <span class="text-[11px] font-semibold uppercase tracking-[0.16em] text-sun-redDeep">
+              {g.category}
+            </span>
+            <h2 class="mt-3 text-[19px] font-semibold leading-snug tracking-tighter2 text-sun-text">
+              {g.title}
+            </h2>
+            <p class="mt-3 flex-1 text-[14px] leading-[1.6] text-sun-textSoft">
+              {g.metaDescription}
+            </p>
+            <span class="mt-5 text-[13.5px] font-medium text-sun-textMuted group-hover:text-sun-redDeep transition-colors">
+              Read the guide →
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>

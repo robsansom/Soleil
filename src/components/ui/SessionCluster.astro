@@ -1,0 +1,180 @@
+---
+/**
+ * Session cluster — a recreation of the live session card: countdown
+ * ring, SPF and clothing chips, plus a floating reapply notification.
+ * Theme-aware like the other app-UI recreations.
+ */
+import { useTranslations } from '../../i18n/utils';
+
+const base = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+
+const t = useTranslations(Astro.currentLocale);
+const ui = t.uiDemo.session;
+
+// Ring geometry: r=62 → circumference ≈ 389.6; show ~68% remaining.
+const circumference = 2 * Math.PI * 62;
+const remainingFraction = 0.68;
+const dashOffset = circumference * (1 - remainingFraction);
+---
+
+<div class="app-ui se-cluster relative mx-auto" role="img" aria-label={t.showcaseRoutine.imageAlt}>
+  <div class="ui-cluster-glow" aria-hidden="true"></div>
+
+  <article class="ui-card se-card" aria-hidden="true">
+    <header class="se-head">
+      <span class="se-live-dot"></span>
+      <span class="se-head-title">{ui.header}</span>
+    </header>
+
+    <div class="se-ring-wrap">
+      <svg class="se-ring" viewBox="0 0 140 140" fill="none">
+        <defs>
+          <linearGradient id="seRing" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#FFB340" />
+            <stop offset="100%" stop-color="#FF7A00" />
+          </linearGradient>
+        </defs>
+        <circle cx="70" cy="70" r="62" stroke="var(--ui-hairline)" stroke-width="10" />
+        {/* Ring sweeps from empty to its resting value on reveal; the
+            attribute value doubles as the no-JS resting state. */}
+        <circle
+          cx="70"
+          cy="70"
+          r="62"
+          stroke="url(#seRing)"
+          stroke-width="10"
+          stroke-linecap="round"
+          stroke-dasharray={circumference}
+          stroke-dashoffset={dashOffset}
+          transform="rotate(-90 70 70)"
+          data-ring
+          style={`--ring-start: ${circumference}; --ring-end: ${dashOffset};`}
+        />
+      </svg>
+      <div class="se-ring-center">
+        <p class="se-remaining">{ui.remaining}</p>
+        <p class="se-remaining-caption">{ui.caption}</p>
+      </div>
+    </div>
+
+    <div class="se-chips">
+      <span class="se-chip">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 3.5c3.5 4.5 6 7.6 6 10.7a6 6 0 1 1-12 0c0-3.1 2.5-6.2 6-10.7Z" />
+        </svg>
+        {ui.chipSPF}
+      </span>
+      <span class="se-chip">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M8 4 5 6.5 6.5 10 8 9v10h8V9l1.5 1L19 6.5 16 4a4 4 0 0 1-8 0Z" />
+        </svg>
+        {ui.chipClothing}
+      </span>
+    </div>
+  </article>
+
+  <aside class="ui-notif se-notif float-b" aria-hidden="true">
+    <img src={`${base}images/icon-192.png`} alt="" loading="lazy" decoding="async" />
+    <div class="min-w-0 flex-1">
+      <p class="ui-notif-app"><span>Soleil</span><span>{t.uiDemo.sunWindow.notifTime}</span></p>
+      <p class="ui-notif-title">{ui.reapplyTitle}</p>
+      <p class="ui-notif-body">{ui.reapplyBody}</p>
+    </div>
+  </aside>
+</div>
+
+<style is:global>
+  .se-cluster {
+    width: min(100%, 24rem);
+    padding: 1.5rem 0 3.75rem;
+  }
+
+  .se-card {
+    position: relative;
+    padding: 20px 22px 24px;
+  }
+  .se-head {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+  .se-live-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 999px;
+    background: var(--ui-accent);
+    box-shadow: 0 0 0 4px var(--ui-accent-soft);
+    flex: none;
+  }
+  .se-head-title {
+    font-size: 13px;
+    font-weight: 650;
+    letter-spacing: 0.02em;
+  }
+
+  .se-ring-wrap {
+    position: relative;
+    width: min(62%, 13rem);
+    margin: 22px auto 0;
+  }
+  .se-ring {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .se-ring-center {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-content: center;
+    text-align: center;
+  }
+  .se-remaining {
+    font-size: clamp(1.9rem, 4vw, 2.3rem);
+    font-weight: 750;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .se-remaining-caption {
+    margin-top: 5px;
+    font-size: 11.5px;
+    color: var(--ui-ink-muted);
+  }
+
+  .se-chips {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 22px;
+  }
+  .se-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 13px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ui-ink-soft);
+    background: var(--ui-card-2);
+    box-shadow: inset 0 0 0 1px var(--ui-hairline);
+  }
+  .se-chip svg {
+    color: var(--ui-accent);
+  }
+
+  .se-notif {
+    position: absolute;
+    right: -1.25rem;
+    bottom: 0.5rem;
+    width: min(90%, 21rem);
+    transform: rotate(1.8deg);
+  }
+
+  @media (max-width: 767px) {
+    .se-notif { right: 0; }
+  }
+</style>

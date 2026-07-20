@@ -1,0 +1,297 @@
+---
+/**
+ * One SEO guide page per target search query (English only — the guides
+ * target English search phrases, so they deliberately have no locale
+ * variants). Content lives in src/data/guides/*; this template renders
+ * it in the site's warm-cream editorial style with Article + FAQPage +
+ * BreadcrumbList JSON-LD.
+ */
+import Base from '../../layouts/Base.astro';
+import AppStoreBadge from '../../components/AppStoreBadge.astro';
+import { guides, getGuide } from '../../data/guides';
+import { dimsFor } from '../../data/screens';
+
+export function getStaticPaths() {
+  return guides.map((g) => ({ params: { slug: g.slug } }));
+}
+
+const { slug } = Astro.params;
+const guide = getGuide(slug!)!;
+const related = guide.related
+  .map((s) => getGuide(s))
+  .filter((g): g is NonNullable<typeof g> => Boolean(g));
+
+const base = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+
+const url = new URL(`/guides/${guide.slug}`, Astro.site).toString();
+const dims = dimsFor(guide.soleil.screenshot.src);
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: guide.title,
+    description: guide.metaDescription,
+    url,
+    image: new URL(`${base}images/social-card.png`, Astro.site).toString(),
+    author: { '@type': 'Organization', name: 'Soleil', url: Astro.site?.toString() },
+    publisher: { '@type': 'Organization', name: 'Soleil', url: Astro.site?.toString() },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: guide.faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: new URL('/', Astro.site).toString() },
+      { '@type': 'ListItem', position: 2, name: 'Guides', item: new URL('/guides/', Astro.site).toString() },
+      { '@type': 'ListItem', position: 3, name: guide.title, item: url },
+    ],
+  },
+];
+---
+
+<Base
+  title={`${guide.metaTitle}`}
+  description={guide.metaDescription}
+  pathname={`/guides/${guide.slug}`}
+  jsonLd={jsonLd}
+  ogType="article"
+>
+  <article class="bg-sun-ink text-sun-text">
+    <div class="mx-auto max-w-3xl px-6 sm:px-8 lg:px-10 pt-16 sm:pt-24 pb-24 sm:pb-32">
+      <nav class="text-[13px] text-sun-textMuted flex flex-wrap gap-2" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-sun-text transition-colors">Home</a>
+        <span aria-hidden="true">/</span>
+        <a href="/guides/" class="hover:text-sun-text transition-colors">Guides</a>
+        <span aria-hidden="true">/</span>
+        <span>{guide.category}</span>
+      </nav>
+
+      <p class="mt-10 text-[12px] font-semibold uppercase tracking-[0.24em] text-sun-redDeep">
+        {guide.category}
+      </p>
+      <h1 class="mt-5 display-section text-[clamp(2rem,5.4vw,3.4rem)] text-balance">
+        {guide.title}
+      </h1>
+
+      <div class="guide-article mt-10">
+        {guide.intro.map((p) => (
+          <p class="guide-intro" set:html={p} />
+        ))}
+
+        {guide.blocks.map((b) => {
+          if (b.type === 'h2') return <h2>{b.text}</h2>;
+          if (b.type === 'h3') return <h3>{b.text}</h3>;
+          if (b.type === 'p') return <p set:html={b.html} />;
+          if (b.type === 'callout') return <div class="guide-callout" set:html={b.html} />;
+          if (b.type === 'list')
+            return b.ordered ? (
+              <ol>{b.items.map((i) => <li set:html={i} />)}</ol>
+            ) : (
+              <ul>{b.items.map((i) => <li set:html={i} />)}</ul>
+            );
+          if (b.type === 'table')
+            return (
+              <div class="guide-table-scroll">
+                <table>
+                  <thead>
+                    <tr>{b.head.map((h) => <th>{h}</th>)}</tr>
+                  </thead>
+                  <tbody>
+                    {b.rows.map((r) => (
+                      <tr>{r.map((c) => <td set:html={c} />)}</tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            );
+          return null;
+        })}
+      </div>
+
+      {/* How Soleil helps — the app-integration moment, with screenshot. */}
+      <section class="mt-16 rounded-[28px] bg-sun-card ring-soft overflow-hidden">
+        <div class="grid gap-8 md:grid-cols-[1.2fr_0.8fr] items-center p-7 sm:p-10">
+          <div>
+            <p class="text-[12px] font-semibold uppercase tracking-[0.24em] text-sun-redDeep">
+              How Soleil helps
+            </p>
+            <h2 class="mt-4 text-[clamp(1.4rem,3vw,1.9rem)] font-semibold tracking-tighter2">
+              {guide.soleil.heading}
+            </h2>
+            {guide.soleil.paragraphs.map((p) => (
+              <p class="mt-4 text-[15.5px] leading-[1.65] text-sun-textSoft" set:html={p} />
+            ))}
+            <div class="mt-7">
+              <AppStoreBadge height={52} />
+            </div>
+          </div>
+          <div class="mx-auto w-full max-w-[230px]">
+            <img
+              src={`${base}${guide.soleil.screenshot.src.replace(/^\//, '')}`}
+              alt={guide.soleil.screenshot.alt}
+              width={dims.w}
+              height={dims.h}
+              loading="lazy"
+              decoding="async"
+              class="w-full rounded-[26px] shadow-[0_24px_50px_-20px_rgba(148,94,26,0.45)] ring-1 ring-black/10"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Related questions (also in FAQPage JSON-LD). */}
+      <section class="mt-16">
+        <h2 class="text-[clamp(1.4rem,3vw,1.9rem)] font-semibold tracking-tighter2">
+          Related questions
+        </h2>
+        <ul class="mt-6 divide-y divide-black/[0.06] rounded-[24px] bg-sun-card ring-soft overflow-hidden">
+          {guide.faqs.map((f) => (
+            <li class="p-6 sm:p-7">
+              <h3 class="text-[15.5px] font-semibold text-sun-text">{f.q}</h3>
+              <p class="mt-2 text-[15px] leading-[1.6] text-sun-textSoft">{f.a}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <p class="mt-12 text-[13px] leading-[1.7] text-sun-textMuted">
+        Soleil is wellness guidance, not medical advice. For sensitive skin or
+        diagnosed conditions, please follow a dermatologist’s plan.
+      </p>
+
+      {related.length > 0 && (
+        <section class="mt-16">
+          <h2 class="text-[12px] uppercase tracking-[0.18em] text-sun-textMuted">Keep reading</h2>
+          <div class="mt-5 grid gap-4 sm:grid-cols-3">
+            {related.map((r) => (
+              <a
+                href={`/guides/${r.slug}`}
+                class="group rounded-[20px] bg-sun-card ring-soft p-5 transition-transform duration-300 hover:-translate-y-1"
+              >
+                <span class="text-[11px] font-semibold uppercase tracking-[0.16em] text-sun-redDeep">{r.category}</span>
+                <h3 class="mt-2 text-[15px] font-semibold leading-snug text-sun-text">{r.title}</h3>
+                <span class="mt-3 inline-block text-[13px] text-sun-textMuted group-hover:text-sun-redDeep transition-colors">
+                  Read the guide →
+                </span>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+    </div>
+  </article>
+</Base>
+
+<style is:global>
+  /* Long-form article styling on the cream canvas. Scoped by class so it
+     can't leak into app-UI clusters. */
+  .guide-article h2 {
+    margin: 44px 0 14px;
+    font-size: clamp(1.35rem, 2.8vw, 1.8rem);
+    font-weight: 650;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    color: #241c11;
+  }
+  .guide-article h3 {
+    margin: 30px 0 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #241c11;
+  }
+  .guide-article p {
+    margin: 0 0 16px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #5d5340;
+  }
+  .guide-article .guide-intro {
+    font-size: 18px;
+    line-height: 1.65;
+    color: #241c11;
+  }
+  .guide-article p strong,
+  .guide-article li strong {
+    color: #241c11;
+    font-weight: 650;
+  }
+  .guide-article ul,
+  .guide-article ol {
+    margin: 0 0 18px 20px;
+    color: #5d5340;
+  }
+  .guide-article li {
+    margin-bottom: 9px;
+    font-size: 15.5px;
+    line-height: 1.65;
+  }
+  .guide-article a {
+    color: #e85d00;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .guide-article a:hover {
+    text-decoration: underline;
+  }
+  .guide-table-scroll {
+    overflow-x: auto;
+    margin: 0 0 20px;
+  }
+  .guide-article table {
+    width: 100%;
+    min-width: 460px;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 14.5px;
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: inset 0 0 0 1px rgba(36, 28, 17, 0.08);
+  }
+  .guide-article th {
+    text-align: left;
+    font-weight: 650;
+    color: #241c11;
+    background: #fff6e9;
+    padding: 11px 15px;
+    border-bottom: 1px solid rgba(36, 28, 17, 0.1);
+    white-space: nowrap;
+  }
+  .guide-article td {
+    padding: 11px 15px;
+    border-bottom: 1px solid rgba(36, 28, 17, 0.06);
+    color: #5d5340;
+  }
+  .guide-article tr:last-child td {
+    border-bottom: 0;
+  }
+  .guide-article tr td:first-child {
+    color: #241c11;
+    font-weight: 550;
+  }
+  .guide-callout {
+    border-radius: 16px;
+    border: 1px solid rgba(232, 93, 0, 0.22);
+    border-left: 3px solid #ff7a00;
+    background: #fff6e9;
+    padding: 18px 22px;
+    margin: 0 0 20px;
+    font-size: 15px;
+    line-height: 1.65;
+    color: #5d5340;
+  }
+  .guide-callout strong {
+    color: #241c11;
+  }
+</style>

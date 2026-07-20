@@ -2,19 +2,60 @@
 import Base from '../../layouts/Base.astro';
 import Hero from '../Hero.astro';
 import Showcase from '../Showcase.astro';
-import PhotoMoment from '../PhotoMoment.astro';
 import SplitHeadline from '../SplitHeadline.astro';
 import BentoGrid from '../BentoGrid.astro';
 import PartOfIphone from '../PartOfIphone.astro';
+import SunWindowCluster from '../ui/SunWindowCluster.astro';
+import RealSunCluster from '../ui/RealSunCluster.astro';
+import SessionCluster from '../ui/SessionCluster.astro';
+import DayArc from '../DayArc.astro';
+import FaqSection from '../FaqSection.astro';
+import GuidesTeaser from '../GuidesTeaser.astro';
 import { useTranslations } from '../../i18n/utils';
+import { homeFaqs } from '../../data/homeFaq';
 
 const currentLocale = Astro.currentLocale ?? 'en';
 const t = useTranslations(currentLocale);
+
+// SEO surfaces (FAQ, guides teaser, structured data) are English-only —
+// the guides target English search queries and have no locale variants.
+const isEnglish = currentLocale === 'en';
+
+const jsonLd = isEnglish
+  ? [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'MobileApplication',
+        name: 'Soleil',
+        operatingSystem: 'iOS, watchOS',
+        applicationCategory: 'HealthApplication',
+        description: t.meta.description,
+        offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+        author: { '@type': 'Organization', name: 'Soleil', url: Astro.site?.toString() },
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: homeFaqs.map((f) => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: 'Soleil',
+        url: Astro.site?.toString(),
+      },
+    ]
+  : [];
 ---
 
 <Base
   title={t.meta.title}
   description={t.meta.description}
+  jsonLd={jsonLd}
 >
   <Hero />
 
@@ -22,46 +63,36 @@ const t = useTranslations(currentLocale);
     eyebrow={t.showcaseNow.eyebrow}
     headline={t.showcaseNow.headline}
     headlineAccent={t.showcaseNow.headlineAccent}
-    image="screen-home.png"
-    alt={t.showcaseNow.imageAlt}
     body={t.showcaseNow.body}
     device="right"
-    kind="screenshot"
-  />
+    kind="custom"
+  >
+    <SunWindowCluster />
+  </Showcase>
 
   <Showcase
     eyebrow={t.showcaseRealSun.eyebrow}
     headline={t.showcaseRealSun.headline}
     headlineAccent={t.showcaseRealSun.headlineAccent}
-    image="photo-watch-shade.jpg"
-    alt={t.showcaseRealSun.imageAlt}
     body={t.showcaseRealSun.body}
     device="left"
-    kind="photo"
-  />
+    kind="custom"
+  >
+    <RealSunCluster />
+  </Showcase>
 
-  {/* Family moment. `#theme-sentinel` sits at the vertical midpoint of
-      the photo so the page-wide dark→light flip lands as the family
-      picture fills the screen — the sunrise beat of the page. */}
-  <PhotoMoment
-    eyebrow={t.photoMoment.eyebrow}
-    headline={t.photoMoment.headline}
-    headlineAccent={t.photoMoment.headlineAccent}
-    body={t.photoMoment.body}
-    image="photo-family-parasol.jpg"
-    alt={t.photoMoment.imageAlt}
-  />
+  <DayArc />
 
   <Showcase
     eyebrow={t.showcaseRoutine.eyebrow}
     headline={t.showcaseRoutine.headline}
     headlineAccent={t.showcaseRoutine.headlineAccent}
-    image="screen-session.png"
-    alt={t.showcaseRoutine.imageAlt}
     body={t.showcaseRoutine.body}
     device="right"
-    kind="screenshot"
-  />
+    kind="custom"
+  >
+    <SessionCluster />
+  </Showcase>
 
   <SplitHeadline
     eyebrow={t.splitHeadlinePrivacy.eyebrow}
@@ -74,52 +105,7 @@ const t = useTranslations(currentLocale);
 
   <PartOfIphone />
 
-  {/* Scroll-triggered global theme inversion. Toggles `is-light` on
-      <html> when #theme-sentinel above crosses the viewport midline.
-      Lives inside <Base> so the script is rendered inside <body>. */}
-  <script is:inline>
-    (() => {
-      const root = document.documentElement;
-      root.classList.add('boot');
+  {isEnglish && <GuidesTeaser />}
 
-      const init = () => {
-        const sentinel = document.getElementById('theme-sentinel');
-        if (!sentinel) {
-          root.classList.remove('boot');
-          return;
-        }
-
-        const update = () => {
-          const trigger = window.innerHeight * 0.5;
-          const y = sentinel.getBoundingClientRect().top;
-          root.classList.toggle('is-light', y < trigger);
-
-          const header = document.getElementById('site-header');
-          if (header) {
-            const sampleY = Math.min(header.getBoundingClientRect().bottom + 2, window.innerHeight - 1);
-            const surface = document.elementFromPoint(window.innerWidth / 2, sampleY)?.closest('section, footer');
-            const surfaceIsLight = root.classList.contains('is-light')
-              && surface?.classList.contains('bg-sun-ink');
-            root.classList.toggle('header-on-light', Boolean(surfaceIsLight));
-            root.classList.toggle('header-on-dark', !surfaceIsLight);
-          }
-        };
-
-        update();
-        // Clear the boot guard on the next frame so subsequent flips animate.
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => root.classList.remove('boot'));
-        });
-
-        window.addEventListener('scroll', update, { passive: true });
-        window.addEventListener('resize', update);
-      };
-
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
-      } else {
-        init();
-      }
-    })();
-  </script>
+  {isEnglish && <FaqSection />}
 </Base>

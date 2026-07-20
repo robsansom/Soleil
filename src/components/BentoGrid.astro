@@ -1,10 +1,17 @@
 ---
 /**
- * Feature bento grid — six product moments, each a quiet glass tile
- * with a glyph chip, eyebrow, title and body. The Real Sun tile takes
- * the brand-accent surface (the one loud moment in the grid).
+ * Feature bento grid — six product moments plus a photographic beat.
+ * Each tile pairs its copy with a small hand-built visual (UV meter,
+ * SPF timer, daylight bars, family avatars, glow steps, heatmap) so
+ * the grid shows the product rather than describing it. The Real Sun
+ * tile takes the brand-accent surface with white text — the one loud
+ * moment in the grid.
  */
 import { useTranslations } from '../i18n/utils';
+
+const base = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
 
 const t = useTranslations(Astro.currentLocale);
 
@@ -14,7 +21,29 @@ const tiles = [
   { key: 'realSun' as const, span: 'md:col-span-3', glyph: 'watch', accent: true },
   { key: 'family' as const, span: 'md:col-span-3', glyph: 'people' },
   { key: 'glow' as const, span: 'md:col-span-2', glyph: 'sparkle' },
-  { key: 'history' as const, span: 'md:col-span-4', glyph: 'chart' },
+  { key: 'history' as const, span: 'md:col-span-2', glyph: 'chart' },
+];
+
+// Daylight bars for the accent tile (height %, opacity).
+const daylightBars = [
+  { h: 34, o: 0.55 }, { h: 58, o: 0.75 }, { h: 82, o: 0.95 }, { h: 66, o: 0.8 },
+  { h: 24, o: 0.4 }, { h: 12, o: 0.3 }, { h: 30, o: 0.5 }, { h: 46, o: 0.65 },
+];
+
+// Calendar heatmap dots for the history tile (opacity per day).
+const heatmap = [
+  0.15, 0.4, 0.7, 0.3, 0.15, 0.55, 0.85,
+  0.3, 0.15, 0.5, 0.9, 0.4, 0.15, 0.3,
+  0.6, 0.35, 0.15, 0.45, 0.75, 1, 0.5,
+];
+
+// The same memoji-style avatars the app ships (generated with Tapback
+// Memojis, github.com/Wimell/Tapback-Memojis, MIT — bundled as static
+// assets, no runtime dependency). Order matches the app's share card.
+const familyAvatars = [
+  { src: 'avatars/memoji-leading.png', size: 56 },
+  { src: 'avatars/memoji-center.png', size: 68 },
+  { src: 'avatars/memoji-trailing.png', size: 56 },
 ];
 ---
 
@@ -41,8 +70,8 @@ const tiles = [
             class={[
               'reveal',
               `reveal-delay-${(i % 4) + 1}`,
-              'bento-card relative rounded-[24px] p-6 sm:p-7 overflow-hidden min-h-[240px] flex flex-col',
-              tile.accent ? 'bg-sun-red text-[#231505]' : 'bento-tile',
+              'bento-card relative rounded-[24px] p-6 sm:p-7 overflow-hidden min-h-[280px] flex flex-col',
+              tile.accent ? 'bento-tile--accent text-white' : 'bento-tile',
               tile.span,
             ].join(' ')}
           >
@@ -87,7 +116,7 @@ const tiles = [
             <p
               class={[
                 'mt-5 text-[12px] uppercase tracking-[0.18em]',
-                tile.accent ? 'text-[#231505]/75' : 'text-sun-textMuted',
+                tile.accent ? 'text-white/80' : 'text-sun-textMuted',
               ].join(' ')}
             >
               {translation.eyebrow}
@@ -95,7 +124,7 @@ const tiles = [
             <h3
               class={[
                 'mt-3 font-semibold tracking-tight leading-[1.18] text-[clamp(1.25rem,2.2vw,1.55rem)]',
-                tile.accent ? 'text-[#231505]' : 'text-sun-text',
+                tile.accent ? 'text-white' : 'text-sun-text',
               ].join(' ')}
             >
               {translation.title}
@@ -103,14 +132,309 @@ const tiles = [
             <p
               class={[
                 'mt-3 leading-[1.55] text-[14.5px] max-w-[44ch]',
-                tile.accent ? 'text-[#231505]/85' : 'text-sun-textSoft',
+                tile.accent ? 'text-white/90' : 'text-sun-textSoft',
               ].join(' ')}
             >
               {translation.body}
             </p>
+
+            {/* Tile visual — a small live piece of the product. */}
+            <div class="bento-visual mt-auto pt-6" aria-hidden="true">
+              {tile.key === 'uvNow' && (
+                <div class="app-ui bv-uv">
+                  <span class="bv-uv-badge" data-pop style="--d: 260ms">UV 6</span>
+                  <div class="bv-uv-track">
+                    <span class="bv-uv-dot" data-pop style="--d: 160ms"></span>
+                  </div>
+                </div>
+              )}
+
+              {tile.key === 'sunscreen' && (
+                <div class="app-ui bv-spf">
+                  <span class="bv-spf-chip">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 3.5c3.5 4.5 6 7.6 6 10.7a6 6 0 1 1-12 0c0-3.1 2.5-6.2 6-10.7Z" />
+                    </svg>
+                    SPF 50
+                  </span>
+                  <div class="bv-spf-track">
+                    <span class="bv-spf-fill" data-grow-x></span>
+                  </div>
+                </div>
+              )}
+
+              {tile.key === 'realSun' && (
+                <div class="bv-daylight">
+                  {daylightBars.map((bar, barIndex) => (
+                    <span style={`height:${bar.h}%;opacity:${bar.o};--d:${barIndex * 60}ms`} data-grow></span>
+                  ))}
+                </div>
+              )}
+
+              {tile.key === 'family' && (
+                <div class="bv-family">
+                  {familyAvatars.map((avatar, avatarIndex) => (
+                    <span
+                      class={`bv-avatar ${avatarIndex === 1 ? 'bv-avatar--lead' : ''}`}
+                      style={`width:${avatar.size}px;height:${avatar.size}px;`}
+                    >
+                      <img src={`${base}images/${avatar.src}`} alt="" width={avatar.size} height={avatar.size} loading="lazy" decoding="async" />
+                      <i class="bv-avatar-check" data-pop style={`--d: ${200 + avatarIndex * 140}ms`}>
+                        <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M4 12.5 10 18.5 20 6" />
+                        </svg>
+                      </i>
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              {tile.key === 'glow' && (
+                <div class="app-ui bv-glow">
+                  {[1, 2, 3].map((step) => (
+                    <div class="bv-glow-row">
+                      <span class="bv-glow-num">{step}</span>
+                      <span class="bv-glow-line" style={`width:${[72, 54, 63][step - 1]}%;--d:${step * 90}ms`} data-grow-x></span>
+                      {step === 1 && (
+                        <svg class="bv-glow-check" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" data-pop style="--d: 420ms">
+                          <path d="M4 12.5 10 18.5 20 6" />
+                        </svg>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {tile.key === 'history' && (
+                <div class="bv-heatmap">
+                  {heatmap.map((opacity, dotIndex) => (
+                    <span style={`--o:${opacity};--d:${dotIndex * 26}ms`} data-pop></span>
+                  ))}
+                </div>
+              )}
+            </div>
           </article>
         );
       })}
+
+      {/* Photographic beat closing the grid — imagery earns its place
+          here rather than repeating full-width photo sections above. */}
+      <figure class="reveal reveal-delay-3 bento-card bento-photo relative rounded-[24px] overflow-hidden min-h-[280px] md:col-span-2">
+        <img
+          src={`${base}images/photo-shade.jpg`}
+          alt={t.bento.photoAlt}
+          loading="lazy"
+          decoding="async"
+          class="absolute inset-0 h-full w-full object-cover"
+        />
+        <div class="bento-photo-scrim absolute inset-0" aria-hidden="true"></div>
+      </figure>
     </div>
   </div>
 </section>
+
+<style is:global>
+  /* Accent tile: the juicy sunrise gradient — the one loud moment in
+     the grid, glowing rather than muddy. */
+  .bento-tile--accent {
+    background: linear-gradient(155deg, #FFB340 0%, #FF7A00 52%, #F0570A 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.25),
+      0 18px 40px -18px rgba(240, 87, 10, 0.55),
+      0 36px 80px -40px rgba(240, 87, 10, 0.45);
+  }
+
+  /* --- UV meter ------------------------------------------------- */
+  .bv-uv {
+    position: relative;
+    padding-top: 26px;
+  }
+  .bv-uv-track {
+    height: 8px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #58A05C 0%, #E5C54B 35%, #FF8A1A 62%, #E8431F 100%);
+    position: relative;
+  }
+  .bv-uv-dot {
+    position: absolute;
+    top: 50%;
+    left: 58%;
+    width: 16px;
+    height: 16px;
+    border-radius: 999px;
+    transform: translate(-50%, -50%);
+    background: var(--ui-card);
+    box-shadow: 0 0 0 3px var(--ui-accent), 0 3px 8px rgba(148, 94, 26, 0.35);
+  }
+  /* data-pop animates transform on the dot — recentre it via margins
+     instead so the pop's scale doesn't fight the translate. */
+  .js-ready .bento-card .bv-uv-dot {
+    transform: none;
+    margin-left: -8px;
+    margin-top: -8px;
+  }
+  .bv-uv-badge {
+    position: absolute;
+    top: -4px;
+    left: 58%;
+    transform: translateX(-50%);
+    padding: 3px 9px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--ui-accent-deep);
+    background: var(--ui-accent-soft);
+  }
+  .js-ready .bento-card .bv-uv-badge {
+    transform: none;
+    margin-left: -20px;
+  }
+
+  /* --- SPF timer ------------------------------------------------ */
+  .bv-spf {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .bv-spf-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 11px;
+    border-radius: 999px;
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--ui-accent);
+    background: var(--ui-accent-soft);
+    flex: none;
+  }
+  .bv-spf-track {
+    flex: 1;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--ui-card-2);
+    box-shadow: inset 0 0 0 1px var(--ui-hairline);
+    overflow: hidden;
+  }
+  .bv-spf-fill {
+    display: block;
+    width: 62%;
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #FF7A00, #FFB340);
+  }
+
+  /* --- Daylight bars (accent tile) ------------------------------ */
+  .bv-daylight {
+    display: flex;
+    align-items: flex-end;
+    gap: 7px;
+    height: 56px;
+  }
+  .bv-daylight span {
+    flex: 1;
+    border-radius: 6px 6px 3px 3px;
+    background: #FFFFFF;
+  }
+
+  /* --- Family memoji avatars ------------------------------------- */
+  .bv-family {
+    display: flex;
+    align-items: flex-end;
+  }
+  .bv-avatar {
+    position: relative;
+    display: inline-flex;
+    border-radius: 999px;
+    box-shadow:
+      0 0 0 3px #FFFFFF,
+      0 6px 14px -6px rgba(148, 94, 26, 0.4);
+    transition: transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .bv-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 999px;
+    object-fit: cover;
+  }
+  .bv-avatar + .bv-avatar {
+    margin-left: -12px;
+  }
+  .bv-avatar--lead {
+    z-index: 1;
+  }
+  /* Playful lift on tile hover — the family waves back. */
+  .bento-card:hover .bv-avatar {
+    transform: translateY(-3px);
+  }
+  .bento-card:hover .bv-avatar--lead {
+    transform: translateY(-6px);
+  }
+  .bv-avatar-check {
+    position: absolute;
+    right: -1px;
+    bottom: -1px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 999px;
+    color: #FFFFFF;
+    background: #4CAF50;
+    box-shadow: 0 0 0 2px #FFFFFF;
+  }
+
+  /* --- Glow steps ------------------------------------------------ */
+  .bv-glow {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .bv-glow-row {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+  .bv-glow-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 999px;
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--ui-accent);
+    background: var(--ui-accent-soft);
+    flex: none;
+  }
+  .bv-glow-line {
+    height: 7px;
+    border-radius: 999px;
+    background: var(--ui-card-2);
+    box-shadow: inset 0 0 0 1px var(--ui-hairline);
+  }
+  .bv-glow-check {
+    color: #58A05C;
+    flex: none;
+  }
+
+  /* --- History heatmap ------------------------------------------ */
+  .bv-heatmap {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    max-width: 12rem;
+  }
+  .bv-heatmap span {
+    aspect-ratio: 1;
+    border-radius: 5px;
+    background: rgb(255 122 0 / var(--o, 1));
+  }
+
+  /* --- Photo tile ------------------------------------------------ */
+  .bento-photo-scrim {
+    background: linear-gradient(to top, rgba(33, 24, 9, 0.30), transparent 55%);
+  }
+</style>

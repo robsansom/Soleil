@@ -1,48 +1,50 @@
-# Soleil — Marketing Site
+# Soleil
 
-Landing page for [Soleil](https://getsoleilapp.com), personal sun guidance
-for iPhone and Apple Watch. Static site built with
-[Astro](https://astro.build) + Tailwind, deployed to GitHub Pages behind
-the custom domain `getsoleilapp.com`.
+The marketing site for [Soleil](https://getsoleilapp.com), a thoughtful sun
+companion for iPhone and Apple Watch. It helps people understand current UV
+conditions, keep an eye on their day outside, and build kinder sun routines.
+
+This repository contains the public website only, not the iOS or watchOS app.
 
 ## Stack
 
-- **Astro 5** — static output, file-based routing, built-in i18n
-- **Tailwind 3** — design tokens live in `tailwind.config.mjs` (`sun.*`)
-- **GitHub Pages** — deployed by `.github/workflows/deploy.yml` on push to `main`
+- [Astro](https://astro.build) 5 for static pages and routing
+- [Tailwind CSS](https://tailwindcss.com) 3 for styling
+- GitHub Pages for deployment
 
-## Develop
+## Run Locally
 
 ```bash
 npm install
-npm run dev       # local dev server
-npm run build     # production build to dist/
-npm run preview   # serve the production build
+npm run dev
 ```
 
-## Structure
+The local server prints its URL in the terminal. For a production build:
 
-| Path | What lives there |
+```bash
+npm run build
+npm run preview
+```
+
+## Project Map
+
+| Path | Purpose |
 | --- | --- |
-| `src/config/site.ts` | App Store URL, support email, app name — single source of truth |
-| `src/i18n/translations/` | Full page copy per locale (`en`, `fr`, `es`, `de`, `ja`) |
-| `src/components/` | Hero, Showcase, PhotoMoment, BentoGrid, PartOfIphone, chrome |
-| `src/components/pages/` | Index, Support, Privacy, Terms page bodies |
-| `src/pages/` | Route shells (default locale at `/`, others at `/{locale}/`) |
-| `public/images/` | Photography, app screenshots, icons, social card |
+| `src/components/` | Reusable page sections and visual UI |
+| `src/components/pages/` | Page-level content composition |
+| `src/pages/` | Routes, including guides, support, privacy and terms |
+| `src/i18n/translations/` | Localised site copy |
+| `src/data/` | Guides, FAQ and screen content |
+| `src/config/site.ts` | App name, App Store destination and support contact |
+| `public/` | Static images, crawler rules and the custom-domain CNAME |
 
-## Conventions
+## Deployment
 
-- The site is light-first: a warm cream canvas (`sun.ink`) with deep warm
-  ink text and a sunrise-orange accent gradient. The footer is the one
-  deliberate dark section (`footer-dark` in `global.css`).
-- Motion lives in `src/scripts/motion.ts` (IntersectionObserver reveals)
-  plus CSS data-viz hooks in `global.css` (`data-draw`, `data-grow`,
-  `data-pop`, `data-ring`) that fire once their `.reveal-image` or
-  `.bento-card` ancestor becomes visible.
-- The App Store badge renders as a "Coming soon" pill until
-  `site.appStoreUrl` in `src/config/site.ts` is set to a real
-  `https://apps.apple.com/...` URL — then every CTA goes live at once.
-- Photography is shared with the app repo (`Sunkind/brand/imagery/`);
-  sourcing and licences are documented there in `LICENSES.md`.
-- The website never leads the app: only shipped features appear here.
+Pushing to `main` runs the GitHub Pages workflow in
+`.github/workflows/deploy.yml`. The live site uses the custom domain
+`getsoleilapp.com`.
+
+## Notes
+
+Soleil is maintained as a private product project. The source, design and
+brand assets in this repository are not licensed for reuse.

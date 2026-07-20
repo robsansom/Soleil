@@ -9,3 +9,10 @@ dist
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Local project planning and assistant configuration
+.claude/
+CLAUDE.md
+app.md
+seo-keywords.md
+docs/

@@ -1,0 +1,102 @@
+---
+import '../styles/global.css';
+import Header from '../components/site/Header.astro';
+import Footer from '../components/site/Footer.astro';
+import { useTranslations, toLocale, getLocalizedPath } from '../i18n/utils';
+import { languages } from '../i18n/ui';
+
+export interface Props {
+  title: string;
+  description?: string;
+  pathname?: string;
+  /** Extra JSON-LD blocks rendered into <head> (Article, FAQPage, …). */
+  jsonLd?: object[];
+  ogType?: string;
+  /** Localised routes get hreflang alternates; English-only ones don't. */
+  localised?: boolean;
+}
+
+const t = useTranslations(Astro.currentLocale);
+const locale = toLocale(Astro.currentLocale);
+
+const {
+  title,
+  description = t.meta.description,
+  pathname = Astro.url.pathname,
+  jsonLd = [],
+  ogType = 'website',
+  localised = true,
+} = Astro.props;
+
+const canonical = new URL(pathname, Astro.site).toString();
+const socialCard = new URL('/images/social-card.png', Astro.site).toString();
+const alternates = localised
+  ? (Object.keys(languages) as (keyof typeof languages)[]).map((code) => ({
+      code,
+      href: new URL(getLocalizedPath(code, pathname), Astro.site).toString(),
+    }))
+  : [];
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#ffd84d" />
+    <title>{title}</title>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/images/icon-192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/images/icon-512.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="canonical" href={canonical} />
+    <link rel="sitemap" href="/sitemap.xml" />
+
+    {/* Self-hosted, so the display face is on the wire immediately and
+        the headline never reflows. */}
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/bricolage-latin.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/instrument-latin.woff2" crossorigin />
+
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialCard} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={t.meta.title} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={socialCard} />
+
+    {alternates.map((a) => <link rel="alternate" hreflang={a.code} href={a.href} />)}
+    {alternates.length > 0 && (
+      <link rel="alternate" hreflang="x-default" href={new URL(getLocalizedPath('en', pathname), Astro.site).toString()} />
+    )}
+
+    {jsonLd.map((block) => (
+      <script type="application/ld+json" set:html={JSON.stringify(block)} />
+    ))}
+
+    <script is:inline>
+      // Entrance animations are opt-in: the class is only added when JS
+      // runs and the visitor has not asked for reduced motion, so content
+      // is never hidden behind a script that might not arrive.
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('motion-on');
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{t.skipLabel}</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <script>
+      import '../scripts/motion';
+    </script>
+  </body>
+</html>

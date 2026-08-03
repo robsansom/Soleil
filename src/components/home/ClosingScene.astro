@@ -1,0 +1,85 @@
+---
+/** Scene 8b — the closing panel. The app icon is the real artwork from
+ *  the app's asset catalogue. */
+import Cta from '../site/Cta.astro';
+import { useTranslations } from '../../i18n/utils';
+
+const t = useTranslations(Astro.currentLocale);
+const { closing } = t.home;
+---
+
+<section class="scene closing" data-tone="solar" id="app-store">
+  <div class="wrap closing__inner">
+    <img
+      class="closing__icon"
+      src="/images/icon-512.png"
+      alt={closing.imageAlt}
+      width="512"
+      height="512"
+      loading="lazy"
+      decoding="async"
+    />
+
+    <h2 class="display-hero closing__headline" data-reveal="up">{closing.headline}</h2>
+    <p class="lede closing__body" data-reveal="up">{closing.body}</p>
+
+    <div class="closing__cta" data-reveal="up">
+      <Cta />
+      <p class="hand closing__note">{closing.note}</p>
+    </div>
+
+    <p class="closing__privacy">{closing.privacy}</p>
+  </div>
+</section>
+
+<style>
+  .closing {
+    margin-inline: clamp(0px, 1.4vw, 20px);
+    border-radius: var(--r-scene);
+    overflow: clip;
+    text-align: center;
+  }
+
+  .closing__inner {
+    display: grid;
+    justify-items: center;
+  }
+
+  .closing__icon {
+    width: clamp(84px, 12vw, 128px);
+    height: auto;
+    border-radius: 24%;
+    box-shadow: var(--lift-md);
+    transform: rotate(-6deg);
+    margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+  }
+
+  .closing__headline {
+    max-width: 14ch;
+  }
+
+  .closing__body {
+    margin-top: 1.25rem;
+    max-width: 40ch;
+  }
+
+  .closing__cta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: clamp(1.75rem, 3vw, 2.5rem);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .closing__note {
+    transform: rotate(-3deg);
+  }
+
+  .closing__privacy {
+    margin-top: clamp(1.75rem, 3vw, 2.5rem);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: rgb(23 18 14 / 0.7);
+  }
+</style>

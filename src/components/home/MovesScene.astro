@@ -1,0 +1,161 @@
+---
+/** Scene 3 — four crooked process cards. One designed cluster on
+ *  desktop, a peeking snap strip on mobile. */
+import Mark from '../art/Mark.astro';
+import { useTranslations } from '../../i18n/utils';
+
+const t = useTranslations(Astro.currentLocale);
+const { moves } = t.home;
+
+const looks = [
+  { tone: 'cyan', mark: 'sky' as const, tilt: -3.5 },
+  { tone: 'solar', mark: 'cover' as const, tilt: 2.5 },
+  { tone: 'pink', mark: 'session' as const, tilt: -2 },
+  { tone: 'violet', mark: 'realsun' as const, tilt: 4 },
+];
+---
+
+<section class="scene moves" data-tone="paper" id="how">
+  <div class="moves__panel scene--panel">
+    <div class="wrap moves__head">
+      <p class="eyebrow" data-reveal="up">{moves.eyebrow}</p>
+      <h2 class="display-xl" data-reveal="up">{moves.headline}</h2>
+    </div>
+
+    <ol class="moves__cluster">
+      {
+        moves.steps.map((step, i) => (
+          <li
+            class="mcard"
+            data-tone={looks[i].tone}
+            style={`--tilt:${looks[i].tilt}deg; --i:${i}`}
+            data-reveal="plop"
+          >
+            <span class="mcard__num" aria-hidden="true">{i + 1}</span>
+            <Mark name={looks[i].mark} size={132} class="mcard__art" />
+            <h3 class="display-sm mcard__title">{step.title}</h3>
+            <p class="mcard__body">{step.body}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .moves {
+    padding-block: clamp(2rem, 4vw, 3rem);
+  }
+
+  .moves__panel {
+    background: var(--sunset-pale);
+    border-radius: var(--r-scene);
+    padding-block: var(--scene-pad-y);
+    overflow: clip;
+  }
+
+  .moves__head {
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .moves__head .eyebrow {
+    color: var(--sunset-deep);
+    margin-bottom: 0.9rem;
+  }
+
+  .moves__head h2 {
+    max-width: 14ch;
+  }
+
+  .moves__cluster {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding-inline: var(--gutter);
+    padding-block: 1rem 2rem;
+  }
+
+  .moves__cluster::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mcard {
+    scroll-snap-align: center;
+    flex: none;
+    width: min(72vw, 300px);
+    padding: 1.4rem 1.4rem 1.8rem;
+    border-radius: var(--r-lg);
+    background: var(--card-bg);
+    color: var(--ink);
+    box-shadow: var(--lift-md);
+    transform: rotate(var(--tilt));
+  }
+
+  .mcard[data-tone='cyan'] {
+    --card-bg: var(--sky-cyan);
+  }
+  .mcard[data-tone='solar'] {
+    --card-bg: var(--solar-yellow);
+  }
+  .mcard[data-tone='pink'] {
+    --card-bg: var(--sunset-pink);
+  }
+  .mcard[data-tone='violet'] {
+    --card-bg: var(--twilight-pale);
+  }
+
+  .mcard__num {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    opacity: 0.62;
+  }
+
+  .mcard__art {
+    margin: 0.35rem 0 1rem -0.35rem;
+  }
+
+  .mcard__body {
+    margin-top: 0.5rem;
+    font-size: 0.9875rem;
+    line-height: 1.5;
+  }
+
+  @media (min-width: 900px) {
+    .moves__cluster {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      align-items: start;
+      gap: 0;
+      overflow: visible;
+      width: min(100% - (2 * var(--gutter)), var(--max-w));
+      margin-inline: auto;
+      padding-inline: 0;
+      padding-block: 1rem 1.5rem;
+    }
+
+    .mcard {
+      width: auto;
+      /* The cluster overlaps: each card sits on the one before it, and
+         the one beneath keeps clear space so no copy is covered. */
+      margin-left: -2rem;
+      margin-top: calc(var(--i) * 1.35rem);
+      z-index: calc(var(--i) + 1);
+    }
+
+    .mcard:not(:last-child) {
+      padding-right: 3rem;
+    }
+
+    .mcard:first-child {
+      margin-left: 0;
+    }
+
+    .mcard:nth-child(even) {
+      margin-top: calc(var(--i) * 0.6rem - 1.4rem);
+    }
+  }
+</style>

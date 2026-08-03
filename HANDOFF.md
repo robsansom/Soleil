@@ -60,7 +60,16 @@ was read only; nothing in it was changed.
 2. **`screen-home.png` shows UV 0 / “No burn risk”.** Accurate, but it is the
    hero image of a UV app showing no UV. Carried as-is because it is real; a
    replacement capture is item 1 in `ASSET_NEEDED.md`.
-3. **Privacy policy said the site loads a Google Font.** It no longer does —
+3. **Real screenshots vs. hand-built UI — a standing instruction was reversed.**
+   The previous site deliberately recreated the app's UI in HTML/CSS
+   (`src/components/ui/*Cluster.astro`) so it would localise into all five
+   languages. The v5 brief says the opposite: use real screenshots, never
+   fabricate app UI. This build follows the brief, which means the app UI
+   *inside* the device frames reads English on `/fr`, `/es`, `/de` and `/ja`.
+   The surrounding copy is fully translated. Worth an explicit decision:
+   accept it, capture localised screenshots, or bring back hand-built clusters
+   for the non-English locales.
+4. **Privacy policy said the site loads a Google Font.** It no longer does —
    fonts are self-hosted — so that sentence was replaced and “Google” removed
    from the service-provider list, in all five locales. This is the only change
    to ported legal text.

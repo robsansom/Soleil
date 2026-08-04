@@ -1,7 +1,7 @@
 ---
-/** Scene 8b — the closing panel. The app icon is the real artwork from
- *  the app's asset catalogue. */
+/** Scene 8b — the closing panel, closing on the Soleil mark. */
 import Cta from '../site/Cta.astro';
+import SunMark from '../site/SunMark.astro';
 import { useTranslations } from '../../i18n/utils';
 
 const t = useTranslations(Astro.currentLocale);
@@ -10,15 +10,7 @@ const { closing } = t.home;
 
 <section class="scene closing" data-tone="solar" id="app-store">
   <div class="wrap closing__inner">
-    <img
-      class="closing__icon"
-      src="/images/icon-512.png"
-      alt={closing.imageAlt}
-      width="512"
-      height="512"
-      loading="lazy"
-      decoding="async"
-    />
+    <span class="closing__mark"><SunMark size={132} /></span>
 
     <h2 class="display-hero closing__headline" data-reveal="up">{closing.headline}</h2>
     <p class="lede closing__body" data-reveal="up">{closing.body}</p>
@@ -45,13 +37,13 @@ const { closing } = t.home;
     justify-items: center;
   }
 
-  .closing__icon {
-    width: clamp(84px, 12vw, 128px);
-    height: auto;
-    border-radius: 24%;
-    box-shadow: var(--lift-md);
-    transform: rotate(-6deg);
+  /* The Soleil mark rather than the app icon: it is ours, it is vector, and
+     it survives the icon being redrawn. */
+  .closing__mark {
+    display: block;
+    width: clamp(96px, 12vw, 132px);
     margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+    color: var(--ink);
   }
 
   .closing__headline {

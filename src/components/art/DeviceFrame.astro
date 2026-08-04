@@ -49,8 +49,10 @@ const { w, h } = dimsFor(src);
   .device__frame {
     position: relative;
     aspect-ratio: var(--ratio);
-    padding: 1.9%;
-    border-radius: 12% / 5.9%;
+    /* A real iPhone bezel is nearer 3% of the body width; 1.9% left the
+       screen content crowding the frame. */
+    padding: 3.1%;
+    border-radius: 12.5% / 6.1%;
     background: #0d0b09;
     box-shadow:
       inset 0 0 0 1px rgb(255 255 255 / 0.14),
@@ -61,7 +63,7 @@ const { w, h } = dimsFor(src);
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 10.5% / 5.1%;
+    border-radius: 9.6% / 4.7%;
   }
 
   .device__island {

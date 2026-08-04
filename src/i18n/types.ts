@@ -74,6 +74,8 @@ export interface HomeCopy {
     eyebrow: string;
     headline: string;
     headlineAccent: string;
+    /** Five readouts as the sun crosses the day arc. */
+    notes: string[];
     tabsLabel: string;
     tabs: { label: string; title: string; body: string }[];
     note: string;

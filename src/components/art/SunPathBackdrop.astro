@@ -22,7 +22,7 @@
   </svg>
 
   <svg class="sunart__dune" viewBox="0 0 1200 300" preserveAspectRatio="none">
-    <path d="M0 180c180-60 320 40 520 20s320-110 500-90c100 11 160 60 180 40v150H0Z" />
+    <path d="M0 180c180-60 320 40 520 20s320-110 500-90c100 11 150 40 180 30v160H0Z" />
   </svg>
 
   <svg class="sunart__path" viewBox="0 0 600 300" preserveAspectRatio="none">
@@ -46,6 +46,9 @@
   .sunart__path {
     position: absolute;
     display: block;
+    /* The global `svg { max-width: 100% }` reset clamps any shape authored
+       wider than its parent, which stopped the dune short of the edge. */
+    max-width: none;
   }
 
   .sunart__mass path {

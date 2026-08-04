@@ -20,6 +20,9 @@
 
   position: relative;
   width: 100%;
+  /* Everything inside is sized in em, so a placement can scale the whole
+     surface by turning this one knob. */
+  font-size: var(--ui-size, 15px);
   font-family: var(--font-body);
   font-feature-settings: 'tnum';
   color: var(--ui-ink);
@@ -27,17 +30,17 @@
 }
 
 .ui-card {
-  padding: 15px 16px 16px;
+  padding: 1.0em 1.0667em 1.0667em;
   border-radius: var(--r-md);
   background: var(--ui-card);
   color: var(--ui-ink);
   box-shadow:
     0 0 0 1px rgb(23 18 14 / 0.05),
-    0 18px 36px -22px rgb(23 18 14 / 0.55);
+    0 1.2em 2.4em -1.4667em rgb(23 18 14 / 0.55);
 }
 
 .ui-label {
-  font-size: 9.5px;
+  font-size: 0.6333em;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -48,22 +51,22 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  gap: 0.6667em;
 }
 
 .ui-time {
-  font-size: 11.5px;
+  font-size: 0.7667em;
   color: var(--ui-ink-muted);
 }
 
 .ui-tiles {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 7px;
+  gap: 0.4667em;
 }
 
 .ui-tile {
-  padding: 9px 11px 10px;
+  padding: 0.6em 0.7333em 0.6667em;
   border-radius: var(--r-sm);
   background: var(--ui-card-2);
 }
@@ -72,26 +75,26 @@
   display: flex;
   align-items: baseline;
   flex-wrap: wrap;
-  gap: 5px;
-  margin-top: 3px;
-  font-size: 17px;
+  gap: 0.3333em;
+  margin-top: 0.2em;
+  font-size: 1.1333em;
   font-weight: 700;
   letter-spacing: -0.02em;
 }
 
 .ui-tile__caption {
-  font-size: 10.5px;
+  font-size: 0.7em;
   font-weight: 500;
   color: var(--ui-ink-muted);
 }
 
 .ui-pill {
   display: inline-block;
-  padding: 4px 9px;
+  padding: 0.2667em 0.6em;
   border-radius: var(--r-pill);
   background: var(--ui-accent);
   color: #fff;
-  font-size: 9.5px;
+  font-size: 0.6333em;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -103,22 +106,22 @@
   z-index: 2;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
+  gap: 0.5333em;
+  padding: 0.5333em 0.8em;
   border-radius: var(--r-sm);
   background: var(--ui-card);
   color: var(--ui-ink);
-  font-size: 11.5px;
+  font-size: 0.7667em;
   font-weight: 600;
   white-space: nowrap;
   box-shadow:
     0 0 0 1px rgb(23 18 14 / 0.06),
-    0 14px 26px -16px rgb(23 18 14 / 0.5);
+    0 0.9333em 1.7333em -1.0667em rgb(23 18 14 / 0.5);
 }
 
 .ui-dot {
-  width: 8px;
-  height: 8px;
+  width: 0.5333em;
+  height: 0.5333em;
   border-radius: 50%;
   background: var(--ui-accent);
   flex: none;
@@ -127,8 +130,8 @@
 .ui-person {
   display: flex;
   align-items: center;
-  gap: 9px;
-  padding: 8px 0;
+  gap: 0.6em;
+  padding: 0.5333em 0;
   border-top: 1px solid var(--ui-hairline);
 }
 
@@ -139,8 +142,8 @@
 .ui-avatar {
   display: grid;
   place-items: center;
-  width: 26px;
-  height: 26px;
+  width: 1.7333em;
+  height: 1.7333em;
   border-radius: 50%;
   background: var(--ui-card-2);
   color: var(--ui-accent);
@@ -148,30 +151,33 @@
 }
 
 .ui-person__name {
-  font-size: 13px;
+  font-size: 0.8667em;
   font-weight: 650;
 }
 
 .ui-person__status {
   margin-left: auto;
-  font-size: 11px;
+  font-size: 0.7333em;
   color: var(--ui-ink-muted);
   text-align: right;
 }
 
-/* The UV curve, drawn once when its scene arrives. */
+/* The UV curve, drawn once when its scene arrives. The height follows the
+   viewBox rather than being pinned, because forcing it squashed the
+   "you are here" marker into an ellipse. */
 .ui-curve {
   display: block;
   width: 100%;
-  height: 62px;
+  height: auto;
+  aspect-ratio: 150 / 76;
 }
 
 .ui-axis {
   display: flex;
   justify-content: space-between;
-  gap: 6px;
-  margin-top: 5px;
-  font-size: 9.5px;
+  gap: 0.4em;
+  margin-top: 0.3333em;
+  font-size: 0.6333em;
   color: var(--ui-ink-muted);
 }
 

@@ -160,6 +160,14 @@ export const home: HomeCopy = {
     eyebrow: 'Real Sun',
     headline: '予報は、これから起きるかもしれないことを教えてくれます。',
     headlineAccent: 'Real Sunは、実際に浴びた日光を見せてくれます。',
+    /** Read out as the sun crosses the arc, morning to golden hour. */
+    notes: [
+      'やわらかな朝の光。',
+      '正午に向けてUVが急上昇。',
+      '日差しのピーク。対策をおすすめします。',
+      '午後はしだいに和らぎます。',
+      'ゴールデンアワー。低く、やさしい日差し。',
+    ],
     tabsLabel: '時間帯',
     tabs: [
       {

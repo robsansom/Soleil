@@ -160,6 +160,14 @@ export const home: HomeCopy = {
     eyebrow: 'Real Sun',
     headline: 'Forecasts tell you what might happen.',
     headlineAccent: 'Real Sun shows the daylight you actually had.',
+    /** Read out as the sun crosses the arc, morning to golden hour. */
+    notes: [
+      'Gentle morning light.',
+      'Climbing fast. UV rises towards midday.',
+      'Peak sun. Protection is recommended.',
+      'Softening through the afternoon.',
+      'Golden hour. The sun is low and soft.',
+    ],
     tabsLabel: 'Times of day',
     tabs: [
       {

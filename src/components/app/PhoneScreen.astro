@@ -15,6 +15,7 @@
  * Everything scales from one container-relative font size, so the screen
  * is resolution-independent inside whatever frame holds it.
  */
+import SunMark from '../site/SunMark.astro';
 import { useTranslations } from '../../i18n/utils';
 
 const t = useTranslations(Astro.currentLocale);
@@ -208,19 +209,46 @@ const [markerX, markerY] = cubicAt(0.3);
         {
           ui.tabs.map((tab, i) => (
             <span class={`ps__tab ${i === 0 ? 'is-on' : ''}`}>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-                {i === 0 && <><rect x="3.5" y="4.5" width="17" height="16" rx="3.2" /><path d="M8 2.6v3.4M16 2.6v3.4M3.5 9.6h17" /></>}
-                {i === 1 && <><circle cx="12" cy="12" r="4.2" /><path d="M12 2.4v2.6M12 19v2.6M2.4 12H5M19 12h2.6M5.2 5.2 7 7M17 17l1.8 1.8M18.8 5.2 17 7M7 17l-1.8 1.8" /></>}
-                {i === 2 && <><circle cx="12" cy="8" r="3.8" /><path d="M4.8 20.2c0-3.9 3.2-6.2 7.2-6.2s7.2 2.3 7.2 6.2" /></>}
-              </svg>
-              {tab}
+              <span class={`ps__tabIcon ${i === 1 ? 'ps__tabIcon--mark' : ''}`}>
+                {/* Filled glyphs, as in the app: the outline set read far
+                    too light against a solid iOS tab bar. */}
+                {i === 0 && (
+                  <svg viewBox="0 0 24 24">
+                    <rect x="2.6" y="3.8" width="18.8" height="17.4" rx="4.6" fill="currentColor" />
+                    {[0, 1, 2].map((row) =>
+                      [0, 1, 2].map((col) => (
+                        <rect
+                          x={6.4 + col * 4.3}
+                          y={9.4 + row * 3.5}
+                          width="2.4"
+                          height="2.2"
+                          rx="0.7"
+                          fill="#fff"
+                          opacity="0.94"
+                        />
+                      )),
+                    )}
+                  </svg>
+                )}
+                {i === 1 && <SunMark size={40} />}
+                {i === 2 && (
+                  <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="7.4" r="4.5" fill="currentColor" />
+                    <path
+                      d="M3.1 21.6c0-4.9 4-7.8 8.9-7.8s8.9 2.9 8.9 7.8Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                )}
+              </span>
+              <span class="ps__tabLabel">{tab}</span>
             </span>
           ))
         }
       </div>
       <span class="ps__fab">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
-          <path d="M12 5v14M5 12h14" />
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M12 4.6v14.8M4.6 12h14.8" />
         </svg>
       </span>
     </div>
@@ -615,59 +643,88 @@ const [markerX, markerY] = cubicAt(0.3);
     align-items: center;
     gap: 0.5em;
     margin-top: auto;
-    padding: 0.9em 0 1.1em;
+    padding: 0.75em 0 1em;
   }
 
   .ps__tabbar {
     display: flex;
     flex: 1;
-    align-items: center;
-    gap: 0.15em;
-    padding: 0.55em 0.35em 0.5em;
+    align-items: stretch;
+    gap: 0.1em;
+    padding: 0.34em;
     border-radius: 999px;
-    background: rgb(255 255 255 / 0.8);
-    backdrop-filter: blur(1em);
-    box-shadow: 0 0.25em 1em -0.4em rgb(0 0 0 / 0.22);
+    background: rgb(255 255 255 / 0.82);
+    backdrop-filter: blur(1.2em);
+    box-shadow:
+      0 0 0 0.5px rgb(0 0 0 / 0.05),
+      0 0.3em 1.1em -0.35em rgb(0 0 0 / 0.26);
   }
 
-  /* Equal columns rather than space-around, so the three tabs are evenly
-     spaced whatever the label lengths do between locales. */
+  /* Equal columns, so spacing holds whatever the labels do per locale. */
   .ps__tab {
     display: grid;
     flex: 1;
     justify-items: center;
-    gap: 0.3em;
-    padding: 0;
-    font-size: 0.6em;
-    font-weight: 500;
-    line-height: 1;
-    letter-spacing: -0.005em;
-    color: rgb(60 60 67 / 0.62);
+    align-content: center;
+    gap: 0.24em;
+    padding: 0.42em 0.2em 0.38em;
+    border-radius: 999px;
+    color: #1c1c1e;
     white-space: nowrap;
   }
 
-  .ps__tab svg {
-    width: 2.15em;
+  /* The selected tab sits on its own capsule, as it does in the app. */
+  .ps__tab.is-on {
+    background: #fff;
+    color: #f4623f;
+    box-shadow: 0 0.08em 0.32em -0.18em rgb(0 0 0 / 0.16);
   }
 
-  .ps__tab.is-on {
-    color: #f4623f;
+  .ps__tabIcon {
+    display: block;
+    width: 1.95em;
+  }
+
+  /* The mark is mostly negative space between its rays, so at the same
+     box size it reads smaller than the solid glyphs beside it. Sized
+     optically rather than geometrically. */
+  .ps__tabIcon--mark {
+    width: 2.3em;
+  }
+
+  .ps__tabIcon svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .ps__tabLabel {
+    font-size: 0.75em;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+
+  .ps__tab.is-on .ps__tabLabel {
     font-weight: 600;
   }
 
   .ps__fab {
     display: grid;
     place-items: center;
-    width: 3.1em;
-    height: 3.1em;
+    width: 3.3em;
+    height: 3.3em;
     border-radius: 50%;
-    background: rgb(255 255 255 / 0.86);
+    background: rgb(255 255 255 / 0.9);
     color: #1c1c1e;
-    box-shadow: 0 0.25em 1em -0.4em rgb(0 0 0 / 0.28);
+    box-shadow:
+      0 0 0 0.5px rgb(0 0 0 / 0.05),
+      0 0.3em 1.1em -0.35em rgb(0 0 0 / 0.28);
     flex: none;
   }
 
   .ps__fab svg {
-    width: 1.3em;
+    width: 1.45em;
   }
+
 </style>

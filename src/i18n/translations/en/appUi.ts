@@ -8,22 +8,8 @@ export const appUi = {
      *  every locale gets its own hero rather than an English picture. */
     phoneScreen: {
       statusTime: '09:41',
-      location: 'Dubai',
       headline: 'The heat of the day is here',
-      uvNowLabel: 'UV NOW',
-      readingTime: '12:32 pm',
-      value: '11',
-      category: 'Extreme',
-      livePill: 'LIVE UV',
-      guidance: 'Strong sun until 6 pm. Keep direct sun short and use shade.',
-      axis: ['9 AM', '11 AM', '1 PM'],
       rightNow: 'Right now',
-      tiles: [
-        { label: 'PEAK UV', value: '12', caption: 'Peak at 12:40 pm' },
-        { label: 'UV LEVEL', value: 'Extreme' },
-        { label: 'CLOUD COVER', value: '5 %' },
-        { label: 'HUMIDITY', value: '38 %' }
-      ],
       tabs: ['Your Day', 'Your Sun', 'You'],
       searchLabel: 'Search',
       addLabel: 'Add'

@@ -7,22 +7,8 @@ import type { AppUiCopy } from '../../types';
 export const appUi: AppUiCopy = {
     phoneScreen: {
       statusTime: '09:41',
-      location: 'ドバイ',
       headline: '一日でいちばん暑い時間です',
-      uvNowLabel: '現在のUV',
-      readingTime: '12:32',
-      value: '11',
-      category: '極めて強い',
-      livePill: 'リアルタイムUV',
-      guidance: '18時まで強い日差し。直射日光は短くして、日陰を使いましょう。',
-      axis: ['9時', '11時', '13時'],
       rightNow: '現在の状況',
-      tiles: [
-        { label: '最大UV', value: '12', caption: '12:40にピーク' },
-        { label: 'UVレベル', value: '極めて強い' },
-        { label: '雲量', value: '5 %' },
-        { label: '湿度', value: '38 %' }
-      ],
       tabs: ['あなたの一日', 'あなたの太陽', 'あなた'],
       searchLabel: '検索',
       addLabel: '追加'

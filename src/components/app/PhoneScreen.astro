@@ -19,6 +19,44 @@ import { useTranslations } from '../../i18n/utils';
 
 const t = useTranslations(Astro.currentLocale);
 const ui = t.appUi.phoneScreen;
+/** The reading itself is the same sample every recreated surface uses,
+ *  so the hero and the rest of the page can never drift apart. */
+const uv = t.appUi.sunWindow;
+const daylight = t.appUi.realSun;
+
+/**
+ * The UV curve, defined once as two cubics that meet with a horizontal
+ * tangent — so the peak is smooth rather than kinked — and sampled for
+ * the "you are here" marker. Deriving the marker from the same curve is
+ * the only way to guarantee it sits exactly on the line.
+ */
+const PEAK = [84, 12] as const;
+const CURVE = {
+  start: [8, 84],
+  a: [[34, 80], [54, 12]],
+  peak: PEAK,
+  b: [[114, 12], [126, 54]],
+  end: [142, 78],
+} as const;
+
+const d =
+  `M${CURVE.start[0]} ${CURVE.start[1]}` +
+  ` C ${CURVE.a[0][0]} ${CURVE.a[0][1]}, ${CURVE.a[1][0]} ${CURVE.a[1][1]},` +
+  ` ${PEAK[0]} ${PEAK[1]}` +
+  ` C ${CURVE.b[0][0]} ${CURVE.b[0][1]}, ${CURVE.b[1][0]} ${CURVE.b[1][1]},` +
+  ` ${CURVE.end[0]} ${CURVE.end[1]}`;
+
+/** Point on the falling half of the curve, 0 = peak, 1 = end of day. */
+const cubicAt = (t0: number) => {
+  const pts = [PEAK, CURVE.b[0], CURVE.b[1], CURVE.end];
+  const u = 1 - t0;
+  const w = [u * u * u, 3 * u * u * t0, 3 * u * t0 * t0, t0 * t0 * t0];
+  return [0, 1].map((axis) =>
+    pts.reduce((sum, pt, i) => sum + pt[axis] * w[i], 0),
+  );
+};
+
+const [markerX, markerY] = cubicAt(0.3);
 ---
 
 <div class="ps" role="img" aria-label={t.home.sunWindow.imageAlt}>
@@ -63,7 +101,7 @@ const ui = t.appUi.phoneScreen;
       </span>
     </div>
 
-    <h3 class="ps__place">{ui.location}</h3>
+    <h3 class="ps__place">{uv.location}</h3>
 
     <p class="ps__headline">
       <svg class="ps__sun" viewBox="0 0 24 24" fill="currentColor">
@@ -90,10 +128,10 @@ const ui = t.appUi.phoneScreen;
               stroke-linecap="round"
             />
           </svg>
-          {ui.uvNowLabel}
+          {uv.uvNowLabel}
         </span>
         <span class="ps__cardTime">
-          {ui.readingTime}
+          {uv.time}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
             <path d="M9 5l7 7-7 7" />
           </svg>
@@ -102,9 +140,9 @@ const ui = t.appUi.phoneScreen;
 
       <div class="ps__body">
         <div class="ps__reading">
-          <p class="ps__value">{ui.value}</p>
-          <p class="ps__category">{ui.category}</p>
-          <span class="ps__live">{ui.livePill}</span>
+          <p class="ps__value">{uv.value}</p>
+          <p class="ps__category">{uv.category}</p>
+          <span class="ps__live">{uv.livePill}</span>
         </div>
 
         <div class="ps__chart">
@@ -112,28 +150,27 @@ const ui = t.appUi.phoneScreen;
             {[0, 1, 2].map((i) => (
               <line class="ps__grid" x1={12 + i * 63} y1="2" x2={12 + i * 63} y2="84" />
             ))}
-            <path
-              class="ps__curveFill"
-              d="M8 84 C 36 78, 52 20, 84 12 C 112 16, 128 52, 142 78 L 142 84 Z"
+            <path class="ps__curveFill" d={`${d} L ${CURVE.end[0]} 84 Z`} />
+            <path class="ps__curveLine" d={d} />
+            <circle
+              class="ps__marker"
+              cx={markerX.toFixed(2)}
+              cy={markerY.toFixed(2)}
+              r="5.2"
             />
-            <path
-              class="ps__curveLine"
-              d="M8 84 C 36 78, 52 20, 84 12 C 112 16, 128 52, 142 78"
-            />
-            <circle class="ps__marker" cx="99" cy="24" r="5.4" />
           </svg>
-          <p class="ps__axis">{ui.axis.map((label) => <span>{label}</span>)}</p>
+          <p class="ps__axis">{uv.axis.map((label) => <span>{label}</span>)}</p>
         </div>
       </div>
 
-      <p class="ps__guidance">{ui.guidance}</p>
+      <p class="ps__guidance">{uv.guidance}</p>
     </article>
 
     <h4 class="ps__section">{ui.rightNow}</h4>
 
     <div class="ps__tiles">
       {
-        ui.tiles.map((tile, i) => (
+        uv.tiles.map((tile, i) => (
           <div class="ps__tile">
             <p class="ps__tileLabel">
               <span class={`ps__tileDot ps__tileDot--${i}`} />
@@ -148,6 +185,22 @@ const ui = t.appUi.phoneScreen;
       }
     </div>
 
+      <section class="ps__daylight">
+        {/* Label and figure share a row: this card sits at the fold, and
+            the part that shows should carry the number, not just a title. */}
+        <header class="ps__cardHead">
+          <span class="ps__cardLabel">{daylight.header}</span>
+          <span class="ps__daylightValue">{daylight.value}</span>
+        </header>
+        <p class="ps__daylightFrom">{daylight.watchChip}</p>
+        <div class="ps__daylightBars">
+          {
+            [34, 52, 41, 68, 88, 74, 96, 61, 45, 58, 38, 26].map((h) => (
+              <span style={`--h:${h}%`} />
+            ))
+          }
+        </div>
+      </section>
     </div>
 
     <div class="ps__tabs">
@@ -204,6 +257,20 @@ const ui = t.appUi.phoneScreen;
     flex: 1;
     min-height: 0;
     overflow: hidden;
+    /* Content dissolves as it reaches the tab bar rather than being
+       sliced through a line of text. Which line lands at the fold
+       depends on the locale, so this has to be positional, not a
+       per-element decision. */
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      #000 calc(100% - 2.4em),
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      #000 calc(100% - 2.4em),
+      transparent 100%
+    );
   }
 
   /* Status bar ------------------------------------------------------- */
@@ -265,7 +332,7 @@ const ui = t.appUi.phoneScreen;
   .ps__bar {
     display: flex;
     justify-content: flex-end;
-    margin-top: 1.5em;
+    margin-top: 1.05em;
   }
 
   .ps__round {
@@ -283,12 +350,16 @@ const ui = t.appUi.phoneScreen;
     width: 1.15em;
   }
 
+  /* The large title uses the site's display face. This is the first of
+     the aesthetic changes heading back into the app itself, so the two
+     should be looked at together. */
   .ps__place {
     margin-top: 0.5em;
-    font-size: 2.3em;
-    font-weight: 700;
-    letter-spacing: -0.028em;
-    line-height: 1.05;
+    font-family: var(--font-display);
+    font-size: 2.35em;
+    font-weight: 800;
+    letter-spacing: -0.038em;
+    line-height: 1.02;
   }
 
   .ps__headline {
@@ -315,7 +386,7 @@ const ui = t.appUi.phoneScreen;
   /* The UV card ------------------------------------------------------ */
 
   .ps__card {
-    margin-top: 1.05em;
+    margin-top: 0.9em;
     padding: 1.05em 1.1em 1.15em;
     border-radius: 1.45em;
     background: #f7f7fb;
@@ -335,9 +406,10 @@ const ui = t.appUi.phoneScreen;
     display: inline-flex;
     align-items: center;
     gap: 0.4em;
-    font-size: 0.84em;
+    font-size: 0.8em;
     font-weight: 600;
     letter-spacing: 0.055em;
+    text-transform: uppercase;
     color: #3c3c43;
   }
 
@@ -381,9 +453,10 @@ const ui = t.appUi.phoneScreen;
     border-radius: 999px;
     background: #f4623f;
     color: #fff;
-    font-size: 0.82em;
+    font-size: 0.8em;
     font-weight: 700;
     letter-spacing: 0.04em;
+    text-transform: uppercase;
   }
 
   .ps__chart svg {
@@ -435,7 +508,7 @@ const ui = t.appUi.phoneScreen;
   /* Right now -------------------------------------------------------- */
 
   .ps__section {
-    margin-top: 1.1em;
+    margin-top: 0.95em;
     font-size: 1.45em;
     font-weight: 700;
     letter-spacing: -0.025em;
@@ -459,9 +532,10 @@ const ui = t.appUi.phoneScreen;
     display: flex;
     align-items: center;
     gap: 0.35em;
-    font-size: 0.76em;
+    font-size: 0.74em;
     font-weight: 600;
     letter-spacing: 0.05em;
+    text-transform: uppercase;
     color: rgb(60 60 67 / 0.7);
   }
 
@@ -498,6 +572,42 @@ const ui = t.appUi.phoneScreen;
     color: rgb(60 60 67 / 0.6);
   }
 
+  .ps__daylight {
+    margin-top: 0.75em;
+    padding: 0.9em 1em 1em;
+    border-radius: 1.15em;
+    background: #f7f7fb;
+    box-shadow: 0 0 0 0.5px rgb(0 0 0 / 0.04);
+  }
+
+  .ps__daylightValue {
+    font-size: 1.35em;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+
+  .ps__daylightFrom {
+    margin-top: 0.15em;
+    font-size: 0.8em;
+    color: rgb(60 60 67 / 0.6);
+  }
+
+  .ps__daylightBars {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.24em;
+    height: 2.4em;
+    margin-top: 0.6em;
+  }
+
+  .ps__daylightBars span {
+    flex: 1;
+    height: var(--h);
+    border-radius: 999px;
+    background: #f4623f;
+    opacity: 0.75;
+  }
+
   /* Tab bar ---------------------------------------------------------- */
 
   .ps__tabs {
@@ -512,28 +622,32 @@ const ui = t.appUi.phoneScreen;
     display: flex;
     flex: 1;
     align-items: center;
-    justify-content: space-around;
-    gap: 0.3em;
-    padding: 0.5em 0.3em;
+    gap: 0.15em;
+    padding: 0.55em 0.35em 0.5em;
     border-radius: 999px;
-    background: rgb(255 255 255 / 0.78);
+    background: rgb(255 255 255 / 0.8);
     backdrop-filter: blur(1em);
     box-shadow: 0 0.25em 1em -0.4em rgb(0 0 0 / 0.22);
   }
 
+  /* Equal columns rather than space-around, so the three tabs are evenly
+     spaced whatever the label lengths do between locales. */
   .ps__tab {
     display: grid;
+    flex: 1;
     justify-items: center;
-    gap: 0.2em;
-    padding: 0.15em 0.5em;
-    font-size: 0.68em;
+    gap: 0.3em;
+    padding: 0;
+    font-size: 0.6em;
     font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.005em;
     color: rgb(60 60 67 / 0.62);
     white-space: nowrap;
   }
 
   .ps__tab svg {
-    width: 1.7em;
+    width: 2.15em;
   }
 
   .ps__tab.is-on {

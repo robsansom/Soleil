@@ -680,22 +680,34 @@ const [markerX, markerY] = cubicAt(0.3);
     box-shadow: 0 0.08em 0.32em -0.18em rgb(0 0 0 / 0.16);
   }
 
+  /* Every icon box is the same size, so the three labels share one
+     baseline. Optical differences are applied to the glyph inside the
+     box, never to the box itself. */
   .ps__tabIcon {
-    display: block;
+    display: grid;
+    place-items: center;
     width: 1.95em;
+    height: 1.95em;
   }
 
-  /* The mark is mostly negative space between its rays, so at the same
-     box size it reads smaller than the solid glyphs beside it. Sized
-     optically rather than geometrically. */
-  .ps__tabIcon--mark {
-    width: 2.3em;
-  }
-
-  .ps__tabIcon svg {
+  /* `:global` because the mark comes from a child component, and Astro's
+     scoped styles stop at that boundary. Without it the mark kept its own
+     width/height attributes, rendered 29x43 instead of square, and pushed
+     the whole tab bar taller. */
+  .ps__tabIcon :global(svg) {
+    display: block;
     width: 100%;
     height: auto;
-    display: block;
+  }
+
+  /* The mark is mostly negative space between its rays, so at an equal
+     box it reads smaller than the solid glyphs. Scaled inside its fixed
+     box, which leaves the label baseline untouched. */
+  .ps__tabIcon--mark :global(svg) {
+    width: 118%;
+    /* The global reset clamps any svg to its box, which cancelled the
+       bump outright. */
+    max-width: none;
   }
 
   .ps__tabLabel {

@@ -19,23 +19,19 @@ import { useTranslations } from '../../i18n/utils';
 const t = useTranslations(Astro.currentLocale);
 const { realSun } = t.home;
 
-/** Recorded daylight through the day, positioned as a share of the arc. */
-const bars = [
-  { at: 0.08, h: 40 },
-  { at: 0.14, h: 62 },
-  { at: 0.2, h: 34 },
-  { at: 0.33, h: 78 },
-  { at: 0.39, h: 104 },
-  { at: 0.45, h: 126 },
-  { at: 0.51, h: 108 },
-  { at: 0.57, h: 84 },
-  { at: 0.7, h: 62 },
-  { at: 0.76, h: 78 },
-  { at: 0.82, h: 46 },
-  { at: 0.88, h: 28 },
-];
+/**
+ * Recorded daylight, drawn as segments riding the day's own UV curve
+ * rather than as a separate bar chart underneath it. Read as
+ * dash/gap pairs along the path (pathLength is normalised to 100), so
+ * each solid run is a stretch of time spent outside.
+ */
+const DAYLIGHT = '9 5 4 8 26 6 14 4 8 100';
 
-const BASE = 392;
+/** Pushes the pattern past dawn so the day does not open on a stray dot. */
+const DAYLIGHT_OFFSET = -6;
+
+/** The arc every layer of the figure is drawn from. */
+const ARC = 'M60 392C300 392 380 60 600 60s300 332 540 332';
 ---
 
 <section class="scene realsun" data-tone="twilight" id="real-sun" data-realsun data-zone="1">
@@ -82,26 +78,29 @@ const BASE = 392;
       </div>
 
       <svg viewBox="0 0 1200 440" role="img" aria-label={realSun.imageAlt}>
+        <defs>
+          {/* Daylight is revealed only as far as the sun has travelled. */}
+          <clipPath id="rs-travelled">
+            <rect data-travelled x="0" y="0" width="1200" height="440" />
+          </clipPath>
+        </defs>
 
-        <path class="rs-area" d="M60 392C300 392 380 60 600 60s300 332 540 332Z" />
+        <path class="rs-area" d={`${ARC}Z`} />
 
         {/* The day's UV, dotted like a path across the sky. */}
-        <path class="rs-arc" d="M60 392C300 392 380 60 600 60s300 332 540 332" fill="none" data-curve />
+        <path class="rs-arc" d={ARC} fill="none" data-curve />
 
-        {
-          bars.map((bar, i) => (
-            <rect
-              class="rs-bar"
-              data-bar-at={bar.at}
-              style={`--i:${i}`}
-              x={60 + bar.at * 1080 - 11}
-              y={BASE - bar.h}
-              width="22"
-              height={bar.h}
-              rx="11"
-            />
-          ))
-        }
+        {/* The daylight actually recorded, sitting on the curve. */}
+        <g clip-path="url(#rs-travelled)">
+          <path
+            class="rs-daylight"
+            d={ARC}
+            fill="none"
+            pathLength="100"
+            stroke-dasharray={DAYLIGHT}
+            stroke-dashoffset={DAYLIGHT_OFFSET}
+          />
+        </g>
 
         <line class="rs-base" x1="46" y1="392" x2="1154" y2="392" />
 
@@ -279,30 +278,11 @@ const BASE = 392;
     stroke-width: 2;
   }
 
-  .rs-bar {
-    fill: var(--twilight-pale);
-    opacity: 0.4;
-    transition:
-      fill 0.45s linear,
-      opacity 0.45s linear;
-  }
-
-  /* Bars light as the sun passes over them, and stay lit. */
-  .rs-bar.is-lit {
-    fill: var(--sky-cyan);
-    opacity: 1;
-  }
-
-  .motion-on .rs-bar {
-    transform: scaleY(0);
-    transform-box: fill-box;
-    transform-origin: 50% 100%;
-  }
-
-  .motion-on .realsun__figure.is-in .rs-bar {
-    transform: none;
-    transition: transform 0.6s var(--ease-plop);
-    transition-delay: calc(var(--i, 0) * 40ms);
+  /* Daylight rides the curve: one material, one idiom, no second chart. */
+  .rs-daylight {
+    stroke: var(--sky-cyan);
+    stroke-width: 15;
+    stroke-linecap: round;
   }
 
   .realsun__legend {
@@ -314,10 +294,12 @@ const BASE = 392;
     color: rgb(255 255 255 / 0.7);
   }
 
+  /* The swatch matches the mark it stands for: a rounded capsule of
+     daylight, not a chart square. */
   .realsun__key {
-    width: 14px;
-    height: 14px;
-    border-radius: 4px;
+    width: 22px;
+    height: 8px;
+    border-radius: var(--r-pill);
     background: var(--sky-cyan);
   }
 

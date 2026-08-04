@@ -27,7 +27,7 @@ export function initDayArc() {
   const sun = scene.querySelector<SVGGElement>('[data-sun]');
   const clock = scene.querySelector<HTMLElement>('[data-clock]');
   const note = scene.querySelector<HTMLElement>('[data-note]');
-  const bars = [...scene.querySelectorAll<SVGRectElement>('[data-bar-at]')];
+  const travelled = scene.querySelector<SVGRectElement>('[data-travelled]');
   const tablist = scene.querySelector<HTMLElement>('[data-tabs]');
   const tabs = [...scene.querySelectorAll<HTMLButtonElement>('[data-tab]')];
   const panels = [...scene.querySelectorAll<HTMLElement>('[data-panel]')];
@@ -63,10 +63,12 @@ export function initDayArc() {
       if (note.textContent !== text) note.textContent = text;
     }
 
-    // Daylight up to the sun's position is lit. Purely positional, so it
-    // reads the same going forwards or back.
-    for (const bar of bars) {
-      bar.classList.toggle('is-lit', Number(bar.dataset.barAt) <= t);
+    // Daylight is only shown as far as the sun has travelled. Purely
+    // positional, so it reads the same going forwards or back. With
+    // motion reduced the whole day stays visible instead.
+    if (travelled && curve) {
+      const { x } = curve.getPointAtLength(curve.getTotalLength() * t);
+      travelled.setAttribute('width', reduced ? '1200' : String(x));
     }
   };
 

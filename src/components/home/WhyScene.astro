@@ -27,7 +27,15 @@ const looks = [
   { x: 71, y: 88, d: 0.95, tone: 'solar', tilt: -3 },
 ];
 
-const badges = why.badges.map((label, i) => ({ label, ...looks[i % looks.length] }));
+/** Deterministic scatter: each chip falls a different distance with a
+ *  different spin, so the cluster lands like dropped stickers rather than
+ *  a row sliding down together. */
+const badges = why.badges.map((label, i) => ({
+  label,
+  ...looks[i % looks.length],
+  fall: 200 + ((i * 67) % 190),
+  spin: ((i * 53) % 26) - 13,
+}));
 ---
 
 <section class="scene why" data-tone="solar-pale" id="why">
@@ -45,9 +53,9 @@ const badges = why.badges.map((label, i) => ({ label, ...looks[i % looks.length]
         badges.map((badge) => (
           <li
             class={`sticker sticker--${badge.tone} why__badge`}
-            style={`--x:${badge.x}%; --y:${badge.y}%; --d:${badge.d}; --tilt:${badge.tilt}deg`}
+            style={`--d:${badge.d}; --tilt:${badge.tilt}deg; --fall:${badge.fall}px; --spin:${badge.spin}deg`}
             data-badge
-            data-reveal="sticker"
+            data-reveal="drop"
           >
             {badge.label}
           </li>

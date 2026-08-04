@@ -169,6 +169,19 @@ const cards = toolkit.cards.map((card, i) => ({ ...card, ...looks[i] }));
     color: var(--card-fg, var(--ink));
     box-shadow: var(--lift-md);
     overflow: clip;
+    transition:
+      transform 0.55s var(--ease-plop),
+      box-shadow 0.45s var(--ease-weight);
+  }
+
+  /* A card straightens up and lifts under the cursor — the tilt it was
+     resting at unwinds, which reads as picking it off the pile. */
+  @media (hover: hover) {
+    .tcard:hover .tcard__inner,
+    .tcard:focus-within .tcard__inner {
+      transform: translateY(-10px) rotate(calc(var(--tilt) * -0.9)) scale(1.012);
+      box-shadow: var(--lift-lg);
+    }
   }
 
   .tcard[data-tone='cyan'] .tcard__inner {

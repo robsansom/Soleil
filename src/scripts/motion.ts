@@ -38,6 +38,33 @@ function splitWords(root: ParentNode) {
   }
 }
 
+/* Staggered pop inside the app surfaces -------------------------------- */
+
+/**
+ * Marks every part of a recreated app surface so it can arrive in
+ * sequence. Done here rather than in the markup so the running order is
+ * true document order across nested groups (rows inside a list, tiles
+ * inside a grid) without hand-numbering seven components.
+ *
+ * Safe to run before the reveal fires: the surface itself is already
+ * hidden by `[data-reveal]`, so nothing flashes.
+ */
+function markAppSurfaces() {
+  const PARTS = [
+    '.ui-card > *:not(:has(li)):not(.ui-tiles)',
+    '.ui-card .ui-tiles > *',
+    '.ui-card li',
+  ].join(', ');
+
+  for (const surface of document.querySelectorAll<HTMLElement>('.app-ui')) {
+    const parts = surface.querySelectorAll<HTMLElement>(PARTS);
+    parts.forEach((part, index) => {
+      part.dataset.pop = '';
+      part.style.setProperty('--pop', String(90 + index * 70));
+    });
+  }
+}
+
 /* Reveal on scroll ---------------------------------------------------- */
 
 function initReveals() {
@@ -130,6 +157,7 @@ async function initSequence() {
 
 if (motionOn) {
   splitWords(document);
+  markAppSurfaces();
   initReveals();
   void initSequence();
 }

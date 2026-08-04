@@ -91,6 +91,18 @@ const looks = [
     color: var(--ink);
     box-shadow: var(--lift-md);
     transform: rotate(var(--tilt));
+    transition:
+      transform 0.55s var(--ease-plop),
+      box-shadow 0.45s var(--ease-weight);
+  }
+
+  @media (hover: hover) {
+    .mcard:hover,
+    .mcard:focus-within {
+      transform: translateY(-9px) rotate(calc(var(--tilt) * -0.75)) scale(1.015);
+      box-shadow: var(--lift-lg);
+      z-index: 2;
+    }
   }
 
   .mcard[data-tone='cyan'] {

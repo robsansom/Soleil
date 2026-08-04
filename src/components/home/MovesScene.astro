@@ -101,7 +101,9 @@ const looks = [
     .mcard:focus-within {
       transform: translateY(-9px) rotate(calc(var(--tilt) * -0.75)) scale(1.015);
       box-shadow: var(--lift-lg);
-      z-index: 2;
+      /* Deliberately no z-index change: the cluster keeps its designed
+         overlap and the card simply lifts within it. Reordering on hover
+         made the stack rearrange itself under the cursor. */
     }
   }
 

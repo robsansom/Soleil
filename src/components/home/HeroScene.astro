@@ -1,6 +1,7 @@
 ---
 import SunPathBackdrop from '../art/SunPathBackdrop.astro';
 import DeviceFrame from '../art/DeviceFrame.astro';
+import PhoneScreen from '../app/PhoneScreen.astro';
 import Cta from '../site/Cta.astro';
 import { useTranslations } from '../../i18n/utils';
 
@@ -30,12 +31,9 @@ const { hero } = t.home;
       </p>
 
       <div class="hero__device" data-reveal="plop">
-        <DeviceFrame
-          src="/images/screen-home.png"
-          alt={t.home.sunWindow.imageAlt}
-          tilt={7}
-          priority
-        />
+        <DeviceFrame tilt={7}>
+          <PhoneScreen />
+        </DeviceFrame>
       </div>
     </div>
   </div>

@@ -5,6 +5,28 @@
 import type { AppUiCopy } from '../../types';
 
 export const appUi: AppUiCopy = {
+    phoneScreen: {
+      statusTime: '09:41',
+      location: 'Dubaï',
+      headline: 'La chaleur du jour est là',
+      uvNowLabel: 'UV MAINTENANT',
+      readingTime: '12:32',
+      value: '11',
+      category: 'Extrême',
+      livePill: 'UV EN DIRECT',
+      guidance: 'Soleil fort jusqu\u2019à 18 h. Limitez le soleil direct et cherchez l\u2019ombre.',
+      axis: ['9 h', '11 h', '13 h'],
+      rightNow: 'En ce moment',
+      tiles: [
+        { label: 'PIC UV', value: '12', caption: 'Pic à 12 h 40' },
+        { label: 'NIVEAU UV', value: 'Extrême' },
+        { label: 'NUAGES', value: '5 %' },
+        { label: 'HUMIDITÉ', value: '38 %' }
+      ],
+      tabs: ['Votre journée', 'Votre soleil', 'Vous'],
+      searchLabel: 'Rechercher',
+      addLabel: 'Ajouter'
+    },
     sunWindow: {
       location: 'Santa Monica',
       conditions: 'Ensoleillé \u00b7 Max:24\u00b0 Min:16\u00b0',

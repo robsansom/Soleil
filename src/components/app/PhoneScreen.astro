@@ -1,0 +1,559 @@
+---
+/**
+ * The Your Day screen, recreated in HTML.
+ *
+ * This is the hero's protagonist. It is a recreation rather than a
+ * screenshot for one reason above all: a screenshot bakes English into
+ * the single image every locale sees. Rebuilt, it localises with the rest
+ * of the page, stays crisp at any size, and costs a few kB instead of a
+ * 500kB PNG.
+ *
+ * It follows the app's light-mode reference frame — iOS system greys,
+ * the coral accent, SF Pro via `system-ui` — and it must keep following
+ * it. When the app's Your Day screen changes, change this too.
+ *
+ * Everything scales from one container-relative font size, so the screen
+ * is resolution-independent inside whatever frame holds it.
+ */
+import { useTranslations } from '../../i18n/utils';
+
+const t = useTranslations(Astro.currentLocale);
+const ui = t.appUi.phoneScreen;
+---
+
+<div class="ps" role="img" aria-label={t.home.sunWindow.imageAlt}>
+  <div class="ps__inner" aria-hidden="true">
+    <div class="ps__status">
+      <span class="ps__statusTime">{ui.statusTime}</span>
+      <span class="ps__statusIcons">
+        <svg class="ps__signal" viewBox="0 0 20 12" fill="currentColor">
+          <rect x="0" y="8" width="3" height="4" rx="1" />
+          <rect x="5" y="5.5" width="3" height="6.5" rx="1" />
+          <rect x="10" y="3" width="3" height="9" rx="1" />
+          <rect x="15" y="0" width="3" height="12" rx="1" />
+        </svg>
+        <svg class="ps__wifi" viewBox="0 0 16 12" fill="currentColor">
+          <path d="M8 11.2 6 8.6a3.3 3.3 0 0 1 4 0Z" />
+          <path
+            d="M3.4 5.6a7.2 7.2 0 0 1 9.2 0"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+          />
+          <path
+            d="M1 3a10.9 10.9 0 0 1 14 0"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+          />
+        </svg>
+        <span class="ps__battery"><span class="ps__batteryFill"></span></span>
+      </span>
+    </div>
+
+    <div class="ps__scroll">
+    <div class="ps__bar">
+      <span class="ps__round">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+          <circle cx="10.5" cy="10.5" r="6.5" />
+          <path d="M15.5 15.5 21 21" />
+        </svg>
+      </span>
+    </div>
+
+    <h3 class="ps__place">{ui.location}</h3>
+
+    <p class="ps__headline">
+      <svg class="ps__sun" viewBox="0 0 24 24" fill="currentColor">
+        <circle cx="12" cy="12" r="5" />
+        <path
+          d="M12 1.4v3.1M12 19.5v3.1M1.4 12h3.1M19.5 12h3.1M4.4 4.4l2.2 2.2M17.4 17.4l2.2 2.2M19.6 4.4l-2.2 2.2M6.6 17.4l-2.2 2.2"
+          stroke="currentColor"
+          stroke-width="2.1"
+          stroke-linecap="round"
+        />
+      </svg>
+      {ui.headline}
+    </p>
+
+    <article class="ps__card">
+      <header class="ps__cardHead">
+        <span class="ps__cardLabel">
+          <svg class="ps__sun ps__sun--sm" viewBox="0 0 24 24" fill="currentColor">
+            <circle cx="12" cy="12" r="5" />
+            <path
+              d="M12 1.4v3.1M12 19.5v3.1M1.4 12h3.1M19.5 12h3.1M4.4 4.4l2.2 2.2M17.4 17.4l2.2 2.2M19.6 4.4l-2.2 2.2M6.6 17.4l-2.2 2.2"
+              stroke="currentColor"
+              stroke-width="2.1"
+              stroke-linecap="round"
+            />
+          </svg>
+          {ui.uvNowLabel}
+        </span>
+        <span class="ps__cardTime">
+          {ui.readingTime}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 5l7 7-7 7" />
+          </svg>
+        </span>
+      </header>
+
+      <div class="ps__body">
+        <div class="ps__reading">
+          <p class="ps__value">{ui.value}</p>
+          <p class="ps__category">{ui.category}</p>
+          <span class="ps__live">{ui.livePill}</span>
+        </div>
+
+        <div class="ps__chart">
+          <svg viewBox="0 0 150 96" fill="none">
+            {[0, 1, 2].map((i) => (
+              <line class="ps__grid" x1={12 + i * 63} y1="2" x2={12 + i * 63} y2="84" />
+            ))}
+            <path
+              class="ps__curveFill"
+              d="M8 84 C 36 78, 52 20, 84 12 C 112 16, 128 52, 142 78 L 142 84 Z"
+            />
+            <path
+              class="ps__curveLine"
+              d="M8 84 C 36 78, 52 20, 84 12 C 112 16, 128 52, 142 78"
+            />
+            <circle class="ps__marker" cx="99" cy="24" r="5.4" />
+          </svg>
+          <p class="ps__axis">{ui.axis.map((label) => <span>{label}</span>)}</p>
+        </div>
+      </div>
+
+      <p class="ps__guidance">{ui.guidance}</p>
+    </article>
+
+    <h4 class="ps__section">{ui.rightNow}</h4>
+
+    <div class="ps__tiles">
+      {
+        ui.tiles.map((tile, i) => (
+          <div class="ps__tile">
+            <p class="ps__tileLabel">
+              <span class={`ps__tileDot ps__tileDot--${i}`} />
+              {tile.label}
+            </p>
+            <p class="ps__tileValue">
+              {tile.value}
+              {tile.caption && <span class="ps__tileCaption">{tile.caption}</span>}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+
+    </div>
+
+    <div class="ps__tabs">
+      <div class="ps__tabbar">
+        {
+          ui.tabs.map((tab, i) => (
+            <span class={`ps__tab ${i === 0 ? 'is-on' : ''}`}>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                {i === 0 && <><rect x="3.5" y="4.5" width="17" height="16" rx="3.2" /><path d="M8 2.6v3.4M16 2.6v3.4M3.5 9.6h17" /></>}
+                {i === 1 && <><circle cx="12" cy="12" r="4.2" /><path d="M12 2.4v2.6M12 19v2.6M2.4 12H5M19 12h2.6M5.2 5.2 7 7M17 17l1.8 1.8M18.8 5.2 17 7M7 17l-1.8 1.8" /></>}
+                {i === 2 && <><circle cx="12" cy="8" r="3.8" /><path d="M4.8 20.2c0-3.9 3.2-6.2 7.2-6.2s7.2 2.3 7.2 6.2" /></>}
+              </svg>
+              {tab}
+            </span>
+          ))
+        }
+      </div>
+      <span class="ps__fab">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+          <path d="M12 5v14M5 12h14" />
+        </svg>
+      </span>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* One container-relative size drives everything below, so the screen
+     is resolution-independent inside whatever frame holds it. */
+  .ps {
+    container-type: inline-size;
+    width: 100%;
+    height: 100%;
+    background: #f2f2f7;
+    color: #000;
+    /* SF Pro on Apple devices, which is what the app itself uses. */
+    font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    overflow: hidden;
+  }
+
+  .ps__inner {
+    font-size: 14px;
+    font-size: 3.95cqw;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 1.15em 1.15em 0;
+  }
+
+  /* Content runs under a pinned tab bar, exactly as it does on a real
+     screen. Without this a longer translation pushes the tab bar out of
+     the frame — German is a full line longer than English. */
+  .ps__scroll {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  /* Status bar ------------------------------------------------------- */
+
+  .ps__status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.15em 0.6em 0;
+    font-weight: 600;
+    font-size: 1em;
+    letter-spacing: -0.01em;
+  }
+
+  .ps__statusIcons {
+    display: flex;
+    align-items: center;
+    gap: 0.35em;
+  }
+
+  .ps__signal {
+    width: 1.25em;
+  }
+  .ps__wifi {
+    width: 1.05em;
+  }
+
+  .ps__battery {
+    position: relative;
+    width: 1.6em;
+    height: 0.82em;
+    border-radius: 0.26em;
+    box-shadow: inset 0 0 0 0.09em rgb(0 0 0 / 0.35);
+    padding: 0.1em;
+  }
+
+  .ps__battery::after {
+    content: '';
+    position: absolute;
+    right: -0.16em;
+    top: 50%;
+    width: 0.1em;
+    height: 0.3em;
+    border-radius: 0 0.1em 0.1em 0;
+    background: rgb(0 0 0 / 0.35);
+    transform: translateY(-50%);
+  }
+
+  .ps__batteryFill {
+    display: block;
+    width: 82%;
+    height: 100%;
+    border-radius: 0.14em;
+    background: #34c759;
+  }
+
+  /* Header ----------------------------------------------------------- */
+
+  .ps__bar {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1.5em;
+  }
+
+  .ps__round {
+    display: grid;
+    place-items: center;
+    width: 2.5em;
+    height: 2.5em;
+    border-radius: 50%;
+    background: #fff;
+    color: #1c1c1e;
+    box-shadow: 0 0.1em 0.5em rgb(0 0 0 / 0.07);
+  }
+
+  .ps__round svg {
+    width: 1.15em;
+  }
+
+  .ps__place {
+    margin-top: 0.5em;
+    font-size: 2.3em;
+    font-weight: 700;
+    letter-spacing: -0.028em;
+    line-height: 1.05;
+  }
+
+  .ps__headline {
+    display: flex;
+    align-items: center;
+    gap: 0.45em;
+    margin-top: 0.5em;
+    font-size: 1.16em;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+  }
+
+  .ps__sun {
+    width: 1.15em;
+    flex: none;
+    color: #f4623f;
+  }
+
+  .ps__sun--sm {
+    width: 1em;
+  }
+
+  /* The UV card ------------------------------------------------------ */
+
+  .ps__card {
+    margin-top: 1.05em;
+    padding: 1.05em 1.1em 1.15em;
+    border-radius: 1.45em;
+    background: #f7f7fb;
+    box-shadow:
+      0 0 0 0.5px rgb(0 0 0 / 0.04),
+      0 0.3em 1.1em -0.5em rgb(0 0 0 / 0.1);
+  }
+
+  .ps__cardHead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.8em;
+  }
+
+  .ps__cardLabel {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    font-size: 0.84em;
+    font-weight: 600;
+    letter-spacing: 0.055em;
+    color: #3c3c43;
+  }
+
+  .ps__cardTime {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25em;
+    font-size: 0.86em;
+    color: rgb(60 60 67 / 0.6);
+  }
+
+  .ps__cardTime svg {
+    width: 0.6em;
+  }
+
+  .ps__body {
+    display: grid;
+    grid-template-columns: minmax(0, 0.78fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 0.9em;
+    margin-top: 0.75em;
+  }
+
+  .ps__value {
+    font-size: 4.35em;
+    font-weight: 700;
+    letter-spacing: -0.045em;
+    line-height: 0.92;
+  }
+
+  .ps__category {
+    margin-top: 0.15em;
+    font-size: 1.16em;
+    font-weight: 500;
+  }
+
+  .ps__live {
+    display: inline-block;
+    margin-top: 0.7em;
+    padding: 0.42em 0.85em;
+    border-radius: 999px;
+    background: #f4623f;
+    color: #fff;
+    font-size: 0.82em;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  .ps__chart svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 150 / 96;
+  }
+
+  .ps__grid {
+    stroke: rgb(60 60 67 / 0.13);
+    stroke-width: 1;
+    stroke-dasharray: 2 3;
+  }
+
+  .ps__curveFill {
+    fill: #f9d5d2;
+  }
+
+  .ps__curveLine {
+    stroke: #f04a2a;
+    stroke-width: 2.6;
+    stroke-linecap: round;
+  }
+
+  .ps__marker {
+    fill: #f7f7fb;
+    stroke: #1c1c1e;
+    stroke-width: 2.4;
+  }
+
+  .ps__axis {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.35em;
+    padding: 0 0.15em;
+    font-size: 0.76em;
+    color: rgb(60 60 67 / 0.6);
+  }
+
+  .ps__guidance {
+    margin-top: 0.9em;
+    font-size: 1.16em;
+    font-weight: 600;
+    line-height: 1.32;
+    letter-spacing: -0.018em;
+  }
+
+  /* Right now -------------------------------------------------------- */
+
+  .ps__section {
+    margin-top: 1.1em;
+    font-size: 1.45em;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+  }
+
+  .ps__tiles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6em;
+    margin-top: 0.7em;
+  }
+
+  .ps__tile {
+    padding: 0.85em 0.9em 1em;
+    border-radius: 1.15em;
+    background: #f7f7fb;
+    box-shadow: 0 0 0 0.5px rgb(0 0 0 / 0.04);
+  }
+
+  .ps__tileLabel {
+    display: flex;
+    align-items: center;
+    gap: 0.35em;
+    font-size: 0.76em;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: rgb(60 60 67 / 0.7);
+  }
+
+  .ps__tileDot {
+    width: 0.85em;
+    height: 0.85em;
+    border-radius: 0.25em;
+    background: #f4623f;
+    opacity: 0.85;
+    flex: none;
+  }
+
+  .ps__tileDot--2 {
+    background: #7cc0e8;
+  }
+  .ps__tileDot--3 {
+    background: #f0a04a;
+  }
+
+  .ps__tileValue {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.4em;
+    margin-top: 0.75em;
+    font-size: 1.65em;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+
+  .ps__tileCaption {
+    font-size: 0.52em;
+    font-weight: 500;
+    color: rgb(60 60 67 / 0.6);
+  }
+
+  /* Tab bar ---------------------------------------------------------- */
+
+  .ps__tabs {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    margin-top: auto;
+    padding: 0.9em 0 1.1em;
+  }
+
+  .ps__tabbar {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: space-around;
+    gap: 0.3em;
+    padding: 0.5em 0.3em;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.78);
+    backdrop-filter: blur(1em);
+    box-shadow: 0 0.25em 1em -0.4em rgb(0 0 0 / 0.22);
+  }
+
+  .ps__tab {
+    display: grid;
+    justify-items: center;
+    gap: 0.2em;
+    padding: 0.15em 0.5em;
+    font-size: 0.68em;
+    font-weight: 500;
+    color: rgb(60 60 67 / 0.62);
+    white-space: nowrap;
+  }
+
+  .ps__tab svg {
+    width: 1.7em;
+  }
+
+  .ps__tab.is-on {
+    color: #f4623f;
+    font-weight: 600;
+  }
+
+  .ps__fab {
+    display: grid;
+    place-items: center;
+    width: 3.1em;
+    height: 3.1em;
+    border-radius: 50%;
+    background: rgb(255 255 255 / 0.86);
+    color: #1c1c1e;
+    box-shadow: 0 0.25em 1em -0.4em rgb(0 0 0 / 0.28);
+    flex: none;
+  }
+
+  .ps__fab svg {
+    width: 1.3em;
+  }
+</style>

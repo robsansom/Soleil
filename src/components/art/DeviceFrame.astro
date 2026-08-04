@@ -1,17 +1,18 @@
 ---
 /**
- * A real Soleil screenshot in an iPhone-proportioned frame.
+ * An iPhone-proportioned frame around a screen.
  *
- * The screen content is always a genuine capture from the app — nothing
- * here recreates app UI in HTML. If a designer supplies a rendered
- * device composition (see ASSET_NEEDED.md), swap the <img> for it and
- * drop the `framed` treatment.
+ * The screen is either a real capture from the app (pass `src`) or a
+ * recreated one passed as a slot — see app/PhoneScreen.astro, which the
+ * hero uses so its screen localises instead of baking English into an
+ * image.
  */
 import { dimsFor } from '../../data/screens';
 
 export interface Props {
-  src: string;
-  alt: string;
+  /** Omit when passing a recreated screen through the default slot. */
+  src?: string;
+  alt?: string;
   /** Degrees of tilt. The protagonist is never perfectly upright. */
   tilt?: number;
   /** Only the hero image should be eager/high priority. */
@@ -21,21 +22,28 @@ export interface Props {
   class?: string;
 }
 
-const { src, alt, tilt = 0, priority = false, crop = false, class: className = '' } = Astro.props;
-const { w, h } = dimsFor(src);
+const { src, alt = '', tilt = 0, priority = false, crop = false, class: className = '' } = Astro.props;
+// A slotted screen has no intrinsic size, so it takes the stock ratio.
+const { w, h } = src ? dimsFor(src) : { w: 1206, h: 2622 };
 ---
 
 <div class={`device ${crop ? 'device--crop' : ''} ${className}`} style={`--tilt:${tilt}deg; --ratio:${w} / ${h}`}>
   <div class="device__frame">
-    <img
-      src={src}
-      alt={alt}
-      width={w}
-      height={h}
-      loading={priority ? 'eager' : 'lazy'}
-      decoding={priority ? 'sync' : 'async'}
-      fetchpriority={priority ? 'high' : 'auto'}
-    />
+    {
+      src ? (
+        <img
+          src={src}
+          alt={alt}
+          width={w}
+          height={h}
+          loading={priority ? 'eager' : 'lazy'}
+          decoding={priority ? 'sync' : 'async'}
+          fetchpriority={priority ? 'high' : 'auto'}
+        />
+      ) : (
+        <div class="device__screen"><slot /></div>
+      )
+    }
     <span class="device__island" aria-hidden="true"></span>
   </div>
 </div>
@@ -59,11 +67,13 @@ const { w, h } = dimsFor(src);
       0 0 0 1px rgb(23 18 14 / 0.35);
   }
 
-  .device__frame img {
+  .device__frame img,
+  .device__screen {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 9.6% / 4.7%;
+    overflow: hidden;
   }
 
   .device__island {

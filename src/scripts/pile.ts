@@ -14,6 +14,11 @@
  * left parked at their final transforms. Hover lift is plain CSS on an
  * inner span, so it composes with the parked transform without the
  * simulation needing to stay alive to service it.
+ *
+ * Chips always come to rest reading the right way up. A pill is
+ * symmetrical under a half turn, so any chip that settles past vertical
+ * can be rotated by 180 degrees without moving a pixel of the pile — the
+ * footprint is identical and only the text changes orientation.
  */
 import type { Engine, Body } from 'matter-js';
 
@@ -101,8 +106,8 @@ export async function initPile() {
       density: 0.0012,
       sleepThreshold: 40,
     });
-    Body.setAngle(body, (Math.random() - 0.5) * 0.5);
-    Body.setAngularVelocity(body, (Math.random() - 0.5) * 0.12);
+    Body.setAngle(body, (Math.random() - 0.5) * 0.36);
+    Body.setAngularVelocity(body, (Math.random() - 0.5) * 0.06);
 
     return { el, w, h, body };
   });
@@ -117,13 +122,28 @@ export async function initPile() {
 
   // Park each chip at its start position above the stage, then reveal.
   // Without this the chips would flash stacked at the origin for a frame.
+  const place = (el: HTMLElement, x: number, y: number, angle: number) => {
+    el.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${angle}rad)`;
+  };
+
   const draw = () => {
     for (const { el, body, w, h } of chips) {
-      el.style.transform =
-        `translate3d(${body.position.x - w / 2}px, ${body.position.y - h / 2}px, 0)` +
-        ` rotate(${body.angle}rad)`;
+      place(el, body.position.x - w / 2, body.position.y - h / 2, body.angle);
     }
   };
+
+  /** The same pose, turned to whichever half-turn reads upright. */
+  const drawUpright = () => {
+    for (const { el, body, w, h } of chips) {
+      let angle = body.angle % (Math.PI * 2);
+      if (angle > Math.PI / 2) angle -= Math.PI;
+      if (angle < -Math.PI / 2) angle += Math.PI;
+      if (angle > Math.PI / 2) angle -= Math.PI;
+      if (angle < -Math.PI / 2) angle += Math.PI;
+      place(el, body.position.x - w / 2, body.position.y - h / 2, angle);
+    }
+  };
+
   draw();
   stage.dataset.pileActive = 'true';
 
@@ -153,8 +173,10 @@ export async function initPile() {
   const stop = () => {
     Runner.stop(runner);
     Events.off(engine, 'afterUpdate', draw);
-    draw();
+    // Mark settled first so the transition is in place, then write the
+    // upright pose — the few chips that need it turn over gently.
     stage.dataset.pileSettled = 'true';
+    requestAnimationFrame(drawUpright);
     Engine.clear(engine);
   };
 

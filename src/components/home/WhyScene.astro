@@ -133,9 +133,12 @@ const badges = why.badges.map((label, i) => ({ label, ...looks[i % looks.length]
     will-change: transform;
   }
 
-  /* Once settled the transform is final, so stop hinting the compositor. */
+  /* Once settled the transform is final, so stop hinting the compositor.
+     The transition covers the half-turn that rights any chip which came
+     to rest upside down. */
   .why__badges[data-pile-settled] .why__badge {
     will-change: auto;
+    transition: transform 0.45s var(--ease-weight);
   }
 
   .why__badges {

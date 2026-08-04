@@ -21,15 +21,6 @@ const { hero } = t.home;
     </div>
 
     <div class="hero__object">
-      <div class="hero__device" data-reveal="plop">
-        <DeviceFrame
-          src="/images/screen-home.png"
-          alt={t.home.sunWindow.imageAlt}
-          tilt={8}
-          priority
-        />
-      </div>
-
       <p class="hand hero__note" data-reveal="up">
         <svg viewBox="0 0 90 60" aria-hidden="true" focusable="false">
           <path d="M84 8C60 2 22 10 10 34" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
@@ -37,6 +28,15 @@ const { hero } = t.home;
         </svg>
         {hero.note}
       </p>
+
+      <div class="hero__device" data-reveal="plop">
+        <DeviceFrame
+          src="/images/screen-home.png"
+          alt={t.home.sunWindow.imageAlt}
+          tilt={7}
+          priority
+        />
+      </div>
     </div>
   </div>
 
@@ -48,13 +48,13 @@ const { hero } = t.home;
     min-height: 100svh;
     display: flex;
     align-items: center;
-    padding-block: calc(var(--header-h) + 3rem) clamp(3rem, 7vw, 5rem);
+    padding-block: calc(var(--header-h) + 3rem) clamp(3.5rem, 8vw, 6rem);
     overflow: clip;
   }
 
   .hero__grid {
     display: grid;
-    gap: clamp(2rem, 4vw, 3rem);
+    gap: clamp(1.5rem, 4vw, 3rem);
     align-items: center;
     width: min(100% - (2 * var(--gutter)), 1680px);
   }
@@ -77,31 +77,37 @@ const { hero } = t.home;
     margin-top: clamp(1.4rem, 2.5vw, 2rem);
   }
 
+  /* The device sits fully inside the frame — cropping it at the viewport
+     edge read as a broken image rather than an intentional crop. */
   .hero__object {
     position: relative;
-    /* The protagonist runs past the crop rather than sitting politely
-       inside a column. */
-    margin-inline: auto -12vw;
-    width: min(78vw, 460px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: min(62vw, 290px);
+    margin-inline: auto;
+  }
+
+  .hero__device {
+    width: 100%;
   }
 
   .hero__note {
-    position: absolute;
-    left: -2rem;
-    bottom: 16%;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    max-width: 13ch;
-    transform: rotate(-5deg);
+    max-width: 20ch;
+    margin-bottom: 0.85rem;
+    transform: rotate(-2.5deg);
     text-align: left;
   }
 
   .hero__note svg {
-    width: 54px;
+    width: 52px;
     flex: none;
     order: 2;
-    transform: rotate(8deg);
+    /* Points down at the device on mobile, across at it on desktop. */
+    transform: rotate(-84deg);
   }
 
   .hero__cue {
@@ -113,57 +119,31 @@ const { hero } = t.home;
     display: none;
   }
 
-  @media (max-width: 799px) {
-    .hero__object {
-      width: min(74vw, 340px);
-      margin-inline: auto -18vw;
-      margin-top: -1rem;
-    }
-    /* No room beside the cropped phone on a small screen, so the note
-       sits in the flow, just under the call to action. */
-    .hero__object {
-      display: flex;
-      flex-direction: column;
-    }
-    .hero__note {
-      position: static;
-      order: -1;
-      /* The object bleeds past the right edge; the note must not. */
-      max-width: 58vw;
-      margin: 0 0 0.75rem 0.25rem;
-      transform: rotate(-2.5deg);
-    }
-    .hero__note svg {
-      order: 0;
-      transform: rotate(178deg);
-    }
-  }
-
   @media (min-width: 800px) {
     .hero__grid {
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
-      gap: clamp(1rem, 3vw, 3rem);
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
     }
+
     .hero__object {
-      /* Sized against the viewport height too, so the phone stays a
-         cropped object in the composition and never becomes the page. */
-      width: min(32vw, 400px, 33svh);
-      margin-inline: auto -5vw;
+      width: min(24vw, 290px, 40svh);
+      align-items: flex-start;
     }
+
     .hero__note {
-      left: -62%;
-      bottom: 30%;
+      position: absolute;
+      left: -78%;
+      bottom: 24%;
+      width: 70%;
       max-width: none;
-      width: 56%;
+      margin-bottom: 0;
     }
+
+    .hero__note svg {
+      transform: rotate(8deg);
+    }
+
     .hero__cue {
       display: block;
-    }
-  }
-
-  @media (min-width: 1400px) {
-    .hero__object {
-      margin-inline: auto -4vw;
     }
   }
 </style>

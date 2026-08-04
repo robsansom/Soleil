@@ -1,0 +1,112 @@
+---
+/**
+ * A live session: elapsed time outside with the people on the outing and
+ * the protection each has in place.
+ *
+ * The ring is an activity indicator for time already spent outside — it
+ * is never a countdown toward a limit, and reapplying sunscreen does not
+ * reset it.
+ */
+import { useTranslations } from '../../i18n/utils';
+
+export interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+const t = useTranslations(Astro.currentLocale);
+const ui = t.appUi.session;
+
+const circumference = 2 * Math.PI * 54;
+const dashOffset = circumference * (1 - 0.72);
+---
+
+<div class={`app-ui ${className}`} role="img" aria-label={ui.header} data-reveal="up">
+  <article class="ui-card" aria-hidden="true">
+    <header class="ui-head">
+      <span class="ui-label se__title"><span class="ui-dot" />{ui.header}</span>
+      <span class="se__uv">{ui.uvChip}</span>
+    </header>
+
+    <div class="se__ring">
+      <svg viewBox="0 0 124 124" fill="none">
+        <circle cx="62" cy="62" r="54" stroke="var(--ui-hairline)" stroke-width="9" />
+        <circle
+          cx="62"
+          cy="62"
+          r="54"
+          stroke="var(--ui-accent)"
+          stroke-width="9"
+          stroke-linecap="round"
+          stroke-dasharray={circumference}
+          stroke-dashoffset={dashOffset}
+          transform="rotate(-90 62 62)"
+        />
+      </svg>
+      <div class="se__center">
+        <p class="se__elapsed">{ui.elapsed}</p>
+        <p class="ui-label">{ui.elapsedLabel}</p>
+      </div>
+    </div>
+
+    <p class="ui-label se__peopleLabel">{ui.peopleLabel}</p>
+    <ul>
+      {
+        ui.people.map((person) => (
+          <li class="ui-person">
+            <span class="ui-avatar">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <circle cx="12" cy="8" r="4" />
+                <path d="M4.5 20.5c0-4.1 3.4-6.5 7.5-6.5s7.5 2.4 7.5 6.5Z" />
+              </svg>
+            </span>
+            <span class="ui-person__name">{person.name}</span>
+            <span class="ui-person__status">{person.status}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </article>
+</div>
+
+<style>
+  .se__title {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--ui-ink-soft);
+  }
+
+  .se__uv {
+    padding: 4px 9px;
+    border-radius: var(--r-pill);
+    background: var(--ui-card-2);
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  .se__ring {
+    position: relative;
+    width: 128px;
+    margin: 14px auto 4px;
+  }
+
+  .se__center {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-content: center;
+    text-align: center;
+  }
+
+  .se__elapsed {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+  }
+
+  .se__peopleLabel {
+    margin: 12px 0 2px;
+  }
+</style>

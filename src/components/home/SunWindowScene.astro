@@ -1,11 +1,17 @@
 ---
 /**
- * Scene 4 — the signature sequence. On a wide screen with motion
- * enabled the stage pins and the four states advance as you scroll; the
- * scroll distance is bounded and never hijacked. Everywhere else the
- * same content is a plain, readable list beside the device.
+ * Scene 4 — the signature sequence. On a wide screen with motion enabled
+ * the stage pins, the object starts large and settles smaller as you
+ * scroll, and the surface itself changes: the Sun Window opens, the
+ * reading arrives, the day's numbers separate out, and the protection
+ * check resolves it. The scroll distance is bounded and never hijacked.
+ *
+ * Everywhere else the same content is a plain, readable list with the
+ * four surfaces stacked beneath it.
  */
-import DeviceFrame from '../art/DeviceFrame.astro';
+import SunWindowCard from '../app/SunWindowCard.astro';
+import DetailTiles from '../app/DetailTiles.astro';
+import ProtectionCard from '../app/ProtectionCard.astro';
 import Cta from '../site/Cta.astro';
 import { useTranslations } from '../../i18n/utils';
 
@@ -39,9 +45,12 @@ const { sunWindow } = t.home;
         <div class="sunwin__cta" data-reveal="up"><Cta variant="ink" /></div>
       </div>
 
-      <div class="sunwin__device">
-        <div class="sunwin__deviceInner" data-sequence-object>
-          <DeviceFrame src="/images/screen-home.png" alt={sunWindow.imageAlt} tilt={-4} />
+      <div class="sunwin__object">
+        <div class="sunwin__objectInner" data-sequence-object>
+          <div class="swobj" data-obj="0"><SunWindowCard compact /></div>
+          <div class="swobj" data-obj="1"><SunWindowCard chip /></div>
+          <div class="swobj" data-obj="2"><DetailTiles /></div>
+          <div class="swobj" data-obj="3"><ProtectionCard /></div>
         </div>
       </div>
     </div>
@@ -103,12 +112,6 @@ const { sunWindow } = t.home;
     margin-top: clamp(1.75rem, 3vw, 2.5rem);
   }
 
-  .sunwin__device {
-    position: relative;
-    justify-self: center;
-    width: min(70vw, 320px);
-  }
-
   .sunwin__dots {
     display: none;
     gap: 0.4rem;
@@ -127,21 +130,26 @@ const { sunWindow } = t.home;
     background: var(--ink);
   }
 
+  .sunwin__object {
+    justify-self: center;
+    width: min(100%, 24rem);
+  }
+
+  .sunwin__objectInner {
+    display: grid;
+    gap: 1.25rem;
+  }
+
   @media (min-width: 1000px) {
     .sunwin__inner {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
-    }
-    .sunwin__device {
-      /* Bounded by height as well: the object is scaled up to 1.34 by
-         the sequence and must still read as a cropped object, not a wall. */
-      width: min(30vw, 360px, 31svh);
+      grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
     }
   }
 
   /* Pinned sequence — only when JS is running and motion is welcome. */
   @media (min-width: 1000px) {
     :global(html.motion-on) .sunwin {
-      height: 300vh;
+      height: 320vh;
     }
 
     :global(html.motion-on) .sunwin__stage {
@@ -176,6 +184,28 @@ const { sunWindow } = t.home;
 
     :global(html.motion-on) .sunwin__dots {
       display: flex;
+    }
+
+    /* The four surfaces occupy one slot and cross-fade in place while the
+       whole object scales down through the sequence. */
+    :global(html.motion-on) .sunwin__objectInner {
+      display: grid;
+      transform-origin: center;
+    }
+
+    :global(html.motion-on) .swobj {
+      grid-area: 1 / 1;
+      opacity: 0;
+      transform: translateY(14px) scale(0.98);
+      transition:
+        opacity 0.45s linear,
+        transform 0.6s var(--ease-weight);
+      pointer-events: none;
+    }
+
+    :global(html.motion-on) .swobj.is-on {
+      opacity: 1;
+      transform: none;
     }
   }
 </style>

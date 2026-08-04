@@ -1,5 +1,6 @@
 import { site as enSite } from './translations/en/site';
 import { legal as enLegal } from './translations/en/legal';
+import { appUi as enAppUi } from './translations/en/appUi';
 
 /**
  * Chrome and legal copy were ported wholesale from the previous Soleil
@@ -8,6 +9,9 @@ import { legal as enLegal } from './translations/en/legal';
  */
 export type SiteCopy = typeof enSite;
 export type LegalCopy = typeof enLegal;
+
+/** Strings rendered inside the hand-built app-UI recreations. */
+export type AppUiCopy = typeof enAppUi;
 
 export interface NavCopy {
   features: string;
@@ -93,6 +97,7 @@ export type Translation = SiteCopy &
   LegalCopy & {
     nav: NavCopy;
     home: HomeCopy;
+    appUi: AppUiCopy;
     /** Visible-on-focus skip link at the top of every page. */
     skipLabel: string;
   };

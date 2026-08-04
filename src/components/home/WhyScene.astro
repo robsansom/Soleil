@@ -8,15 +8,23 @@ import { useTranslations } from '../../i18n/utils';
 const t = useTranslations(Astro.currentLocale);
 const { why } = t.home;
 
-/** Placed clear of the centre column so nothing ever sits on the copy. */
+/** Two loose columns either side of the copy — placed clear of the
+ *  centre so nothing ever lands on the text. */
 const looks = [
-  { x: 7, y: 14, d: 1, tone: 'cyan', tilt: -5 },
-  { x: 73, y: 9, d: 0.6, tone: 'pink', tilt: 4 },
-  { x: 1, y: 46, d: 0.85, tone: 'solar', tilt: 3 },
-  { x: 78, y: 40, d: 1.15, tone: 'violet', tilt: -4 },
-  { x: 8, y: 78, d: 0.7, tone: 'orange', tilt: 5 },
-  { x: 70, y: 72, d: 1, tone: 'ink', tilt: -3 },
-  { x: 76, y: 90, d: 0.5, tone: 'cyan', tilt: 2 },
+  { x: 5, y: 6, d: 1, tone: 'cyan', tilt: -5 },
+  { x: 72, y: 4, d: 0.6, tone: 'pink', tilt: 4 },
+  { x: 0, y: 20, d: 0.85, tone: 'solar', tilt: 3 },
+  { x: 78, y: 18, d: 1.15, tone: 'violet', tilt: -4 },
+  { x: 8, y: 34, d: 0.7, tone: 'orange', tilt: 5 },
+  { x: 74, y: 32, d: 1, tone: 'ink', tilt: -3 },
+  { x: 1, y: 48, d: 0.55, tone: 'cyan', tilt: 2 },
+  { x: 79, y: 46, d: 0.9, tone: 'solar', tilt: -5 },
+  { x: 7, y: 62, d: 1.1, tone: 'violet', tilt: 4 },
+  { x: 73, y: 60, d: 0.65, tone: 'cyan', tilt: -2 },
+  { x: 2, y: 76, d: 0.8, tone: 'pink', tilt: -4 },
+  { x: 77, y: 74, d: 1.05, tone: 'orange', tilt: 3 },
+  { x: 9, y: 90, d: 0.6, tone: 'ink', tilt: 5 },
+  { x: 71, y: 88, d: 0.95, tone: 'solar', tilt: -3 },
 ];
 
 const badges = why.badges.map((label, i) => ({ label, ...looks[i % looks.length] }));
@@ -25,7 +33,7 @@ const badges = why.badges.map((label, i) => ({ label, ...looks[i % looks.length]
 <section class="scene why" data-tone="solar-pale" id="why">
   <div class="wrap why__stage" data-badges>
     <div class="why__centre">
-      <SunMark size={120} class="why__mark" />
+      <span class="why__mark"><SunMark size={120} /></span>
       <p class="eyebrow" data-reveal="up">{why.eyebrow}</p>
       <h2 class="display-lg why__headline" data-reveal="up">{why.headline}</h2>
       <p class="lede why__body" data-reveal="up">{why.body}</p>
@@ -66,6 +74,7 @@ const badges = why.badges.map((label, i) => ({ label, ...looks[i % looks.length]
 
   .why__mark {
     display: block;
+    width: 120px;
     margin-inline: auto;
     margin-bottom: 1.25rem;
     color: var(--solar-orange);
@@ -107,7 +116,7 @@ const badges = why.badges.map((label, i) => ({ label, ...looks[i % looks.length]
 
   @media (min-width: 1000px) {
     .why__stage {
-      min-height: 34rem;
+      min-height: 42rem;
       display: grid;
       place-items: center;
     }

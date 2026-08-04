@@ -46,8 +46,10 @@ cover, session, real sun). They are coherent but they are a developer's hand.
 
 ## 4. Nine lifestyle photographs for the “every kind of sunny day” wall
 
-`src/components/home/MomentsScene.astro` currently rotates a pool of four real
-assets across nine phrases. One image per phrase would remove the repetition.
+`src/components/home/MomentsScene.astro` reveals drawn stickers from the site's
+own mark set, because the only imagery available was cropped photography and
+slivers of app UI — at that size they read as broken images rather than art
+direction. Nine real photographs would let the wall do what the reference does.
 
 - School run, beach day, garden afternoon, city walk, sport outside, family
   holiday, sensitive skin, cloudy-but-bright day, golden hour.

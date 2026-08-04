@@ -2,11 +2,19 @@
 /**
  * The feature rail. Native CSS scroll-snap does the heavy lifting: real
  * touch drag, real keyboard scrolling, real momentum, and it works with
- * no JavaScript at all. The script only adds the arrow buttons' behaviour
- * and the slight rotation each card takes as it passes the centre.
+ * no JavaScript. The script only adds the arrow buttons' behaviour and
+ * the slight lift each card takes as it passes the centre.
+ *
+ * Each card carries a hand-built recreation of the matching app surface
+ * (src/components/app/), not a screenshot — so it stays crisp and
+ * localises with the rest of the page.
  */
-import DeviceFrame from '../art/DeviceFrame.astro';
-import Mark from '../art/Mark.astro';
+import SunWindowCard from '../app/SunWindowCard.astro';
+import ProtectionCard from '../app/ProtectionCard.astro';
+import SunscreenCard from '../app/SunscreenCard.astro';
+import SessionCard from '../app/SessionCard.astro';
+import FamilyCard from '../app/FamilyCard.astro';
+import RealSunCard from '../app/RealSunCard.astro';
 import { useTranslations } from '../../i18n/utils';
 
 const t = useTranslations(Astro.currentLocale);
@@ -14,12 +22,12 @@ const { toolkit } = t.home;
 
 /** Visual treatment per card, in the order the copy declares them. */
 const looks = [
-  { tone: 'cyan', tilt: -1.4, shot: '/images/screen-home.png' },
-  { tone: 'solar', tilt: 1.1, mark: 'cover' as const },
-  { tone: 'pink', tilt: -1, mark: 'session' as const, big: '2h' },
-  { tone: 'orange', tilt: 1.5, shot: '/images/screen-your-sun.png' },
-  { tone: 'violet', tilt: -1.2, shot: '/images/screen-family.png' },
-  { tone: 'twilight', tilt: 1.2, mark: 'realsun' as const },
+  { tone: 'cyan', tilt: -1.4 },
+  { tone: 'solar', tilt: 1.1 },
+  { tone: 'pink', tilt: -1 },
+  { tone: 'orange', tilt: 1.5 },
+  { tone: 'violet', tilt: -1.2 },
+  { tone: 'twilight', tilt: 1.2 },
 ];
 
 const cards = toolkit.cards.map((card, i) => ({ ...card, ...looks[i] }));
@@ -41,30 +49,22 @@ const cards = toolkit.cards.map((card, i) => ({ ...card, ...looks[i] }));
     </div>
   </div>
 
-  <div
-    class="rail"
-    data-rail
-    tabindex="0"
-    role="group"
-    aria-label={toolkit.railLabel}
-  >
+  <div class="rail" data-rail tabindex="0" role="group" aria-label={toolkit.railLabel}>
     <ul class="rail__track">
       {
-        cards.map((card) => (
+        cards.map((card, i) => (
           <li class="tcard" data-tone={card.tone} style={`--tilt:${card.tilt}deg`} data-rail-item>
             <div class="tcard__inner">
               <span class="sticker tcard__tag">{card.tag}</span>
               <h3 class="display-md tcard__title">{card.title}</h3>
               <p class="tcard__body">{card.body}</p>
-              <div class={`tcard__figure ${card.shot ? '' : 'tcard__figure--graphic'}`}>
-                {card.shot ? (
-                  <DeviceFrame src={card.shot} alt="" tilt={-2} crop class="tcard__shot" />
-                ) : (
-                  <div class="tcard__graphic">
-                    {card.big && <span class="tcard__big">{card.big}</span>}
-                    <Mark name={card.mark!} size={140} />
-                  </div>
-                )}
+              <div class="tcard__figure">
+                {i === 0 && <SunWindowCard chip />}
+                {i === 1 && <ProtectionCard />}
+                {i === 2 && <SunscreenCard />}
+                {i === 3 && <SessionCard />}
+                {i === 4 && <FamilyCard />}
+                {i === 5 && <RealSunCard />}
               </div>
             </div>
           </li>
@@ -153,7 +153,7 @@ const cards = toolkit.cards.map((card, i) => ({ ...card, ...looks[i] }));
 
   .tcard {
     scroll-snap-align: center;
-    width: min(78vw, 360px);
+    width: min(80vw, 350px);
     flex: none;
     transform: rotate(var(--tilt)) translateY(var(--drift, 0px));
     transition: transform 0.5s var(--ease-weight);
@@ -163,7 +163,6 @@ const cards = toolkit.cards.map((card, i) => ({ ...card, ...looks[i] }));
     display: flex;
     flex-direction: column;
     height: 100%;
-    min-height: 460px;
     padding: 1.5rem 1.5rem 0;
     border-radius: var(--r-lg);
     background: var(--card-bg, var(--paper));
@@ -209,38 +208,17 @@ const cards = toolkit.cards.map((card, i) => ({ ...card, ...looks[i] }));
     line-height: 1.5;
   }
 
+  /* The app surface sits at the foot of the card and runs past its edge,
+     so the card reads as a window onto the product. */
   .tcard__figure {
     margin-top: auto;
-    padding-top: 1.5rem;
-    display: flex;
-    justify-content: center;
+    padding-top: 1.75rem;
+    margin-bottom: -2.5rem;
+    transform: rotate(1.2deg);
   }
 
-  .tcard__shot {
-    width: 62%;
-    margin-bottom: -14%;
-  }
-
-  .tcard__figure--graphic {
-    margin-top: 0;
-    flex: 1;
-    align-items: center;
-    padding-block: 1rem 2.5rem;
-  }
-
-  .tcard__graphic {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transform: rotate(-3deg);
-  }
-
-  .tcard__big {
-    font-family: var(--font-display);
-    font-size: 4.5rem;
-    font-weight: 800;
-    letter-spacing: -0.05em;
-    line-height: 0.8;
+  .tcard:nth-child(even) .tcard__figure {
+    transform: rotate(-1.4deg);
   }
 
   @media (min-width: 900px) {
@@ -248,7 +226,7 @@ const cards = toolkit.cards.map((card, i) => ({ ...card, ...looks[i] }));
       display: flex;
     }
     .tcard {
-      width: 380px;
+      width: 372px;
     }
   }
 </style>

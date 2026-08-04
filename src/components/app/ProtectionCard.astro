@@ -1,0 +1,93 @@
+---
+/** The protection check: skin type, SPF and cover turned into one thing
+ *  to do now. Deliberately smaller than the live UV reading. */
+import { useTranslations } from '../../i18n/utils';
+
+export interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+const t = useTranslations(Astro.currentLocale);
+const ui = t.appUi.protection;
+const rows = [
+  { label: ui.skinLabel, value: ui.skinValue },
+  { label: ui.spfLabel, value: ui.spfValue },
+  { label: ui.coverLabel, value: ui.coverValue },
+];
+---
+
+<div class={`app-ui ${className}`} role="img" aria-label={ui.title} data-reveal="up">
+  <article class="ui-card" aria-hidden="true">
+    <header class="ui-head">
+      <span class="ui-label">{ui.title}</span>
+      <span class="ui-time">{t.appUi.sunWindow.uvNowLabel} {t.appUi.sunWindow.value}</span>
+    </header>
+
+    <ul class="pc__rows">
+      {
+        rows.map((row) => (
+          <li>
+            <span class="pc__label">{row.label}</span>
+            <span class="pc__value">{row.value}</span>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="pc__guidance">{t.appUi.sunWindow.guidance}</p>
+    <span class="pc__action">{ui.action}</span>
+  </article>
+</div>
+
+<style>
+  .pc__rows {
+    display: grid;
+    margin-top: 12px;
+  }
+
+  .pc__rows li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 9px 0;
+    border-top: 1px solid var(--ui-hairline);
+  }
+
+  .pc__rows li:first-child {
+    border-top: 0;
+  }
+
+  .pc__label {
+    font-size: 12.5px;
+    color: var(--ui-ink-soft);
+  }
+
+  .pc__value {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .pc__guidance {
+    margin-top: 10px;
+    padding-top: 12px;
+    border-top: 1px solid var(--ui-hairline);
+    font-size: 12.5px;
+    line-height: 1.45;
+    color: var(--ui-ink-soft);
+  }
+
+  .pc__action {
+    display: block;
+    margin-top: 12px;
+    padding: 10px 12px;
+    border-radius: var(--r-sm);
+    background: var(--ui-accent);
+    color: #fff;
+    font-size: 12.5px;
+    font-weight: 700;
+    text-align: center;
+  }
+</style>

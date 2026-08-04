@@ -62,7 +62,9 @@ function initReveals() {
         observer.unobserve(el);
       }
     },
-    { rootMargin: '0px 0px -8% 0px', threshold: 0.12 },
+    // The horizontal margin covers cards peeking in from the edge of a
+    // rail, so a half-visible card is never a blank panel.
+    { rootMargin: '0px 30% -8% 30%', threshold: 0.12 },
   );
 
   targets.forEach((target) => observer.observe(target));
@@ -77,6 +79,7 @@ async function initSequence() {
 
   const steps = [...section.querySelectorAll<HTMLElement>('[data-step]')];
   const dots = [...section.querySelectorAll<HTMLElement>('[data-dot]')];
+  const surfaces = [...section.querySelectorAll<HTMLElement>('[data-obj]')];
   const object = section.querySelector<HTMLElement>('[data-sequence-object]');
   if (steps.length === 0 || !object) return;
 
@@ -85,10 +88,14 @@ async function initSequence() {
   gsap.registerPlugin(ScrollTrigger);
 
   steps[0].classList.add('is-on');
+  surfaces[0]?.classList.add('is-on');
 
   const show = (index: number) => {
     steps.forEach((step, i) => step.classList.toggle('is-on', i === index));
     dots.forEach((dot, i) => dot.classList.toggle('is-on', i === index));
+    // The app surface changes with the state, so the object is never a
+    // static picture being pushed around.
+    surfaces.forEach((surface, i) => surface.classList.toggle('is-on', i === index));
   };
 
   const timeline = gsap.timeline({
@@ -107,16 +114,16 @@ async function initSequence() {
     },
   });
 
-  // The object opens up as the states advance: it starts large and
-  // cropped, then settles into a calm, complete composition.
+  // The object starts large and tilted and settles smaller and square as
+  // the states advance, so the scene resolves rather than just moving.
   timeline
     .fromTo(
       object,
-      { scale: 1.34, rotate: -8, yPercent: 8 },
-      { scale: 1.1, rotate: -4, yPercent: 2, ease: 'none' },
+      { scale: 1.22, rotate: -5, yPercent: 6 },
+      { scale: 1.1, rotate: -3, yPercent: 2, ease: 'none' },
     )
-    .to(object, { scale: 1, rotate: 2, yPercent: 0, ease: 'none' })
-    .to(object, { scale: 0.96, rotate: 0, ease: 'none' });
+    .to(object, { scale: 1, rotate: 1.5, yPercent: 0, ease: 'none' })
+    .to(object, { scale: 0.94, rotate: 0, ease: 'none' });
 }
 
 /* Boot ---------------------------------------------------------------- */

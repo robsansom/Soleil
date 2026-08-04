@@ -85,13 +85,15 @@ const zoneBounds = [
           class="rs-curve"
           d="M46 266C170 250 250 120 380 78c130 42 210 172 334 188"
           fill="none"
+          data-curve
         />
 
         {
-          bars.map((bar) => (
+          bars.map((bar, i) => (
             <rect
               class="rs-bar"
               data-bar-zone={bar.zone}
+              style={`--i:${i}`}
               x={bar.x}
               y={266 - bar.h}
               width="20"
@@ -102,8 +104,20 @@ const zoneBounds = [
         }
 
         <line class="rs-base" x1="40" y1="266" x2="720" y2="266" />
-        <circle class="rs-peak" cx="380" cy="78" r="9" />
+
+        {/* The sun rides the curve to whichever part of the day is
+            selected — the same idea as the old site's day arc. */}
+        <line class="rs-drop" data-drop x1="380" y1="78" x2="380" y2="266" />
+
+        <g data-sun transform="translate(380 78)">
+          <circle class="rs-sun__halo" r="26" />
+          <circle class="rs-sun__ring" r="15" />
+          <circle class="rs-sun" r="9" />
+        </g>
       </svg>
+      <p class="realsun__axis" aria-hidden="true">
+        {t.appUi.realSun.axis.map((label) => <span>{label}</span>)}
+      </p>
       <figcaption class="realsun__legend">
         <span class="realsun__key realsun__key--bar"></span>
         <span>{realSun.eyebrow}</span>
@@ -223,13 +237,52 @@ const zoneBounds = [
     stroke-linecap: round;
   }
 
-  .rs-peak {
+  .rs-sun {
     fill: var(--solar-orange);
+  }
+
+  .rs-sun__halo {
+    fill: var(--solar-orange);
+    opacity: 0.2;
+  }
+
+  .rs-sun__ring {
+    fill: var(--solar-orange);
+    opacity: 0.38;
+  }
+
+  .rs-drop {
+    stroke: var(--solar-yellow);
+    stroke-width: 2;
+    stroke-dasharray: 3 7;
+    opacity: 0.45;
+  }
+
+  .realsun__axis {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    padding-inline: 4%;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    color: rgb(255 255 255 / 0.6);
   }
 
   .rs-base {
     stroke: rgb(255 255 255 / 0.3);
     stroke-width: 2;
+  }
+
+  .motion-on .rs-bar {
+    transform: scaleY(0);
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+  }
+
+  .motion-on .realsun__figure.is-in .rs-bar {
+    transform: none;
+    transition: transform 0.7s var(--ease-plop);
+    transition-delay: calc(var(--i) * 45ms);
   }
 
   .rs-bar {

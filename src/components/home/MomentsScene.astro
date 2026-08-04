@@ -1,29 +1,29 @@
 ---
 /**
- * Scene 5 — the breadth wall. Oversized phrases carry the whole scene;
- * the imagery around them is decorative enhancement (CSS hover on
- * pointer devices, an in-view rotation on touch) and never carries
- * meaning of its own.
+ * Scene 5 — the breadth wall. Oversized phrases carry the whole scene.
+ *
+ * The clusters around them are drawn stickers from the site's own mark
+ * set, not cropped photography: slivers of a face or of app UI read as
+ * broken images at this size, and there is no photography commissioned
+ * for these nine moments yet (see ASSET_NEEDED.md). The stickers are
+ * decorative enhancement and never carry meaning.
  */
+import Mark from '../art/Mark.astro';
 import { useTranslations } from '../../i18n/utils';
 
 const t = useTranslations(Astro.currentLocale);
 const { moments } = t.home;
 
-/** Real photography and real screenshots only. */
-const pool = [
-  { src: '/images/photo-sunscreen.jpg', w: 1254, h: 1254 },
-  { src: '/images/screen-home.png', w: 1206, h: 2436 },
-  { src: '/images/photo-shade.jpg', w: 1254, h: 1254 },
-  { src: '/images/screen-family.png', w: 1206, h: 2622 },
-  { src: '/images/screen-your-sun.png', w: 1206, h: 2622 },
-];
+const marks = ['sun', 'cover', 'cloud', 'watch', 'session', 'water', 'sky', 'realsun'] as const;
+const tones = ['solar', 'cyan', 'paper', 'violet', 'solar', 'paper', 'cyan', 'violet'] as const;
 
 const items = moments.items.map((text, i) => ({
   text,
-  a: pool[i % pool.length],
-  b: pool[(i + 2) % pool.length],
-  tilt: [-6, 5, -4, 7, -5][i % 5],
+  a: marks[i % marks.length],
+  b: marks[(i + 3) % marks.length],
+  toneA: tones[i % tones.length],
+  toneB: tones[(i + 2) % tones.length],
+  tilt: [-8, 6, -5, 9, -6][i % 5],
 }));
 ---
 
@@ -38,11 +38,11 @@ const items = moments.items.map((text, i) => ({
       items.map((item) => (
         <li class="moment" data-moment style={`--tilt:${item.tilt}deg`}>
           <span class="moment__text display-xl">{item.text}</span>
-          <span class="moment__art moment__art--a" aria-hidden="true">
-            <img src={item.a.src} alt="" width={item.a.w} height={item.a.h} loading="lazy" decoding="async" />
+          <span class={`moment__art moment__art--a tone-${item.toneA}`} aria-hidden="true">
+            <Mark name={item.a} size={54} />
           </span>
-          <span class="moment__art moment__art--b" aria-hidden="true">
-            <img src={item.b.src} alt="" width={item.b.w} height={item.b.h} loading="lazy" decoding="async" />
+          <span class={`moment__art moment__art--b tone-${item.toneB}`} aria-hidden="true">
+            <Mark name={item.b} size={54} />
           </span>
         </li>
       ))
@@ -88,31 +88,48 @@ const items = moments.items.map((text, i) => ({
   .moment__art {
     position: absolute;
     top: 50%;
-    display: block;
-    width: clamp(96px, 11vw, 168px);
-    border-radius: var(--r-md);
-    overflow: clip;
+    display: grid;
+    place-items: center;
+    width: clamp(74px, 7vw, 96px);
+    aspect-ratio: 1;
+    border-radius: 50%;
     box-shadow: var(--lift-md);
     opacity: 0;
     pointer-events: none;
-    transform: translateY(-50%) rotate(var(--tilt)) scale(0.9);
+    transform: translateY(-50%) rotate(var(--tilt)) scale(0.86);
     transition:
-      opacity 0.32s linear,
-      transform 0.5s var(--ease-plop);
+      opacity 0.3s linear,
+      transform 0.55s var(--ease-plop);
   }
 
-  .moment__art img {
-    width: 100%;
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
+  .moment__art :global(.mark) {
+    width: 60%;
+    height: 60%;
+  }
+
+  .tone-solar {
+    background: var(--solar-yellow);
+    color: var(--ink);
+  }
+  .tone-cyan {
+    background: var(--sky-cyan);
+    color: var(--ink);
+  }
+  .tone-paper {
+    background: var(--paper);
+    color: var(--ink);
+  }
+  .tone-violet {
+    background: var(--twilight-pale);
+    color: var(--twilight-deep);
   }
 
   .moment__art--a {
-    left: max(2vw, calc(50% - 34vw));
+    left: max(0.5vw, calc(50% - 42vw));
   }
 
   .moment__art--b {
-    right: max(2vw, calc(50% - 34vw));
+    right: max(0.5vw, calc(50% - 42vw));
     --tilt: calc(var(--tilt) * -1);
   }
 
@@ -132,9 +149,9 @@ const items = moments.items.map((text, i) => ({
     transform: rotate(-2deg);
   }
 
-  /* Phrases already reach the edges on small screens; the clusters would
-     collide with them, so they only appear from tablet up. */
-  @media (max-width: 719px) {
+  /* The phrases already reach both edges on a small screen, so the
+     stickers would land on top of them. */
+  @media (max-width: 899px) {
     .moment__art {
       display: none;
     }

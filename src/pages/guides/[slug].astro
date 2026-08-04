@@ -123,12 +123,13 @@ const jsonLd = [
             {guide.soleil.paragraphs.map((p) => <p class="guide__appBody" set:html={p} />)}
             <div class="guide__appCta"><Cta variant="ink" /></div>
           </div>
-          <DeviceFrame
-            src={guide.soleil.screenshot.src}
-            alt={guide.soleil.screenshot.alt}
-            tilt={-3}
-            class="guide__shot"
-          />
+          <div class="guide__shot">
+            <DeviceFrame
+              src={guide.soleil.screenshot.src}
+              alt={guide.soleil.screenshot.alt}
+              tilt={-3}
+            />
+          </div>
         </section>
 
         <section class="guide__faqs">

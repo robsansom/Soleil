@@ -87,6 +87,19 @@ Rules: no standing `requestAnimationFrame` loop; the badge drift only runs while
 a pointer moves; GSAP is dynamically imported and only on ≥1000px; reduced
 motion removes parallax, scrubbing and entrances without removing content.
 
+## App-UI recreations
+
+`src/components/app/` holds hand-built recreations of the app's surfaces —
+Sun Window, detail tiles, protection check, session, family, sunscreen timing
+and Real Sun. They are HTML/CSS, never screenshots, so they stay crisp at any
+size and translate through `appUi` in the locale files. The shared shell lives
+in `src/styles/app-ui.css` and re-maps the page tokens onto `--ui-*` variables,
+so a card can sit on any scene tone.
+
+Structure must track the real app screens. The sample values are plausible, not
+live, and must agree with the surrounding copy — never a countdown, never a
+vitamin-D figure.
+
 ## Accessibility
 
 - Real landmark and heading order; one `<h1>` per page; visible focus rings

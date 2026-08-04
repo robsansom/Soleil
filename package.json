@@ -9,14 +9,17 @@
     "build": "astro check && astro build",
     "build:fast": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "illustrations": "node scripts/build-illustrations.mjs"
   },
   "dependencies": {
     "astro": "^5.0.0",
-    "gsap": "^3.13.0"
+    "gsap": "^3.13.0",
+    "matter-js": "^0.20.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
+    "@types/matter-js": "^0.20.2",
     "@types/node": "^22.0.0",
     "typescript": "^5.9.3"
   }

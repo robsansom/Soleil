@@ -1,17 +1,18 @@
 ---
 /** Scene 3 — four crooked process cards. One designed cluster on
  *  desktop, a peeking snap strip on mobile. */
-import Mark from '../art/Mark.astro';
 import { useTranslations } from '../../i18n/utils';
 
 const t = useTranslations(Astro.currentLocale);
 const { moves } = t.home;
 
+/** Commissioned ink drawings, one per move. Derived to WebP by
+ *  `npm run illustrations` — the 1800px masters stay in assets/. */
 const looks = [
-  { tone: 'cyan', mark: 'sky' as const, tilt: -3.5 },
-  { tone: 'solar', mark: 'cover' as const, tilt: 2.5 },
-  { tone: 'pink', mark: 'session' as const, tilt: -2 },
-  { tone: 'violet', mark: 'realsun' as const, tilt: 4 },
+  { tone: 'cyan', art: 'soleil-step-check-sky', tilt: -3.5 },
+  { tone: 'solar', art: 'soleil-step-choose-cover', tilt: 2.5 },
+  { tone: 'pink', art: 'soleil-step-start-day', tilt: -2 },
+  { tone: 'violet', art: 'soleil-step-real-sun', tilt: 4 },
 ];
 ---
 
@@ -32,7 +33,15 @@ const looks = [
             data-reveal="plop"
           >
             <span class="mcard__num" aria-hidden="true">{i + 1}</span>
-            <Mark name={looks[i].mark} size={132} class="mcard__art" />
+            <img
+              class="mcard__art"
+              src={`/images/illustrations/${looks[i].art}.webp`}
+              alt=""
+              width="600"
+              height="600"
+              loading="lazy"
+              decoding="async"
+            />
             <h3 class="display-sm mcard__title">{step.title}</h3>
             <p class="mcard__body">{step.body}</p>
           </li>
@@ -129,7 +138,9 @@ const looks = [
   }
 
   .mcard__art {
-    margin: 0.35rem 0 1rem -0.35rem;
+    width: clamp(116px, 13vw, 152px);
+    height: auto;
+    margin: 0.35rem 0 0.75rem -0.5rem;
   }
 
   .mcard__body {

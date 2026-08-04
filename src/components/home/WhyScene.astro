@@ -27,19 +27,11 @@ const looks = [
   { x: 71, y: 88, d: 0.95, tone: 'solar', tilt: -3 },
 ];
 
-/** Deterministic scatter: each chip falls a different distance with a
- *  different spin, so the cluster lands like dropped stickers rather than
- *  a row sliding down together. */
-const badges = why.badges.map((label, i) => ({
-  label,
-  ...looks[i % looks.length],
-  fall: 200 + ((i * 67) % 190),
-  spin: ((i * 53) % 26) - 13,
-}));
+const badges = why.badges.map((label, i) => ({ label, ...looks[i % looks.length] }));
 ---
 
 <section class="scene why" data-tone="solar-pale" id="why">
-  <div class="wrap why__stage" data-badges>
+  <div class="wrap why__stage">
     <div class="why__centre">
       <span class="why__mark"><SunMark size={120} /></span>
       <p class="eyebrow" data-reveal="up">{why.eyebrow}</p>
@@ -48,16 +40,13 @@ const badges = why.badges.map((label, i) => ({
       <p class="hand why__note" data-reveal="up">{why.note}</p>
     </div>
 
-    <ul class="why__badges">
+    {/* The pile stage. Plain wrapped flow until the physics takes over,
+        so the chips are readable with no JS and under reduced motion. */}
+    <ul class="why__badges" data-pile>
       {
         badges.map((badge) => (
-          <li
-            class={`sticker sticker--${badge.tone} why__badge`}
-            style={`--d:${badge.d}; --tilt:${badge.tilt}deg; --fall:${badge.fall}px; --spin:${badge.spin}deg`}
-            data-badge
-            data-reveal="drop"
-          >
-            {badge.label}
+          <li class="why__badge" data-badge>
+            <span class={`sticker sticker--${badge.tone}`}>{badge.label}</span>
           </li>
         ))
       }
@@ -112,18 +101,59 @@ const badges = why.badges.map((label, i) => ({
   /* One centred pile under the copy at every width. The two absolute
      columns were never symmetrical about the text, and the stacked
      arrangement reads as a deliberate cluster rather than a stray edge. */
+  .why__badge > .sticker {
+    transition: transform 0.28s var(--ease-plop), box-shadow 0.28s var(--ease-weight);
+  }
+
+  /* Lift one chip out of the pile. On the inner span, so it composes with
+     the physics transform the simulation parks on the <li>. */
+  @media (hover: hover) {
+    .why__badge:hover > .sticker {
+      transform: translateY(-7px) scale(1.05);
+      box-shadow: var(--lift-md);
+    }
+  }
+
+  /* Physics states -------------------------------------------------- */
+
+  .why__badges[data-pile-pending] .why__badge {
+    opacity: 0;
+  }
+
+  .why__badges[data-pile-active] {
+    display: block;
+    position: relative;
+  }
+
+  .why__badges[data-pile-active] .why__badge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 1;
+    will-change: transform;
+  }
+
+  /* Once settled the transform is final, so stop hinting the compositor. */
+  .why__badges[data-pile-settled] .why__badge {
+    will-change: auto;
+  }
+
   .why__badges {
     display: flex;
     flex-wrap: wrap;
+    align-content: center;
     justify-content: center;
     gap: 0.5rem;
     max-width: 46rem;
     margin: 2.25rem auto 0;
+    /* Reserved in CSS rather than measured at runtime: the pile needs
+       more depth than the wrapped rows do, and claiming the space up
+       front means switching to physics shifts nothing on the page. */
+    min-height: clamp(15rem, 22vw, 19rem);
   }
 
   .why__badge {
-    transform: rotate(var(--tilt)) translate3d(var(--px, 0px), var(--py, 0px), 0);
-    transition: transform 0.6s var(--ease-weight);
+    transform: rotate(var(--tilt));
   }
 
   @media (min-width: 900px) {
@@ -133,7 +163,7 @@ const badges = why.badges.map((label, i) => ({
       margin-top: 3rem;
     }
 
-    .why__badge {
+    .why__badge > .sticker {
       font-size: 0.9375rem;
       padding: 0.62rem 1.15rem;
     }
@@ -141,6 +171,6 @@ const badges = why.badges.map((label, i) => ({
 </style>
 
 <script>
-  import { initBadges } from '../../scripts/badges';
-  initBadges();
+  import { initPile } from '../../scripts/pile';
+  void initPile();
 </script>

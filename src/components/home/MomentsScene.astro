@@ -8,21 +8,35 @@
  * for these nine moments yet (see ASSET_NEEDED.md). The stickers are
  * decorative enhancement and never carry meaning.
  */
-import Mark from '../art/Mark.astro';
 import { useTranslations } from '../../i18n/utils';
 
 const t = useTranslations(Astro.currentLocale);
 const { moments } = t.home;
 
-const marks = ['sun', 'cover', 'cloud', 'watch', 'session', 'water', 'sky', 'realsun'] as const;
+/**
+ * One commissioned drawing per moment, in the order the copy declares
+ * them. Sides alternate so the wall does not grow a column, and each
+ * line owns its own picture rather than repeating a generic mark.
+ */
+const art = [
+  'soleil-moment-school-run',
+  'soleil-moment-beach-day',
+  'soleil-moment-garden',
+  'soleil-moment-city-walk',
+  'soleil-moment-sport',
+  'soleil-moment-family-holiday',
+  'soleil-moment-sensitive-skin',
+  'soleil-moment-cloudy-bright',
+  'soleil-moment-golden-hour',
+];
+
 const tones = ['solar', 'cyan', 'paper', 'violet', 'solar', 'paper', 'cyan', 'violet'] as const;
 
 const items = moments.items.map((text, i) => ({
   text,
-  a: marks[i % marks.length],
-  b: marks[(i + 3) % marks.length],
-  toneA: tones[i % tones.length],
-  toneB: tones[(i + 2) % tones.length],
+  art: art[i] ?? art[i % art.length],
+  tone: tones[i % tones.length],
+  side: i % 2 === 0 ? 'a' : 'b',
   tilt: [-8, 6, -5, 9, -6][i % 5],
 }));
 ---
@@ -38,11 +52,18 @@ const items = moments.items.map((text, i) => ({
       items.map((item) => (
         <li class="moment" data-moment style={`--tilt:${item.tilt}deg`}>
           <span class="moment__text display-xl">{item.text}</span>
-          <span class={`moment__art moment__art--a tone-${item.toneA}`} aria-hidden="true">
-            <Mark name={item.a} size={54} />
-          </span>
-          <span class={`moment__art moment__art--b tone-${item.toneB}`} aria-hidden="true">
-            <Mark name={item.b} size={54} />
+          <span
+            class={`moment__art moment__art--${item.side} tone-${item.tone}`}
+            aria-hidden="true"
+          >
+            <img
+              src={`/images/illustrations/${item.art}.webp`}
+              alt=""
+              width="760"
+              height="760"
+              loading="lazy"
+              decoding="async"
+            />
           </span>
         </li>
       ))
@@ -90,7 +111,7 @@ const items = moments.items.map((text, i) => ({
     top: 50%;
     display: grid;
     place-items: center;
-    width: clamp(74px, 7vw, 96px);
+    width: clamp(104px, 11.5vw, 168px);
     aspect-ratio: 1;
     border-radius: 50%;
     box-shadow: var(--lift-md);
@@ -102,9 +123,11 @@ const items = moments.items.map((text, i) => ({
       transform 0.55s var(--ease-plop);
   }
 
-  .moment__art :global(.mark) {
-    width: 60%;
-    height: 60%;
+  /* The drawings are composed with their own 12% margin, so they sit
+     edge to edge inside the circle rather than being inset again. */
+  .moment__art img {
+    width: 92%;
+    height: auto;
   }
 
   .tone-solar {

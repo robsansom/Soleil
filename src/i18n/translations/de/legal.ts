@@ -119,7 +119,7 @@ export const legal: LegalCopy = {
       },
       {
         q: 'Was steckt in Soleil Pro und was kostet es?',
-        a: 'Kostenlos deckt das Heute ab: Live-UV und die Bedingungen des Tages, den Sonnen-Timer, dein Hautprofil und den jüngsten Verlauf. Pro ergänzt die Daily-Glow-Einrichtung, den vollen Familienverlauf samt Familien-Widget, alle Trends und Einblicke, den KI-Hautscan und die weiteren Widgets. Es kostet 2,49 $/Woche, 29,99 $/Jahr oder einmalig 79,99 $. Preise können je nach Land abweichen - Apple zeigt dir deinen vor dem Kauf.'
+        a: 'Kostenlos deckt das Heute ab: Live-UV und die Bedingungen des Tages, den Sonnen-Timer, dein Hautprofil (inklusive KI-Hautscan) und den jüngsten Verlauf. Pro ergänzt die Daily-Glow-Einrichtung, den vollen Familienverlauf samt Familien-Widget, alle Trends und Einblicke, erneute KI-Hautscans und die weiteren Widgets. Es kostet 2,49 $/Woche, 29,99 $/Jahr oder einmalig 79,99 $. Preise können je nach Land abweichen - Apple zeigt dir deinen vor dem Kauf.'
       },
       {
         q: 'Wie kündige ich ein Pro-Abo?',

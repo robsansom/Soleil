@@ -119,7 +119,7 @@ export const legal: LegalCopy = {
       },
       {
         q: '¿Qué incluye Soleil Pro y cuánto cuesta?',
-        a: 'Gratis cubre el hoy: UV en directo y las condiciones del día, el temporizador de sol, tu perfil de piel y el historial reciente. Pro añade la configuración de Daily Glow, el historial familiar completo y el widget de Familia, todas las tendencias y análisis, el escaneo de piel con IA y el resto de widgets. Cuesta 2,49 $/semana, 29,99 $/año o 79,99 $ en un pago único. Los precios pueden variar según el país - Apple te muestra el tuyo antes de comprar.'
+        a: 'Gratis cubre el hoy: UV en directo y las condiciones del día, el temporizador de sol, tu perfil de piel (con un escaneo de piel con IA) y el historial reciente. Pro añade la configuración de Daily Glow, el historial familiar completo y el widget de Familia, todas las tendencias y análisis, nuevos escaneos de piel con IA y el resto de widgets. Cuesta 2,49 $/semana, 29,99 $/año o 79,99 $ en un pago único. Los precios pueden variar según el país - Apple te muestra el tuyo antes de comprar.'
       },
       {
         q: '¿Cómo cancelo una suscripción Pro?',

@@ -117,7 +117,7 @@ export const legal = {
       },
       {
         q: 'What\u2019s in Soleil Pro, and what does it cost?',
-        a: 'Free covers today: live UV and today\u2019s conditions, the Sun timer, your skin profile and recent history. Pro adds Daily Glow setup, full family history and the Family status widget, full trends and insights, the AI skin scan, and the wider widget suite. It\u2019s $2.49/week, $29.99/year, or $79.99 once for lifetime. Prices can vary by country - Apple shows yours before you buy.'
+        a: 'Free covers today: live UV and today\u2019s conditions, the Sun timer, your skin profile (including an AI skin scan) and recent history. Pro adds Daily Glow setup, full family history and the Family status widget, full trends and insights, AI skin re-scans, and the wider widget suite. It\u2019s $2.49/week, $29.99/year, or $79.99 once for lifetime. Prices can vary by country - Apple shows yours before you buy.'
       },
       {
         q: 'How do I cancel a Pro subscription?',

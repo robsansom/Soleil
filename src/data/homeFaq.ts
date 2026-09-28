@@ -65,7 +65,7 @@ export const homeFaqs: HomeFaq[] = [
   },
   {
     q: 'Is Soleil free?',
-    a: 'Free covers today: live UV and today’s conditions, the Sun timer, your skin profile and recent history. Soleil Pro adds Daily Glow setup, full family history and widgets, full trends and the AI skin scan: $2.49/week, $29.99/year, or $79.99 once.',
+    a: 'Free covers today: live UV and today’s conditions, the Sun timer, your skin profile (including an AI skin scan) and recent history. Soleil Pro adds Daily Glow setup, full family history and widgets, full trends and AI skin re-scans: $2.49/week, $29.99/year, or $79.99 once.',
   },
   {
     q: 'Does Soleil track me or need an account?',

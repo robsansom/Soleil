@@ -8,62 +8,30 @@
  * of the page, stays crisp at any size, and costs a few kB instead of a
  * 500kB PNG.
  *
- * It follows the app's light-mode reference frame — iOS system greys,
- * the coral accent, SF Pro via `system-ui` — and it must keep following
- * it. When the app's Your Day screen changes, change this too.
+ * It is assembled from the same cards as every other recreated surface
+ * (./cards/), in the order Your Day stacks them — UV now in cyan, the four
+ * condition tiles, then the orange daylight card — on the app's paper
+ * ground with its floating tab bar. When Your Day changes, change the
+ * cards and this follows.
  *
- * Everything scales from one container-relative font size, so the screen
- * is resolution-independent inside whatever frame holds it.
+ * Everything scales from one container-relative size: 1em is the app's
+ * 16pt body and the screen is 402pt, 25.125em, wide.
  */
-import SunMark from '../site/SunMark.astro';
+import Glyph from './Glyph.astro';
+import UvNowCard from './cards/UvNowCard.astro';
+import ConditionTiles from './cards/ConditionTiles.astro';
+import DaylightCard from './cards/DaylightCard.astro';
 import { useTranslations } from '../../i18n/utils';
 
 const t = useTranslations(Astro.currentLocale);
 const ui = t.appUi.phoneScreen;
-/** The reading itself is the same sample every recreated surface uses,
- *  so the hero and the rest of the page can never drift apart. */
-const uv = t.appUi.sunWindow;
-const daylight = t.appUi.realSun;
-
-/**
- * The UV curve, defined once as two cubics that meet with a horizontal
- * tangent — so the peak is smooth rather than kinked — and sampled for
- * the "you are here" marker. Deriving the marker from the same curve is
- * the only way to guarantee it sits exactly on the line.
- */
-const PEAK = [84, 12] as const;
-const CURVE = {
-  start: [8, 84],
-  a: [[34, 80], [54, 12]],
-  peak: PEAK,
-  b: [[114, 12], [126, 54]],
-  end: [142, 78],
-} as const;
-
-const d =
-  `M${CURVE.start[0]} ${CURVE.start[1]}` +
-  ` C ${CURVE.a[0][0]} ${CURVE.a[0][1]}, ${CURVE.a[1][0]} ${CURVE.a[1][1]},` +
-  ` ${PEAK[0]} ${PEAK[1]}` +
-  ` C ${CURVE.b[0][0]} ${CURVE.b[0][1]}, ${CURVE.b[1][0]} ${CURVE.b[1][1]},` +
-  ` ${CURVE.end[0]} ${CURVE.end[1]}`;
-
-/** Point on the falling half of the curve, 0 = peak, 1 = end of day. */
-const cubicAt = (t0: number) => {
-  const pts = [PEAK, CURVE.b[0], CURVE.b[1], CURVE.end];
-  const u = 1 - t0;
-  const w = [u * u * u, 3 * u * u * t0, 3 * u * t0 * t0, t0 * t0 * t0];
-  return [0, 1].map((axis) =>
-    pts.reduce((sum, pt, i) => sum + pt[axis] * w[i], 0),
-  );
-};
-
-const [markerX, markerY] = cubicAt(0.3);
+const tabIcons = ['calendar', 'sun', 'person'] as const;
 ---
 
-<div class="ps" role="img" aria-label={t.home.sunWindow.imageAlt}>
-  <div class="ps__inner" aria-hidden="true">
+<div class="ps" role="img" aria-label={t.home.uvNow.imageAlt}>
+  <div class="app-screen ps__inner" aria-hidden="true">
     <div class="ps__status">
-      <span class="ps__statusTime">{ui.statusTime}</span>
+      <span>{ui.statusTime}</span>
       <span class="ps__statusIcons">
         <svg class="ps__signal" viewBox="0 0 20 12" fill="currentColor">
           <rect x="0" y="8" width="3" height="4" rx="1" />
@@ -73,135 +41,29 @@ const [markerX, markerY] = cubicAt(0.3);
         </svg>
         <svg class="ps__wifi" viewBox="0 0 16 12" fill="currentColor">
           <path d="M8 11.2 6 8.6a3.3 3.3 0 0 1 4 0Z" />
-          <path
-            d="M3.4 5.6a7.2 7.2 0 0 1 9.2 0"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.7"
-            stroke-linecap="round"
-          />
-          <path
-            d="M1 3a10.9 10.9 0 0 1 14 0"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.7"
-            stroke-linecap="round"
-          />
+          <path d="M3.4 5.6a7.2 7.2 0 0 1 9.2 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+          <path d="M1 3a10.9 10.9 0 0 1 14 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
         </svg>
         <span class="ps__battery"><span class="ps__batteryFill"></span></span>
       </span>
     </div>
 
+    {/* Content runs under the pinned tab bar, exactly as it does on a real
+        screen, so a longer translation can never push the bar out of the
+        frame. */}
     <div class="ps__scroll">
-    <div class="ps__bar">
-      <span class="ps__round">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
-          <circle cx="10.5" cy="10.5" r="6.5" />
-          <path d="M15.5 15.5 21 21" />
-        </svg>
-      </span>
-    </div>
-
-    <h3 class="ps__place">{uv.location}</h3>
-
-    <p class="ps__headline">
-      <svg class="ps__sun" viewBox="0 0 24 24" fill="currentColor">
-        <circle cx="12" cy="12" r="5" />
-        <path
-          d="M12 1.4v3.1M12 19.5v3.1M1.4 12h3.1M19.5 12h3.1M4.4 4.4l2.2 2.2M17.4 17.4l2.2 2.2M19.6 4.4l-2.2 2.2M6.6 17.4l-2.2 2.2"
-          stroke="currentColor"
-          stroke-width="2.1"
-          stroke-linecap="round"
-        />
-      </svg>
-      {ui.headline}
-    </p>
-
-    <article class="ps__card">
-      <header class="ps__cardHead">
-        <span class="ps__cardLabel">
-          <svg class="ps__sun ps__sun--sm" viewBox="0 0 24 24" fill="currentColor">
-            <circle cx="12" cy="12" r="5" />
-            <path
-              d="M12 1.4v3.1M12 19.5v3.1M1.4 12h3.1M19.5 12h3.1M4.4 4.4l2.2 2.2M17.4 17.4l2.2 2.2M19.6 4.4l-2.2 2.2M6.6 17.4l-2.2 2.2"
-              stroke="currentColor"
-              stroke-width="2.1"
-              stroke-linecap="round"
-            />
-          </svg>
-          {uv.uvNowLabel}
-        </span>
-        <span class="ps__cardTime">
-          {uv.time}
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 5l7 7-7 7" />
-          </svg>
-        </span>
-      </header>
-
-      <div class="ps__body">
-        <div class="ps__reading">
-          <p class="ps__value">{uv.value}</p>
-          <p class="ps__category">{uv.category}</p>
-          <span class="ps__live">{uv.livePill}</span>
-        </div>
-
-        <div class="ps__chart">
-          <svg viewBox="0 0 150 96" fill="none">
-            {[0, 1, 2].map((i) => (
-              <line class="ps__grid" x1={12 + i * 63} y1="2" x2={12 + i * 63} y2="84" />
-            ))}
-            <path class="ps__curveFill" d={`${d} L ${CURVE.end[0]} 84 Z`} />
-            <path class="ps__curveLine" d={d} />
-            <circle
-              class="ps__marker"
-              cx={markerX.toFixed(2)}
-              cy={markerY.toFixed(2)}
-              r="5.2"
-            />
-          </svg>
-          <p class="ps__axis">{uv.axis.map((label) => <span>{label}</span>)}</p>
-        </div>
+      <div class="ps__bar">
+        <span class="ps__round"><Glyph name="search" /></span>
       </div>
 
-      <p class="ps__guidance">{uv.guidance}</p>
-    </article>
+      <h3 class="ps__place">{t.appUi.uvNow.location}</h3>
+      <p class="ui-hand ps__hand"><Glyph name="sun" />{ui.subtitle}</p>
 
-    <h4 class="ps__section">{ui.rightNow}</h4>
-
-    <div class="ps__tiles">
-      {
-        uv.tiles.map((tile, i) => (
-          <div class="ps__tile">
-            <p class="ps__tileLabel">
-              <span class={`ps__tileDot ps__tileDot--${i}`} />
-              {tile.label}
-            </p>
-            <p class="ps__tileValue">
-              {tile.value}
-              {tile.caption && <span class="ps__tileCaption">{tile.caption}</span>}
-            </p>
-          </div>
-        ))
-      }
-    </div>
-
-      <section class="ps__daylight">
-        {/* Label and figure share a row: this card sits at the fold, and
-            the part that shows should carry the number, not just a title. */}
-        <header class="ps__cardHead">
-          <span class="ps__cardLabel">{daylight.header}</span>
-          <span class="ps__daylightValue">{daylight.value}</span>
-        </header>
-        <p class="ps__daylightFrom">{daylight.watchChip}</p>
-        <div class="ps__daylightBars">
-          {
-            [34, 52, 41, 68, 88, 74, 96, 61, 45, 58, 38, 26].map((h) => (
-              <span style={`--h:${h}%`} />
-            ))
-          }
-        </div>
-      </section>
+      <div class="ps__stack">
+        <UvNowCard lean={-0.5} />
+        <ConditionTiles />
+        <DaylightCard tone="orange" lean={0.5} />
+      </div>
     </div>
 
     <div class="ps__tabs">
@@ -209,96 +71,40 @@ const [markerX, markerY] = cubicAt(0.3);
         {
           ui.tabs.map((tab, i) => (
             <span class={`ps__tab ${i === 0 ? 'is-on' : ''}`}>
-              <span class={`ps__tabIcon ${i === 1 ? 'ps__tabIcon--mark' : ''}`}>
-                {/* Filled glyphs, as in the app: the outline set read far
-                    too light against a solid iOS tab bar. */}
-                {i === 0 && (
-                  <svg viewBox="0 0 24 24">
-                    <rect x="2.6" y="3.8" width="18.8" height="17.4" rx="4.6" fill="currentColor" />
-                    {[0, 1, 2].map((row) =>
-                      [0, 1, 2].map((col) => (
-                        <rect
-                          x={6.4 + col * 4.3}
-                          y={9.4 + row * 3.5}
-                          width="2.4"
-                          height="2.2"
-                          rx="0.7"
-                          fill="#fff"
-                          opacity="0.94"
-                        />
-                      )),
-                    )}
-                  </svg>
-                )}
-                {i === 1 && <SunMark size={40} />}
-                {i === 2 && (
-                  <svg viewBox="0 0 24 24">
-                    <circle cx="12" cy="7.4" r="4.5" fill="currentColor" />
-                    <path
-                      d="M3.1 21.6c0-4.9 4-7.8 8.9-7.8s8.9 2.9 8.9 7.8Z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                )}
-              </span>
+              <Glyph name={tabIcons[i]} class="ps__tabIcon" />
               <span class="ps__tabLabel">{tab}</span>
             </span>
           ))
         }
       </div>
-      <span class="ps__fab">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <path d="M12 4.6v14.8M4.6 12h14.8" />
-        </svg>
-      </span>
+      <span class="ps__fab"><Glyph name="plus" /></span>
     </div>
   </div>
 </div>
 
 <style>
-  /* One container-relative size drives everything below, so the screen
-     is resolution-independent inside whatever frame holds it. */
   .ps {
     container-type: inline-size;
     width: 100%;
     height: 100%;
-    background: #f2f2f7;
-    color: #000;
-    /* SF Pro on Apple devices, which is what the app itself uses. */
-    font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
     overflow: hidden;
   }
 
   .ps__inner {
-    font-size: 14px;
-    font-size: 3.95cqw;
+    --ui-size: 3.98cqw;
+    position: relative;
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding: 1.15em 1.15em 0;
+    padding: 0.9em 1em 0;
   }
 
-  /* Content runs under a pinned tab bar, exactly as it does on a real
-     screen. Without this a longer translation pushes the tab bar out of
-     the frame — German is a full line longer than English. */
   .ps__scroll {
     flex: 1;
     min-height: 0;
     overflow: hidden;
-    /* Content dissolves as it reaches the tab bar rather than being
-       sliced through a line of text. Which line lands at the fold
-       depends on the locale, so this has to be positional, not a
-       per-element decision. */
-    -webkit-mask-image: linear-gradient(
-      to bottom,
-      #000 calc(100% - 2.4em),
-      transparent 100%
-    );
-    mask-image: linear-gradient(
-      to bottom,
-      #000 calc(100% - 2.4em),
-      transparent 100%
-    );
   }
 
   /* Status bar ------------------------------------------------------- */
@@ -307,9 +113,9 @@ const [markerX, markerY] = cubicAt(0.3);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.15em 0.6em 0;
+    padding: 0 0.75em;
+    font-size: 1.05em;
     font-weight: 600;
-    font-size: 1em;
     letter-spacing: -0.01em;
   }
 
@@ -320,31 +126,20 @@ const [markerX, markerY] = cubicAt(0.3);
   }
 
   .ps__signal {
-    width: 1.25em;
+    width: 1.2em;
   }
+
   .ps__wifi {
-    width: 1.05em;
+    width: 1em;
   }
 
   .ps__battery {
     position: relative;
-    width: 1.6em;
-    height: 0.82em;
-    border-radius: 0.26em;
-    box-shadow: inset 0 0 0 0.09em rgb(0 0 0 / 0.35);
+    width: 1.55em;
+    height: 0.8em;
     padding: 0.1em;
-  }
-
-  .ps__battery::after {
-    content: '';
-    position: absolute;
-    right: -0.16em;
-    top: 50%;
-    width: 0.1em;
-    height: 0.3em;
-    border-radius: 0 0.1em 0.1em 0;
-    background: rgb(0 0 0 / 0.35);
-    transform: translateY(-50%);
+    border-radius: 0.26em;
+    box-shadow: inset 0 0 0 0.09em rgb(23 18 14 / 0.35);
   }
 
   .ps__batteryFill {
@@ -360,383 +155,120 @@ const [markerX, markerY] = cubicAt(0.3);
   .ps__bar {
     display: flex;
     justify-content: flex-end;
-    margin-top: 1.05em;
+    margin-top: 1em;
   }
 
   .ps__round {
     display: grid;
     place-items: center;
-    width: 2.5em;
-    height: 2.5em;
+    width: 2.6em;
+    height: 2.6em;
     border-radius: 50%;
-    background: #fff;
-    color: #1c1c1e;
-    box-shadow: 0 0.1em 0.5em rgb(0 0 0 / 0.07);
-  }
-
-  .ps__round svg {
-    width: 1.15em;
-  }
-
-  /* The large title uses the site's display face. This is the first of
-     the aesthetic changes heading back into the app itself, so the two
-     should be looked at together. */
-  .ps__place {
-    margin-top: 0.5em;
-    font-family: var(--font-display);
-    font-size: 2.35em;
-    font-weight: 800;
-    letter-spacing: -0.038em;
-    line-height: 1.02;
-  }
-
-  .ps__headline {
-    display: flex;
-    align-items: center;
-    gap: 0.45em;
-    margin-top: 0.5em;
-    font-size: 1.16em;
-    font-weight: 600;
-    letter-spacing: -0.015em;
-    line-height: 1.25;
-  }
-
-  .ps__sun {
-    width: 1.15em;
-    flex: none;
-    color: #f4623f;
-  }
-
-  .ps__sun--sm {
-    width: 1em;
-  }
-
-  /* The UV card ------------------------------------------------------ */
-
-  .ps__card {
-    margin-top: 0.9em;
-    padding: 1.05em 1.1em 1.15em;
-    border-radius: 1.45em;
-    background: #f7f7fb;
+    background: var(--paper);
     box-shadow:
-      0 0 0 0.5px rgb(0 0 0 / 0.04),
-      0 0.3em 1.1em -0.5em rgb(0 0 0 / 0.1);
+      0 0 0 1px rgb(23 18 14 / 0.06),
+      0 0.25em 0.8em -0.3em rgb(23 18 14 / 0.3);
   }
 
-  .ps__cardHead {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.8em;
+  .ps__round :global(svg) {
+    width: 1.1em;
+    height: 1.1em;
   }
 
-  .ps__cardLabel {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4em;
-    font-size: 0.8em;
-    font-weight: 600;
-    letter-spacing: 0.055em;
-    text-transform: uppercase;
-    color: #3c3c43;
+  .ps__place {
+    margin-top: 0.3em;
+    font-family: var(--font-display);
+    font-size: 2.4em;
+    font-weight: 800;
+    letter-spacing: -0.042em;
+    line-height: 0.95;
   }
 
-  .ps__cardTime {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25em;
-    font-size: 0.86em;
-    color: rgb(60 60 67 / 0.6);
+  .ps__hand {
+    margin-top: 0.45em;
+    font-size: 1.3em;
   }
 
-  .ps__cardTime svg {
-    width: 0.6em;
-  }
-
-  .ps__body {
+  .ps__stack {
     display: grid;
-    grid-template-columns: minmax(0, 0.78fr) minmax(0, 1fr);
-    align-items: center;
-    gap: 0.9em;
-    margin-top: 0.75em;
-  }
-
-  .ps__value {
-    font-size: 4.35em;
-    font-weight: 700;
-    letter-spacing: -0.045em;
-    line-height: 0.92;
-  }
-
-  .ps__category {
-    margin-top: 0.15em;
-    font-size: 1.16em;
-    font-weight: 500;
-  }
-
-  .ps__live {
-    display: inline-block;
-    margin-top: 0.7em;
-    padding: 0.42em 0.85em;
-    border-radius: 999px;
-    background: #f4623f;
-    color: #fff;
-    font-size: 0.8em;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-
-  .ps__chart svg {
-    display: block;
-    width: 100%;
-    height: auto;
-    aspect-ratio: 150 / 96;
-  }
-
-  .ps__grid {
-    stroke: rgb(60 60 67 / 0.13);
-    stroke-width: 1;
-    stroke-dasharray: 2 3;
-  }
-
-  .ps__curveFill {
-    fill: #f9d5d2;
-  }
-
-  .ps__curveLine {
-    stroke: #f04a2a;
-    stroke-width: 2.6;
-    stroke-linecap: round;
-  }
-
-  .ps__marker {
-    fill: #f7f7fb;
-    stroke: #1c1c1e;
-    stroke-width: 2.4;
-  }
-
-  .ps__axis {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 0.35em;
-    padding: 0 0.15em;
-    font-size: 0.76em;
-    color: rgb(60 60 67 / 0.6);
-  }
-
-  .ps__guidance {
+    gap: 1.1em;
     margin-top: 0.9em;
-    font-size: 1.16em;
-    font-weight: 600;
-    line-height: 1.32;
-    letter-spacing: -0.018em;
-  }
-
-  /* Right now -------------------------------------------------------- */
-
-  .ps__section {
-    margin-top: 0.95em;
-    font-size: 1.45em;
-    font-weight: 700;
-    letter-spacing: -0.025em;
-  }
-
-  .ps__tiles {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.6em;
-    margin-top: 0.7em;
-  }
-
-  .ps__tile {
-    padding: 0.85em 0.9em 1em;
-    border-radius: 1.15em;
-    background: #f7f7fb;
-    box-shadow: 0 0 0 0.5px rgb(0 0 0 / 0.04);
-  }
-
-  .ps__tileLabel {
-    display: flex;
-    align-items: center;
-    gap: 0.35em;
-    font-size: 0.74em;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: rgb(60 60 67 / 0.7);
-  }
-
-  .ps__tileDot {
-    width: 0.85em;
-    height: 0.85em;
-    border-radius: 0.25em;
-    background: #f4623f;
-    opacity: 0.85;
-    flex: none;
-  }
-
-  .ps__tileDot--2 {
-    background: #7cc0e8;
-  }
-  .ps__tileDot--3 {
-    background: #f0a04a;
-  }
-
-  .ps__tileValue {
-    display: flex;
-    align-items: baseline;
-    flex-wrap: wrap;
-    gap: 0.4em;
-    margin-top: 0.75em;
-    font-size: 1.65em;
-    font-weight: 700;
-    letter-spacing: -0.03em;
-  }
-
-  .ps__tileCaption {
-    font-size: 0.52em;
-    font-weight: 500;
-    color: rgb(60 60 67 / 0.6);
-  }
-
-  .ps__daylight {
-    margin-top: 0.75em;
-    padding: 0.9em 1em 1em;
-    border-radius: 1.15em;
-    background: #f7f7fb;
-    box-shadow: 0 0 0 0.5px rgb(0 0 0 / 0.04);
-  }
-
-  .ps__daylightValue {
-    font-size: 1.35em;
-    font-weight: 700;
-    letter-spacing: -0.03em;
-  }
-
-  .ps__daylightFrom {
-    margin-top: 0.15em;
-    font-size: 0.8em;
-    color: rgb(60 60 67 / 0.6);
-  }
-
-  .ps__daylightBars {
-    display: flex;
-    align-items: flex-end;
-    gap: 0.24em;
-    height: 2.4em;
-    margin-top: 0.6em;
-  }
-
-  .ps__daylightBars span {
-    flex: 1;
-    height: var(--h);
-    border-radius: 999px;
-    background: #f4623f;
-    opacity: 0.75;
   }
 
   /* Tab bar ---------------------------------------------------------- */
 
+  /* The bar floats over the content, as it does in the app: the card
+     below the fold runs on underneath it and fades out. */
   .ps__tabs {
+    position: absolute;
+    inset: auto 1em 0;
     display: flex;
     align-items: center;
-    gap: 0.5em;
-    margin-top: auto;
-    padding: 0.75em 0 1em;
+    gap: 0.6em;
+    padding: 2.2em 0 1.25em;
+    background: linear-gradient(to bottom, rgb(255 253 247 / 0), rgb(255 253 247 / 0.85) 55%);
   }
 
   .ps__tabbar {
     display: flex;
     flex: 1;
-    align-items: stretch;
     gap: 0.1em;
-    padding: 0.34em;
-    border-radius: 999px;
-    background: rgb(255 255 255 / 0.82);
-    backdrop-filter: blur(1.2em);
+    padding: 0.3em;
+    border-radius: var(--r-pill);
+    background: var(--paper);
     box-shadow:
-      0 0 0 0.5px rgb(0 0 0 / 0.05),
-      0 0.3em 1.1em -0.35em rgb(0 0 0 / 0.26);
+      0 0 0 1px rgb(23 18 14 / 0.06),
+      0 0.4em 1.2em -0.4em rgb(23 18 14 / 0.35);
   }
 
   /* Equal columns, so spacing holds whatever the labels do per locale. */
   .ps__tab {
     display: grid;
     flex: 1;
+    min-width: 0;
     justify-items: center;
-    align-content: center;
-    gap: 0.24em;
-    padding: 0.42em 0.2em 0.38em;
-    border-radius: 999px;
-    color: #1c1c1e;
-    white-space: nowrap;
+    gap: 0.25em;
+    padding: 0.45em 0.2em 0.4em;
+    border-radius: var(--r-pill);
   }
 
-  /* The selected tab sits on its own capsule, as it does in the app. */
+  /* The selected tab sits on its own warm capsule, in the app's vivid
+     tab pink (SunkindTheme.tabActive). */
   .ps__tab.is-on {
-    background: #fff;
-    color: #f4623f;
-    box-shadow: 0 0.08em 0.32em -0.18em rgb(0 0 0 / 0.16);
+    background: #f1e9d8;
+    color: #d9147e;
   }
 
-  /* Every icon box is the same size, so the three labels share one
-     baseline. Optical differences are applied to the glyph inside the
-     box, never to the box itself. */
-  .ps__tabIcon {
-    display: grid;
-    place-items: center;
-    width: 1.95em;
-    height: 1.95em;
-  }
-
-  /* `:global` because the mark comes from a child component, and Astro's
-     scoped styles stop at that boundary. Without it the mark kept its own
-     width/height attributes, rendered 29x43 instead of square, and pushed
-     the whole tab bar taller. */
-  .ps__tabIcon :global(svg) {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-
-  /* The mark is mostly negative space between its rays, so at an equal
-     box it reads smaller than the solid glyphs. Scaled inside its fixed
-     box, which leaves the label baseline untouched. */
-  .ps__tabIcon--mark :global(svg) {
-    width: 118%;
-    /* The global reset clamps any svg to its box, which cancelled the
-       bump outright. */
-    max-width: none;
+  .ps__tab :global(.ps__tabIcon) {
+    width: 1.55em;
+    height: 1.55em;
   }
 
   .ps__tabLabel {
-    font-size: 0.75em;
-    font-weight: 500;
-    line-height: 1;
-    letter-spacing: -0.01em;
-  }
-
-  .ps__tab.is-on .ps__tabLabel {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.7em;
     font-weight: 600;
+    line-height: 1;
   }
 
   .ps__fab {
     display: grid;
     place-items: center;
-    width: 3.3em;
-    height: 3.3em;
-    border-radius: 50%;
-    background: rgb(255 255 255 / 0.9);
-    color: #1c1c1e;
-    box-shadow:
-      0 0 0 0.5px rgb(0 0 0 / 0.05),
-      0 0.3em 1.1em -0.35em rgb(0 0 0 / 0.28);
     flex: none;
+    width: 3.4em;
+    height: 3.4em;
+    border-radius: 50%;
+    background: var(--paper);
+    box-shadow:
+      0 0 0 1px rgb(23 18 14 / 0.06),
+      0 0.4em 1.2em -0.4em rgb(23 18 14 / 0.35);
   }
 
-  .ps__fab svg {
+  .ps__fab :global(svg) {
     width: 1.45em;
+    height: 1.45em;
   }
-
 </style>

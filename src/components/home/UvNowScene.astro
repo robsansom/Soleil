@@ -1,34 +1,36 @@
 ---
 /**
- * Scene 4 — the signature sequence. On a wide screen with motion enabled
- * the stage pins, the object starts large and settles smaller as you
- * scroll, and the surface itself changes: the Sun Window opens, the
- * reading arrives, the day's numbers separate out, and the protection
- * check resolves it. The scroll distance is bounded and never hijacked.
+ * Scene 4 — the signature sequence, built around Your Day's UV now card.
+ * On a wide screen with motion enabled the stage pins, the object starts
+ * large and settles smaller as you scroll, and the surface itself changes:
+ * the card opens, the reading arrives, the day's numbers separate out, and
+ * the protection check resolves it. The scroll distance is bounded and
+ * never hijacked.
  *
  * Everywhere else the same content is a plain, readable list with the
  * four surfaces stacked beneath it.
  */
-import SunWindowCard from '../app/SunWindowCard.astro';
-import DetailTiles from '../app/DetailTiles.astro';
-import ProtectionCard from '../app/ProtectionCard.astro';
+import AppSlice from '../app/AppSlice.astro';
+import UvNowCard from '../app/cards/UvNowCard.astro';
+import ConditionTiles from '../app/cards/ConditionTiles.astro';
+import ProtectionCard from '../app/cards/ProtectionCard.astro';
 import Cta from '../site/Cta.astro';
 import { useTranslations } from '../../i18n/utils';
 
 const t = useTranslations(Astro.currentLocale);
-const { sunWindow } = t.home;
+const { uvNow } = t.home;
 ---
 
-<section class="scene sunwin" data-tone="sky-deep" id="sun-window" data-sequence>
+<section class="scene sunwin" data-tone="sky-deep" id="uv-now" data-sequence>
   <div class="sunwin__stage">
     <div class="wrap sunwin__inner">
       <div class="sunwin__copy">
-        <p class="eyebrow" data-reveal="up">{sunWindow.eyebrow}</p>
-        <h2 class="display-lg sunwin__headline" data-reveal="up">{sunWindow.headline}</h2>
+        <p class="eyebrow" data-reveal="up">{uvNow.eyebrow}</p>
+        <h2 class="display-lg sunwin__headline" data-reveal="up">{uvNow.headline}</h2>
 
         <ol class="sunwin__steps">
           {
-            sunWindow.steps.map((step, i) => (
+            uvNow.steps.map((step, i) => (
               <li class="swstep" data-step={i}>
                 <span class="sticker swstep__label">{step.label}</span>
                 <h3 class="display-sm swstep__title">{step.title}</h3>
@@ -39,7 +41,7 @@ const { sunWindow } = t.home;
         </ol>
 
         <ol class="sunwin__dots" aria-hidden="true">
-          {sunWindow.steps.map((_, i) => <li data-dot={i} class={i === 0 ? 'is-on' : ''} />)}
+          {uvNow.steps.map((_, i) => <li data-dot={i} class={i === 0 ? 'is-on' : ''} />)}
         </ol>
 
         <div class="sunwin__cta" data-reveal="up"><Cta variant="ink" /></div>
@@ -47,10 +49,10 @@ const { sunWindow } = t.home;
 
       <div class="sunwin__object">
         <div class="sunwin__objectInner" data-sequence-object>
-          <div class="swobj" data-obj="0"><SunWindowCard compact /></div>
-          <div class="swobj" data-obj="1"><SunWindowCard chip /></div>
-          <div class="swobj" data-obj="2"><DetailTiles /></div>
-          <div class="swobj" data-obj="3"><ProtectionCard /></div>
+          <div class="swobj" data-obj="0"><AppSlice label={uvNow.imageAlt}><UvNowCard compact /></AppSlice></div>
+          <div class="swobj" data-obj="1"><AppSlice label={uvNow.imageAlt}><UvNowCard peak /></AppSlice></div>
+          <div class="swobj" data-obj="2"><AppSlice label={uvNow.imageAlt}><ConditionTiles /></AppSlice></div>
+          <div class="swobj" data-obj="3"><AppSlice label={t.appUi.protection.label}><ProtectionCard /></AppSlice></div>
         </div>
       </div>
     </div>

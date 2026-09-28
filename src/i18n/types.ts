@@ -51,7 +51,7 @@ export interface HomeCopy {
     headline: string;
     steps: { title: string; body: string }[];
   };
-  sunWindow: {
+  uvNow: {
     eyebrow: string;
     headline: string;
     steps: { label: string; title: string; body: string }[];

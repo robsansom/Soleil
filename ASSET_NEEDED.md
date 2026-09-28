@@ -7,26 +7,20 @@ priority order. Each item has a slot in the code already.
 
 ---
 
-## 1. A fresh Sun Window capture at meaningful UV — **highest impact**
+## 1. ~~A fresh Your Day capture at meaningful UV~~ — done 2026-09-28
 
-`public/images/screen-home.png` (used in the hero, the Sun Window sequence and
-the Live UV card) was captured in the evening: it reads **“No burn risk · UV is 0
-right now.”** It is honest, but it is the weakest possible hero for a UV app.
-
-- Same screen, captured at **UV 5–7 with a “High” category** and a peak later in
-  the day, so the hero states the product's core fact.
-- 1206 × 2436 px, iPhone 15 Pro class, dark appearance (matches the rest).
-- Drop in as `public/images/screen-home.png`; dimensions are already declared in
-  `src/data/screens.ts`.
+The guides now use the app's 2026-09-18 App Store captures (UV 10, Very High)
+in `public/images/app/`; the hero and scenes use hand-built cards that match the
+re-skinned app.
 
 ## 2. `hero-device-composition.webp` — the protagonist
 
 A rendered iPhone **and** Apple Watch composition to replace the CSS device
-frame in the hero and the Sun Window sequence.
+frame in the hero and the UV now sequence.
 
 - Transparent background, 2400 px on the long edge, WebP + AVIF.
-- Three-quarter tilt, iPhone rotated ~8° clockwise, Sun Window visible on the
-  phone; Watch smaller, lower-left, showing the UV complication.
+- Three-quarter tilt, iPhone rotated ~8° clockwise, showing Your Day's UV now
+  card; Watch smaller, lower-left, showing the UV complication.
 - Lit warm from the upper right so it sits on the solar-yellow hero; soft
   contact shadow baked in, no hard drop shadow (the CSS adds its own).
 - Slot: replace the `<img>` inside `src/components/art/DeviceFrame.astro` and

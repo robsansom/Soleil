@@ -49,13 +49,13 @@ export const home: HomeCopy = {
       },
       {
         tag: 'Outside',
-        title: 'Sessions',
-        body: 'Start an outing and Soleil keeps elapsed time and each person’s cover in the same place.',
+        title: 'Sun timer',
+        body: 'Start an outing and Soleil keeps elapsed time, each person’s cover and their reminders together. Daily Glow adds an optional guided routine.',
       },
       {
         tag: 'Your people',
         title: 'Family',
-        body: 'Profiles for everyone you look after, a quick cover-up glance and separate reapply reminders.',
+        body: 'Profiles for everyone you look after, each with their own skin type and their own reapply reminders.',
       },
       {
         tag: 'Apple Watch',
@@ -79,7 +79,7 @@ export const home: HomeCopy = {
       },
       {
         title: 'Start the day',
-        body: 'Run a session for whoever is outside and keep sunscreen timing organised.',
+        body: 'Start the Sun timer for whoever is outside and keep sunscreen timing organised.',
       },
       {
         title: 'See your Real Sun',
@@ -88,14 +88,14 @@ export const home: HomeCopy = {
     ],
   },
 
-  sunWindow: {
-    eyebrow: 'The Sun Window',
+  uvNow: {
+    eyebrow: 'UV now',
     headline: 'The UV answer, in one look',
     steps: [
       {
         label: 'One card',
         title: 'Open Soleil and the sky answers first.',
-        body: 'No dashboard to decode. The Sun Window leads with the live UV index for where you are.',
+        body: 'No dashboard to decode. Your Day opens on the live UV index for where you are.',
       },
       {
         label: 'The reading',
@@ -113,7 +113,7 @@ export const home: HomeCopy = {
         body: 'Your skin type and SPF turn the reading into a timely protection check. Soleil never presents time as permission.',
       },
     ],
-    imageAlt: 'The Soleil Sun Window on iPhone: live UV, today’s peak and a protection check',
+    imageAlt: 'Soleil’s Your Day screen on iPhone: live UV, today’s peak and the conditions behind it',
   },
 
   moments: {
@@ -136,15 +136,15 @@ export const home: HomeCopy = {
   why: {
     eyebrow: 'Why Soleil',
     headline: 'Useful, and yours',
-    body: 'Everything Soleil learns about your sun stays on your iPhone. No account to make, no analytics, no advertising, no cross-app tracking.',
+    body: 'Everything Soleil learns about your sun stays yours: on your iPhone, and in your own private iCloud if you sync. No account to make, no analytics, no advertising, no cross-app tracking.',
     badges: [
       'Live local UV',
       'Private by default',
       'No account',
       'Family-ready',
       'Apple Watch',
-      'Practical reminders',
-      'Your day, in context',
+      'Daily Glow routine',
+      'Private iCloud sync',
       'Widgets',
       'Live Activity',
       'Peak UV alerts',
@@ -200,7 +200,7 @@ export const home: HomeCopy = {
     headline: 'Take Soleil with you.',
     body: 'Live UV, a protection check for your skin, and reminders that keep up with the day.',
     note: 'iPhone & Apple Watch',
-    privacy: 'No account. No tracking. Your history stays on your device.',
+    privacy: 'No account. No tracking. Your history stays on your devices and in your own iCloud.',
     imageAlt: 'The Soleil app icon: a golden sun on a blue sky',
   },
 };

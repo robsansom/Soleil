@@ -50,8 +50,8 @@ export const part2: Guide[] = [
         'A Home Screen widget or Apple Watch complication makes this a half-second glance before you head out, the habit that prevents most cloudy-day burns.',
       ],
       screenshot: {
-        src: '/images/screen-home.png',
-        alt: 'Soleil showing live UV index alongside cloud cover percentage',
+        src: '/images/app/your-day.webp',
+        alt: 'Soleil’s Your Day screen: UV 10, Very High, with cloud cover at 5% and humidity beside it',
       },
     },
     faqs: [
@@ -117,8 +117,8 @@ export const part2: Guide[] = [
         'From then on, every protection-check estimate, family profile and session record is calibrated to the skin you actually have, not a population average. You can change it any time in the You tab.',
       ],
       screenshot: {
-        src: '/images/screen-family.png',
-        alt: 'Soleil profile showing Skin Type III with personalised protection guidance',
+        src: '/images/app/you.webp',
+        alt: 'Soleil’s You tab: Skin Type III, then each person in the family with their own protection guidance',
       },
     },
     faqs: [
@@ -174,11 +174,11 @@ export const part2: Guide[] = [
       heading: 'One outing, every child in view',
       paragraphs: [
         'Family is built into Soleil’s session model. Add a profile for each person you look after, each with their own skin type, then start an outing and record sunscreen, shade, cover and swimming per person. Each child gets their <strong>own reapply reminder</strong>, because the toddler who just towelled off is not on the same clock as the teenager in the shade.',
-        'The You tab shows everyone’s status at a glance, and family check-ins stay on your device: no accounts, no cloud. Pro adds the family’s history over time and a Family status widget.',
+        'The You tab shows everyone’s skin type and protection guidance at a glance, and family data stays on your devices and in your own private iCloud: no Soleil account, nothing shared with us. Pro adds the family’s history over time and a Family status widget.',
       ],
       screenshot: {
-        src: '/images/screen-family.png',
-        alt: 'Soleil family view showing per-child skin types and protection status',
+        src: '/images/app/you.webp',
+        alt: 'Soleil’s You tab: family members, including a child, each with their own skin type and protection guidance',
       },
     },
     faqs: [
@@ -246,8 +246,8 @@ export const part2: Guide[] = [
         'It’s honest by design: logging SPF 50 doesn’t make the timer promise you the whole afternoon, and reapplying never extends a session. The estimate is a prompt to reassess, not permission.',
       ],
       screenshot: {
-        src: '/images/screen-home.png',
-        alt: 'Soleil home screen with SPF 50 recorded alongside live UV and burn risk',
+        src: '/images/app/live-outing.webp',
+        alt: 'Soleil’s live outing: elapsed time, not a safe-time countdown, beside a protection check and sunscreen alerts',
       },
     },
     faqs: [
@@ -304,8 +304,8 @@ export const part2: Guide[] = [
         'The free Soleil Watch app also puts live UV, session time and today’s daylight on your wrist, with complications and a Smart Stack card.',
       ],
       screenshot: {
-        src: '/images/screen-your-sun.png',
-        alt: 'The Soleil Your Sun tab: start a session and keep protection checks running',
+        src: '/images/app/your-sun.webp',
+        alt: 'The Soleil Your Sun tab: start the Sun timer and keep protection checks running',
       },
     },
     faqs: [

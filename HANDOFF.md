@@ -17,7 +17,7 @@ was read only; nothing in it was changed.
      arrow buttons, keyboard scrolling and centre-distance drift.
   3. How it works — four crooked overlapping cards on pale pink; a snap strip
      with peeking cards on mobile.
-  4. The Sun Window — pinned cyan sequence over a bounded 320vh: the object
+  4. UV now — pinned cyan sequence over a bounded 320vh: the object
      starts large and settles smaller while the surface itself changes from the
      card to the reading to the day's numbers to the protection check.
      Degrades to a plain list with all four surfaces stacked.
@@ -62,15 +62,15 @@ was read only; nothing in it was changed.
    is not carried into this repo, both guides now point at
    `screen-your-sun.png`, and their alt text was rewritten. Re-shoot the history
    screen before any vitamin-D-adjacent guide uses a screenshot again.
-2. **`screen-home.png` shows UV 0 / “No burn risk”.** Accurate, but it is the
-   hero image of a UV app showing no UV. Carried as-is because it is real; a
-   replacement capture is item 1 in `ASSET_NEEDED.md`.
+2. **`screen-home.png` showed UV 0 / “No burn risk”.** Resolved 2026-09-28:
+   the old dark-UI screenshots were replaced by the app's 2026-09-18 App Store
+   captures in `public/images/app/`.
 3. **Real screenshots vs. hand-built UI — resolved in favour of components.**
    The v5 brief asked for real screenshots and no fabricated app UI; the
    previous site deliberately recreated the app's surfaces in HTML/CSS so
    they would localise. After review the owner chose the components: a
    phone image in every card was repetitive, and screenshot text cannot
-   translate. The feature rail, the Sun Window sequence and the Real Sun
+   translate. The feature rail, the UV now sequence and the Real Sun
    card now use hand-built recreations in `src/components/app/`, driven by
    the ported `appUi` copy in all five locales. Real screenshots remain
    where a whole device is the point: the hero and the guide pages.
@@ -86,7 +86,7 @@ was read only; nothing in it was changed.
 - **No carousel library.** Native CSS scroll-snap gives better accessibility
   than Embla for what these rails do, and ships no JavaScript. The brief allowed
   “another accessible, maintained” approach.
-- **GSAP only for the Sun Window sequence**, dynamically imported and only above
+- **GSAP only for the UV now sequence**, dynamically imported and only above
   1000px. Everything else is IntersectionObserver plus CSS transitions.
 - **The moments wall's phrases are not focusable.** They are not links or
   controls, and adding tab stops to decorative type would hurt keyboard users

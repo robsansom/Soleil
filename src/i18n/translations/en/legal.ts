@@ -2,11 +2,11 @@
 export const legal = {
   privacyPage: {
     metaTitle: 'Privacy Policy - Soleil',
-    metaDescription: 'How Soleil handles your data. No account. No tracking. Your skin profile, sessions and history live on your device.',
+    metaDescription: 'How Soleil handles your data. No account. No tracking. Your skin profile, sessions and history live on your devices and in your own private iCloud.',
     eyebrow: 'Legal',
     headline: 'Privacy.',
     headlineDim: 'By default.',
-    lastUpdated: '4 July 2026',
+    lastUpdated: '28 September 2026',
     intro: 'This policy explains, in plain language, what Soleil does with your information. The headline is short: it doesn\u2019t do much, on purpose.',
     promisesTitle: 'Our promises',
     promises: [
@@ -24,11 +24,11 @@ export const legal = {
       },
       {
         title: 'The short version',
-        body: 'The App has no Soleil account or developer-operated content server. Your skin profile, sun sessions, sunscreen log, family profiles and exposure history are stored on your device using Apple\u2019s standard storage frameworks. We do not receive them. The App has no advertising, cross-app tracking or third-party analytics SDK. Information you send to support, technical website logs handled by our hosting provider, and information Apple provides to developers are described below.'
+        body: 'The App has no Soleil account or developer-operated content server. Your skin profile, sun sessions, sunscreen log, family profiles and exposure history are stored on your device using Apple\u2019s standard storage frameworks and, if you use iCloud, synced between your own devices through your private iCloud account. We do not receive them and cannot read them. The App has no advertising, cross-app tracking or third-party analytics SDK. Information you send to support, technical website logs handled by our hosting provider, and information Apple provides to developers are described below.'
       },
       {
         title: 'What data the app handles, and where it lives',
-        body: 'On your device, your Fitzpatrick skin type, SPF and clothing choices, sun sessions, family profiles and history are stored locally using Apple\u2019s SwiftData framework. Soleil does not operate a separate database containing this information or provide us with an interface for reading it. Family profiles are simple local records you create - Soleil does not contact or identify the people they describe.'
+        body: 'On your device, your Fitzpatrick skin type, SPF and clothing choices, sun sessions, family profiles, saved places, progress photos and history are stored using Apple\u2019s SwiftData framework. If iCloud is turned on for your Apple Account, SwiftData also syncs this data between your devices through the private database of your own iCloud account, where Apple stores it under Apple\u2019s own terms. That private database belongs to your Apple Account: Soleil does not operate a separate database containing this information, and neither Apple\u2019s tools nor the App give us a way to read it. You can turn iCloud off for Soleil in iOS Settings to keep data on the device only. Family profiles are simple records you create - Soleil does not contact or identify the people they describe.'
       },
       {
         title: 'Location and weather',
@@ -68,11 +68,11 @@ export const legal = {
       },
       {
         title: 'Children',
-        body: 'Soleil is intended for a general audience and is not directed specifically at children. Family profiles for children are created and controlled by the adult who owns the device, and stay on that device. We do not ask users to create an account or provide an age. If a child emails support, we use the message only to respond and manage the request. A parent or guardian can contact us about that correspondence.'
+        body: 'Soleil is intended for a general audience and is not directed specifically at children. Family profiles for children are created and controlled by the adult who owns the device, and stay on that adult\u2019s devices and in their own private iCloud. We do not ask users to create an account or provide an age. If a child emails support, we use the message only to respond and manage the request. A parent or guardian can contact us about that correspondence.'
       },
       {
         title: 'Your rights',
-        body: 'Depending on where you live, you may have rights over personal information we control, including rights to access, correct, erase, restrict or object to its use, and to complain to a regulator. These rights are subject to legal limits. Contact support@getsoleil.com to make a request. UK residents may complain to the Information Commissioner\u2019s Office at ico.org.uk. Content stored only on your device should be managed through the App or your device because we do not hold a copy.'
+        body: 'Depending on where you live, you may have rights over personal information we control, including rights to access, correct, erase, restrict or object to its use, and to complain to a regulator. These rights are subject to legal limits. Contact support@getsoleil.com to make a request. UK residents may complain to the Information Commissioner\u2019s Office at ico.org.uk. Content stored on your devices or in your private iCloud should be managed through the App, your device or your iCloud settings, because we do not hold a copy.'
       },
       {
         title: 'Changes to this policy',
@@ -104,8 +104,8 @@ export const legal = {
         a: 'During onboarding you can answer a few questions, use the camera scan, or pick your Fitzpatrick type directly. The optional AI-assisted scan sends one photo through a secure proxy purely to estimate skin tone - or you can keep everything on-device. You can change your skin type any time in the You tab.'
       },
       {
-        q: 'How do family profiles and check-ins work?',
-        a: 'Add the people you look after in the You tab, then choose who is outside when you start a session. A check-in asks who\u2019s covered right now, and Soleil schedules reapply reminders for each person. Everything stays on your device - nothing is shared or uploaded. Pro adds full family history and the Family status widget.'
+        q: 'How do family profiles work?',
+        a: 'Add the people you look after in the You tab, then choose who is outside when you start the Sun timer. Each person keeps their own skin type, and Soleil schedules reapply reminders for each of them. Family data stays on your devices and in your own private iCloud - nothing is shared with us. Pro adds full family history and the Family status widget.'
       },
       {
         q: 'What do I need for the Apple Watch features?',
@@ -117,7 +117,7 @@ export const legal = {
       },
       {
         q: 'What\u2019s in Soleil Pro, and what does it cost?',
-        a: 'Free covers today: live UV, a basic Sun Window, a basic session, your skin profile and recent history. Pro adds Daily Glow setup, full family history and the Family status widget, full trends and insights, the AI skin scan, and the wider widget suite. It\u2019s $3.99/week, $19.99/year, or $69.99 once for lifetime.'
+        a: 'Free covers today: live UV and today\u2019s conditions, the Sun timer, your skin profile and recent history. Pro adds Daily Glow setup, full family history and the Family status widget, full trends and insights, the AI skin scan, and the wider widget suite. It\u2019s $2.49/week, $29.99/year, or $79.99 once for lifetime. Prices can vary by country - Apple shows yours before you buy.'
       },
       {
         q: 'How do I cancel a Pro subscription?',
@@ -143,7 +143,7 @@ export const legal = {
     eyebrow: 'Legal',
     headline: 'Terms',
     headlineDim: 'of Use.',
-    lastUpdated: '4 July 2026',
+    lastUpdated: '28 September 2026',
     intro: 'These terms apply when you download or use the Soleil iOS app ("Soleil", "we", "us"). By using Soleil you agree to them, together with Apple\u2019s Standard EULA. They are written in plain English on purpose.',
     tldrTitle: 'In short',
     tldr: [
@@ -196,7 +196,7 @@ export const legal = {
       },
       {
         title: '8. Your data is yours',
-        body: 'Your skin profile, sun sessions, sunscreen log, family profiles and history belong to you and are stored on your device. We claim no licence over them and we never access them. You are responsible for the accuracy of the information you enter - the App\u2019s guidance is only as good as the skin type, SPF and clothing details you give it.'
+        body: 'Your skin profile, sun sessions, sunscreen log, family profiles and history belong to you. They are stored on your device and, if you use iCloud, in your own private iCloud account. We claim no licence over them and we never access them. You are responsible for the accuracy of the information you enter - the App\u2019s guidance is only as good as the skin type, SPF and clothing details you give it.'
       },
       {
         title: '9. Third-party services',

@@ -4,11 +4,11 @@ import type { LegalCopy } from '../../types';
 export const legal: LegalCopy = {
   privacyPage: {
     metaTitle: 'Politique de confidentialité - Soleil',
-    metaDescription: 'Comment Soleil traite vos données. Pas de compte. Pas de suivi. Votre profil de peau, vos sessions et votre historique restent sur votre appareil.',
+    metaDescription: 'Comment Soleil traite vos données. Pas de compte. Pas de suivi. Votre profil de peau, vos sessions et votre historique restent sur vos appareils et dans votre iCloud privé.',
     eyebrow: 'Mentions légales',
     headline: 'Confidentialité.',
     headlineDim: 'Par défaut.',
-    lastUpdated: '4 juillet 2026',
+    lastUpdated: '28 septembre 2026',
     intro: 'Cette politique explique, en langage clair, ce que Soleil fait de vos informations. Le résumé tient en peu de mots : pas grand-chose, et c\u2019est voulu.',
     promisesTitle: 'Nos engagements',
     promises: [
@@ -26,11 +26,11 @@ export const legal: LegalCopy = {
       },
       {
         title: 'L\u2019essentiel',
-        body: 'L\u2019App ne comporte aucun compte Soleil ni serveur de contenu opéré par le développeur. Votre profil de peau, vos sessions solaires, votre journal de crème solaire, vos profils familiaux et votre historique d\u2019exposition sont stockés sur votre appareil à l\u2019aide des frameworks de stockage standard d\u2019Apple. Nous ne les recevons pas. L\u2019App ne contient ni publicité, ni suivi inter-apps, ni SDK d\u2019analytique tiers. Les informations que vous envoyez à l\u2019assistance, les journaux techniques du site web traités par notre hébergeur et les informations qu\u2019Apple fournit aux développeurs sont décrits ci-dessous.'
+        body: 'L\u2019App ne comporte aucun compte Soleil ni serveur de contenu opéré par le développeur. Votre profil de peau, vos sessions solaires, votre journal de crème solaire, vos profils familiaux et votre historique d\u2019exposition sont stockés sur votre appareil à l\u2019aide des frameworks de stockage standard d\u2019Apple et, si vous utilisez iCloud, synchronisés entre vos propres appareils via votre compte iCloud privé. Nous ne les recevons pas et ne pouvons pas les lire. L\u2019App ne contient ni publicité, ni suivi inter-apps, ni SDK d\u2019analytique tiers. Les informations que vous envoyez à l\u2019assistance, les journaux techniques du site web traités par notre hébergeur et les informations qu\u2019Apple fournit aux développeurs sont décrits ci-dessous.'
       },
       {
         title: 'Quelles données l\u2019app traite, et où elles vivent',
-        body: 'Sur votre appareil, votre type de peau Fitzpatrick, vos choix de SPF et de vêtements, vos sessions solaires, vos profils familiaux et votre historique sont stockés localement via le framework SwiftData d\u2019Apple. Soleil n\u2019exploite pas de base de données distincte contenant ces informations et ne nous fournit aucune interface pour les lire. Les profils familiaux sont de simples fiches locales que vous créez - Soleil ne contacte ni n\u2019identifie les personnes qu\u2019ils décrivent.'
+        body: 'Sur votre appareil, votre type de peau Fitzpatrick, vos choix de SPF et de vêtements, vos sessions solaires, vos profils familiaux, vos lieux enregistrés, vos photos de progression et votre historique sont stockés via le framework SwiftData d\u2019Apple. Si iCloud est activé pour votre compte Apple, SwiftData synchronise aussi ces données entre vos appareils via la base de données privée de votre propre compte iCloud, où Apple les stocke selon ses propres conditions. Cette base privée appartient à votre compte Apple : Soleil n\u2019exploite pas de base de données distincte contenant ces informations, et ni les outils d\u2019Apple ni l\u2019App ne nous permettent de les lire. Vous pouvez désactiver iCloud pour Soleil dans les Réglages iOS afin de conserver les données sur l\u2019appareil uniquement. Les profils familiaux sont de simples fiches que vous créez - Soleil ne contacte ni n\u2019identifie les personnes qu\u2019ils décrivent.'
       },
       {
         title: 'Localisation et météo',
@@ -70,11 +70,11 @@ export const legal: LegalCopy = {
       },
       {
         title: 'Enfants',
-        body: 'Soleil s\u2019adresse à un public général et ne vise pas spécifiquement les enfants. Les profils familiaux d\u2019enfants sont créés et contrôlés par l\u2019adulte propriétaire de l\u2019appareil, et restent sur cet appareil. Nous ne demandons ni la création d\u2019un compte ni un âge. Si un enfant écrit à l\u2019assistance, nous n\u2019utilisons le message que pour répondre et gérer la demande. Un parent ou tuteur peut nous contacter au sujet de cette correspondance.'
+        body: 'Soleil s\u2019adresse à un public général et ne vise pas spécifiquement les enfants. Les profils familiaux d\u2019enfants sont créés et contrôlés par l\u2019adulte propriétaire de l\u2019appareil, et restent sur les appareils de cet adulte et dans son propre iCloud privé. Nous ne demandons ni la création d\u2019un compte ni un âge. Si un enfant écrit à l\u2019assistance, nous n\u2019utilisons le message que pour répondre et gérer la demande. Un parent ou tuteur peut nous contacter au sujet de cette correspondance.'
       },
       {
         title: 'Vos droits',
-        body: 'Selon votre lieu de résidence, vous pouvez disposer de droits sur les informations personnelles que nous contrôlons, notamment des droits d\u2019accès, de rectification, d\u2019effacement, de limitation ou d\u2019opposition à leur utilisation, ainsi que le droit de saisir un régulateur. Ces droits sont soumis à des limites légales. Contactez support@getsoleil.com pour formuler une demande. Les résidents du Royaume-Uni peuvent saisir l\u2019Information Commissioner\u2019s Office sur ico.org.uk. Le contenu stocké uniquement sur votre appareil doit être géré via l\u2019App ou votre appareil, car nous n\u2019en détenons pas de copie.'
+        body: 'Selon votre lieu de résidence, vous pouvez disposer de droits sur les informations personnelles que nous contrôlons, notamment des droits d\u2019accès, de rectification, d\u2019effacement, de limitation ou d\u2019opposition à leur utilisation, ainsi que le droit de saisir un régulateur. Ces droits sont soumis à des limites légales. Contactez support@getsoleil.com pour formuler une demande. Les résidents du Royaume-Uni peuvent saisir l\u2019Information Commissioner\u2019s Office sur ico.org.uk. Le contenu stocké sur vos appareils ou dans votre iCloud privé doit être géré via l\u2019App, votre appareil ou vos réglages iCloud, car nous n\u2019en détenons aucune copie.'
       },
       {
         title: 'Modifications de cette politique',
@@ -106,8 +106,8 @@ export const legal: LegalCopy = {
         a: 'Pendant la configuration, vous pouvez répondre à quelques questions, utiliser l\u2019analyse par caméra ou choisir directement votre type Fitzpatrick. L\u2019analyse optionnelle assistée par IA envoie une seule photo via un proxy sécurisé, uniquement pour estimer votre teint - ou vous pouvez tout garder sur l\u2019appareil. Vous pouvez changer votre type de peau à tout moment dans l\u2019onglet Vous.'
       },
       {
-        q: 'Comment fonctionnent les profils familiaux et les points de contrôle ?',
-        a: 'Ajoutez les personnes dont vous prenez soin dans l’onglet Vous, puis choisissez qui est dehors au lancement d’une session. Un point demande qui est couvert en ce moment, et Soleil programme des rappels de réapplication pour chaque personne. Tout reste sur votre appareil - rien n’est partagé ni envoyé. Pro ajoute l’historique familial complet et le widget de statut Famille.'
+        q: 'Comment fonctionnent les profils familiaux ?',
+        a: 'Ajoutez les personnes dont vous prenez soin dans l’onglet Vous, puis choisissez qui est dehors au lancement du minuteur solaire. Chaque personne garde son propre type de peau, et Soleil programme des rappels de réapplication pour chacune. Les données familiales restent sur vos appareils et dans votre iCloud privé - rien n’est partagé avec nous. Pro ajoute l’historique familial complet et le widget de statut Famille.'
       },
       {
         q: 'De quoi ai-je besoin pour les fonctionnalités Apple Watch ?',
@@ -119,7 +119,7 @@ export const legal: LegalCopy = {
       },
       {
         q: 'Que contient Soleil Pro, et combien coûte-t-il ?',
-        a: 'La version gratuite couvre le jour même : UV en direct, fenêtre de soleil basique, session basique, votre profil de peau et l’historique récent. Pro ajoute la configuration Daily Glow, l’historique familial complet et le widget Famille, toutes les tendances et analyses, le scan de peau par IA et les widgets supplémentaires. C’est 3,99 $/semaine, 19,99 $/an, ou 69,99 $ en une fois.'
+        a: 'La version gratuite couvre le jour même : UV en direct et conditions du jour, le minuteur solaire, votre profil de peau et l’historique récent. Pro ajoute la configuration Daily Glow, l’historique familial complet et le widget Famille, toutes les tendances et analyses, le scan de peau par IA et les widgets supplémentaires. C’est 2,49 $/semaine, 29,99 $/an, ou 79,99 $ en une fois. Les prix peuvent varier selon le pays - Apple affiche le vôtre avant l’achat.'
       },
       {
         q: 'Comment annuler un abonnement Pro ?',
@@ -145,7 +145,7 @@ export const legal: LegalCopy = {
     eyebrow: 'Mentions légales',
     headline: 'Conditions',
     headlineDim: 'd\u2019utilisation.',
-    lastUpdated: '4 juillet 2026',
+    lastUpdated: '28 septembre 2026',
     intro: 'Ces conditions s\u2019appliquent lorsque vous téléchargez ou utilisez l\u2019app iOS Soleil (« Soleil », « nous »). En utilisant Soleil, vous les acceptez, ainsi que le CLUF standard d\u2019Apple. Elles sont volontairement rédigées en langage clair.',
     tldrTitle: 'En bref',
     tldr: [
@@ -198,7 +198,7 @@ export const legal: LegalCopy = {
       },
       {
         title: '8. Vos données vous appartiennent',
-        body: 'Votre profil de peau, vos sessions solaires, votre journal de crème solaire, vos profils familiaux et votre historique vous appartiennent et sont stockés sur votre appareil. Nous ne revendiquons aucune licence sur eux et nous n\u2019y accédons jamais. Vous êtes responsable de l\u2019exactitude des informations que vous saisissez - les conseils de l\u2019App ne valent que par le type de peau, le SPF et les détails vestimentaires que vous lui indiquez.'
+        body: 'Votre profil de peau, vos sessions solaires, votre journal de crème solaire, vos profils familiaux et votre historique vous appartiennent. Ils sont stockés sur votre appareil et, si vous utilisez iCloud, dans votre propre compte iCloud privé. Nous ne revendiquons aucune licence sur eux et nous n\u2019y accédons jamais. Vous êtes responsable de l\u2019exactitude des informations que vous saisissez - les conseils de l\u2019App ne valent que par le type de peau, le SPF et les détails vestimentaires que vous lui indiquez.'
       },
       {
         title: '9. Services tiers',

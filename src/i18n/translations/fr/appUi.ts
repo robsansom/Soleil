@@ -1,72 +1,69 @@
-/** Copy inside the hand-built app-UI recreations — ported from the
- *  previous Soleil site so the components keep localising. These
- *  mirror the real Your Day / Your Sun / Real Sun screens; the
- *  sample values are plausible, not live data. */
+/** Copy inside the hand-built app-UI recreations. Uses the app's own
+ *  translations wherever the app already says it. Sample values only. */
 import type { AppUiCopy } from '../../types';
 
 export const appUi: AppUiCopy = {
     phoneScreen: {
       statusTime: '09:41',
-      headline: 'La chaleur du jour est là',
+      subtitle: 'La chaleur du jour est là',
       rightNow: 'En ce moment',
-      tabs: ['Votre journée', 'Votre soleil', 'Vous'],
-      searchLabel: 'Rechercher',
-      addLabel: 'Ajouter'
+      tabs: ['Votre journée', 'Votre soleil', 'Vous']
     },
-    sunWindow: {
+    uvNow: {
       location: 'Santa Monica',
-      conditions: 'Ensoleillé \u00b7 Max:24\u00b0 Min:16\u00b0',
-      uvNowLabel: 'UV maintenant',
+      label: 'UV maintenant',
       time: '12:32',
       value: '6',
       category: 'Élevé',
       livePill: 'UV en direct',
       guidance: 'Soleil fort jusqu’à 16 h. Limitez l’exposition directe et cherchez l’ombre.',
-      axis: ['9 h', '11 h', '13 h'],
+      axis: ['9 h', '11 h', '13 h', '15 h'],
+      peak: 'Pic 8 · 13:00',
       tiles: [
         { label: 'Pic UV', value: '8', caption: 'Pic à 13:00' },
         { label: 'Niveau UV', value: 'Élevé' },
-        { label: 'Nébulosité', value: '18 %' },
+        { label: 'Couverture nuageuse', value: '18 %' },
         { label: 'Humidité', value: '54 %' }
-      ],
-      peakLabel: 'Pic UV',
-      peakValue: '8 à 13:00',
-      notifTime: 'maintenant',
-      notifTitle: 'Pic UV à 13:00',
-      notifBody: 'L’UV devrait atteindre 8 aujourd’hui.'
-    },
-    session: {
-      header: 'Session en direct',
-      uvChip: 'UV 6 · Élevé',
-      elapsed: '18:42',
-      elapsedLabel: 'écoulées',
-      peopleLabel: 'Vos proches',
-      people: [
-        { name: 'Vous', status: 'SPF 50 · appliqué il y a 12 min' },
-        { name: 'Maya', status: 'SPF 30 · appliqué il y a 40 min' }
-      ],
-      pause: 'Pause',
-      stop: 'Arrêter la session',
-      reapplyTitle: 'Remettez de la crème',
-      reapplyBody: 'Deux heures depuis l’application. Réappliquez plus tôt après l’eau, la transpiration ou la serviette.'
-    },
-    realSun: {
-      header: 'Temps à la lumière du jour',
-      value: '195 min',
-      daylightLabel: 'Lumière du jour',
-      hourlyLabel: 'UV par heure',
-      axis: ['9:00', 'Midi', '15:00'],
-      detailsRow: 'Voir le détail de la journée',
-      watchChip: 'Depuis l\u2019Apple Watch'
+      ]
     },
     protection: {
-      title: 'Point protection',
+      label: 'Protection',
+      state: 'À vérifier',
+      title: 'Une protection est recommandée maintenant',
+      body: 'Utilisez l’ombre, des vêtements et de la crème solaire sur la peau exposée.',
       skinLabel: 'Type de peau',
-      skinValue: 'III',
+      skinValue: 'Type III',
       spfLabel: 'SPF',
       spfValue: '50',
       coverLabel: 'Couverture',
-      coverValue: 'Chapeau + ombre',
-      action: 'Noter la crème'
+      coverValue: 'Chapeau + ombre'
+    },
+    reminders: {
+      label: 'Alertes',
+      state: 'Alertes prêtes',
+      title: 'Réappliquer avant 14 h 40',
+      body: 'Deux heures au maximum, plus tôt après l’eau, la transpiration ou la serviette.',
+      activity: 'Activité en direct active'
+    },
+    outing: {
+      label: 'Sortie en cours',
+      outsideFor: 'Dehors depuis',
+      elapsed: '18:42',
+      uvLine: 'UV 6 · Élevé',
+      footnote: 'Temps écoulé, et non un compte à rebours de temps sûr'
+    },
+    people: {
+      label: 'Vos proches',
+      childBadge: 'Enfant',
+      list: [
+        { name: 'Vous', child: false, detail: 'Type III · SPF 50, appliqué il y a 12 min' },
+        { name: 'Maya', child: true, detail: 'Type II · SPF 50, appliqué il y a 40 min' }
+      ]
+    },
+    daylight: {
+      label: 'Temps à la lumière du jour',
+      source: 'Depuis l’Apple Watch',
+      value: '195 min',
+      axis: ['9:00', 'Midi', '15:00']
     }
 };

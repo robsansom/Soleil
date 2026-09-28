@@ -7,14 +7,17 @@
  *
  * Each card carries a hand-built recreation of the matching app surface
  * (src/components/app/), not a screenshot — so it stays crisp and
- * localises with the rest of the page.
+ * localises with the rest of the page. The six colours are the app's own
+ * feature colours (SunkindDesignTokens.Card), which the app took from
+ * these cards, so a card and the surface it holds share one colour.
  */
-import SunWindowCard from '../app/SunWindowCard.astro';
-import ProtectionCard from '../app/ProtectionCard.astro';
-import SunscreenCard from '../app/SunscreenCard.astro';
-import SessionCard from '../app/SessionCard.astro';
-import FamilyCard from '../app/FamilyCard.astro';
-import RealSunCard from '../app/RealSunCard.astro';
+import AppSlice from '../app/AppSlice.astro';
+import UvNowCard from '../app/cards/UvNowCard.astro';
+import ProtectionCard from '../app/cards/ProtectionCard.astro';
+import RemindersCard from '../app/cards/RemindersCard.astro';
+import OutingCard from '../app/cards/OutingCard.astro';
+import PeopleCard from '../app/cards/PeopleCard.astro';
+import DaylightCard from '../app/cards/DaylightCard.astro';
 import { useTranslations } from '../../i18n/utils';
 
 const t = useTranslations(Astro.currentLocale);
@@ -59,12 +62,14 @@ const cards = toolkit.cards.map((card, i) => ({ ...card, ...looks[i] }));
               <h3 class="display-md tcard__title">{card.title}</h3>
               <p class="tcard__body">{card.body}</p>
               <div class="tcard__figure">
-                {i === 0 && <SunWindowCard chip />}
-                {i === 1 && <ProtectionCard />}
-                {i === 2 && <SunscreenCard />}
-                {i === 3 && <SessionCard />}
-                {i === 4 && <FamilyCard />}
-                {i === 5 && <RealSunCard />}
+                <AppSlice label={card.title}>
+                  {i === 0 && <UvNowCard peak compact />}
+                  {i === 1 && <ProtectionCard />}
+                  {i === 2 && <RemindersCard />}
+                  {i === 3 && <OutingCard />}
+                  {i === 4 && <PeopleCard />}
+                  {i === 5 && <DaylightCard />}
+                </AppSlice>
               </div>
             </div>
           </li>

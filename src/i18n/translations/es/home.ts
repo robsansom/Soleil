@@ -49,13 +49,13 @@ export const home: HomeCopy = {
       },
       {
         tag: 'Al aire libre',
-        title: 'Sesiones',
-        body: 'Empieza una salida y Soleil mantiene en el mismo sitio el tiempo transcurrido y la protección de cada persona.',
+        title: 'Temporizador de sol',
+        body: 'Empieza una salida y Soleil reúne el tiempo transcurrido, la protección de cada persona y sus recordatorios. Daily Glow añade una rutina guiada opcional.',
       },
       {
         tag: 'Tu gente',
         title: 'Familia',
-        body: 'Perfiles para las personas que cuidas, un vistazo rápido a quién está protegido y recordatorios independientes.',
+        body: 'Perfiles para las personas que cuidas, cada una con su tipo de piel y sus propios recordatorios de reaplicación.',
       },
       {
         tag: 'Apple Watch',
@@ -79,7 +79,7 @@ export const home: HomeCopy = {
       },
       {
         title: 'Empieza el día',
-        body: 'Inicia una sesión para quien esté fuera y mantén los recordatorios en orden.',
+        body: 'Inicia el temporizador de sol para quien esté fuera y mantén los recordatorios en orden.',
       },
       {
         title: 'Mira tu Real Sun',
@@ -88,14 +88,14 @@ export const home: HomeCopy = {
     ],
   },
 
-  sunWindow: {
-    eyebrow: 'La Sun Window',
+  uvNow: {
+    eyebrow: 'UV actual',
     headline: 'La respuesta UV, de un vistazo',
     steps: [
       {
         label: 'Una tarjeta',
         title: 'Abres Soleil y el cielo responde primero.',
-        body: 'Nada que descifrar. La Sun Window empieza por el índice UV en directo donde estás.',
+        body: 'Nada que descifrar. Tu día se abre con el índice UV en directo donde estás.',
       },
       {
         label: 'El dato',
@@ -114,7 +114,7 @@ export const home: HomeCopy = {
       },
     ],
     imageAlt:
-      'La Sun Window de Soleil en iPhone: UV en directo, pico del día y comprobación de protección',
+      'La pantalla Tu día de Soleil en iPhone: UV en directo, pico del día y las condiciones del momento',
   },
 
   moments: {
@@ -137,15 +137,15 @@ export const home: HomeCopy = {
   why: {
     eyebrow: 'Por qué Soleil',
     headline: 'Útil, y tuya',
-    body: 'Todo lo que Soleil aprende sobre tu sol se queda en tu iPhone. Sin cuenta que crear, sin analíticas, sin publicidad, sin seguimiento entre apps.',
+    body: 'Todo lo que Soleil aprende sobre tu sol sigue siendo tuyo: en tu iPhone y, si sincronizas, en tu iCloud privado. Sin cuenta que crear, sin analíticas, sin publicidad, sin seguimiento entre apps.',
     badges: [
       'UV local en directo',
       'Privada por defecto',
       'Sin cuenta',
       'Lista para la familia',
       'Apple Watch',
-      'Recordatorios prácticos',
-      'Tu día, en contexto',
+      'Rutina Daily Glow',
+      'Sincronización privada con iCloud',
       'Widgets',
       'Actividad en vivo',
       'Avisos de pico UV',
@@ -203,7 +203,7 @@ export const home: HomeCopy = {
     body: 'UV en directo, una comprobación de protección para tu piel y recordatorios que siguen el ritmo del día.',
     note: 'iPhone y Apple Watch',
     privacy:
-      'Sin cuenta. Sin seguimiento. Tu historial se queda en tu dispositivo.',
+      'Sin cuenta. Sin seguimiento. Tu historial se queda en tus dispositivos y en tu propio iCloud.',
     imageAlt: 'El icono de la app Soleil: un sol dorado sobre un cielo azul',
   },
 };

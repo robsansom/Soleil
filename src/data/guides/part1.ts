@@ -58,8 +58,8 @@ export const part1: Guide[] = [
         'It deliberately frames the number as a check, not permission: reapplying sunscreen never “resets” your time outside. Start a session when you head out and Soleil keeps watch while you enjoy the day.',
       ],
       screenshot: {
-        src: '/images/screen-home.png',
-        alt: 'Soleil Your Day tab showing the Sun Window: live UV index, burn risk and SPF for San Francisco',
+        src: '/images/app/live-outing.webp',
+        alt: 'Soleil’s live outing: 18 minutes outside at UV 10, labelled as elapsed time, not a safe-time countdown, with a protection check and sunscreen alerts',
       },
     },
     faqs: [
@@ -125,12 +125,12 @@ export const part1: Guide[] = [
     soleil: {
       heading: 'Know the UV without thinking about it',
       paragraphs: [
-        'Soleil’s Your Day tab reads the live UV index for your exact location and turns it into one clear headline, the <strong>Sun Window</strong>, plus the day’s peak time, hourly curve and cloud cover. When UV crosses 3, it says protection is recommended, plainly.',
+        'Soleil’s Your Day tab reads the live UV index for your exact location and leads with it in one card, <strong>UV now</strong>, plus the day’s peak time, hourly curve and cloud cover. When UV crosses 3, it says protection is recommended, plainly.',
         'Home Screen and Apple Watch widgets keep the current UV one glance away, and optional peak-UV alerts warn you before the strongest part of the day.',
       ],
       screenshot: {
-        src: '/images/screen-home.png',
-        alt: 'Soleil app showing live UV index of 0, no burn risk, with the day’s UV curve',
+        src: '/images/app/uv-index.webp',
+        alt: 'Soleil’s UV Index sheet: UV 10, Very High, with the day’s curve peaking around midday and the UV scale beneath it',
       },
     },
     faqs: [
@@ -190,8 +190,8 @@ export const part1: Guide[] = [
         'Because Soleil tracks the sessions you actually did, you can build colour across a week without silently stacking three long days back-to-back, and reapply reminders fire on schedule, sooner after swimming or towel-drying.',
       ],
       screenshot: {
-        src: '/images/screen-your-sun.png',
-        alt: 'Soleil Your Sun tab with sun timer and Daily Glow guided session options',
+        src: '/images/app/your-sun.webp',
+        alt: 'Soleil’s Your Sun tab: start the Sun timer or a Daily Glow routine, with a protection note before you go',
       },
     },
     faqs: [
@@ -254,8 +254,8 @@ export const part1: Guide[] = [
         'Crucially, Soleil never treats a reapplication as extra permitted time outside: the session clock keeps running, and protection checks stay honest.',
       ],
       screenshot: {
-        src: '/images/screen-family.png',
-        alt: 'Soleil You tab showing family profiles with per-person protection guidance',
+        src: '/images/app/live-outing.webp',
+        alt: 'Soleil’s live outing: elapsed time outside, a protection check and sunscreen reminder alerts',
       },
     },
     faqs: [
@@ -316,8 +316,8 @@ export const part1: Guide[] = [
         'With Pro, <strong>Real Sun</strong> places your Apple Watch Time in Daylight against the day’s UV curve, so you can see whether your outdoor time landed in gentle morning light or the strong midday window that drives synthesis, and answer “did I actually get outside enough this week?” from real data.',
       ],
       screenshot: {
-        src: '/images/screen-your-sun.png',
-        alt: 'The Soleil Your Sun tab: a running session and today\u2019s time outside',
+        src: '/images/app/your-sun.webp',
+        alt: 'The Soleil Your Sun tab: time outside, kept simple, with the Sun timer and Daily Glow',
       },
     },
     faqs: [

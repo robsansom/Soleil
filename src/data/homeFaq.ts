@@ -65,10 +65,10 @@ export const homeFaqs: HomeFaq[] = [
   },
   {
     q: 'Is Soleil free?',
-    a: 'Free covers today: live UV, a basic Sun Window, a basic session, your skin profile and recent history. Soleil Pro adds Daily Glow setup, full family history and widgets, full trends and the AI skin scan: $3.99/week, $19.99/year, or $69.99 once.',
+    a: 'Free covers today: live UV and today’s conditions, the Sun timer, your skin profile and recent history. Soleil Pro adds Daily Glow setup, full family history and widgets, full trends and the AI skin scan: $2.49/week, $29.99/year, or $79.99 once.',
   },
   {
     q: 'Does Soleil track me or need an account?',
-    a: 'No account, no analytics, no third-party SDKs. Your skin profile, sessions, family profiles and history stay on your iPhone. Location is used only to fetch local UV from Apple WeatherKit.',
+    a: 'No account, no analytics, no third-party SDKs. Your skin profile, sessions, family profiles and history stay on your devices, synced only through your own private iCloud if you use it. Location is used only to fetch local UV from Apple WeatherKit.',
   },
 ];

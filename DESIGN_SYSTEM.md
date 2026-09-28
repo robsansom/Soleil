@@ -81,7 +81,7 @@ copy supplies an array of lines, so a translator can rebreak them.
 | Plop | `scale .87 → 1`, rotate `−5° → tilt`, `--ease-plop`, ~850ms |
 | Slide with weight | y 26px, `--ease-weight` (`cubic-bezier(.32,.72,0,1)`) |
 | Sticker settle | y 90%, rotate `−8° → tilt`, elastic, 70ms stagger |
-| Sequence | Sun Window only: ScrollTrigger scrub over a bounded 300vh |
+| Sequence | UV now scene only: ScrollTrigger scrub over a bounded 300vh |
 
 Rules: no standing `requestAnimationFrame` loop; the badge drift only runs while
 a pointer moves; GSAP is dynamically imported and only on ≥1000px; reduced
@@ -89,12 +89,21 @@ motion removes parallax, scrubbing and entrances without removing content.
 
 ## App-UI recreations
 
-`src/components/app/` holds hand-built recreations of the app's surfaces —
-Sun Window, detail tiles, protection check, session, family, sunscreen timing
-and Real Sun. They are HTML/CSS, never screenshots, so they stay crisp at any
-size and translate through `appUi` in the locale files. The shared shell lives
-in `src/styles/app-ui.css` and re-maps the page tokens onto `--ui-*` variables,
-so a card can sit on any scene tone.
+`src/components/app/cards/` holds hand-built recreations of the app's cards —
+UV now, the condition tiles, protection, sunscreen alerts, the live outing,
+your people and Time in Daylight. Since the app's September 2026 re-skin they
+are the app's own design, not an approximation: the same fixed colour per
+feature (`SunkindDesignTokens.Card`, which the app took from this site's
+toolkit cards), paper stickers as card headings, ink stickers as section
+headings, 34pt card radius. Sizes are the app's points over its 16pt body, so
+`--ui-size` scales a surface without breaking a proportion.
+
+They are HTML/CSS, never screenshots, so they stay crisp and translate through
+`appUi` in the locale files, which reuses the app's own translations where the
+app already says something. `AppSlice.astro` sets them on the app's paper
+ground — without it a cyan card would vanish into a cyan scene — and
+`PhoneScreen.astro` stacks them into the hero's Your Day screen. The shared
+styles live in `src/styles/app-ui.css`.
 
 Structure must track the real app screens. The sample values are plausible, not
 live, and must agree with the surrounding copy — never a countdown, never a

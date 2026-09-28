@@ -50,10 +50,13 @@ function splitWords(root: ParentNode) {
  * hidden by `[data-reveal]`, so nothing flashes.
  */
 function markAppSurfaces() {
+  // A card's own ground stays put and what is printed on it arrives: its
+  // stickers, figures and rows, then anything standing on the paper
+  // between cards (a section sticker).
   const PARTS = [
-    '.ui-card > *:not(:has(li)):not(.ui-tiles)',
-    '.ui-card .ui-tiles > *',
+    '.ui-card > *:not(:has(li))',
     '.ui-card li',
+    '.ui-screen > :not(.ui-card):not(:has(.ui-card))',
   ].join(', ');
 
   for (const surface of document.querySelectorAll<HTMLElement>('.app-ui')) {
@@ -97,7 +100,7 @@ function initReveals() {
   targets.forEach((target) => observer.observe(target));
 }
 
-/* The Sun Window sequence --------------------------------------------- */
+/* The UV now sequence ------------------------------------------------- */
 
 async function initSequence() {
   const section = document.querySelector<HTMLElement>('[data-sequence]');

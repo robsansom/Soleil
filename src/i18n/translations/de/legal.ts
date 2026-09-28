@@ -4,11 +4,11 @@ import type { LegalCopy } from '../../types';
 export const legal: LegalCopy = {
   privacyPage: {
     metaTitle: 'Datenschutzerklärung - Soleil',
-    metaDescription: 'Wie Soleil mit Ihren Daten umgeht. Kein Account. Kein Tracking. Ihr Hautprofil, Ihre Sessions und Ihr Verlauf bleiben auf Ihrem Gerät.',
+    metaDescription: 'Wie Soleil mit Ihren Daten umgeht. Kein Account. Kein Tracking. Ihr Hautprofil, Ihre Sessions und Ihr Verlauf bleiben auf Ihren Geräten und in Ihrer privaten iCloud.',
     eyebrow: 'Rechtliches',
     headline: 'Privatsphäre.',
     headlineDim: 'Von Haus aus.',
-    lastUpdated: '4. Juli 2026',
+    lastUpdated: '28. September 2026',
     intro: 'Diese Erklärung beschreibt in einfacher Sprache, was Soleil mit Ihren Informationen macht. Die Kurzfassung: absichtlich sehr wenig.',
     promisesTitle: 'Unsere Versprechen',
     promises: [
@@ -26,11 +26,11 @@ export const legal: LegalCopy = {
       },
       {
         title: 'Die Kurzfassung',
-        body: 'Die App hat keinen Soleil-Account und keinen vom Entwickler betriebenen Inhaltsserver. Ihr Hautprofil, Ihre Sonnensessions, Ihr Sonnencreme-Protokoll, Ihre Familienprofile und Ihr Verlauf werden mit Apples Standard-Frameworks auf Ihrem Gerät gespeichert. Wir erhalten sie nicht. Die App enthält keine Werbung, kein App-übergreifendes Tracking und kein Analyse-SDK von Drittanbietern. Informationen, die Sie an den Support senden, technische Website-Logs unseres Hosting-Anbieters und Informationen, die Apple Entwicklern bereitstellt, werden unten beschrieben.'
+        body: 'Die App hat keinen Soleil-Account und keinen vom Entwickler betriebenen Inhaltsserver. Ihr Hautprofil, Ihre Sonnensessions, Ihr Sonnencreme-Protokoll, Ihre Familienprofile und Ihr Verlauf werden mit Apples Standard-Frameworks auf Ihrem Gerät gespeichert und, wenn Sie iCloud nutzen, über Ihren privaten iCloud-Account zwischen Ihren eigenen Geräten synchronisiert. Wir erhalten sie nicht und können sie nicht lesen. Die App enthält keine Werbung, kein App-übergreifendes Tracking und kein Analyse-SDK von Drittanbietern. Informationen, die Sie an den Support senden, technische Website-Logs unseres Hosting-Anbieters und Informationen, die Apple Entwicklern bereitstellt, werden unten beschrieben.'
       },
       {
         title: 'Welche Daten die App verarbeitet und wo sie liegen',
-        body: 'Auf Ihrem Gerät werden Ihr Fitzpatrick-Hauttyp, Ihre LSF- und Kleidungsangaben, Sonnensessions, Familienprofile und Ihr Verlauf lokal mit Apples SwiftData-Framework gespeichert. Soleil betreibt keine separate Datenbank mit diesen Informationen und bietet uns keine Möglichkeit, sie einzusehen. Familienprofile sind einfache lokale Einträge, die Sie anlegen - Soleil kontaktiert oder identifiziert die darin beschriebenen Personen nicht.'
+        body: 'Auf Ihrem Gerät werden Ihr Fitzpatrick-Hauttyp, Ihre LSF- und Kleidungsangaben, Sonnensessions, Familienprofile, gespeicherte Orte, Fortschrittsfotos und Ihr Verlauf mit Apples SwiftData-Framework gespeichert. Ist iCloud für Ihren Apple Account aktiviert, synchronisiert SwiftData diese Daten außerdem über die private Datenbank Ihres eigenen iCloud-Accounts zwischen Ihren Geräten; Apple speichert sie dort nach Apples eigenen Bedingungen. Diese private Datenbank gehört zu Ihrem Apple Account: Soleil betreibt keine separate Datenbank mit diesen Informationen, und weder Apples Werkzeuge noch die App geben uns eine Möglichkeit, sie einzusehen. Sie können iCloud für Soleil in den iOS-Einstellungen deaktivieren, damit die Daten nur auf dem Gerät bleiben. Familienprofile sind einfache Einträge, die Sie anlegen - Soleil kontaktiert oder identifiziert die darin beschriebenen Personen nicht.'
       },
       {
         title: 'Standort und Wetter',
@@ -70,11 +70,11 @@ export const legal: LegalCopy = {
       },
       {
         title: 'Kinder',
-        body: 'Soleil richtet sich an ein allgemeines Publikum und nicht gezielt an Kinder. Familienprofile für Kinder werden von der erwachsenen Person angelegt und kontrolliert, der das Gerät gehört, und bleiben auf diesem Gerät. Wir verlangen weder ein Konto noch eine Altersangabe. Wenn ein Kind dem Support schreibt, verwenden wir die Nachricht nur, um zu antworten und die Anfrage zu bearbeiten. Ein Elternteil oder Erziehungsberechtigter kann uns zu dieser Korrespondenz kontaktieren.'
+        body: 'Soleil richtet sich an ein allgemeines Publikum und nicht gezielt an Kinder. Familienprofile für Kinder werden von der erwachsenen Person angelegt und kontrolliert, der das Gerät gehört, und bleiben auf deren Geräten und in deren eigener privater iCloud. Wir verlangen weder ein Konto noch eine Altersangabe. Wenn ein Kind dem Support schreibt, verwenden wir die Nachricht nur, um zu antworten und die Anfrage zu bearbeiten. Ein Elternteil oder Erziehungsberechtigter kann uns zu dieser Korrespondenz kontaktieren.'
       },
       {
         title: 'Ihre Rechte',
-        body: 'Je nach Wohnort haben Sie möglicherweise Rechte an personenbezogenen Informationen in unserer Verantwortung, darunter Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung oder Widerspruch sowie das Recht auf Beschwerde bei einer Aufsichtsbehörde. Diese Rechte unterliegen gesetzlichen Grenzen. Wenden Sie sich für eine Anfrage an support@getsoleil.com. Personen mit Wohnsitz im Vereinigten Königreich können sich beim Information Commissioner\u2019s Office unter ico.org.uk beschweren. Inhalte, die nur auf Ihrem Gerät gespeichert sind, verwalten Sie bitte über die App oder Ihr Gerät, da wir keine Kopie besitzen.'
+        body: 'Je nach Wohnort haben Sie möglicherweise Rechte an personenbezogenen Informationen in unserer Verantwortung, darunter Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung oder Widerspruch sowie das Recht auf Beschwerde bei einer Aufsichtsbehörde. Diese Rechte unterliegen gesetzlichen Grenzen. Wenden Sie sich für eine Anfrage an support@getsoleil.com. Personen mit Wohnsitz im Vereinigten Königreich können sich beim Information Commissioner\u2019s Office unter ico.org.uk beschweren. Inhalte, die auf Ihren Geräten oder in Ihrer privaten iCloud gespeichert sind, verwalten Sie bitte über die App, Ihr Gerät oder Ihre iCloud-Einstellungen, da wir keine Kopie davon haben.'
       },
       {
         title: 'Änderungen an dieser Erklärung',
@@ -106,8 +106,8 @@ export const legal: LegalCopy = {
         a: 'Beim Onboarding kannst du ein paar Fragen beantworten, den Kamera-Scan nutzen oder deinen Fitzpatrick-Typ direkt auswählen. Der optionale KI-gestützte Scan sendet ein einziges Foto durch einen sicheren Proxy, nur um den Hautton zu schätzen - oder du behältst alles auf dem Gerät. Deinen Hauttyp kannst du jederzeit im Tab "Du" ändern.'
       },
       {
-        q: 'Wie funktionieren Familienprofile und Check-ins?',
-        a: 'Füge die Menschen, um die du dich kümmerst, im Tab "Du" hinzu und wähle beim Start einer Session, wer draußen ist. Ein Check-in fragt, wer gerade abgedeckt ist, und Soleil plant Nachcreme-Erinnerungen für jede Person. Alles bleibt auf deinem Gerät - nichts wird geteilt oder hochgeladen. Pro ergänzt den vollen Familienverlauf und das Familien-Status-Widget.'
+        q: 'Wie funktionieren Familienprofile?',
+        a: 'Füge die Menschen, um die du dich kümmerst, im Tab "Du" hinzu und wähle beim Start des Sonnen-Timers, wer draußen ist. Jede Person behält ihren eigenen Hauttyp, und Soleil plant Nachcreme-Erinnerungen für jede von ihnen. Familiendaten bleiben auf deinen Geräten und in deiner eigenen privaten iCloud - nichts wird mit uns geteilt. Pro ergänzt den vollen Familienverlauf und das Familien-Status-Widget.'
       },
       {
         q: 'Was brauche ich für die Apple Watch Funktionen?',
@@ -119,7 +119,7 @@ export const legal: LegalCopy = {
       },
       {
         q: 'Was steckt in Soleil Pro und was kostet es?',
-        a: 'Kostenlos deckt das Heute ab: Live-UV, eine einfache Schutzzeit, eine einfache Session, dein Hautprofil und der jüngste Verlauf. Pro ergänzt die Daily-Glow-Einrichtung, den vollen Familienverlauf samt Familien-Widget, alle Trends und Einblicke, den KI-Hautscan und die weiteren Widgets. Es kostet 3,99 $/Woche, 19,99 $/Jahr oder einmalig 69,99 $.'
+        a: 'Kostenlos deckt das Heute ab: Live-UV und die Bedingungen des Tages, den Sonnen-Timer, dein Hautprofil und den jüngsten Verlauf. Pro ergänzt die Daily-Glow-Einrichtung, den vollen Familienverlauf samt Familien-Widget, alle Trends und Einblicke, den KI-Hautscan und die weiteren Widgets. Es kostet 2,49 $/Woche, 29,99 $/Jahr oder einmalig 79,99 $. Preise können je nach Land abweichen - Apple zeigt dir deinen vor dem Kauf.'
       },
       {
         q: 'Wie kündige ich ein Pro-Abo?',
@@ -145,7 +145,7 @@ export const legal: LegalCopy = {
     eyebrow: 'Rechtliches',
     headline: 'Nutzungs-',
     headlineDim: 'bedingungen.',
-    lastUpdated: '4. Juli 2026',
+    lastUpdated: '28. September 2026',
     intro: 'Diese Bedingungen gelten, wenn Sie die Soleil iOS-App laden oder nutzen ("Soleil", "wir", "uns"). Mit der Nutzung von Soleil stimmen Sie ihnen zu, zusammen mit Apples Standard-EULA. Sie sind bewusst in einfacher Sprache geschrieben.',
     tldrTitle: 'Kurz gesagt',
     tldr: [
@@ -198,7 +198,7 @@ export const legal: LegalCopy = {
       },
       {
         title: '8. Ihre Daten gehören Ihnen',
-        body: 'Ihr Hautprofil, Ihre Sonnensessions, Ihr Sonnencreme-Protokoll, Ihre Familienprofile und Ihr Verlauf gehören Ihnen und werden auf Ihrem Gerät gespeichert. Wir beanspruchen keine Lizenz daran und greifen niemals darauf zu. Für die Richtigkeit Ihrer Angaben sind Sie verantwortlich - die Hinweise der App sind nur so gut wie die Hauttyp-, LSF- und Kleidungsangaben, die Sie ihr geben.'
+        body: 'Ihr Hautprofil, Ihre Sonnensessions, Ihr Sonnencreme-Protokoll, Ihre Familienprofile und Ihr Verlauf gehören Ihnen. Sie werden auf Ihrem Gerät gespeichert und, wenn Sie iCloud nutzen, in Ihrem eigenen privaten iCloud-Account. Wir beanspruchen keine Lizenz daran und greifen niemals darauf zu. Für die Richtigkeit Ihrer Angaben sind Sie verantwortlich - die Hinweise der App sind nur so gut wie die Hauttyp-, LSF- und Kleidungsangaben, die Sie ihr geben.'
       },
       {
         title: '9. Dienste von Drittanbietern',

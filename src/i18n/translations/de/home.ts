@@ -49,13 +49,13 @@ export const home: HomeCopy = {
       },
       {
         tag: 'Draußen',
-        title: 'Sessions',
-        body: 'Starte einen Ausflug: Soleil hält verstrichene Zeit und den Schutz aller an einem Ort fest.',
+        title: 'Sonnen-Timer',
+        body: 'Starte einen Ausflug: Soleil hält verstrichene Zeit, den Schutz aller und ihre Erinnerungen zusammen. Daily Glow ergänzt eine optionale geführte Routine.',
       },
       {
         tag: 'Deine Leute',
         title: 'Familie',
-        body: 'Profile für alle, um die du dich kümmerst, ein schneller Blick auf den Schutzstatus und eigene Erinnerungen pro Person.',
+        body: 'Profile für alle, um die du dich kümmerst, jeweils mit eigenem Hauttyp und eigenen Nachcreme-Erinnerungen.',
       },
       {
         tag: 'Apple Watch',
@@ -79,7 +79,7 @@ export const home: HomeCopy = {
       },
       {
         title: 'Starte den Tag',
-        body: 'Starte eine Session für alle, die draußen sind, und halte die Creme-Erinnerungen in Ordnung.',
+        body: 'Starte den Sonnen-Timer für alle, die draußen sind, und halte die Creme-Erinnerungen in Ordnung.',
       },
       {
         title: 'Sieh dein Real Sun',
@@ -88,14 +88,14 @@ export const home: HomeCopy = {
     ],
   },
 
-  sunWindow: {
-    eyebrow: 'Das Sun Window',
+  uvNow: {
+    eyebrow: 'UV jetzt',
     headline: 'Die UV-Antwort, auf einen Blick',
     steps: [
       {
         label: 'Eine Karte',
         title: 'Du öffnest Soleil, und der Himmel antwortet zuerst.',
-        body: 'Nichts zu entziffern. Das Sun Window beginnt mit dem Live-UV-Index an deinem Standort.',
+        body: 'Nichts zu entziffern. Dein Tag beginnt mit dem Live-UV-Index an deinem Standort.',
       },
       {
         label: 'Der Messwert',
@@ -114,7 +114,7 @@ export const home: HomeCopy = {
       },
     ],
     imageAlt:
-      'Das Sun Window von Soleil auf dem iPhone: Live-UV, Tagesmaximum und Schutz-Check',
+      'Der Bildschirm „Dein Tag“ von Soleil auf dem iPhone: Live-UV, Tagesmaximum und die Bedingungen dahinter',
   },
 
   moments: {
@@ -137,15 +137,15 @@ export const home: HomeCopy = {
   why: {
     eyebrow: 'Warum Soleil',
     headline: 'Nützlich, und deins',
-    body: 'Alles, was Soleil über deine Sonne lernt, bleibt auf deinem iPhone. Kein Account, keine Analytics, keine Werbung, kein app-übergreifendes Tracking.',
+    body: 'Alles, was Soleil über deine Sonne lernt, bleibt deins: auf deinem iPhone und, wenn du synchronisierst, in deiner privaten iCloud. Kein Account, keine Analytics, keine Werbung, kein app-übergreifendes Tracking.',
     badges: [
       'Live-UV vor Ort',
       'Privat von Haus aus',
       'Ohne Account',
       'Familientauglich',
       'Apple Watch',
-      'Praktische Erinnerungen',
-      'Dein Tag, im Kontext',
+      'Daily Glow Routine',
+      'Private iCloud-Synchronisierung',
       'Widgets',
       'Live-Aktivität',
       'Warnung beim UV-Maximum',
@@ -203,7 +203,7 @@ export const home: HomeCopy = {
     body: 'Live-UV, ein Schutz-Check für deine Haut und Erinnerungen, die mit dem Tag Schritt halten.',
     note: 'iPhone und Apple Watch',
     privacy:
-      'Kein Account. Kein Tracking. Deine Historie bleibt auf deinem Gerät.',
+      'Kein Account. Kein Tracking. Deine Historie bleibt auf deinen Geräten und in deiner eigenen iCloud.',
     imageAlt: 'Das Soleil-App-Symbol: eine goldene Sonne an blauem Himmel',
   },
 };

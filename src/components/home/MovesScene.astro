@@ -1,6 +1,7 @@
 ---
 /** Scene 3 — four crooked process cards. One designed cluster on
  *  desktop, a peeking snap strip on mobile. */
+import RailArrows from '../site/RailArrows.astro';
 import { useTranslations } from '../../i18n/utils';
 
 const t = useTranslations(Astro.currentLocale);
@@ -21,13 +22,16 @@ const looks = [
     <div class="wrap moves__head">
       <p class="eyebrow" data-reveal="up">{moves.eyebrow}</p>
       <h2 class="display-xl" data-reveal="up">{moves.headline}</h2>
+      {/* Only while the cards are a strip (below 900px). */}
+      <RailArrows class="moves__arrows" />
     </div>
 
-    <ol class="moves__cluster">
+    <ol class="moves__cluster" data-rail tabindex="0" aria-label={moves.headline}>
       {
         moves.steps.map((step, i) => (
           <li
             class="mcard"
+            data-rail-item
             data-tone={looks[i].tone}
             style={`--tilt:${looks[i].tilt}deg; --i:${i}`}
             data-reveal="plop"
@@ -74,6 +78,10 @@ const looks = [
 
   .moves__head h2 {
     max-width: 14ch;
+  }
+
+  .moves__head :global(.moves__arrows) {
+    margin-top: 1.25rem;
   }
 
   .moves__cluster {
@@ -150,6 +158,10 @@ const looks = [
   }
 
   @media (min-width: 900px) {
+    .moves__head :global(.moves__arrows) {
+      display: none;
+    }
+
     .moves__cluster {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -184,3 +196,8 @@ const looks = [
     }
   }
 </style>
+
+<script>
+  import { initRail } from '../../scripts/rail';
+  initRail();
+</script>

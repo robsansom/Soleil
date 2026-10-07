@@ -18,6 +18,7 @@ import RemindersCard from '../app/cards/RemindersCard.astro';
 import OutingCard from '../app/cards/OutingCard.astro';
 import PeopleCard from '../app/cards/PeopleCard.astro';
 import DaylightCard from '../app/cards/DaylightCard.astro';
+import RailArrows from '../site/RailArrows.astro';
 import { useTranslations } from '../../i18n/utils';
 
 const t = useTranslations(Astro.currentLocale);
@@ -42,14 +43,7 @@ const cards = toolkit.cards.map((card, i) => ({ ...card, ...looks[i] }));
       <p class="eyebrow" data-reveal="up">{toolkit.eyebrow}</p>
       <h2 class="display-xl" data-reveal="up">{toolkit.headline}</h2>
     </div>
-    <div class="toolkit__arrows">
-      <button type="button" class="rail-btn" data-rail-prev aria-label={toolkit.prev}>
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 12H5M11 6l-6 6 6 6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
-      </button>
-      <button type="button" class="rail-btn" data-rail-next aria-label={toolkit.next}>
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
-      </button>
-    </div>
+    <RailArrows class="toolkit__arrows" />
   </div>
 
   <div class="rail" data-rail tabindex="0" role="group" aria-label={toolkit.railLabel}>
@@ -84,11 +78,14 @@ const cards = toolkit.cards.map((card, i) => ({ ...card, ...looks[i] }));
     overflow: clip;
   }
 
+  /* On a phone the arrows drop under the headline rather than squeezing
+     it; from 900px they sit level with its last line. */
   .toolkit__head {
     display: flex;
+    flex-wrap: wrap;
     align-items: flex-end;
     justify-content: space-between;
-    gap: 2rem;
+    gap: 1.25rem 2rem;
     margin-bottom: clamp(2rem, 4vw, 3rem);
   }
 
@@ -101,39 +98,8 @@ const cards = toolkit.cards.map((card, i) => ({ ...card, ...looks[i] }));
     max-width: 16ch;
   }
 
-  .toolkit__arrows {
-    display: none;
-    gap: 0.5rem;
-    flex: none;
+  .toolkit__head :global(.toolkit__arrows) {
     padding-bottom: 0.5rem;
-  }
-
-  .rail-btn {
-    display: grid;
-    place-items: center;
-    width: 52px;
-    height: 52px;
-    border: none;
-    border-radius: var(--r-pill);
-    background: var(--ink);
-    color: var(--paper);
-    cursor: pointer;
-    transition: transform 0.3s var(--ease-plop), opacity 0.2s linear;
-  }
-
-  .rail-btn svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  .rail-btn:hover {
-    transform: scale(1.08);
-  }
-
-  .rail-btn[disabled] {
-    opacity: 0.28;
-    cursor: default;
-    transform: none;
   }
 
   .rail {
@@ -240,9 +206,6 @@ const cards = toolkit.cards.map((card, i) => ({ ...card, ...looks[i] }));
   }
 
   @media (min-width: 900px) {
-    .toolkit__arrows {
-      display: flex;
-    }
     .tcard {
       width: 372px;
     }

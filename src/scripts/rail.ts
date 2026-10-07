@@ -13,6 +13,11 @@ export function initRail(root: ParentNode = document) {
   const rails = root.querySelectorAll<HTMLElement>('[data-rail]');
 
   rails.forEach((rail) => {
+    // Every scene with a rail calls this, and each call sees every rail on
+    // the page. Bind once, or one click moves two cards.
+    if (rail.dataset.railReady === 'true') return;
+    rail.dataset.railReady = 'true';
+
     const scene = rail.closest('section') ?? document;
     const prev = scene.querySelector<HTMLButtonElement>('[data-rail-prev]');
     const next = scene.querySelector<HTMLButtonElement>('[data-rail-next]');

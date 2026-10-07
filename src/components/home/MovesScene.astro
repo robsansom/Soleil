@@ -80,8 +80,10 @@ const looks = [
     max-width: 14ch;
   }
 
+  /* Room for the headline's descenders: at 0.86 leading the "y" of "day"
+     hangs into this gap, so 1.25rem read as touching. Matches the toolkit. */
   .moves__head :global(.moves__arrows) {
-    margin-top: 1.25rem;
+    margin-top: 1.75rem;
   }
 
   .moves__cluster {

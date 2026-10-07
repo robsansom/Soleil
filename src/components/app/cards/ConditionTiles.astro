@@ -47,9 +47,12 @@ const glyphs = ['arrow', 'drop', 'cloud', 'wind'] as const;
     margin-left: 0.1em;
   }
 
+  /* minmax(0, …): a long label (German "Luftfeuchtigkeit") ellipsizes
+     inside its tile rather than widening the grid, which on a 320px
+     phone pushed the whole scene past the screen edge. */
   .ct__grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.625em;
     width: 100%;
   }

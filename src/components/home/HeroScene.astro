@@ -132,6 +132,9 @@ const { hero } = t.home;
       left: -78%;
       bottom: 24%;
       width: 70%;
+      /* On a landscape phone the device column is narrow enough that 70%
+         left the note one word per line. Two lines is the drawing. */
+      min-width: 11.5rem;
       max-width: none;
       margin-bottom: 0;
     }

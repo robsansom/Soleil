@@ -17,7 +17,7 @@ export const appUi: AppUiCopy = {
       category: '強い',
       livePill: 'ライブUV',
       guidance: '16時まで日差しが強めです。直射日光は短めに、日陰を使いましょう。',
-      axis: ['9時', '11時', '13時', '15時'],
+      axis: ['9時', '12時', '15時'],
       peak: 'ピーク 8・13:00',
       tiles: [
         { label: '最大UV', value: '8', caption: '13:00にピーク' },

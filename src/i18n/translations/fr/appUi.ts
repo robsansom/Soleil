@@ -17,7 +17,7 @@ export const appUi: AppUiCopy = {
       category: 'Élevé',
       livePill: 'UV en direct',
       guidance: 'Soleil fort jusqu’à 16 h. Limitez l’exposition directe et cherchez l’ombre.',
-      axis: ['9 h', '11 h', '13 h', '15 h'],
+      axis: ['9 h', '12 h', '15 h'],
       peak: 'Pic 8 · 13:00',
       tiles: [
         { label: 'Pic UV', value: '8', caption: 'Pic à 13:00' },

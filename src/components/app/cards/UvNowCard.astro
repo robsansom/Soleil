@@ -40,7 +40,8 @@ const line = points.map(([x, y], i) => `${i ? 'L' : 'M'}${x.toFixed(1)} ${y.toFi
 const fill = `${line} L ${W} ${BASE} L 0 ${BASE} Z`;
 
 const NOW = 12 + 32 / 60;
-const ticks = [9, 11, 13, 15];
+/** Three ticks, three hours apart: room for a translated label on a phone. */
+const ticks = [9, 12, 15];
 ---
 
 <article class="ui-card ui-card--cyan uv" style={`--lean:${lean}deg`}>

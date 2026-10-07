@@ -103,6 +103,20 @@ const menuLinks = [
     letter-spacing: -0.045em;
     color: var(--ink);
     text-decoration: none;
+    border-radius: var(--r-pill);
+    transition:
+      background-color 0.2s linear,
+      box-shadow 0.2s linear,
+      padding 0.3s var(--ease-weight);
+  }
+
+  /* Once the page has moved, the wordmark takes the same paper pill as the
+     nav, so it never sits on top of the copy scrolling beneath it. At the
+     top of the hero it stays bare, as drawn. */
+  .hdr.is-scrolled .brand {
+    padding-inline: 0.7rem 1rem;
+    background: rgb(255 253 247 / 0.92);
+    box-shadow: var(--lift-sm);
   }
 
   .hdr__nav {
@@ -267,6 +281,10 @@ const menuLinks = [
     menu.addEventListener('click', (e) => {
       if (e.target instanceof HTMLAnchorElement) close();
     });
+    const header = menu.closest('.hdr');
+    const onScroll = () => header?.classList.toggle('is-scrolled', window.scrollY > 24);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
     // A resize past the desktop breakpoint should not leave the page locked.
     window.addEventListener('resize', () => {
       if (window.innerWidth >= 900 && menu.open) close();

@@ -17,7 +17,7 @@ export const appUi: AppUiCopy = {
       category: 'Alto',
       livePill: 'UV en directo',
       guidance: 'Sol fuerte hasta las 16:00. Limita el sol directo y busca sombra.',
-      axis: ['9:00', '11:00', '13:00', '15:00'],
+      axis: ['9:00', '12:00', '15:00'],
       peak: 'Pico 8 · 13:00',
       tiles: [
         { label: 'UV máximo', value: '8', caption: 'Pico a las 13:00' },

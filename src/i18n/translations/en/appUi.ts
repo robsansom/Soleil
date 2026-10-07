@@ -22,7 +22,7 @@ export const appUi = {
       category: 'High',
       livePill: 'Live UV',
       guidance: 'Strong sun until 4 pm. Keep direct sun short and use shade.',
-      axis: ['9 am', '11 am', '1 pm', '3 pm'],
+      axis: ['9 am', 'Noon', '3 pm'],
       peak: 'Peak 8 · 13:00',
       tiles: [
         { label: 'Peak UV', value: '8', caption: 'Peak at 13:00' },

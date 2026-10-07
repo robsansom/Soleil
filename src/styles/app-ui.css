@@ -42,14 +42,25 @@
 /* A slice of an app screen: the paper ground the cards sit on. It is what
    lets a cyan card read as cyan inside a cyan scene. */
 .ui-screen {
+  /* Concentric corners: the slice's radius is the card's radius plus the
+     gap around it, so the two curves run parallel instead of the card's
+     corner bulging toward the slice's. */
+  --pad: 1em;
+  --inner: 2.125em;
   display: grid;
   gap: 0.75em;
-  padding: 1em;
-  border-radius: 2.125em;
+  padding: var(--pad);
+  border-radius: calc(var(--inner) + var(--pad));
   background: var(--ui-ground);
   box-shadow:
     0 0 0 1px rgb(23 18 14 / 0.06),
     0 1.2em 2.4em -1.4em rgb(23 18 14 / 0.5);
+}
+
+/* Tiles carry the smaller 22pt radius, and they are what sits in the
+   slice's corners when it holds the "Right now" grid. */
+.ui-screen:has(.ui-card--tile) {
+  --inner: 1.375em;
 }
 
 /* Cards --------------------------------------------------------------- */

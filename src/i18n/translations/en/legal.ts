@@ -105,7 +105,7 @@ export const legal = {
       },
       {
         q: 'How do family profiles work?',
-        a: 'Add the people you look after in the You tab, then choose who is outside when you start the Sun timer. Each person keeps their own skin type, and Soleil schedules reapply reminders for each of them. Family data stays on your devices and in your own private iCloud - nothing is shared with us. Pro adds full family history and the Family status widget.'
+        a: 'Family profiles are part of Soleil Pro. Add the people you look after in the You tab, then choose who is outside when you start the Sun timer. Each person keeps their own skin type and sunscreen record, and Soleil runs a reapply reminder for each of them. Pro also adds family history and the Family status widget. Family data stays on your devices and in your own private iCloud - nothing is shared with us. Your own sun safety is always free.'
       },
       {
         q: 'What do I need for the Apple Watch features?',
@@ -117,7 +117,7 @@ export const legal = {
       },
       {
         q: 'What\u2019s in Soleil Pro, and what does it cost?',
-        a: 'Free covers today: live UV and today\u2019s conditions, the Sun timer, your skin profile (including an AI skin scan) and recent history. Pro adds Daily Glow setup, full family history and the Family status widget, full trends and insights, AI skin re-scans, and the wider widget suite. It\u2019s $2.49/week, $29.99/year, or $79.99 once for lifetime. Prices can vary by country - Apple shows yours before you buy.'
+        a: 'Free covers your own sun, every day: live UV and today\u2019s conditions, the Sun timer and reminders, the Live Activity, the Apple Watch app, widgets, your skin profile (including an AI skin scan) and every session you record. Pro adds guided Daily Glow sessions and the routine editor, family profiles and outings with a reminder for each person, family history and the Family status widget, Real Sun (Time in Daylight), monthly trends, the calendar heatmap, Sun Journey and AI skin re-scans. It\u2019s $2.49/week, $29.99/year with a 3-day free trial, or $79.99 once for lifetime. Prices can vary by country - Apple shows yours before you buy.'
       },
       {
         q: 'How do I cancel a Pro subscription?',

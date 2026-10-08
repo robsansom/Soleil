@@ -107,7 +107,7 @@ export const legal: LegalCopy = {
       },
       {
         q: 'Wie funktionieren Familienprofile?',
-        a: 'Füge die Menschen, um die du dich kümmerst, im Tab "Du" hinzu und wähle beim Start des Sonnen-Timers, wer draußen ist. Jede Person behält ihren eigenen Hauttyp, und Soleil plant Nachcreme-Erinnerungen für jede von ihnen. Familiendaten bleiben auf deinen Geräten und in deiner eigenen privaten iCloud - nichts wird mit uns geteilt. Pro ergänzt den vollen Familienverlauf und das Familien-Status-Widget.'
+        a: 'Familienprofile gehören zu Soleil Pro. Füge die Menschen, um die du dich kümmerst, im Tab "Du" hinzu und wähle beim Start des Sonnen-Timers, wer draußen ist. Jede Person behält ihren eigenen Hauttyp und ihr eigenes Sonnencreme-Protokoll, und Soleil führt für jede von ihnen eine eigene Nachcreme-Erinnerung. Pro ergänzt außerdem den Familienverlauf und das Familien-Status-Widget. Familiendaten bleiben auf deinen Geräten und in deiner eigenen privaten iCloud - nichts wird mit uns geteilt. Dein eigener Sonnenschutz bleibt immer kostenlos.'
       },
       {
         q: 'Was brauche ich für die Apple Watch Funktionen?',
@@ -119,7 +119,7 @@ export const legal: LegalCopy = {
       },
       {
         q: 'Was steckt in Soleil Pro und was kostet es?',
-        a: 'Kostenlos deckt das Heute ab: Live-UV und die Bedingungen des Tages, den Sonnen-Timer, dein Hautprofil (inklusive KI-Hautscan) und den jüngsten Verlauf. Pro ergänzt die Daily-Glow-Einrichtung, den vollen Familienverlauf samt Familien-Widget, alle Trends und Einblicke, erneute KI-Hautscans und die weiteren Widgets. Es kostet 2,49 $/Woche, 29,99 $/Jahr oder einmalig 79,99 $. Preise können je nach Land abweichen - Apple zeigt dir deinen vor dem Kauf.'
+        a: 'Kostenlos ist dein eigener Sonnenschutz, jeden Tag: Live-UV und die Bedingungen des Tages, der Sonnen-Timer und Erinnerungen, die Live-Aktivität, die Apple Watch App, Widgets, dein Hautprofil (inklusive KI-Hautscan) und jede Sitzung, die du aufzeichnest. Pro ergänzt geführte Daily-Glow-Sessions und den Routine-Editor, Familienprofile und Ausflüge mit einer Erinnerung pro Person, den Familienverlauf und das Familien-Widget, Real Sun (Zeit im Tageslicht), Monatstrends, die Kalender-Heatmap, die Sonnenreise und erneute KI-Hautscans. Es kostet 2,49 $/Woche, 29,99 $/Jahr mit 3-tägiger Gratis-Testphase oder einmalig 79,99 $. Preise können je nach Land abweichen - Apple zeigt dir deinen vor dem Kauf.'
       },
       {
         q: 'Wie kündige ich ein Pro-Abo?',

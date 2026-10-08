@@ -107,7 +107,7 @@ export const legal: LegalCopy = {
       },
       {
         q: '¿Cómo funcionan los perfiles familiares?',
-        a: 'Añade a las personas que cuidas en la pestaña Tú y elige quién está fuera al iniciar el temporizador de sol. Cada persona conserva su propio tipo de piel, y Soleil programa recordatorios de reaplicación para cada una. Los datos familiares se quedan en tus dispositivos y en tu propio iCloud privado - no se comparte nada con nosotros. Pro añade el historial familiar completo y el widget de estado de Familia.'
+        a: 'Los perfiles familiares forman parte de Soleil Pro. Añade a las personas que cuidas en la pestaña Tú y elige quién está fuera al iniciar el temporizador de sol. Cada persona conserva su propio tipo de piel y su registro de protector, y Soleil lleva un recordatorio de reaplicación para cada una. Pro añade también el historial familiar y el widget de estado de Familia. Los datos familiares se quedan en tus dispositivos y en tu propio iCloud privado - no se comparte nada con nosotros. Tu propia protección solar siempre es gratis.'
       },
       {
         q: '¿Qué necesito para las funciones de Apple Watch?',
@@ -119,7 +119,7 @@ export const legal: LegalCopy = {
       },
       {
         q: '¿Qué incluye Soleil Pro y cuánto cuesta?',
-        a: 'Gratis cubre el hoy: UV en directo y las condiciones del día, el temporizador de sol, tu perfil de piel (con un escaneo de piel con IA) y el historial reciente. Pro añade la configuración de Daily Glow, el historial familiar completo y el widget de Familia, todas las tendencias y análisis, nuevos escaneos de piel con IA y el resto de widgets. Cuesta 2,49 $/semana, 29,99 $/año o 79,99 $ en un pago único. Los precios pueden variar según el país - Apple te muestra el tuyo antes de comprar.'
+        a: 'Gratis cubre tu propio sol, cada día: UV en directo y las condiciones del día, el temporizador de sol y los recordatorios, la Actividad en Vivo, la app de Apple Watch, los widgets, tu perfil de piel (con un escaneo de piel con IA) y cada sesión que registres. Pro añade sesiones Daily Glow guiadas y el editor de rutina, perfiles familiares y salidas con un recordatorio para cada persona, el historial familiar y el widget de Familia, Real Sun (tiempo con luz de día), tendencias mensuales, el mapa de calor del calendario, Viaje al sol y nuevos escaneos de piel con IA. Cuesta 2,49 $/semana, 29,99 $/año con 3 días de prueba gratis, o 79,99 $ en un pago único. Los precios pueden variar según el país - Apple te muestra el tuyo antes de comprar.'
       },
       {
         q: '¿Cómo cancelo una suscripción Pro?',

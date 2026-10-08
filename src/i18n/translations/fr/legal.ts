@@ -107,7 +107,7 @@ export const legal: LegalCopy = {
       },
       {
         q: 'Comment fonctionnent les profils familiaux ?',
-        a: 'Ajoutez les personnes dont vous prenez soin dans l’onglet Vous, puis choisissez qui est dehors au lancement du minuteur solaire. Chaque personne garde son propre type de peau, et Soleil programme des rappels de réapplication pour chacune. Les données familiales restent sur vos appareils et dans votre iCloud privé - rien n’est partagé avec nous. Pro ajoute l’historique familial complet et le widget de statut Famille.'
+        a: 'Les profils familiaux font partie de Soleil Pro. Ajoutez les personnes dont vous prenez soin dans l\u2019onglet Vous, puis choisissez qui est dehors au lancement du minuteur solaire. Chaque personne garde son propre type de peau et son suivi de crème solaire, et Soleil gère un rappel de réapplication pour chacune. Pro ajoute aussi l\u2019historique familial et le widget de statut Famille. Les données familiales restent sur vos appareils et dans votre iCloud privé - rien n\u2019est partagé avec nous. Votre propre protection solaire reste toujours gratuite.'
       },
       {
         q: 'De quoi ai-je besoin pour les fonctionnalités Apple Watch ?',
@@ -119,7 +119,7 @@ export const legal: LegalCopy = {
       },
       {
         q: 'Que contient Soleil Pro, et combien coûte-t-il ?',
-        a: 'La version gratuite couvre le jour même : UV en direct et conditions du jour, le minuteur solaire, votre profil de peau (scan de peau par IA compris) et l’historique récent. Pro ajoute la configuration Daily Glow, l’historique familial complet et le widget Famille, toutes les tendances et analyses, les nouveaux scans de peau par IA et les widgets supplémentaires. C’est 2,49 $/semaine, 29,99 $/an, ou 79,99 $ en une fois. Les prix peuvent varier selon le pays - Apple affiche le vôtre avant l’achat.'
+        a: 'La version gratuite couvre votre propre soleil, chaque jour : UV en direct et conditions du jour, le minuteur solaire et les rappels, l\u2019Activité en direct, l\u2019app Apple Watch, les widgets, votre profil de peau (scan de peau par IA compris) et chaque session enregistrée. Pro ajoute les sessions Daily Glow guidées et l\u2019éditeur de routine, les profils familiaux et les sorties avec un rappel pour chaque personne, l\u2019historique familial et le widget Famille, Real Sun (temps à la lumière du jour), les tendances mensuelles, le calendrier en carte de chaleur, le Parcours solaire et les nouveaux scans de peau par IA. C\u2019est 2,49 $/semaine, 29,99 $/an avec 3 jours d\u2019essai gratuit, ou 79,99 $ en une fois. Les prix peuvent varier selon le pays - Apple affiche le vôtre avant l\u2019achat.'
       },
       {
         q: 'Comment annuler un abonnement Pro ?',

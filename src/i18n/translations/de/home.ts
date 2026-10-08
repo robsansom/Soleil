@@ -17,7 +17,7 @@ export const skipLabel = 'Zum Inhalt springen';
 
 export const home: HomeCopy = {
   hero: {
-    titleLines: ['Kenne den UV-Wert.', 'Genieß den Tag.'],
+    titleLines: ['Dein Sonnentag,', 'auf einen Blick.'],
     body: 'Live-UV an deinem Standort, ein Schutz-Check passend zu deiner Haut und Sonnencreme-Erinnerungen, die mit dem Tag Schritt halten.',
     note: 'Für iPhone und Apple Watch',
     imageAlt:

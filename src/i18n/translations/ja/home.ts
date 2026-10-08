@@ -17,7 +17,7 @@ export const skipLabel = '本文へスキップ';
 
 export const home: HomeCopy = {
   hero: {
-    titleLines: ['UVを知って、', '一日を楽しもう。'],
+    titleLines: ['あなたの一日の', '日差しのかたち。'],
     body: 'いまいる場所のリアルタイムUV、肌に合わせた保護チェック、そして一日に寄り添う日焼け止めリマインダー。',
     note: 'iPhoneとApple Watchのために',
     imageAlt: '明るいビーチで日焼け止めを塗る女性。背景には海。',

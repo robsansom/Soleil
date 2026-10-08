@@ -23,8 +23,8 @@ export const site: SiteCopy = {
   },
   footer: {
     taglineEyebrow: 'UV, protección primero',
-    taglineHeadline: 'Conoce el UV.',
-    taglineHeadlineDim: 'Disfruta del día.',
+    taglineHeadline: 'La forma de',
+    taglineHeadlineDim: 'tu día al sol.',
     copyright: 'Hecho con cariño en el Reino Unido.',
     appleAffiliation: 'Soleil es una app independiente, no afiliada a Apple Inc.',
     appleTrademarks: 'Apple, el logotipo de Apple, iPhone y Apple Watch son marcas comerciales de Apple Inc., registradas en EE. UU. y en otros países y regiones. App Store es una marca de servicio de Apple Inc.',

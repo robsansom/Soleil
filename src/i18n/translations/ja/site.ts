@@ -23,8 +23,8 @@ export const site: SiteCopy = {
   },
   footer: {
     taglineEyebrow: '保護ファーストのUV',
-    taglineHeadline: 'UVを知って、',
-    taglineHeadlineDim: '一日を楽しもう。',
+    taglineHeadline: 'あなたの一日の',
+    taglineHeadlineDim: '日差しのかたち。',
     copyright: 'Made with care in the UK.',
     appleAffiliation: 'Soleilは独立したアプリであり、Apple Inc.とは提携していません。',
     appleTrademarks: 'Apple、Appleロゴ、iPhone、Apple Watchは、米国およびその他の国と地域で登録されたApple Inc.の商標です。App StoreはApple Inc.のサービスマークです。',

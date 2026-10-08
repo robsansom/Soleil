@@ -20,7 +20,7 @@ export const legal = {
     sections: [
       {
         title: 'Who we are',
-        body: 'Soleil (the "App") is published by an independent developer based in the United Kingdom ("we", "us"). We are the controller of personal information you choose to send us, such as a support email. For privacy questions, contact support@getsoleil.com.'
+        body: 'Soleil (the "App") is published by an independent developer based in the United Kingdom ("we", "us"). We are the controller of personal information you choose to send us, such as a support email. For privacy questions, contact support@getsoleilapp.com.'
       },
       {
         title: 'The short version',
@@ -72,7 +72,7 @@ export const legal = {
       },
       {
         title: 'Your rights',
-        body: 'Depending on where you live, you may have rights over personal information we control, including rights to access, correct, erase, restrict or object to its use, and to complain to a regulator. These rights are subject to legal limits. Contact support@getsoleil.com to make a request. UK residents may complain to the Information Commissioner\u2019s Office at ico.org.uk. Content stored on your devices or in your private iCloud should be managed through the App, your device or your iCloud settings, because we do not hold a copy.'
+        body: 'Depending on where you live, you may have rights over personal information we control, including rights to access, correct, erase, restrict or object to its use, and to complain to a regulator. These rights are subject to legal limits. Contact support@getsoleilapp.com to make a request. UK residents may complain to the Information Commissioner\u2019s Office at ico.org.uk. Content stored on your devices or in your private iCloud should be managed through the App, your device or your iCloud settings, because we do not hold a copy.'
       },
       {
         title: 'Changes to this policy',
@@ -80,7 +80,7 @@ export const legal = {
       },
       {
         title: 'Contact',
-        body: 'Questions or requests about privacy can be sent to support@getsoleil.com. A postal address for formal correspondence is available on request.'
+        body: 'Questions or requests about privacy can be sent to support@getsoleilapp.com. A postal address for formal correspondence is available on request.'
       }
     ]
   },
@@ -133,7 +133,7 @@ export const legal = {
       },
       {
         q: 'I\u2019ve found a bug. What do I do?',
-        a: 'Email support@getsoleil.com with a short description of what you were doing, what you expected and what actually happened. A screenshot helps a lot.'
+        a: 'Email support@getsoleilapp.com with a short description of what you were doing, what you expected and what actually happened. A screenshot helps a lot.'
       }
     ]
   },
@@ -245,7 +245,7 @@ export const legal = {
       },
       {
         title: '18. Contact',
-        body: 'Questions about these terms? Email support@getsoleil.com. A UK postal address is available on request for formal correspondence.'
+        body: 'Questions about these terms? Email support@getsoleilapp.com. A UK postal address is available on request for formal correspondence.'
       }
     ]
   }

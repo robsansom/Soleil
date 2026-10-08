@@ -22,7 +22,7 @@ export const legal: LegalCopy = {
     sections: [
       {
         title: 'Quiénes somos',
-        body: 'Soleil (la "App") está publicada por un desarrollador independiente con sede en el Reino Unido ("nosotros"). Somos los responsables del tratamiento de la información personal que decidas enviarnos, como un correo de soporte. Para cuestiones de privacidad, escribe a support@getsoleil.com.'
+        body: 'Soleil (la "App") está publicada por un desarrollador independiente con sede en el Reino Unido ("nosotros"). Somos los responsables del tratamiento de la información personal que decidas enviarnos, como un correo de soporte. Para cuestiones de privacidad, escribe a support@getsoleilapp.com.'
       },
       {
         title: 'La versión corta',
@@ -74,7 +74,7 @@ export const legal: LegalCopy = {
       },
       {
         title: 'Tus derechos',
-        body: 'Según dónde vivas, puedes tener derechos sobre la información personal que controlamos, incluidos los derechos de acceso, rectificación, supresión, limitación u oposición a su uso, y el derecho a reclamar ante un regulador. Estos derechos están sujetos a límites legales. Escribe a support@getsoleil.com para hacer una solicitud. Los residentes en el Reino Unido pueden reclamar ante la Information Commissioner\u2019s Office en ico.org.uk. El contenido almacenado en tus dispositivos o en tu iCloud privado debe gestionarse desde la App, el propio dispositivo o los ajustes de iCloud, porque nosotros no guardamos ninguna copia.'
+        body: 'Según dónde vivas, puedes tener derechos sobre la información personal que controlamos, incluidos los derechos de acceso, rectificación, supresión, limitación u oposición a su uso, y el derecho a reclamar ante un regulador. Estos derechos están sujetos a límites legales. Escribe a support@getsoleilapp.com para hacer una solicitud. Los residentes en el Reino Unido pueden reclamar ante la Information Commissioner\u2019s Office en ico.org.uk. El contenido almacenado en tus dispositivos o en tu iCloud privado debe gestionarse desde la App, el propio dispositivo o los ajustes de iCloud, porque nosotros no guardamos ninguna copia.'
       },
       {
         title: 'Cambios en esta política',
@@ -82,7 +82,7 @@ export const legal: LegalCopy = {
       },
       {
         title: 'Contacto',
-        body: 'Las preguntas o solicitudes sobre privacidad pueden enviarse a support@getsoleil.com. Hay una dirección postal disponible bajo petición para correspondencia formal.'
+        body: 'Las preguntas o solicitudes sobre privacidad pueden enviarse a support@getsoleilapp.com. Hay una dirección postal disponible bajo petición para correspondencia formal.'
       }
     ]
   },
@@ -135,7 +135,7 @@ export const legal: LegalCopy = {
       },
       {
         q: 'He encontrado un error. ¿Qué hago?',
-        a: 'Escribe a support@getsoleil.com con una breve descripción de lo que estabas haciendo, lo que esperabas y lo que ocurrió en realidad. Una captura de pantalla ayuda mucho.'
+        a: 'Escribe a support@getsoleilapp.com con una breve descripción de lo que estabas haciendo, lo que esperabas y lo que ocurrió en realidad. Una captura de pantalla ayuda mucho.'
       }
     ]
   },
@@ -247,7 +247,7 @@ export const legal: LegalCopy = {
       },
       {
         title: '18. Contacto',
-        body: '¿Preguntas sobre estos términos? Escribe a support@getsoleil.com. Hay una dirección postal en el Reino Unido disponible bajo petición para correspondencia formal.'
+        body: '¿Preguntas sobre estos términos? Escribe a support@getsoleilapp.com. Hay una dirección postal en el Reino Unido disponible bajo petición para correspondencia formal.'
       }
     ]
   }

@@ -22,7 +22,7 @@ export const legal: LegalCopy = {
     sections: [
       {
         title: 'Qui nous sommes',
-        body: 'Soleil (l\u2019« App ») est publiée par un développeur indépendant basé au Royaume-Uni (« nous »). Nous sommes le responsable du traitement des informations personnelles que vous choisissez de nous envoyer, comme un e-mail d\u2019assistance. Pour toute question de confidentialité, contactez support@getsoleil.com.'
+        body: 'Soleil (l\u2019« App ») est publiée par un développeur indépendant basé au Royaume-Uni (« nous »). Nous sommes le responsable du traitement des informations personnelles que vous choisissez de nous envoyer, comme un e-mail d\u2019assistance. Pour toute question de confidentialité, contactez support@getsoleilapp.com.'
       },
       {
         title: 'L\u2019essentiel',
@@ -74,7 +74,7 @@ export const legal: LegalCopy = {
       },
       {
         title: 'Vos droits',
-        body: 'Selon votre lieu de résidence, vous pouvez disposer de droits sur les informations personnelles que nous contrôlons, notamment des droits d\u2019accès, de rectification, d\u2019effacement, de limitation ou d\u2019opposition à leur utilisation, ainsi que le droit de saisir un régulateur. Ces droits sont soumis à des limites légales. Contactez support@getsoleil.com pour formuler une demande. Les résidents du Royaume-Uni peuvent saisir l\u2019Information Commissioner\u2019s Office sur ico.org.uk. Le contenu stocké sur vos appareils ou dans votre iCloud privé doit être géré via l\u2019App, votre appareil ou vos réglages iCloud, car nous n\u2019en détenons aucune copie.'
+        body: 'Selon votre lieu de résidence, vous pouvez disposer de droits sur les informations personnelles que nous contrôlons, notamment des droits d\u2019accès, de rectification, d\u2019effacement, de limitation ou d\u2019opposition à leur utilisation, ainsi que le droit de saisir un régulateur. Ces droits sont soumis à des limites légales. Contactez support@getsoleilapp.com pour formuler une demande. Les résidents du Royaume-Uni peuvent saisir l\u2019Information Commissioner\u2019s Office sur ico.org.uk. Le contenu stocké sur vos appareils ou dans votre iCloud privé doit être géré via l\u2019App, votre appareil ou vos réglages iCloud, car nous n\u2019en détenons aucune copie.'
       },
       {
         title: 'Modifications de cette politique',
@@ -82,7 +82,7 @@ export const legal: LegalCopy = {
       },
       {
         title: 'Contact',
-        body: 'Les questions ou demandes relatives à la confidentialité peuvent être adressées à support@getsoleil.com. Une adresse postale pour la correspondance formelle est disponible sur demande.'
+        body: 'Les questions ou demandes relatives à la confidentialité peuvent être adressées à support@getsoleilapp.com. Une adresse postale pour la correspondance formelle est disponible sur demande.'
       }
     ]
   },
@@ -135,7 +135,7 @@ export const legal: LegalCopy = {
       },
       {
         q: 'J\u2019ai trouvé un bug. Que faire ?',
-        a: 'Écrivez à support@getsoleil.com en décrivant brièvement ce que vous faisiez, ce que vous attendiez et ce qui s\u2019est réellement passé. Une capture d\u2019écran aide beaucoup.'
+        a: 'Écrivez à support@getsoleilapp.com en décrivant brièvement ce que vous faisiez, ce que vous attendiez et ce qui s\u2019est réellement passé. Une capture d\u2019écran aide beaucoup.'
       }
     ]
   },
@@ -247,7 +247,7 @@ export const legal: LegalCopy = {
       },
       {
         title: '18. Contact',
-        body: 'Des questions sur ces conditions ? Écrivez à support@getsoleil.com. Une adresse postale au Royaume-Uni est disponible sur demande pour la correspondance formelle.'
+        body: 'Des questions sur ces conditions ? Écrivez à support@getsoleilapp.com. Une adresse postale au Royaume-Uni est disponible sur demande pour la correspondance formelle.'
       }
     ]
   }

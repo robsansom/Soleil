@@ -15,7 +15,7 @@ export const site = {
   appStoreUrl: '#app-store',
 
   /** Address shown on legal pages and support contact CTAs. */
-  supportEmail: 'support@getsoleil.com',
+  supportEmail: 'support@getsoleilapp.com',
 
   /** Marketing display name used in headers, page titles and meta tags. */
   appName: 'Soleil',

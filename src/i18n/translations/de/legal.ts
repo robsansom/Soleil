@@ -22,7 +22,7 @@ export const legal: LegalCopy = {
     sections: [
       {
         title: 'Wer wir sind',
-        body: 'Soleil (die "App") wird von einem unabhängigen Entwickler mit Sitz im Vereinigten Königreich veröffentlicht ("wir", "uns"). Wir sind Verantwortliche für personenbezogene Informationen, die Sie uns freiwillig senden, etwa eine Support-E-Mail. Bei Datenschutzfragen wenden Sie sich an support@getsoleil.com.'
+        body: 'Soleil (die "App") wird von einem unabhängigen Entwickler mit Sitz im Vereinigten Königreich veröffentlicht ("wir", "uns"). Wir sind Verantwortliche für personenbezogene Informationen, die Sie uns freiwillig senden, etwa eine Support-E-Mail. Bei Datenschutzfragen wenden Sie sich an support@getsoleilapp.com.'
       },
       {
         title: 'Die Kurzfassung',
@@ -74,7 +74,7 @@ export const legal: LegalCopy = {
       },
       {
         title: 'Ihre Rechte',
-        body: 'Je nach Wohnort haben Sie möglicherweise Rechte an personenbezogenen Informationen in unserer Verantwortung, darunter Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung oder Widerspruch sowie das Recht auf Beschwerde bei einer Aufsichtsbehörde. Diese Rechte unterliegen gesetzlichen Grenzen. Wenden Sie sich für eine Anfrage an support@getsoleil.com. Personen mit Wohnsitz im Vereinigten Königreich können sich beim Information Commissioner\u2019s Office unter ico.org.uk beschweren. Inhalte, die auf Ihren Geräten oder in Ihrer privaten iCloud gespeichert sind, verwalten Sie bitte über die App, Ihr Gerät oder Ihre iCloud-Einstellungen, da wir keine Kopie davon haben.'
+        body: 'Je nach Wohnort haben Sie möglicherweise Rechte an personenbezogenen Informationen in unserer Verantwortung, darunter Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung oder Widerspruch sowie das Recht auf Beschwerde bei einer Aufsichtsbehörde. Diese Rechte unterliegen gesetzlichen Grenzen. Wenden Sie sich für eine Anfrage an support@getsoleilapp.com. Personen mit Wohnsitz im Vereinigten Königreich können sich beim Information Commissioner\u2019s Office unter ico.org.uk beschweren. Inhalte, die auf Ihren Geräten oder in Ihrer privaten iCloud gespeichert sind, verwalten Sie bitte über die App, Ihr Gerät oder Ihre iCloud-Einstellungen, da wir keine Kopie davon haben.'
       },
       {
         title: 'Änderungen an dieser Erklärung',
@@ -82,7 +82,7 @@ export const legal: LegalCopy = {
       },
       {
         title: 'Kontakt',
-        body: 'Fragen oder Anliegen zum Datenschutz senden Sie an support@getsoleil.com. Eine Postadresse für formelle Korrespondenz stellen wir auf Anfrage bereit.'
+        body: 'Fragen oder Anliegen zum Datenschutz senden Sie an support@getsoleilapp.com. Eine Postadresse für formelle Korrespondenz stellen wir auf Anfrage bereit.'
       }
     ]
   },
@@ -135,7 +135,7 @@ export const legal: LegalCopy = {
       },
       {
         q: 'Ich habe einen Fehler gefunden. Was jetzt?',
-        a: 'Schreib an support@getsoleil.com mit einer kurzen Beschreibung: was du gemacht hast, was du erwartet hast und was tatsächlich passiert ist. Ein Screenshot hilft sehr.'
+        a: 'Schreib an support@getsoleilapp.com mit einer kurzen Beschreibung: was du gemacht hast, was du erwartet hast und was tatsächlich passiert ist. Ein Screenshot hilft sehr.'
       }
     ]
   },
@@ -247,7 +247,7 @@ export const legal: LegalCopy = {
       },
       {
         title: '18. Kontakt',
-        body: 'Fragen zu diesen Bedingungen? Schreiben Sie an support@getsoleil.com. Eine britische Postadresse für formelle Korrespondenz ist auf Anfrage erhältlich.'
+        body: 'Fragen zu diesen Bedingungen? Schreiben Sie an support@getsoleilapp.com. Eine britische Postadresse für formelle Korrespondenz ist auf Anfrage erhältlich.'
       }
     ]
   }

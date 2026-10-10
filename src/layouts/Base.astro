@@ -4,6 +4,7 @@ import Header from '../components/site/Header.astro';
 import Footer from '../components/site/Footer.astro';
 import { useTranslations, toLocale, getLocalizedPath } from '../i18n/utils';
 import { languages } from '../i18n/ui';
+import { site } from '../config/site';
 
 export interface Props {
   title: string;
@@ -44,6 +45,7 @@ const alternates = localised
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#ffd84d" />
+    <meta name="apple-itunes-app" content={`app-id=${site.appStoreId}`} />
     <title>{title}</title>
 
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />

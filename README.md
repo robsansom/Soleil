@@ -62,12 +62,13 @@ plus English-only `/guides/` and `/guides/[slug]`, `/sitemap.xml` and
   arrive, drop them in and change the `--font-display`, `--font-body` and
   `--font-hand` tokens in `src/styles/tokens.css`. Nothing else needs to change.
 
-## Going live
+## App Store
 
-1. Put the real product URL in `src/config/site.ts` (`appStoreUrl`). Every CTA
-   switches from the "coming soon" pill to a real App Store link automatically.
-2. Add `public/images/download-on-the-app-store.svg` from Apple's marketing
-   guidelines if you want the official badge rather than a text CTA.
+Soleil went live on 2026-10-10. The listing URL and app ID live in
+`src/config/site.ts`. Every CTA links to the listing, and every page carries
+Safari's Smart App Banner. Full-size CTAs show Apple's official localised badge
+from `public/images/app-store/badge-<locale>.svg`; the header uses a short
+"Download" button.
 
 ## Deployment
 

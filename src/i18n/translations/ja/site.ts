@@ -12,10 +12,6 @@ export const site: SiteCopy = {
     appStoreLinkLabel: 'App StoreでSoleilをダウンロード',
     appStoreBadgeAlt: 'App Storeでダウンロード'
   },
-  cta: {
-    comingSoon: 'App Storeで近日公開',
-    comingSoonShort: '近日公開'
-  },
   header: {
     features: '機能',
     support: 'サポート',

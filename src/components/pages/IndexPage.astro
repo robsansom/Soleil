@@ -11,6 +11,7 @@ import FaqScene from '../home/FaqScene.astro';
 import ClosingScene from '../home/ClosingScene.astro';
 import { homeFaqs } from '../../data/homeFaq';
 import { useTranslations, toLocale } from '../../i18n/utils';
+import { site } from '../../config/site';
 
 const locale = toLocale(Astro.currentLocale);
 const t = useTranslations(locale);
@@ -27,6 +28,8 @@ const jsonLd = isEnglish
         operatingSystem: 'iOS, watchOS',
         applicationCategory: 'HealthApplication',
         description: t.meta.description,
+        installUrl: site.appStoreUrl,
+        offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
         author: { '@type': 'Organization', name: 'Soleil', url: siteUrl },
       },
       {

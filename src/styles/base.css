@@ -303,26 +303,26 @@ html[lang='ja'] .display-md {
   padding-right: 1.35rem;
 }
 
-/* Coming-soon state: a pill, not a fake App Store badge. */
-.cta-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  min-height: 52px;
-  padding: 0.6rem 1.3rem;
+/* Apple's official badge. Scaled as a whole, never recoloured or redrawn;
+   52px matches the buttons and clears Apple's 40px on-screen minimum. */
+.store-badge {
+  display: inline-block;
   border-radius: var(--r-sm);
-  background: var(--ink);
-  color: var(--paper);
-  font-weight: 700;
-  box-shadow: var(--lift-sm);
+  line-height: 0;
+  transition: transform 0.35s var(--ease-plop);
 }
 
-.cta-pill__dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--solar-yellow);
-  flex: none;
+.store-badge img {
+  width: auto;
+  height: 52px;
+}
+
+.store-badge:hover {
+  transform: translateY(-2px) scale(1.015);
+}
+
+.store-badge:active {
+  transform: translateY(0) scale(0.985);
 }
 
 /* Stickers + tags ---------------------------------------------------- */

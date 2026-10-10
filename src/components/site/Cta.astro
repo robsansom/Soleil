@@ -1,57 +1,59 @@
 ---
 /**
- * The one download call to action. While `appStoreUrl` is still a
- * placeholder every instance renders the "coming soon" pill; the moment
- * a real product URL lands in src/config/site.ts they all become links
- * to the App Store.
+ * The one download call to action, linking to the App Store listing in
+ * src/config/site.ts.
+ *
+ * Full-size instances show Apple's official "Download on the App Store"
+ * badge in the page's language (public/images/app-store/badge-<locale>.svg,
+ * from Apple's marketing tools; it may not be redrawn). If a locale's badge
+ * file is missing, the site's own pink button stands in. The compact header
+ * instance is always the button: a badge crowds the pill nav.
  */
-import { site, appStoreLive } from '../../config/site';
-import { useTranslations } from '../../i18n/utils';
+import fs from 'node:fs';
+import path from 'node:path';
+import { site } from '../../config/site';
+import { useTranslations, toLocale } from '../../i18n/utils';
 
 export interface Props {
-  /** Visual weight — 'pink' is the primary action colour. */
+  /** Visual weight of the fallback button — 'pink' is the primary action colour. */
   variant?: 'pink' | 'ink' | 'paper' | 'solar';
-  /** Header/footer use the short label. */
+  /** Header uses a short text button rather than the badge. */
   compact?: boolean;
   class?: string;
 }
 
 const { variant = 'pink', compact = false, class: className = '' } = Astro.props;
-const t = useTranslations(Astro.currentLocale);
-const label = compact ? t.cta.comingSoonShort : t.cta.comingSoon;
+const locale = toLocale(Astro.currentLocale);
+const t = useTranslations(locale);
 const variantClass = variant === 'pink' ? '' : ` btn--${variant}`;
+
+/** Badge path and intrinsic size, read from the SVG so the box never shifts. */
+function readBadge() {
+  const src = `/images/app-store/badge-${locale}.svg`;
+  const file = path.join(process.cwd(), 'public', src);
+  if (!fs.existsSync(file)) return null;
+  const svg = fs.readFileSync(file, 'utf8');
+  const box = svg.match(/viewBox="[\d.]+[\s,]+[\d.]+[\s,]+([\d.]+)[\s,]+([\d.]+)"/);
+  if (!box) return null;
+  return { src, width: Math.round(Number(box[1])), height: Math.round(Number(box[2])) };
+}
+
+const badge = compact ? null : readBadge();
 ---
 
 {
-  appStoreLive ? (
-    <a
-      class={`btn${variantClass} ${className}`}
-      href={site.appStoreUrl}
-      aria-label={t.a11y.appStoreLinkLabel}
-    >
-      <span>{t.a11y.appStoreBadgeAlt}</span>
+  badge ? (
+    <a class={`store-badge ${className}`} href={site.appStoreUrl} aria-label={t.a11y.appStoreLinkLabel}>
+      <img src={badge.src} width={badge.width} height={badge.height} alt={t.a11y.appStoreBadgeAlt} />
+    </a>
+  ) : (
+    <a class={`btn${variantClass} ${className}`} href={site.appStoreUrl} aria-label={t.a11y.appStoreLinkLabel}>
+      <span>{compact ? t.header.download : t.a11y.appStoreBadgeAlt}</span>
       <span class="btn__arrow" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none">
           <path d="M4 12h15M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
       </span>
     </a>
-  ) : (
-    <span class={`cta-pill ${className}`} data-variant={variant}>
-      <span class="cta-pill__dot" aria-hidden="true" />
-      {label}
-    </span>
   )
 }
-
-<style>
-  .cta-pill[data-variant='solar'],
-  .cta-pill[data-variant='paper'] {
-    background: var(--paper);
-    color: var(--ink);
-  }
-  .cta-pill[data-variant='solar'] .cta-pill__dot,
-  .cta-pill[data-variant='paper'] .cta-pill__dot {
-    background: var(--sunset-pink);
-  }
-</style>

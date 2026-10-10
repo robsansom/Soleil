@@ -4,15 +4,11 @@
  */
 
 export const site = {
-  /**
-   * Apple App Store product URL.
-   *
-   * Until the app is live this is a placeholder anchor, and every CTA
-   * renders its "coming soon" state instead of a badge. Replace it with
-   * the real `https://apps.apple.com/app/…` URL and the whole site
-   * switches over.
-   */
-  appStoreUrl: '#app-store',
+  /** Apple App Store product URL — every download CTA links here. */
+  appStoreUrl: 'https://apps.apple.com/app/soleil-uv-sun-tracker/id6777120580',
+
+  /** App Store ID, for the Safari Smart App Banner. */
+  appStoreId: '6777120580',
 
   /** Address shown on legal pages and support contact CTAs. */
   supportEmail: 'support@getsoleilapp.com',
@@ -22,6 +18,3 @@ export const site = {
 
   domain: 'https://getsoleilapp.com',
 } as const;
-
-/** True once a real App Store URL is set. */
-export const appStoreLive = !site.appStoreUrl.startsWith('#');

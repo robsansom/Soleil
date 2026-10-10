@@ -12,10 +12,6 @@ export const site: SiteCopy = {
     appStoreLinkLabel: 'Soleil im App Store laden',
     appStoreBadgeAlt: 'Laden im App Store'
   },
-  cta: {
-    comingSoon: 'Bald im App Store',
-    comingSoonShort: 'Bald verfügbar'
-  },
   header: {
     features: 'Features',
     support: 'Support',

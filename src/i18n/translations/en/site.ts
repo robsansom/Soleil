@@ -10,10 +10,6 @@ export const site = {
     appStoreLinkLabel: 'Download Soleil on the App Store',
     appStoreBadgeAlt: 'Download on the App Store'
   },
-  cta: {
-    comingSoon: 'Coming soon to the App Store',
-    comingSoonShort: 'Coming soon'
-  },
   header: {
     features: 'Features',
     support: 'Support',

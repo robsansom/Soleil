@@ -12,10 +12,6 @@ export const site: SiteCopy = {
     appStoreLinkLabel: 'Descarga Soleil en el App Store',
     appStoreBadgeAlt: 'Descárgalo en el App Store'
   },
-  cta: {
-    comingSoon: 'Próximamente en el App Store',
-    comingSoonShort: 'Próximamente'
-  },
   header: {
     features: 'Funciones',
     support: 'Soporte',

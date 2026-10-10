@@ -57,11 +57,12 @@ and three highlightable zones. It is deliberately an illustration, not a
 screenshot. If Real Sun ever ships a chart worth showing, a real capture would
 be stronger — 1206 × 2622 px, same conventions as the other screenshots.
 
-## 6. `download-on-the-app-store.svg`
+## 6. ~~`download-on-the-app-store.svg`~~ — done 2026-10-10
 
-Apple's official badge artwork, from the Apple marketing guidelines. Not in the
-repo (Apple's licence does not allow redistribution). Until it exists — and
-until `appStoreUrl` is real — every CTA renders the “coming soon” pill.
+Apple's official black badge for each locale, from Apple's marketing tools
+(toolbox.marketingtools.apple.com), lives in `public/images/app-store/` as
+`badge-<locale>.svg`. Use Apple's artwork as supplied: don't redraw or recolour
+it. A locale without a badge file falls back to the site's own pink button.
 
 ## 7. Licensed display fonts (optional)
 
